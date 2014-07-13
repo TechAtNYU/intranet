@@ -75,24 +75,27 @@ customJS: jobs.js
 	
 	<div ng-show="preview" class="preview__listing">
 		<button class="close__preview" ng-click="doPreview(false)">Close</button>
-		
-		<div class="preview__main">
-			<h1>{{currentTitle}}</h1>
-			
-			<pre class="main__description">{{currentDescription}}</pre>
-			
-			<a ng-href="{{currentApp}}">Apply here!</a>
-			
-			<span>Date</span>
-			<span>{{currentCategory}}</span>
-			<span>{{currentLevel}}</span>
-		</div>
-		
-		<div class="preview__company">
-			<a ng-href="{{currentCompanyUrl}}"><h3>{{currentCompany}}</h3></a>
-			<p>{{currentCompanyDescription}}</p>
-			
-		</div>
+		<article class="listing">
+			<section class="preview__position">
+				<div class="preview__main">
+					<h1>{{currentTitle}}</h1>
+					
+					<pre class="main__description">{{currentDescription}}</pre>
+					
+					<a ng-href="{{currentApp}}">Apply here!</a>
+				</div>
+				<div class="preview__meta">
+					<p>Date</p>
+					<p>{{currentCategory}}</p>
+					<p>{{currentLevel}}</p>
+				</div>
+			</section>
+			<div class="preview__company">
+				<a ng-href="{{currentCompanyUrl}}"><h3>About {{currentCompany}}</h3></a>
+				<pre class="company__description">{{currentCompanyDescription}}</pre>
+				
+			</div>
+		</article>
 	</div>
 
 

@@ -314,9 +314,23 @@ button[class$='__application'] {
 	top: 0;
 	left: 0;
 }
-.main__description {
+.listing {
+	max-width: 75%;
+	margin: auto;
+}
+.main__description, .company__description {
 	font: 1em helvetica;
-	
+}
+.preview__position {
+	overflow: auto;
+}
+.preview__main {
+	width: 60%;
+	float: left;
+}
+.preview__meta {
+	width: 40%;
+	float: left;
 }
 /*.about__position {
 	border-color: #222;
