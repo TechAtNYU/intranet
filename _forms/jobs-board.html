@@ -2,3 +2,29 @@
 layout: default
 title: Jobs Board
 ---
+
+<pre>
+		positionTitle: String,
+		description: String,
+		category: { 
+			type: String, 
+			enum: {
+				values: ['Design', 'Engineering', 'Business Development'], 
+				message: 'Invalid category.' 
+			}
+		},
+		positionLevel: {
+			type: String, 
+			enum: {
+				values: ['Full-Time', 'Part-Time', 'Contract', 'Paid Internship'], 
+				message: 'Invalid position level.' 
+			}        
+		},
+		applicationUrl: String,
+		company: {
+			name: String,
+			url: String,
+		   description: String
+		}
+</pre>
+
