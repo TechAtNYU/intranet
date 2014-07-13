@@ -1,0 +1,44 @@
+// Clearfix
+// --------
+// For clearing floats like a boss h5bp.com/q
+.clearfix() {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+    // Fixes Opera/contenteditable bug:
+    // http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
+    line-height: 0;
+  }
+  &:after {
+    clear: both;
+  }
+}
+.unselectable() {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+.gradient (@color1, @color2r, @color2g, @color2b, @color2a, @size1, @size2, @deg) {
+	background-color: @color1;
+	background-image: -webkit-linear-gradient(@deg, 0 0, 0 100%, color-stop(.5, rgba(@color2r, @color2g, @color2b, @color2a)), color-stop(.5, transparent), to(transparent));
+	background-image: -moz-linear-gradient(@deg, rgba(@color2r, @color2g, @color2b, @color2a) 50%, transparent 50%, transparent);
+	background-image: -o-linear-gradient(@deg, rgba(@color2r, @color2g, @color2b, @color2a) 50%, transparent 50%, transparent);
+	background-image: linear-gradient(@deg, rgba(@color2r, @color2g, @color2b, @color2a) 50%, transparent 50%, transparent);
+	-webkit-background-size: @size1 @size2;
+	-moz-background-size: @size1 @size2;
+	background-size: @size1 @size2;
+}
+.rounded-corners (@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+.box-shadow (@shadow: 0px 0px 5px rgba(50, 50, 50, 0.75)) {
+	-webkit-box-shadow: @shadow;
+	-moz-box-shadow:    @shadow;
+	box-shadow:         @shadow;
+}

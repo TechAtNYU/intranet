@@ -1,0 +1,16 @@
+---
+layout: default
+title: tech@NYU
+---
+
+<section>
+<div class="site">
+	
+	<h3>CMS frontend for the tech@NYU platform</h3>
+	
+{% for form in site.forms %}
+	<h2><a href="{{form.url}}">{{form.title}}</a></h2>
+{% endfor %}
+	
+</div>
+</section>

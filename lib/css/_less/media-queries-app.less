@@ -1,0 +1,77 @@
+// larger than phone
+@media only screen and(min-width: 40em) {
+	header.main {
+		background-position: center bottom;
+		.logo {
+			padding: 1em 0 0;
+		}
+	}
+	.container > section {
+		padding: 2em 0;
+	}
+	footer {
+		p {
+			font-size: 95%;
+		}		
+	}
+}
+@media only screen and (min-width: 70em) {
+	.site {
+		max-width: 50em;
+		width: 65%;
+		font-size: @bump;
+	}	
+}
+@media only screen and (min-width: 50em) and (max-width: 70em) {
+	.site {
+		max-width: 45em;
+		width: 75%;
+	}
+}
+
+@media only screen and (min-width:40em) and (max-width: 50em) {
+	.site {
+		width: 90%;
+		max-width: 45em;
+		font-size: .85em;
+	}
+}
+@media only screen and (min-width: 30em) and (max-width: 70em) {
+	.grid li{
+	  width: 45%;
+	  margin-bottom: 4%;
+	}
+} 
+@media only screen and (max-width: 30em) {
+    .grid li, .grid.posts li {
+	  width: 100%;
+	  padding: 1em;
+	  margin-bottom: 5%;
+	}
+}
+@media only screen and (max-width: 40em) {
+	header.main {
+		background-position: center bottom;
+		font-size: .75em;
+	}
+	.site {
+		padding: 1em;
+		width: 100%;
+		font-size: .85em;
+	}	
+	.container > section {
+	}
+	
+}
+@media print {
+	@page { margin: 0.5in; }
+	img { max-width: 100% !important; }
+	body {
+		font-size: 12pt;
+	}
+	header.main {
+		h1 {
+			font-size: 48px !important;
+		}
+	}
+}

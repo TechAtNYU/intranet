@@ -1,0 +1,34 @@
+// from barrel thx
+/* -- FLUID GRID STYLES -- */
+
+.grid {
+  text-align: justify;
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+  li {
+	  display: inline-block;
+	  text-align: left;
+	  width: 24%;
+  }
+  &.third li {
+	  width: 31%;
+  }
+  &.half li {
+	  width: 47%;
+  }
+}
+
+.grid:after{
+  content: '';
+  display: inline-block;
+  width: 100%;
+}
+
+.grid .placeholder{
+  padding: 0;
+}
+
+.placeholder {
+	width: 1em;
+	display: inline-block;
+}
+

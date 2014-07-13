@@ -1,0 +1,230 @@
+@import "ionicons.css";
+/* -- FLUID GRID STYLES -- */
+.grid {
+  text-align: justify;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.grid li {
+  display: inline-block;
+  text-align: left;
+  width: 24%;
+}
+.grid.third li {
+  width: 31%;
+}
+.grid.half li {
+  width: 47%;
+}
+.grid:after {
+  content: '';
+  display: inline-block;
+  width: 100%;
+}
+.grid .placeholder {
+  padding: 0;
+}
+.placeholder {
+  width: 1em;
+  display: inline-block;
+}
+body {
+  font: 1em "Helvetica Neue", helvetica, arial, sans-serif;
+  font-weight: normal;
+  line-height: 1.5;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  line-height: 1.25;
+  margin-bottom: .1em;
+}
+h1 {
+  font-size: 2.5em;
+}
+h2 {
+  font-size: 2.25em;
+}
+h3 {
+  font-size: 2em;
+}
+h4 {
+  font-size: 1.75em;
+}
+h5 {
+  font-size: 1.5em;
+}
+h6 {
+  font-size: 1.25em;
+}
+hr {
+  clear: both;
+}
+p {
+  font-size: 100%;
+  line-height: 1.75;
+  margin-bottom: .75em;
+}
+a {
+  font-weight: normal;
+}
+a:link,
+a:visited,
+a:active {
+  color: #0000ff;
+}
+a:hover {
+  color: #6666ff;
+}
+blockquote {
+  margin: 1.5em;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  background: #ffffff;
+}
+::selection {
+  background: #0000ff;
+  /* Safari */
+}
+::-moz-selection {
+  background: #0000ff;
+  /* Firefox */
+}
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+.site {
+  margin: 0 auto;
+}
+.content {
+  min-height: 30em;
+  padding: 0 0 2em;
+}
+hr {
+  height: .05em;
+  border: none;
+  background: #ccc;
+}
+.grid img {
+  max-width: 100%;
+}
+header.main {
+  *zoom: 1;
+}
+header.main:before,
+header.main:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+header.main:after {
+  clear: both;
+}
+header.main:before,
+header.main:after {
+  content: " ";
+  display: table;
+}
+header.main:after {
+  clear: both;
+}
+header.main li {
+  list-style: none;
+}
+header.main a:hover {
+  text-decoration: none;
+}
+.posts li {
+  padding: 1em 0;
+}
+footer {
+  font-size: 110%;
+  padding: .5em 0;
+}
+footer .colophon {
+  clear: both;
+  text-align: right;
+}
+header.main a {
+  color: #222;
+}
+header.main h1 {
+  font-size: 2em;
+}
+@media only screen and (min-width: 40em) {
+  .site p {
+    font-size: 125%;
+  }
+}
+@media only screen and (min-width: 70em) {
+  .site {
+    max-width: 50em;
+    width: 65%;
+    font-size: 125%;
+  }
+}
+@media only screen and (min-width: 50em) and (max-width: 70em) {
+  .site {
+    max-width: 45em;
+    width: 75%;
+  }
+}
+@media only screen and (min-width: 40em) and (max-width: 50em) {
+  .site {
+    width: 90%;
+    max-width: 45em;
+    font-size: .85em;
+  }
+}
+@media only screen and (min-width: 30em) and (max-width: 70em) {
+  .grid li {
+    width: 45%;
+    margin-bottom: 4%;
+  }
+}
+@media only screen and (max-width: 30em) {
+  .grid li,
+  .grid.posts li {
+    width: 100%;
+    padding: 1em;
+    margin-bottom: 5%;
+  }
+}
+@media only screen and (max-width: 40em) {
+  .site {
+    padding: 1em;
+    width: 100%;
+    font-size: .85em;
+  }
+}
+@media print {
+  @page {
+    margin: 0.5in;
+  }
+  img {
+    max-width: 100% !important;
+  }
+  body {
+    font-size: 12pt;
+  }
+  header.main h1 {
+    font-size: 48px !important;
+  }
+}
