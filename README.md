@@ -1,4 +1,3 @@
-T@NYU CMS
-====
-
-Platform frontend
+Platform CMS
+=====
+Frontend for platform
