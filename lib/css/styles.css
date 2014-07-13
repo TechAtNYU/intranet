@@ -278,6 +278,11 @@ footer .colophon {
 	width: 100%;
 	min-height: 20em;
 }
+.job__listing select {
+	font: 1em helvetica;
+	padding: 0.5em;
+	border: 1px solid #ccc;
+}
 .main__application {
 	width: 60%;
 	float: left;
@@ -285,6 +290,29 @@ footer .colophon {
 .main__metadata {
 	width: 40%;
 	float: left;
+}
+button[class$='__application'] {
+	border: 1px solid black;
+	padding: 0.5em 1em;
+	font: 1em Helvetica;
+}
+.preview__application {
+	background-color: #eee;
+}
+.decline__application {
+	background-color: red;
+}
+.accept__application {
+	background-color: green;
+}
+.preview__listing {
+	background-color: white;
+	width: 100%;
+	height: 1000px;
+	padding: 1em;
+	position: fixed;
+	top: 0;
+	left: 0;
 }
 /*.about__position {
 	border-color: #222;
