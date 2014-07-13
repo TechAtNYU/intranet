@@ -59,7 +59,7 @@ customJS: jobs.js
 				<h4>Listing Metadata</h4>
 				<label>Paid?</label>
 				<input type="text" ng-model="companyPaid">
-				<button class="preview__application" ng-click="doPreview(true)">Preview</button>
+				<button class="preview__application" ng-click="doPreview(true, $index)">Preview</button>
 				<button class="decline__application">Decline</button>
 				
 				<span ng-if="companyPaid">
@@ -76,6 +76,23 @@ customJS: jobs.js
 	<div ng-show="preview" class="preview__listing">
 		<button class="close__preview" ng-click="doPreview(false)">Close</button>
 		
+		<div class="preview__main">
+			<h1>{{currentTitle}}</h1>
+			
+			<pre class="main__description">{{currentDescription}}</pre>
+			
+			<a ng-href="{{currentApp}}">Apply here!</a>
+			
+			<span>Date</span>
+			<span>{{currentCategory}}</span>
+			<span>{{currentLevel}}</span>
+		</div>
+		
+		<div class="preview__company">
+			<a ng-href="{{currentCompanyUrl}}"><h3>{{currentCompany}}</h3></a>
+			<p>{{currentCompanyDescription}}</p>
+			
+		</div>
 	</div>
 
 

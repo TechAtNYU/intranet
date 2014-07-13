@@ -314,6 +314,10 @@ button[class$='__application'] {
 	top: 0;
 	left: 0;
 }
+.main__description {
+	font: 1em helvetica;
+	
+}
 /*.about__position {
 	border-color: #222;
 }
