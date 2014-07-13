@@ -20,21 +20,30 @@ customJS: jobs.js
 	
 	<h2>New Applications</h2>
 
-<input type="text" ng-model="positionTitle">
-<textarea ng-model="positionDescription"></textarea>
-<select ng-model="positionCategory" ng-options="categories for categories in categories"></select>
+	
+	
+	
 
-<select ng-model="positionLevel" ng-options="level for level in levels"></select>
+	<ul>
+		<li ng-repeat="job in pendingList">
+		<input type="text" ng-model="job.positionTitle"></span>
+		
+		<textarea ng-model="job.description"></textarea>
+		<select ng-model="job.category" ng-options="categories for categories in categories"></select>
+	
+		<select ng-model="job.positionLevel" ng-options="level for level in levels"></select>
+	
+		<input type="text" ng-model="job.applicationUrl">
+		<input type="text" ng-model="job.company.name">
+		<input type="text" ng-model="job.company.url">
+	
+		<textarea ng-model="job.company.description"></textarea>
 
-<input type="text" ng-model="applicationURL">
-<input type="text" ng-model="company">
-<input type="text" ng-model="companyURL">
-
-<textarea ng-model="companyDescription"></textarea>
-
-
-
-
+		<button>Preview</button>
+		
+		
+		</li>
+	</ul>
 
 
 <h1>SAMPLE</h1>
