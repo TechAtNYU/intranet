@@ -245,3 +245,23 @@ footer .colophon {
 	display: inline-block;
 	padding: 1.25em 0.5em;
 }
+
+/* JOB BOARD */
+
+.job__listing {
+	padding: 2em;
+	border-bottom: 1px solid #eee;
+}
+.job__listing div[class^='about__'] {
+	display: block;
+	padding: 1em;
+}
+.about__position {
+	background-color: #222;
+}
+.about__company {
+	background-color: #444;
+}
+.about__listing {
+	background-color: #666;
+}

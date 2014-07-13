@@ -24,28 +24,46 @@ customJS: jobs.js
 	
 	
 
-	<ul>
-		<li ng-repeat="job in pendingList">
-		<input type="text" ng-model="job.positionTitle"></span>
-		
-		<textarea ng-model="job.description"></textarea>
-		<select ng-model="job.category" ng-options="categories for categories in categories"></select>
-	
-		<select ng-model="job.positionLevel" ng-options="level for level in levels"></select>
-	
-		<input type="text" ng-model="job.applicationUrl">
-		<input type="text" ng-model="job.company.name">
-		<input type="text" ng-model="job.company.url">
-	
-		<textarea ng-model="job.company.description"></textarea>
-
-		<button>Preview</button>
-		
-		
+	<ul class="pending__jobs">
+		<li ng-repeat="job in pendingList" class="job__listing">
+			<div class="about__position">
+				<label>Title</label>
+				<input type="text" ng-model="job.positionTitle"></span>
+				
+				<label>Description</label>
+				<textarea ng-model="job.description"></textarea>
+				
+				<label>Category</label>
+				<select ng-model="job.category" ng-options="categories for categories in categories"></select>
+				
+				<label>Level</label>
+				<select ng-model="job.positionLevel" ng-options="level for level in levels"></select>
+	    		
+				<label>Application</label>
+				<input type="text" ng-model="job.applicationUrl">
+			</div>
+			<div class="about__company">
+				<label>Name</label>
+				<input type="text" ng-model="job.company.name">
+				
+				<label>Website</label>
+				<input type="text" ng-model="job.company.url">
+				
+				<label>Description</label>
+				<textarea ng-model="job.company.description"></textarea>
+			</div>
+			<div class="about__listing">
+				<label>Paid</label>
+				<input type="text" value="50">
+				<button>Preview</button>
+				
+				<label>Live</label>
+			</div>
 		</li>
 	</ul>
 
 
+<!-- 
 <h1>SAMPLE</h1>
 
 <h3 ng-bind="positionTitle"></h3>
@@ -64,7 +82,7 @@ customJS: jobs.js
 	
 <p ng-bind="companyDescription"></p>
 
-
+-->
 
 </div>
 {% endraw %}
