@@ -248,6 +248,7 @@ footer .colophon {
 
 /* JOB BOARD */
 
+
 .job__listing {
 	padding: 2em;
 	border-bottom: 1px solid #222;
@@ -260,6 +261,30 @@ footer .colophon {
 	display: block;
 	padding: 1em;
 	border-bottom: 1px solid #eee;
+	overflow: auto;
+}
+.job__listing input {
+	padding: 0.5em;
+	font: 1em helvetica;
+	border: 1px solid #ccc;
+}
+.job__listing label {
+	display: block;
+}
+.job__listing textarea {
+	padding: 0.5em;
+	font: 1em helvetica;
+	border: 1px solid #ccc;
+	width: 100%;
+	min-height: 20em;
+}
+.main__application {
+	width: 60%;
+	float: left;
+}
+.main__metadata {
+	width: 40%;
+	float: left;
 }
 /*.about__position {
 	border-color: #222;

@@ -18,7 +18,7 @@ customJS: jobs.js
 
 <div ng-controller="JobsBoard">
 	
-	<h2>New Applications</h2>
+	<h2>New Applications ({{pendingList.length}})</h2>
 
 	
 	
@@ -27,22 +27,35 @@ customJS: jobs.js
 	<ul class="pending__jobs">
 		<li ng-repeat="job in pendingList" class="job__listing">
 			<div class="about__position">
-				<label>Title</label>
-				<input type="text" ng-model="job.positionTitle"></span>
-				
-				<label>Description</label>
-				<textarea ng-model="job.description"></textarea>
-				
-				<label>Category</label>
-				<select ng-model="job.category" ng-options="categories for categories in categories"></select>
-				
-				<label>Level</label>
-				<select ng-model="job.positionLevel" ng-options="level for level in levels"></select>
-	    		
-				<label>Application</label>
-				<input type="text" ng-model="job.applicationUrl">
+				<ul class="main__application">
+					<li><h4>Position Information</h4></li>
+					<li>
+						<label>Title</label>
+						<input type="text" ng-model="job.positionTitle"></span>
+					</li>
+					<li>
+						<label>Description</label>
+						<textarea ng-model="job.description"></textarea>
+					</li>
+					<li>
+						<label>Application</label>
+						<input type="text" ng-model="job.applicationUrl">
+					</li>
+				</ul>
+				<ul class="main__metadata">
+					<li><h4>Position Metadata</h4></li>
+					<li>
+						<label>Category</label>
+						<select ng-model="job.category" ng-options="categories for categories in categories"></select>
+					</li>
+					<li>
+						<label>Level</label>
+						<select ng-model="job.positionLevel" ng-options="level for level in levels"></select>
+					</li>
+				</ul>
 			</div>
 			<div class="about__company">
+				<h4>Company Information</h4>
 				<label>Name</label>
 				<input type="text" ng-model="job.company.name">
 				
@@ -53,6 +66,7 @@ customJS: jobs.js
 				<textarea ng-model="job.company.description"></textarea>
 			</div>
 			<div class="about__listing">
+				<h4>Listing Metadata</h4>
 				<label>Paid</label>
 				<input type="text" value="50">
 				<button>Preview</button>
