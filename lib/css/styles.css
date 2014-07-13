@@ -250,18 +250,23 @@ footer .colophon {
 
 .job__listing {
 	padding: 2em;
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #222;
+	-webkit-transition: 0.5s background-color;
+}
+.job__listing:hover {
+	background-color: #00BCF2;
 }
 .job__listing div[class^='about__'] {
 	display: block;
 	padding: 1em;
+	border-bottom: 1px solid #eee;
 }
-.about__position {
-	background-color: #222;
+/*.about__position {
+	border-color: #222;
 }
 .about__company {
-	background-color: #444;
+	border-color: #444;
 }
 .about__listing {
-	background-color: #666;
-}
+	border-color: #666;
+}*/
