@@ -11,7 +11,7 @@
 		<meta name="keywords" content="" />
 		
 		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
     </head>
     <body>
         <div class="container">
@@ -23,7 +23,10 @@
         </div> 
 		<!-- replace these with CDN versions in prod -->
 		<script src="/lib/js/jquery.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
 		<script src="/lib/js/app.js"></script>
+		
+		{% if page.customJS %}
+		<script src="/lib/js/form/{{page.customJS}}"></script>
+		{% endif %}
     </body>
 </html>
