@@ -3,33 +3,26 @@ layout: default
 title: Jobs Board
 customJS: jobs.js
 ---
-
-<pre>
-		positionTitle: String,
-		description: String,
-		category: { 
-			type: String, 
-			enum: {
-				values: ['Design', 'Engineering', 'Business Development'], 
-				message: 'Invalid category.' 
-			}
-		},
-		positionLevel: {
-			type: String, 
-			enum: {
-				values: ['Full-Time', 'Part-Time', 'Contract', 'Paid Internship'], 
-				message: 'Invalid position level.' 
-			}        
-		},
-		applicationUrl: String,
-		company: {
-			name: String,
-			url: String,
-		   description: String
-		}
-</pre>
-
-
+{% raw %}
 <div ng-controller="JobsBoard">
-	<p ng-bind="test"></p>
+
+<h3 ng-bind="positionTitle"></h3>
+<p ng-bind="positionDescription"></p>
+<label ng-bind="positionCategory"></label>
+
+<p ng-bind="positionLevel"></p>
+
+<a ng-href="{{applicationURL}}">Apply here</a>
+
+<hr>
+
+<h5>Company</h5>
+
+<a ng-href="{{companyURL}}"><p ng-bind="company"></p></a>
+	
+<p ng-bind="companyDescription"></p>
+
+
+
 </div>
+{% endraw %}

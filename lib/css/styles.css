@@ -231,6 +231,8 @@ footer .colophon {
 
 .main__header {
 	overflow: auto;
+	border-bottom: 1px solid black;
+	margin-bottom: 0.5em;
 }
 .techatnyu__logo {
 	max-width: 10em;
