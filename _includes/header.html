@@ -1,22 +1,20 @@
-
-<header class="main" id="top">
-	<div class="site">
-		<div class="logo">
-			<a href="/">
-			<h1 id="masthead">{{site.name}}</h1>
-			</a>
-			
+<header class="main__header" id="top">
+	<div class="logo">
+		<a href="/">
+			<img src="/lib/logos/techatnyu.png" class="techatnyu__logo">
+		</a>
+		
+		<nav>
 			<ul>
 				{% for form in site.forms %}
 				<li><a href="{{form.url}}">{{form.title}}</a></li>
 				{% endfor %}
 			</ul>
-		</div>
-			
-		<nav>
-			<ul>
-			</ul>
 		</nav>
-		
 	</div>
+		
+	<nav>
+		<ul>
+		</ul>
+	</nav>
 </header>

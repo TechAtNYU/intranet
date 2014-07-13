@@ -125,30 +125,30 @@ hr {
 .grid img {
   max-width: 100%;
 }
-header.main {
+.main__header {
   *zoom: 1;
 }
-header.main:before,
-header.main:after {
+.main__header:before,
+.main__header:after {
   display: table;
   content: "";
   line-height: 0;
 }
-header.main:after {
+.main__header:after {
   clear: both;
 }
-header.main:before,
-header.main:after {
+.main__header:before,
+.main__header:after {
   content: " ";
   display: table;
 }
-header.main:after {
+.main__header:after {
   clear: both;
 }
-header.main li {
+.main__header li {
   list-style: none;
 }
-header.main a:hover {
+.main__header a:hover {
   text-decoration: none;
 }
 .posts li {
@@ -162,10 +162,10 @@ footer .colophon {
   clear: both;
   text-align: right;
 }
-header.main a {
+.main__header a {
   color: #222;
 }
-header.main h1 {
+.main__header h1 {
   font-size: 2em;
 }
 @media only screen and (min-width: 40em) {
@@ -224,7 +224,22 @@ header.main h1 {
   body {
     font-size: 12pt;
   }
-  header.main h1 {
+  .main__header h1 {
     font-size: 48px !important;
   }
+}
+
+.main__header {
+	overflow: auto;
+}
+.techatnyu__logo {
+	max-width: 10em;
+	float: left;
+}
+.main__header nav {
+	float: left;
+}
+.main__header li {
+	display: inline-block;
+	padding: 1.25em 0.5em;
 }
