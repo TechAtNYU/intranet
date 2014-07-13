@@ -4,7 +4,40 @@ title: Jobs Board
 customJS: jobs.js
 ---
 {% raw %}
+
+<pre>
+	TODO:
+	- External/public facing form for companies
+	- Money integration
+	- Internal dashboard view for approving
+	- Markdown bullet points for form
+	- Log $ paid
+	- Show preview of form to client
+	- Manual confirmation - form email at confirmation screen for board person
+</pre>
+
 <div ng-controller="JobsBoard">
+	
+	<h2>New Applications</h2>
+
+<input type="text" ng-model="positionTitle">
+<textarea ng-model="positionDescription"></textarea>
+<select ng-model="positionCategory" ng-options="categories for categories in categories"></select>
+
+<select ng-model="positionLevel" ng-options="level for level in levels"></select>
+
+<input type="text" ng-model="applicationURL">
+<input type="text" ng-model="company">
+<input type="text" ng-model="companyURL">
+
+<textarea ng-model="companyDescription"></textarea>
+
+
+
+
+
+
+<h1>SAMPLE</h1>
 
 <h3 ng-bind="positionTitle"></h3>
 <p ng-bind="positionDescription"></p>
