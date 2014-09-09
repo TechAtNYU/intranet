@@ -1,10 +1,6 @@
 Platform CMS
 =====
-Frontend for platform
-
-- Jekyll
-- Angular
-- LESS (will migrate to SASS)
+Frontend for platform, in Ember and SASS.
 
 # Use cases
 The tech@nyu platform simplifies common tasks for eboard members. For example, an eboard member can: 
