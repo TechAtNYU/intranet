@@ -1,0 +1,1 @@
+grunt.loadNpmTasks('grunt-bower-concat');
