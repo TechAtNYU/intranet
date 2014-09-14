@@ -1,6 +1,0 @@
-name: tech@NYU CMS
-markdown: redcarpet
-
-collections:
-  forms:
-    output: true

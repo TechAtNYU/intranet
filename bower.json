@@ -1,0 +1,7 @@
+{
+    "name": "Tech@NYU CMS",
+    "dependencies": {
+        "ember": "1.7.x",
+        "ember-data": "1.0.0-beta.9"
+    }
+}
