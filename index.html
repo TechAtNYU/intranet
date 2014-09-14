@@ -14,7 +14,64 @@
     </head>
     <body>
         <div class="container">               
-        
+            <form>
+                <fieldset>
+                    <label>
+                        Title
+                        <input />
+                    </label>
+                    <label>
+                        Short Title
+                        <input />
+                    </label>
+                    <label>
+                        Description
+                        <input />
+                    </label>
+                    <label>
+                        Details
+                        <input />
+                    </label>
+                    <fieldset>
+                        <label>
+                            Date
+                            <input type="date" />
+                        </label>
+                        <label>
+                            Start Time
+                            <input type="time" />
+                        </label>
+                        <label>
+                            End Time
+                            <input type="time" />
+                        </label>
+                    </fieldset>
+                </fieldset>
+                <fieldset>
+                    <legend>Venue</legend>
+                    <label>
+                        Name
+                        <datalist>
+                            <option>A</option>
+                        </datalist>
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Organizers</legend>
+                    <label>
+                        Internal Teams
+                        <select multiple>
+                            <option>Team Name</option>
+                        </select>
+                    </label>
+                    <label>
+                        Coorganizing Clubs
+                        <select multiple>
+                            <option>Blah</option>
+                        </select>
+                        <button>Add Related Club</button>
+                    </label>
+            </form>
         </div>
     </body>
 </html>
