@@ -1,1 +1,0 @@
-window.CMS = Ember.Application.create();
