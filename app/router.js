@@ -1,3 +1,6 @@
+/* jshint undef: true, unused: true */
+/* global CmsENV */
+
 import Ember from 'ember';
 
 var Router = Ember.Router.extend({

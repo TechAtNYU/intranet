@@ -26,7 +26,7 @@ eval("//# sourceURL=assets/ember-cli/loader.js");
 
 ;eval("define(\"cms/models/venue\", \n  [\"ember-data\",\"exports\"],\n  function(__dependency1__, __exports__) {\n    \"use strict\";\n    var DS = __dependency1__[\"default\"];\n\n    __exports__[\"default\"] = DS.Model.extend({\n      name: DS.attr(\'string\'),\n      address: DS.attr(\'string\'),\n      seats: DS.attr(\'number\'),\n      kind: DS.attr(\'string\'),\n      notes: DS.attr(\'string\'),\n      company: DS.belongsTo(\'company\')\n    });\n  });//# sourceURL=cms/models/venue.js");
 
-;eval("define(\"cms/router\", \n  [\"ember\",\"exports\"],\n  function(__dependency1__, __exports__) {\n    \"use strict\";\n    var Ember = __dependency1__[\"default\"];\n\n    var Router = Ember.Router.extend({\n      location: CmsENV.locationType\n    });\n\n    Router.map(function() {\n      this.resource(\'events\');\n    });\n\n    __exports__[\"default\"] = Router;\n  });//# sourceURL=cms/router.js");
+;eval("define(\"cms/router\", \n  [\"ember\",\"exports\"],\n  function(__dependency1__, __exports__) {\n    \"use strict\";\n    /* jshint undef: true, unused: true */\n    /* global CmsENV */\n\n    var Ember = __dependency1__[\"default\"];\n\n    var Router = Ember.Router.extend({\n      location: CmsENV.locationType\n    });\n\n    Router.map(function() {\n      this.resource(\'events\');\n    });\n\n    __exports__[\"default\"] = Router;\n  });//# sourceURL=cms/router.js");
 
 ;eval("define(\"cms/routes/events\", \n  [\"ember\",\"exports\"],\n  function(__dependency1__, __exports__) {\n    \"use strict\";\n    var Ember = __dependency1__[\"default\"];\n\n    __exports__[\"default\"] = Ember.Route.extend({\n      model: function() {\n        return this.store.find(\'event\');\n      }\n    });\n  });//# sourceURL=cms/routes/events.js");
 
@@ -64,7 +64,7 @@ eval("//# sourceURL=assets/ember-cli/loader.js");
 
 ;eval("define(\"cms/tests/models/venue.jshint\", \n  [],\n  function() {\n    \"use strict\";\n    module(\'JSHint - models\');\n    test(\'models/venue.js should pass jshint\', function() { \n      ok(true, \'models/venue.js should pass jshint.\'); \n    });\n  });//# sourceURL=cms/tests/models/venue.jshint.js");
 
-;eval("define(\"cms/tests/router.jshint\", \n  [],\n  function() {\n    \"use strict\";\n    module(\'JSHint - .\');\n    test(\'router.js should pass jshint\', function() { \n      ok(false, \'router.js should pass jshint.\\nrouter.js: line 4, col 13, \\\'CmsENV\\\' is not defined.\\n\\n1 error\'); \n    });\n  });//# sourceURL=cms/tests/router.jshint.js");
+;eval("define(\"cms/tests/router.jshint\", \n  [],\n  function() {\n    \"use strict\";\n    module(\'JSHint - .\');\n    test(\'router.js should pass jshint\', function() { \n      ok(true, \'router.js should pass jshint.\'); \n    });\n  });//# sourceURL=cms/tests/router.jshint.js");
 
 ;eval("define(\"cms/tests/routes/events.jshint\", \n  [],\n  function() {\n    \"use strict\";\n    module(\'JSHint - routes\');\n    test(\'routes/events.js should pass jshint\', function() { \n      ok(true, \'routes/events.js should pass jshint.\'); \n    });\n  });//# sourceURL=cms/tests/routes/events.jshint.js");
 
