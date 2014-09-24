@@ -15,7 +15,8 @@ You will need the following things properly installed on your computer.
 
 * `git clone <repository-url>` this repository
 * change into the new directory
-* `npm install`
+* `(sudo) npm install -g ember-cli`
+* `(sudo) npm install`
 * `bower install`
 
 ## Running / Development
