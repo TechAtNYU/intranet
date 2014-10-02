@@ -50,15 +50,13 @@ if (env === 'production') {
  * Routes
  */
 
-app.get('/', index);
-
-
-function index(req, res) {
+app.get('/', function (req, res) {
   res.render('index.html');
-}
+});
 
-// redirect all other root URLS to index
-app.get(/^\/[^\/]+$/, index); // this should really be 404
+app.get(/^\/[^\/]+$/,  function (req, res) {
+  res.render('404.html');
+});
 
 /**
  * Start Server
