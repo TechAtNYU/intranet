@@ -8,15 +8,15 @@
 
     npm install
 
-    // if you don't have nodemon already
+    # if you don't have nodemon already
     npm install -g nodemon
 
 ###Running the Application
 
-    // development
+    # development
     npm start
 
-    //production
+    # production
     NODE_ENV=production node app.js
 
 ###Test
