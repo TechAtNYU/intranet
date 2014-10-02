@@ -48,13 +48,12 @@ if (env === 'production') {
  * Routes
  */
 
-app.get('/', function (req, res) {
+function index(req, res) {
   res.render('index.html');
-});
+}
 
-app.get(/^\/[^\/]+$/,  function (req, res) {
-  res.render('404.html');
-});
+app.get('/', index);
+app.get(/^\/[^\/]+$/, index);
 
 /**
  * Start Server
