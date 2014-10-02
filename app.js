@@ -25,7 +25,7 @@ var app = module.exports = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
-app.set('view engine', 'jade');
+app.engine('html', require('ejs').renderFile);
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -50,16 +50,15 @@ if (env === 'production') {
  * Routes
  */
 
-// serve index and view partials
-app.get('/', routes.index);
-app.get('/partials/:name', routes.partials);
+app.get('/', index);
 
-// JSON API - 
-app.get('/api/name', api.name);
-app.get('/api/people', api.people);
+
+function index(req, res) {
+  res.render('index.html');
+}
 
 // redirect all other root URLS to index
-app.get(/^\/[^\/]+$/, routes.index);
+app.get(/^\/[^\/]+$/, index); // this should really be 404
 
 /**
  * Start Server

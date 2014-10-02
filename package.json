@@ -2,12 +2,15 @@
   "name": "intranet",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "start": "nodemon app.js"
+  },
   "dependencies": {
     "body-parser": "^1.0.2",
     "errorhandler": "*",
     "express": "~4.1.1",
-    "jade": "~0.31.2",
     "method-override": "^1.0.0",
-    "morgan": "^1.0.0"
+    "morgan": "^1.0.0",
+    "ejs": "~1.0.0"
   }
 }
