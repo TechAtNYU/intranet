@@ -1,6 +1,2 @@
-/_site/
+/node_modules
 .DS_Store
-_site
-node_modules
-bower_components
-tmp
