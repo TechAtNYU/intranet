@@ -1,10 +1,39 @@
 'use strict';
 
-/* Directives */
+/**
+ * Setup.
+ */
 
-angular.module('myApp.directives', []).
-  directive('appVersion', function (version) {
-    return function(scope, elm, attrs) {
-      elm.text(version);
-    };
-  });
+var directives = [
+  'tInput'
+];
+
+directives.forEach(function(directive) {
+  angular.module('app.directives', []).directive(
+    directive, eval(directive)
+  );
+});
+
+/**
+ * Directives.
+ */
+
+/**
+ * Input element that displays the amount of characters left given a maxlength.
+ */
+
+function tInput() {
+  return {
+    restrict: 'E',
+    replace: true,
+    scope: {
+      maxlength: "="
+    },
+    template: '<div class="t-input">' +
+                '<input type="text" maxlength="{{maxlength}}" ' +
+                  'ng-model="tinput">' +
+                '</input>' +
+                '<span class="charleft">{{maxlength - tinput.length}}</span>' +
+              '</div>'
+  }
+}

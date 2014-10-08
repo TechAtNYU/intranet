@@ -1,8 +1,6 @@
 'use strict';
 
-/* Controllers */
-
-angular.module('myApp.controllers', []).
+angular.module('app.controllers', []).
   controller('AppCtrl', function ($scope, $http) {
 
     $http({
