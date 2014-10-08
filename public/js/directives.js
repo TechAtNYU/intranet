@@ -30,7 +30,7 @@ function tInput() {
       maxlength: "="
     },
     template: '<div class="t-input">' +
-                '<input type="text" maxlength="{{maxlength}}" ' +
+                '<input type="text" max="{{maxlength}}" ' +
                   'ng-model="tinput">' +
                 '</input>' +
                 '<span class="charleft">{{maxlength - tinput.length}}</span>' +
