@@ -5,7 +5,7 @@
  */
 
 var directives = [
-  'tanTextInput'
+  'tInput'
 ];
 
 directives.forEach(function(directive) {
@@ -18,18 +18,22 @@ directives.forEach(function(directive) {
  * Directives.
  */
 
-function tanTextInput() {
+/**
+ * Input element that displays the amount of characters left given a maxlength.
+ */
+
+function tInput() {
   return {
     restrict: 'E',
-    template: '<input type="text" value="{{character-count}}"/>',
     replace: true,
     scope: {
-      characterCount: '@'
+      maxlength: "="
     },
-    link: function(scope, el, attrs) {
-      console.log(scope)
-      alert(scope.characterCount);
-      // scope.characterCount = attrs.characterCount;
-    }
+    template: '<div class="t-input">' +
+                '<input type="text" maxlength="{{maxlength}}" ' +
+                  'ng-model="tinput">' +
+                '</input>' +
+                '<span class="charleft">{{maxlength - tinput.length}}</span>' +
+              '</div>'
   }
 }
