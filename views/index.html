@@ -16,10 +16,84 @@
   <script type='text/javascript' src='js/services.js'></script>
 </head>
 <body ng-app='app'>
-  <t-input maxlength="10"></t-input>
+  <!-- <t-input maxlength="10"></t-input>
   <t-input maxlength="5"></t-input>
   <t-input maxlength="1"></t-input>
   <t-input maxlength="10"></t-input>
-  <t-input maxlength="10"></t-input>
+  <t-input maxlength="10"></t-input> -->
+
+  <main class="content container">
+    <div class="content-header-container row">
+      <header class="content-header">
+        <h2>Add New Event</h2>
+      </header>
+    </div>
+    <div class="row">
+      <form id="event-add-form" method="POST" action="" role="form" ng-controller="EventAddCtrl">
+        <fieldset id="event-add-basic" class="form-group">
+          <legend>Basic Information</legend>
+
+          <fieldset class="form-group">
+            <div class="col-md-10">
+              <label for="title">Title <small><i>this is what a title should look like</i></small></label>
+              <input name="title" class="form-control" ng-model="event.title">
+            </div>
+            <div class="col-md-6">
+              <label for="shortTitle">Short Title</label>
+              <input name="shortTitle" class="form-control" ng-model="event.shortTitle">
+            </div>
+          </fieldset>
+          <!-- We're gonna need some datepicker addon and probably something like moment.js to calc the date differences -->
+          <fieldset class="form-group">
+            <div class="col-md-3">
+              <label for="startDateTime">Starts</label>
+              <input name="startDateTime" class="form-control" type="dateTime" placeholder="yyyy-MM-ddTHH:mm:ss" ng-model="event.startDateTime">
+            </div>
+            <div class="col-md-3">
+              <label for="endDateTime">Ends</label>
+              <input name="endDateTime" class="form-control" type="dateTime" placeholder="yyyy-MM-ddTHH:mm:ss" ng-model="event.endDateTime">
+            </div>
+            <div class="col-md-2">
+              <label>Length</label>
+              <p class="form-control-static">{{ event.endDateTime - event.startDateTime }}h</p>
+            </div>
+          </fieldset>
+          <fieldset class="form-group">
+            <div class="col-md-6">
+              <label for="description">Description</label>
+              <textarea name="description" class="form-control" rows="2" ng-model="event.description"></textarea>
+
+              <label for="details">Details</label>
+              <textarea name="details" class="form-control" rows="8" ng-model="event.details"></textarea>
+            </div>
+            <div class="col-md-6">
+              <label>Preview</label>
+                <div id="event.-add-preview" class="well">
+                <h4>{{event.title}}</h4>
+                <p><strong>{{event.shortTitle}}</strong></p>
+                <p><i>{{event.startDateTime | date: 'MM/dd h:mma' : 'UTC'}} &ndash; {{event.endDateTime | date: 'MM/dd h:mma' : 'UTC'}} ({{ event.endDateTime - event.startDateTime }} hours)</i></p>
+                <br />
+                <p><strong>Description</strong></p>
+                <p>{{event.description}}</p>
+                <p><strong>Details</strong></p>
+                <p>{{event.details}}</p>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset id="event-add-venue" class="form-group">
+            <legend>Venue</legend>
+
+            <!-- We're gonna need some kind of typeahead library for this -->
+            <div class="col-md-10">
+              <label for="venue-name">Venue Name</label>
+              <input name="venue-name" class="form-control" type="text">
+            </div>
+          </fieldset>
+
+          <!-- TODO: Add fields for adding Venues. -->
+        </section>
+      </form>
+    </div>
+  </main>
 </body>
 </html>

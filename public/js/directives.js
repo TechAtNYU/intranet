@@ -33,7 +33,7 @@ function tInput() {
                 '<input type="text" max="{{maxlength}}" ' +
                   'ng-model="tinput">' +
                 '</input>' +
-                '<span class="charleft">{{maxlength - tinput.length}}</span>' +
+                '<span ng-show="maxlength" class="charleft">{{maxlength - tinput.length}}</span>' +
               '</div>'
   }
 }
