@@ -29,6 +29,14 @@
   padding: 0;
 }
 
-.character-count {
-  
+.input-valid {
+  color: green;
+}
+
+.input-invalid {
+  color: red;
+}
+
+.input-warning {
+  color: orange;
 }
