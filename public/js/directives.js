@@ -30,7 +30,7 @@ function tInput() {
       max: "="
     },
     template: '<div class="t-input">' +
-                '<input type="text" ng-model="tinput" ' +
+                '<input type="text" pattern="pattern()" ng-model="tinput" ' +
                   'ng-change="changeClass()"/>' +
                 '<span class="charleft">' +
                   '{{charsLeft()}}' +
@@ -49,32 +49,40 @@ function tInput() {
         }
       }
 
-      scope.changeClass = function() {
-        if(!scope.max) {
-          return;
-        }
-
-        clearClasses();
-
-        if(!scope.tinput) {
-          return;
-        }
-
-        var klass = 'input-valid';
-        var difference = scope.max - scope.tinput.length;
-
-        if(difference <= 0) klass = 'input-invalid';
-        else if(difference <= THRESHOLD) klass = 'input-warning';
-
-        span.addClass(klass);
+      /**
+       * Creates the regex to require the minimum length of the input for
+       * form validation.
+       */
+      scope.pattern = function() {
+        return scope.max ? '.{1, ' + scope.max + '}' : '.';
       }
 
-      function clearClasses() {
+      /**
+       * Changes the style of the inner span element depending on the number
+       * of characters inputted by the user.
+       */
+      scope.changeClass = function() {
+        if(!scope.max) return;
+
         span.removeClass('input-valid');
         span.removeClass('input-invalid');
         span.removeClass('input-warning');
+
+        if(!scope.tinput) return;
+
+        var difference = scope.max - scope.tinput.length;
+
+        if(difference <= THRESHOLD) {
+          span.addClass(difference > 0 ? 'input-warning' : 'input-invalid');
+        } else {
+          span.addClass('input-valid');
+        }
       }
 
+      /**
+       * Returns the amount of characters left in the input, or an empty string
+       * if max is not specified.
+       */
       scope.charsLeft = function() {
         if(!scope.max) return '';
         else if(!scope.tinput) return scope.max;
