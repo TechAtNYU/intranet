@@ -32,3 +32,10 @@
 .character-count {
   
 }
+
+.copyable-plaintext {
+  font-family: inherit;
+  word-wrap: normal;
+  white-space: pre-wrap;
+  word-break: normal;
+}
