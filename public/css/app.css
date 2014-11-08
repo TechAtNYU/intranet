@@ -39,3 +39,10 @@
   white-space: pre-wrap;
   word-break: normal;
 }
+.inlineblock-li {
+  padding: 0;
+}
+.inlineblock-li li {
+  list-style: none;
+  display: inline-block;
+}
