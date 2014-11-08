@@ -39,3 +39,14 @@
   white-space: pre-wrap;
   word-break: normal;
 }
+.inlineblock-li {
+  padding: 0;
+}
+.inlineblock-li li {
+  list-style: none;
+  display: inline-block;
+}
+.event__team-selector button {
+  margin: 0 5px 5px 0;
+  background-color: #eee;
+}
