@@ -1,5 +1,9 @@
 /* app css stylesheet */
 
+button.selected {
+  background-color: rgb(255, 255, 0) !important;
+}
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;

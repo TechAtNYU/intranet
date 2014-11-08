@@ -51,7 +51,7 @@
               <label>Team</label>
               <ul class="inlineblock-li event__team-selector">
                 <li ng-repeat="team in teams">
-                  <button class="btn" ng-class="team.name" type="button" ng-click="toggleTeam(team.id)">{{team.name}}</button>
+                  <button class="btn" ng-class="{team.name: true, selected: selectedTeams[team.id]}" type="button" ng-click="toggleTeam(team.id)">{{team.name}}</button>
                 </li>
               </ul>
             </div>

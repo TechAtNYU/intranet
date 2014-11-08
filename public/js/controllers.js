@@ -22,12 +22,10 @@ angular.module('app.controllers', []).
     }
 
     $scope.submit = function() {
-
         // Aggregrate all selected teams into our event to be submitted.
         $scope.event.teams = [];
         for(var teamid in Object.keys($scope.selectedTeams))
             $scope.event.teams.push(teamid);
-        console.log($scope.event);
 
         $http.post('http://posttestserver.com/post.php', $scope.event)
             .success(function(data) {
