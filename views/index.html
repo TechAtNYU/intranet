@@ -5,7 +5,7 @@
   <link rel='stylesheet' href='css/app.css'/>
   <link rel='stylesheet' href='css/bootstrap.min.css'/>
 
-  <script src="http://cdn.rawgit.com/jpillora/xdomain/0.6.15/dist/0.6/xdomain.min.js" slave="https://api.tnyu.org/proxy.html"></script>
+  <script src="http://cdn.rawgit.com/jpillora/xdomain/0.6.15/dist/0.6/xdomain.min.js" slave="https://api.tnyu.org/v1.0/proxy.html"></script>
 
   <script type='text/javascript' src='js/lib/jquery-2.1.1.min.js'></script>
   <script type='text/javascript' src='js/lib/bootstrap.min.js'></script>
@@ -51,7 +51,7 @@
               <label>Team</label>
               <ul class="inlineblock-li event__team-selector">
                 <li ng-repeat="team in teams">
-                  <button class="btn {{team.name}}">{{team.name}}</button>
+                  <button class="btn" ng-class="team.name" type="button" ng-click="toggleTeam(team.id)">{{team.name}}</button>
                 </li>
               </ul>
             </div>
