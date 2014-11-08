@@ -30,8 +30,8 @@
         <h2>Add New Event</h2>
       </header>
     </div>
-    <div class="row">
-      <form id="event-add-form" method="POST" action="" role="form" ng-controller="EventAddCtrl">
+    <div class="row" ng-controller="EventAddCtrl">
+      <form id="event-add-form" role="form" ng-submit="submit()" novalidate>
         <fieldset id="event-add-basic" class="form-group">
           <legend>Basic Information</legend>
 
@@ -78,6 +78,20 @@
               <textarea name="details" class="form-control" rows="8" ng-model="event.details"></textarea>
             </div>
           </fieldset>
+          <fieldset class="form-group">
+            <div class="col-md-6">
+              <label for="coorganizers">Co-Organizers</label>
+              <select name="coorganizers" class="form-control" multiple="multiple" ng-model="event.coorganizers">
+                <option value="0">Sweet Club</option>
+                <option value="1">Cool Club</option>
+              </select>
+              <label for="presenters">Presenters</label>
+              <select name="presenters" class="form-control" multiple="multiple" ng-model="event.presenters">
+                <option value="0">Jeff Goldblum</option>
+                <option value="1">George I18n</option>
+              </select>
+            </div>
+          </fieldset>
         </fieldset>
         <fieldset id="event-add-venue" class="form-group">
           <legend>Venue</legend>
@@ -86,9 +100,9 @@
           <div class="col-md-10">
             <label for="venue-name">Venue Name</label>
             <input name="venue-name" class="form-control" type="text">
+            <label for="venue">Venue ID</label>
+            <input name="venue" class="form-control" type="text" ng-model="event.venue">
           </div>
-
-          <!-- TODO: Add fields for adding Venues. -->
         </fieldset>
         <fieldset id="event-add-facebook" class="form-group">
           <legend>Event Listing</legend>
@@ -96,27 +110,30 @@
             <label for="event-rsvp-url">RSVP Url</label>
             <input type="url" name="event-rsvp-url" class="form-control" />          
           </div>
-          <div class="col-md-6">
-            <label>Facebook Event Info</label>
-              <div id="event-add-preview" class="well">
-                <h4>Name</h4>
-                {{event.title}}
-
-                <h4>Details</h4>
-<pre class="copyable-plaintext">
-{{event.description}}
-
-{{event.details}}
-
-All tech@nyu events are covered by a strict anti-harassment policy: http://techatnyu.org/anti-harassment
-</pre>
-
-                <h4>When</h4>
-                <p>{{event.startDateTime | date: 'MM/dd h:mma' : 'UTC'}} &ndash; {{event.endDateTime | date: 'MM/dd h:mma' : 'UTC'}}</p>
-            </div>
-          </div>
         </fieldset>
+        <input name="addedBy" type="text" model="event.addedBy" hidden="hidden">
+        <input type="submit" value="Add Event">
       </form>
+
+      <div class="col-md-6">
+        <label>Facebook Event Info</label>
+          <div id="event-add-preview" class="well">
+            <h4>Name</h4>
+            {{event.title}}
+
+            <h4>Details</h4>
+  <pre class="copyable-plaintext">
+  {{event.description}}
+
+  {{event.details}}
+
+  All tech@nyu events are covered by a strict anti-harassment policy: http://techatnyu.org/anti-harassment
+  </pre>
+
+            <h4>When</h4>
+            <p>{{event.startDateTime | date: 'MM/dd h:mma' : 'UTC'}} &ndash; {{event.endDateTime | date: 'MM/dd h:mma' : 'UTC'}}</p>
+        </div>
+      </div>
     </div>
   </main>
 </body>
