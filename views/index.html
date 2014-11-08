@@ -5,6 +5,8 @@
   <link rel='stylesheet' href='css/app.css'/>
   <link rel='stylesheet' href='css/bootstrap.min.css'/>
 
+  <script src="http://cdn.rawgit.com/jpillora/xdomain/0.6.15/dist/0.6/xdomain.min.js" slave="https://api.tnyu.org/proxy.html"></script>
+
   <script type='text/javascript' src='js/lib/jquery-2.1.1.min.js'></script>
   <script type='text/javascript' src='js/lib/bootstrap.min.js'></script>
   <script type='text/javascript' src='js/lib/angular/angular.min.js'></script>
@@ -43,6 +45,15 @@
               <input name="shortTitle" class="form-control" ng-model="event.shortTitle">
             </div>
           </fieldset>
+
+          <fieldset>
+            <ul>
+              <li ng-repeat="team in teams">
+                {{team.name}}
+              </li>
+            </ul>
+          </fieldset>
+
           <!-- We're gonna need some datepicker addon and probably something like moment.js to calc the date differences -->
           <fieldset class="form-group">
             <div class="col-md-3">
