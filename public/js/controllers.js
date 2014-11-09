@@ -4,22 +4,20 @@ var controllers = angular.module('app.controllers', [])
 
 controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData) {
   // User Initialization
-  (function() {
-    userData.getInformation(function(data){
-      // Put the user into the current scope
-      $scope.currentUser = data;
-      // Fix the addedBy null in the event scope
-      $scope.event.addedBy = $scope.currentUser['id'];
-      // Check if the user is Logged in
-      if (userData.isLoggedIn($scope.currentUser)) {
-        console.log("User logged in");
-      }
-      // Get the teams corresponding to a particular user
-      userData.onTeams($scope.currentUser, function(teamData){
-        $scope.currentUserTeams = teamData;
-      });
+  userData.getInformation(function(data){
+    // Put the user into the current scope
+    $scope.currentUser = data;
+    // Fix the addedBy null in the event scope
+    $scope.event.addedBy = $scope.currentUser['id'];
+    // Check if the user is Logged in
+    if (userData.isLoggedIn($scope.currentUser)) {
+      console.log("User logged in");
+    }
+    // Get the teams corresponding to a particular user
+    userData.onTeams($scope.currentUser, function(teamData){
+      $scope.currentUserTeams = teamData;
     });
-  })();
+  });
 
   // Data Initialization
   $scope.event = { addedBy: null, links: {} };
@@ -29,11 +27,10 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData
       $scope.teams = data.teams;
     })
     .error(function(data, status){
-      console.log(status);
+      console.log("Failed to fetch teams from API with error " + status);
     });
 
   $scope.toggleTeam = function(teamid) {
-    console.log(teamid);
     if($scope.selectedTeams[teamid])
       delete $scope.selectedTeams[teamid];
     else $scope.selectedTeams[teamid] = true;
