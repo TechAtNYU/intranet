@@ -4,28 +4,30 @@ var controllers = angular.module('app.controllers', [])
 
 controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData) {
   // User Initialization
-  (function() {
-    userData.getInformation(function(data){
-      $scope.currentUser = data;
-      if (userData.isLoggedIn($scope.currentUser)) {
-        console.log("User logged in");
-      }
-      userData.onTeams($scope.currentUser, function(teamData){
-        console.log(teamData);
-      });
+  userData.getInformation(function(data){
+    // Put the user into the current scope
+    $scope.currentUser = data;
+    // Fix the addedBy null in the event scope
+    $scope.event.addedBy = $scope.currentUser['id'];
+    // Check if the user is Logged in
+    if (userData.isLoggedIn($scope.currentUser)) {
+      console.log("User logged in");
+    }
+    // Get the teams corresponding to a particular user
+    userData.onTeams($scope.currentUser, function(teamData){
+      $scope.currentUserTeams = teamData;
     });
-  })();
+  });
 
   // Data Initialization
-  $scope.event = { addedBy: "Max", links: {} };
+  $scope.event = { addedBy: null, links: {} };
   $scope.selectedTeams = {};
-  $http.get("https://api.tnyu.org/v1.0/teams")
+  $http.get("https://api.tnyu.org/v1.0/teams?isMeta=false")
     .success(function(data){
-      console.log(data);
       $scope.teams = data.teams;
     })
     .error(function(data, status){
-      console.log(status);
+      console.log("Failed to fetch teams from API with error " + status);
     });
 
   /* Multi-select requires an input model as an array of object literals. An optional
@@ -76,7 +78,6 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData
     });
 
   $scope.toggleTeam = function(teamid) {
-    console.log(teamid);
     if($scope.selectedTeams[teamid])
       delete $scope.selectedTeams[teamid];
     else $scope.selectedTeams[teamid] = true;
@@ -147,4 +148,34 @@ controllers.controller('AddVenueCtrl', function($scope, $modalInstance) {
   $scope.cancel = function() {
     $modalInstance.dismiss('cancel');
   };
+});
+
+ controllers.controller('DatePickerCtrl', function ($scope) {
+
+  $scope.today = function() {
+    $scope.dt = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function () {
+    $scope.dt = null;
+  };
+
+  $scope.toggleMin = function() {
+    $scope.minDate = $scope.minDate ? null : new Date();
+  };
+  $scope.toggleMin();
+
+  $scope.toggleOpenDatePicker = function($event,datePicker) {
+   $event.preventDefault();
+   $event.stopPropagation();
+   $scope[datePicker] = !$scope[datePicker];
+  };
+  
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+
+  $scope.format = 'shortDate';
 });

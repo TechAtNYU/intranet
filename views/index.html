@@ -54,21 +54,18 @@
             </div>
           </fieldset>
 
-          <!-- We're gonna need some datepicker addon and probably something like moment.js to calc the date differences -->
-          <fieldset class="form-group">
+          <!-- Need to add timepickers -->
+         <fieldset class="form-group" ng-controller="DatePickerCtrl">
             <div class="col-md-3">
               <label for="startDateTime">Starts</label>
-              <input name="startDateTime" class="form-control" type="dateTime" placeholder="yyyy-MM-ddTHH:mm:ss" ng-model="event.startDateTime">
+              <input type="text" name="startDateTime" class="form-control" datepicker-popup="{{format}}" ng-model="dt.start" is-open="startDate" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="toggleOpenDatePicker($event,'startDate')"}}/>
             </div>
             <div class="col-md-3">
               <label for="endDateTime">Ends</label>
-              <input name="endDateTime" class="form-control" type="dateTime" placeholder="yyyy-MM-ddTHH:mm:ss" ng-model="event.endDateTime">
-            </div>
-            <div class="col-md-2">
-              <label>Length</label>
-              <p class="form-control-static">{{event.endDateTime - event.startDateTime}}h</p>
+              <input type="text" name= "endDateTime" class="form-control" datepicker-popup="{{format}}" ng-model="dt.end" is-open="endDate" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="toggleOpenDatePicker($event,'endDate')" }}/>
             </div>
           </fieldset>
+          
           <fieldset class="form-group">
             <div class="col-md-6">
               <label for="description">Description</label>
