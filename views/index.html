@@ -79,18 +79,19 @@
             <div class="col-md-6">
               <label for="coorganizers">Co-Organizers</label>
               <p><em>This should be a multi-select typeahead listing all organizations, with related clubs towards the top.</em></p>
-              <select name="coorganizers" class="form-control" multiple="multiple" ng-model="event.coorganizers">
+              <select name="coorganizers" class="form-control" multiple="multiple" ng-model="event.links.coorganizers">
                 <option value="0">Sweet Club</option>
                 <option value="1">Cool Club</option>
                 <option value="545db64907ec528834a7d8e2">Fashion Tech Club</option>
               </select>
               <label for="presenters">Presenters</label>
               <p><em>This should be a multi-select typeahead listing al organizations, with related clubs towards the top.</em></p>
-              <select name="presenters" class="form-control" multiple="multiple" ng-model="event.presenters">
+              <select name="presenters" class="form-control" multiple="multiple" ng-model="event.links.presenters">
                 <option value="0">Jeff Goldblum</option>
                 <option value="1">George I18n</option>
                 <option value="545dae8707ec528834a7d8dd">Billie Whitehouse</option>
               </select>
+              <button class="btn btn-default" ng-click="addPresenter()">Add Presenter</button>
             </div>
           </fieldset>
         </fieldset>
@@ -103,6 +104,7 @@
             <input name="venue-name" class="form-control" type="text">
             <label for="venue">Venue ID</label>
             <input name="venue" class="form-control" type="text" ng-model="event.venue">
+    <button class="btn btn-default" ng-click="addVenue()">Add Venue</button>
           </div>
         </fieldset>
         <fieldset id="event-add-facebook" class="form-group">
