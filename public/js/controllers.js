@@ -9,7 +9,9 @@ angular.module('app.controllers', []).
             if (userData.isLoggedIn($scope.currentUser)) {
                 console.log("User logged in");
             }
-            userData.onTeams($scope.currentUser);
+            userData.onTeams($scope.currentUser, function(teamData){
+                console.log(teamData);
+            });
         });
     })();
 
