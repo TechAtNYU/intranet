@@ -28,12 +28,50 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData
       console.log(status);
     });
 
+  /* Multi-select requires an input model as an array of object literals. An optional
+   * output model can also be specified. This writes an array of selected object literals
+   * to the current scope.
+   */
+
+  $scope.presenters = [];
+  $http.get("https://api.tnyu.org/v1.0/presenters")
+    .success(function(data){
+      data.presenters.forEach(function(presenter) {
+        $scope.presenters.push({ name: presenter.name, ticked: false});
+      });
+    })
+    .error(function(data, status){
+      console.log(status);
+    });
+
+  $scope.coorganizers = [];
+  $http.get("https://api.tnyu.org/v1.0/related-clubs")
+    .success(function(data){
+      data["related-clubs"].forEach(function(club) {
+        $scope.coorganizers.push({ name: club.name, ticked : false});
+      });
+    })
+    .error(function(data, status){
+      console.log(status);
+    });
+  $http.get("https://api.tnyu.org/v1.0/organizations")
+    .success(function(data){
+      data.organizations.forEach(function(organization) {
+        $scope.coorganizers.push({ name: organization.name, ticked: false});
+      });
+    })
+    .error(function(data, status){
+      console.log(status);
+    });
+
   $scope.toggleTeam = function(teamid) {
     console.log(teamid);
     if($scope.selectedTeams[teamid])
       delete $scope.selectedTeams[teamid];
     else $scope.selectedTeams[teamid] = true;
   }
+
+  $scope.test = [ { name: 'Phil', ticked: false }, { name: 'Style', ticked: false} ];
 
   $scope.submit = function() {
     // Aggregrate all selected teams into our event to be submitted.

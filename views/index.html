@@ -4,6 +4,8 @@
   <title>Tech@NYU Intranet</title>
   <link rel="stylesheet" href="/css/app.css"/>
   <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/css/multi-select.css"/>
+
 
   <script src="http://cdn.rawgit.com/jpillora/xdomain/0.6.15/dist/0.6/xdomain.min.js" slave="https://api.tnyu.org/v1.0/proxy.html"></script>
   <script type="text/javascript"  src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
@@ -16,6 +18,7 @@
   <script type="text/javascript" src="/js/directives.js"></script>
   <script type="text/javascript" src="/js/filters.js"></script>
   <script type="text/javascript" src="/js/services.js"></script>
+  <script type="text/javascript" src="/scripts/multi-select.js"></script>
 </head>
 <body ng-app="app">
   <main class="content container">
@@ -79,18 +82,26 @@
             <div class="col-md-6">
               <label for="coorganizers">Co-Organizers</label>
               <p><em>This should be a multi-select typeahead listing all organizations, with related clubs towards the top.</em></p>
-              <select name="coorganizers" class="form-control" multiple="multiple" ng-model="event.links.coorganizers">
-                <option value="0">Sweet Club</option>
-                <option value="1">Cool Club</option>
-                <option value="545db64907ec528834a7d8e2">Fashion Tech Club</option>
-              </select>
+              <div     
+                  multi-select
+                  input-model="coorganizers"
+                  output-model="selectedCoorgs"
+                  button-label="name"
+                  item-label="name"
+                  tick-property="ticked"
+              >
+              </div>
               <label for="presenters">Presenters</label>
               <p><em>This should be a multi-select typeahead listing al organizations, with related clubs towards the top.</em></p>
-              <select name="presenters" class="form-control" multiple="multiple" ng-model="event.links.presenters">
-                <option value="0">Jeff Goldblum</option>
-                <option value="1">George I18n</option>
-                <option value="545dae8707ec528834a7d8dd">Billie Whitehouse</option>
-              </select>
+              <div     
+                  multi-select
+                  input-model="presenters"
+                  output-model="selectedPresenters"
+                  button-label="name"
+                  item-label="name"
+                  tick-property="ticked"
+              >
+              </div>
               <button class="btn btn-default" ng-click="addPresenter()">Add Presenter</button>
             </div>
           </fieldset>
