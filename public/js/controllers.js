@@ -86,3 +86,33 @@ controllers.controller('AddVenueCtrl', function($scope, $modalInstance) {
     $modalInstance.dismiss('cancel');
   };
 });
+
+ controllers.controller('DatePickerCtrl', function ($scope) {
+
+  $scope.today = function() {
+    $scope.dt = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function () {
+    $scope.dt = null;
+  };
+
+  $scope.toggleMin = function() {
+    $scope.minDate = $scope.minDate ? null : new Date();
+  };
+  $scope.toggleMin();
+
+  $scope.toggleOpenDatePicker = function($event,datePicker) {
+   $event.preventDefault();
+   $event.stopPropagation();
+   $scope[datePicker] = !$scope[datePicker];
+  };
+  
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+
+  $scope.format = 'shortDate';
+});
