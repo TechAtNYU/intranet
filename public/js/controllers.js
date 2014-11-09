@@ -4,7 +4,6 @@ angular.module('app.controllers', []).
   controller('EventAddCtrl', function ($scope, $http) {
     $scope.event = { addedBy: "Max" };
     $scope.selectedTeams = {};
-
     $http.get("https://api.tnyu.org/v1.0/teams")
         .success(function(data){
         	console.log(data);
@@ -16,7 +15,7 @@ angular.module('app.controllers', []).
 
     $scope.toggleTeam = function(teamid) {
         console.log(teamid);
-        if($scope.selectedTeams[teamid]) 
+        if($scope.selectedTeams[teamid])
             delete $scope.selectedTeams[teamid];
         else $scope.selectedTeams[teamid] = true;
     }
@@ -27,7 +26,9 @@ angular.module('app.controllers', []).
         for(var teamid in Object.keys($scope.selectedTeams))
             $scope.event.teams.push(teamid);
 
-        $http.post('http://posttestserver.com/post.php', $scope.event)
+        $http.post('https://api.tnyu.org/v1.0/events', 
+                    $scope.event, 
+                    { headers: { "Content-Type": "application/vnd.api+json" } })
             .success(function(data) {
                 console.log(data);
             })
