@@ -1,3 +1,7 @@
+<div class="modal-header">
+    <h3 class="modal-title">Add Venue</h3>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
 <div class="modal-body">
   <form id="venue-form" method="POST" action="" role="form">
     <legend>Venue</legend>
@@ -37,13 +41,10 @@
         <label>Notes</label>
         <textarea name="notes" class="form-control"></textarea>
       </div>
-
-      <input type="submit" name="addVenue" class="form-control"></input>
-
+      
+      <div class="col-md-3">
+      <input type="submit" class="btn btn-primary" name="addVenue" class="form-control"></input>
+      </div>
     </fieldset>
   </form>
-</div>
-<div class="modal-footer">
-  <button class="btn btn-primary" ng-click="ok()">OK</button>
-  <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>

@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h3 class="modal-title">Add Coorganizer</h3>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
+<div class="modal-body">
+  <form id="venue-form" method="POST" action="" role="form">
+    <legend>Coorganizer</legend>
+
+    <fieldset class="form-group">
+      <div class="col-md-10">
+        <label>Organization Name</label>
+        <input type="text" name="name" class="form-control"></input>
+      </div>
+
+      <div class="col-md-10">
+        <label>URL</label>
+        <input type="text" name="url" class="form-control"></input>
+      </div>
+
+      <div class="col-md-10">
+        <label>Description</label>
+        <input type="text" name="description" class="form-control"></input>
+      </div>
+      
+      <div class="col-md-3">
+      <input type="submit" class="btn btn-primary" name="addVenue" class="form-control"></input>
+      </div>
+    </fieldset>
+  </form>
+</div>
