@@ -88,7 +88,7 @@ controllers.controller('AddVenueCtrl', function($scope, $modalInstance) {
   };
 });
 
- controllers.controller('DatePickerCtrl', function ($scope) {
+controllers.controller('DateTimePickerCtrl', function ($scope, $timeout) {
 
   $scope.today = function() {
     $scope.dt = new Date();
@@ -116,4 +116,17 @@ controllers.controller('AddVenueCtrl', function($scope, $modalInstance) {
   };
 
   $scope.format = 'shortDate';
+  $scope.hourStep = 1;
+  $scope.minuteStep = 15;
+
+  $scope.timeOptions = {
+    hourStep: [1, 2, 3],
+    minuteStep: [1, 5, 10, 15, 25, 30]
+  };
+
+  $scope.showMeridian = true;
+  $scope.timeToggleMode = function() {
+    $scope.showMeridian = !$scope.showMeridian;
+  };
+  
 });

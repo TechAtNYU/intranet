@@ -9,6 +9,9 @@
   <script type="text/javascript"  src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
   <script  type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.min.js"></script>
+
+  <script src="http://zhaber.github.io/datetimepicker/datetimepicker-tpls-0.11.js"></script>
+  <link href="http://zhaber.github.io/datetimepicker/datetimepicker.css" type="text/css" rel="stylesheet"> 
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
   <script type="text/javascript" src="/js/app.js"></script>
@@ -51,15 +54,14 @@
             </div>
           </fieldset>
 
-          <!-- Need to add timepickers -->
-         <fieldset class="form-group" ng-controller="DatePickerCtrl">
-            <div class="col-md-3">
+         <fieldset class="form-group" ng-controller="DateTimePickerCtrl" >
+            <div class="col-md-5">
               <label for="startDateTime">Starts</label>
-              <input type="text" name="startDateTime" class="form-control" datepicker-popup="{{format}}" ng-model="dt.start" is-open="startDate" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="toggleOpenDatePicker($event,'startDate')"}}/>
+                <datetimepicker name="startDateTime" min-date="minDate" show-weeks="showWeeks" hour-step="hourStep" minute-step="minuteStep" ng-model="date.start" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-5">
               <label for="endDateTime">Ends</label>
-              <input type="text" name= "endDateTime" class="form-control" datepicker-popup="{{format}}" ng-model="dt.end" is-open="endDate" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="toggleOpenDatePicker($event,'endDate')" }}/>
+                <datetimepicker name="endDateTime" min-date="minDate" show-weeks="showWeeks" hour-step="hourStep" minute-step="minuteStep" ng-model="date.end" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
             </div>
           </fieldset>
           
