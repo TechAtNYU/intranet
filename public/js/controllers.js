@@ -1,7 +1,19 @@
 'use strict';
 
 angular.module('app.controllers', []).
-  controller('EventAddCtrl', function ($scope, $http) {
+  controller('EventAddCtrl', function ($scope, $http, userData) {
+    // User Initialization
+    (function() {
+        userData.getInformation(function(data){
+            $scope.currentUser = data;
+            if (userData.isLoggedIn($scope.currentUser)) {
+                console.log("User logged in");
+            }
+            userData.onTeams($scope.currentUser);
+        });
+    })();
+
+    // Data Initialization
     $scope.event = { addedBy: "Max" };
     $scope.selectedTeams = {};
     $http.get("https://api.tnyu.org/v1.0/teams")
