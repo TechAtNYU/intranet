@@ -4,6 +4,7 @@ angular.module('app', [
   'ngRoute',
   'ui.bootstrap',
   'ui.bootstrap.datetimepicker',
+  'multi-select',
   'app.controllers',
   'app.filters',
   'app.services',
