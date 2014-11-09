@@ -2,24 +2,140 @@
 <html>
 <head>
   <title>Tech@NYU Intranet</title>
-  <link rel='stylesheet' href='css/app.css'/>
-  <link rel='stylesheet' href='css/bootstrap.min.css'/>
+  <link rel="stylesheet" href="/css/app.css"/>
+  <link rel="stylesheet" href="/css/bootstrap.min.css"/>
 
-  <script type='text/javascript' src='js/lib/jquery-2.1.1.min.js'></script>
-  <script type='text/javascript' src='js/lib/bootstrap.min.js'></script>
-  <script type='text/javascript' src='js/lib/angular/angular.min.js'></script>
+  <script src="http://cdn.rawgit.com/jpillora/xdomain/0.6.15/dist/0.6/xdomain.min.js" slave="https://api.tnyu.org/v1.0/proxy.html"></script>
 
-  <script type='text/javascript' src='js/app.js'></script>
-  <script type='text/javascript' src='js/controllers.js'></script>
-  <script type='text/javascript' src='js/directives.js'></script>
-  <script type='text/javascript' src='js/filters.js'></script>
-  <script type='text/javascript' src='js/services.js'></script>
+  <script type="text/javascript" src="/js/lib/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="/js/lib/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/lib/angular/angular.min.js"></script>
+
+  <script type="text/javascript" src="/js/app.js"></script>
+  <script type="text/javascript" src="/js/controllers.js"></script>
+  <script type="text/javascript" src="/js/directives.js"></script>
+  <script type="text/javascript" src="/js/filters.js"></script>
+  <script type="text/javascript" src="/js/services.js"></script>
 </head>
-<body ng-app='app'>
-  <t-input max="10"></t-input>
-  <t-input></t-input>
-  <t-input max="2"></t-input>
-  <t-input max="5"></t-input>
-  <t-input max="100"></t-input>
+<body ng-app="app">
+  <main class="content container">
+    <div class="content-header-container row">
+      <header class="content-header">
+        <h2>Add New Event</h2>
+      </header>
+    </div>
+    <div class="row" ng-controller="EventAddCtrl">
+      <form id="event-add-form" role="form" ng-submit="submit()" novalidate>
+        <fieldset id="event-add-basic" class="form-group">
+          <legend>Basic Information</legend>
+
+          <fieldset class="form-group">
+            <div class="col-md-10">
+              <label for="title">Title <small><i>this is what a title should look like</i></small></label>
+              <input name="title" class="form-control" ng-model="event.title">
+            </div>
+            <div class="col-md-6">
+              <label for="shortTitle">Short Title</label>
+              <input name="shortTitle" class="form-control" ng-model="event.shortTitle">
+            </div>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <div class="col-md-10">
+              <label>Team</label>
+              <ul class="inlineblock-li event__team-selector">
+                <li ng-repeat="team in teams">
+                  <button class="btn" ng-class="{selected: selectedTeams[team.id]}" type="button" ng-click="toggleTeam(team.id)">{{team.name}}</button>
+                </li>
+              </ul>
+            </div>
+          </fieldset>
+
+          <!-- We're gonna need some datepicker addon and probably something like moment.js to calc the date differences -->
+          <fieldset class="form-group">
+            <div class="col-md-3">
+              <label for="startDateTime">Starts</label>
+              <input name="startDateTime" class="form-control" type="dateTime" placeholder="yyyy-MM-ddTHH:mm:ss" ng-model="event.startDateTime">
+            </div>
+            <div class="col-md-3">
+              <label for="endDateTime">Ends</label>
+              <input name="endDateTime" class="form-control" type="dateTime" placeholder="yyyy-MM-ddTHH:mm:ss" ng-model="event.endDateTime">
+            </div>
+            <div class="col-md-2">
+              <label>Length</label>
+              <p class="form-control-static">{{event.endDateTime - event.startDateTime}}h</p>
+            </div>
+          </fieldset>
+          <fieldset class="form-group">
+            <div class="col-md-6">
+              <label for="description">Description</label>
+              <textarea name="description" class="form-control" rows="2" ng-model="event.description"></textarea>
+
+              <label for="details">Details</label>
+              <textarea name="details" class="form-control" rows="8" ng-model="event.details"></textarea>
+            </div>
+          </fieldset>
+          <fieldset class="form-group">
+            <div class="col-md-6">
+              <label for="coorganizers">Co-Organizers</label>
+              <p><em>This should be a multi-select typeahead listing all organizations, with related clubs towards the top.</em></p>
+              <select name="coorganizers" class="form-control" multiple="multiple" ng-model="event.coorganizers">
+                <option value="0">Sweet Club</option>
+                <option value="1">Cool Club</option>
+                <option value="545db64907ec528834a7d8e2">Fashion Tech Club</option>
+              </select>
+              <label for="presenters">Presenters</label>
+              <p><em>This should be a multi-select typeahead listing al organizations, with related clubs towards the top.</em></p>
+              <select name="presenters" class="form-control" multiple="multiple" ng-model="event.presenters">
+                <option value="0">Jeff Goldblum</option>
+                <option value="1">George I18n</option>
+                <option value="545dae8707ec528834a7d8dd">Billie Whitehouse</option>
+              </select>
+            </div>
+          </fieldset>
+        </fieldset>
+        <fieldset id="event-add-venue" class="form-group">
+          <legend>Venue</legend>
+
+          <!-- We're gonna need some kind of typeahead library for this -->
+          <div class="col-md-10">
+            <label for="venue-name">Venue Name</label>
+            <input name="venue-name" class="form-control" type="text">
+            <label for="venue">Venue ID</label>
+            <input name="venue" class="form-control" type="text" ng-model="event.venue">
+          </div>
+        </fieldset>
+        <fieldset id="event-add-facebook" class="form-group">
+          <legend>Event Listing</legend>
+          <div class="col-md-10">
+            <label for="event-rsvp-url">RSVP Url</label>
+            <input type="url" name="event-rsvp-url" class="form-control" />          
+          </div>
+        </fieldset>
+        <input name="addedBy" type="text" model="event.addedBy" hidden="hidden">
+        <input type="submit" value="Add Event">
+      </form>
+
+      <div class="col-md-6">
+        <label>Facebook Event Info</label>
+          <div id="event-add-preview" class="well">
+            <h4>Name</h4>
+            {{event.title}}
+
+            <h4>Details</h4>
+  <pre class="copyable-plaintext">
+  {{event.description}}
+
+  {{event.details}}
+
+  All tech@nyu events are covered by a strict anti-harassment policy: http://techatnyu.org/anti-harassment
+  </pre>
+
+            <h4>When</h4>
+            <p>{{event.startDateTime | date: 'MM/dd h:mma' : 'UTC'}} &ndash; {{event.endDateTime | date: 'MM/dd h:mma' : 'UTC'}}</p>
+        </div>
+      </div>
+    </div>
+  </main>
 </body>
 </html>

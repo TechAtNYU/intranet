@@ -1,5 +1,9 @@
 /* app css stylesheet */
 
+button.selected {
+  background-color: rgb(255, 255, 0) !important;
+}
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -39,4 +43,22 @@
 
 .input-warning {
   color: orange;
+}
+
+.copyable-plaintext {
+  font-family: inherit;
+  word-wrap: normal;
+  white-space: pre-wrap;
+  word-break: normal;
+}
+.inlineblock-li {
+  padding: 0;
+}
+.inlineblock-li li {
+  list-style: none;
+  display: inline-block;
+}
+.event__team-selector button {
+  margin: 0 5px 5px 0;
+  background-color: #eee;
 }

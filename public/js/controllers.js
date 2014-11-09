@@ -1,34 +1,39 @@
 'use strict';
 
 angular.module('app.controllers', []).
-  controller('AppCtrl', function ($scope, $http) {
+  controller('EventAddCtrl', function ($scope, $http) {
+    $scope.event = { addedBy: "Max" };
+    $scope.selectedTeams = {};
+    $http.get("https://api.tnyu.org/v1.0/teams")
+        .success(function(data){
+        	console.log(data);
+        	$scope.teams = data.teams;
+        })
+        .error(function(data, status){
+        	console.log(status);
+        });
 
-    $http({
-      method: 'GET',
-      url: '/api/name'
-    }).
-    success(function (data, status, headers, config) {
-      $scope.name = data.name;
-    }).
-    error(function (data, status, headers, config) {
-      $scope.name = 'Error!';
-    });
+    $scope.toggleTeam = function(teamid) {
+        console.log(teamid);
+        if($scope.selectedTeams[teamid])
+            delete $scope.selectedTeams[teamid];
+        else $scope.selectedTeams[teamid] = true;
+    }
 
-  }).
-  controller('PeopleCtrl', function ($scope, $http) {
-      $http({
-        method: 'GET',
-        url: '/api/people'
-      }).
-      success(function (data, status, headers, config) {
-        $scope.people = data;
-        console.log(data);
-      }).
-      error(function (data, status, headers, config) {
-        $scope.error = status;
-      });
-  }).
-  controller('OtherCtrl', function ($scope) {
-    // write Ctrl here
+    $scope.submit = function() {
+        // Aggregrate all selected teams into our event to be submitted.
+        $scope.event.teams = [];
+        for(var teamid in Object.keys($scope.selectedTeams))
+            $scope.event.teams.push(teamid);
 
+        $http.post('https://api.tnyu.org/v1.0/events', 
+                    $scope.event, 
+                    { headers: { "Content-Type": "application/vnd.api+json" } })
+            .success(function(data) {
+                console.log(data);
+            })
+            .error(function(data, status) {
+                console.log(status);
+            });
+    }
   });
