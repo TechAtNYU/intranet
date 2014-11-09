@@ -50,19 +50,20 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData
       data["related-clubs"].forEach(function(club) {
         $scope.coorganizers.push({ name: club.name, ticked : false});
       });
+      $http.get("https://api.tnyu.org/v1.0/organizations")
+        .success(function(data){
+          data.organizations.forEach(function(organization) {
+            $scope.coorganizers.push({ name: organization.name, ticked: false});
+          });
+        })
+        .error(function(data, status){
+          console.log(status);
+        });
     })
     .error(function(data, status){
       console.log(status);
     });
-  $http.get("https://api.tnyu.org/v1.0/organizations")
-    .success(function(data){
-      data.organizations.forEach(function(organization) {
-        $scope.coorganizers.push({ name: organization.name, ticked: false});
-      });
-    })
-    .error(function(data, status){
-      console.log(status);
-    });
+  
 
   $scope.toggleTeam = function(teamid) {
     console.log(teamid);
