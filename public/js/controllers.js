@@ -19,7 +19,7 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData
   // Data Initialization
   $scope.event = { addedBy: "Max", links: {} };
   $scope.selectedTeams = {};
-  $http.get("https://api.tnyu.org/v1.0/teams")
+  $http.get("https://api.tnyu.org/v1.0/teams?isMeta=false")
     .success(function(data){
       console.log(data);
       $scope.teams = data.teams;
