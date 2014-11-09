@@ -1,7 +1,9 @@
+<div class="modal-header">
+    <h3 class="modal-title">Add Presenter</h3>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
 <div class="modal-body">
   <form id="presenter-form" method="POST" action="" role="form">
-    <legend>Presenter</legend>
-
     <fieldset class="form-group">
       <div class="col-md-10">
         <label for="title">Title</label>
@@ -24,8 +26,8 @@
       </div>
 
       <div class="col-md-10">
-        <label>Twitter ID</label> <i>Note: this is not the @handle, but their <a href="http://gettwitterid.com/">numeric ID</a>.</i>
-        <input type="text" name="twitterId" class="form-control"></input>
+        <label>Twitter</label>
+        <input type="text" name="twitter" class="form-control"></input>
       </div>
 
       <div class="col-md-10">
@@ -68,12 +70,8 @@
         <textarea name="notes" class="form-control"></textarea>
       </div>
 
-      <input type="submit" name="addPresenter" class="form-control"></input>
+      <input type="submit" class="btn btn-primary" name="addPresenter" class="form-control"></input>
 
     </fieldset>
   </form>
-</div>
-<div class="modal-footer">
-  <button class="btn btn-primary" ng-click="ok()">OK</button>
-  <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>
