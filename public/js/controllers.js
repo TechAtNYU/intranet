@@ -104,15 +104,30 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData
 
     console.log($scope.event);
 
-    // $http.post('https://api.tnyu.org/v1.0/events', 
-    //       $scope.event, 
-    //       { headers: { "Content-Type": "application/vnd.api+json" } })
-    //   .success(function(data) {
-    //     console.log(data);
-    //   })
-    //   .error(function(data, status) {
-    //     console.log(status);
-    //   });
+    $http.post('https://api.tnyu.org/v1.0/events', 
+          { 
+            "links": {
+              "events.venue": {
+                "type": "venues"
+              },
+              "events.coorganizers": {
+                "type": "related-clubs"
+              },
+              "events.presenters": {
+                "type": "presenters"
+              },
+              "events.teams": {
+                "type": "teams"
+              }
+            }, "events": $scope.event
+          }, 
+          { headers: { "Content-Type": "application/vnd.api+json" } })
+      .success(function(data) {
+        console.log(data);
+      })
+      .error(function(data, status) {
+        console.log(status);
+      });
   }
   
   $scope.addCoorganizer = function addCoorganizer() {
