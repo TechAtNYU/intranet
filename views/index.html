@@ -4,6 +4,8 @@
   <title>Tech@NYU Intranet</title>
   <link rel="stylesheet" href="/css/app.css"/>
   <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/css/multi-select.css"/>
+
 
   <script src="http://cdn.rawgit.com/jpillora/xdomain/0.6.15/dist/0.6/xdomain.min.js" slave="https://api.tnyu.org/v1.0/proxy.html"></script>
   <script type="text/javascript"  src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
@@ -18,6 +20,7 @@
   <script type="text/javascript" src="/js/directives.js"></script>
   <script type="text/javascript" src="/js/filters.js"></script>
   <script type="text/javascript" src="/js/services.js"></script>
+  <script type="text/javascript" src="/scripts/multi-select.js"></script>
 </head>
 <body ng-app="app">
   <main class="content container">
@@ -74,38 +77,56 @@
               <textarea name="details" class="form-control" rows="8" ng-model="event.details"></textarea>
             </div>
           </fieldset>
+
           <fieldset class="form-group">
             <div class="col-md-6">
               <label for="coorganizers">Co-Organizers</label>
               <p><em>This should be a multi-select typeahead listing all organizations, with related clubs towards the top.</em></p>
-              <select name="coorganizers" class="form-control" multiple="multiple" ng-model="event.links.coorganizers">
-                <option value="0">Sweet Club</option>
-                <option value="1">Cool Club</option>
-                <option value="545db64907ec528834a7d8e2">Fashion Tech Club</option>
-              </select>
+              <div     
+                  multi-select
+                  input-model="coorganizers"
+                  output-model="selectedCoorgs"
+                  button-label="name"
+                  item-label="name"
+                  tick-property="ticked" 
+              ></div>
+              <button class="btn btn-default" ng-click="addCoorganizer()">Add Coorganizer</button>
+              <br>
               <label for="presenters">Presenters</label>
               <p><em>This should be a multi-select typeahead listing al organizations, with related clubs towards the top.</em></p>
-              <select name="presenters" class="form-control" multiple="multiple" ng-model="event.links.presenters">
-                <option value="0">Jeff Goldblum</option>
-                <option value="1">George I18n</option>
-                <option value="545dae8707ec528834a7d8dd">Billie Whitehouse</option>
-              </select>
+              <div     
+                  multi-select
+                  input-model="presenters"
+                  output-model="selectedPresenters"
+                  button-label="name"
+                  item-label="name"
+                  tick-property="ticked" 
+              ></div>
               <button class="btn btn-default" ng-click="addPresenter()">Add Presenter</button>
             </div>
           </fieldset>
         </fieldset>
+
         <fieldset id="event-add-venue" class="form-group">
           <legend>Venue</legend>
 
           <!-- We're gonna need some kind of typeahead library for this -->
           <div class="col-md-10">
-            <label for="venue-name">Venue Name</label>
-            <input name="venue-name" class="form-control" type="text">
-            <label for="venue">Venue ID</label>
-            <input name="venue" class="form-control" type="text" ng-model="event.venue">
-    <button class="btn btn-default" ng-click="addVenue()">Add Venue</button>
+            <label for="venue">Venue</label>
+            <!-- <input name="venue" class="form-control" type="text" ng-model="event.venue"> -->
+            <div     
+                  multi-select
+                  input-model="venues"
+                  output-model="selectedVenue"
+                  button-label="name"
+                  item-label="name"
+                  selection-mode="single"
+                  tick-property="ticked" 
+              ></div>
+            <button class="btn btn-default" ng-click="addVenue()">Add Venue</button>
           </div>
         </fieldset>
+
         <fieldset id="event-add-facebook" class="form-group">
           <legend>Event Listing</legend>
           <div class="col-md-10">
@@ -113,8 +134,11 @@
             <input type="url" name="event-rsvp-url" class="form-control" />          
           </div>
         </fieldset>
-        <input name="addedBy" type="text" model="event.addedBy" hidden="hidden">
-        <input type="submit" value="Add Event">
+
+        <fieldset id="event-submit" class="form-group">
+        <input name="addedBy" type="text" model="event.addedBy" hidden="hidden" />
+        <input type="submit" class="btn btn-primary" value="Add Event" />
+        </fieldset>
       </form>
 
       <div class="col-md-6">
@@ -124,13 +148,13 @@
             {{event.title}}
 
             <h4>Details</h4>
-  <pre class="copyable-plaintext">
-  {{event.description}}
+            <pre class="copyable-plaintext">
+            {{event.description}}
 
-  {{event.details}}
+            {{event.details}}
 
-  All tech@nyu events are covered by a strict anti-harassment policy: http://techatnyu.org/anti-harassment
-  </pre>
+            All tech@nyu events are covered by a strict anti-harassment policy: http://techatnyu.org/anti-harassment
+            </pre>
 
             <h4>When</h4>
             <p>{{event.startDateTime | date: 'MM/dd h:mma' : 'UTC'}} &ndash; {{event.endDateTime | date: 'MM/dd h:mma' : 'UTC'}}</p>
