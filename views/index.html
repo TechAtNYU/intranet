@@ -11,6 +11,8 @@
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.min.js"></script>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
   <script type="text/javascript" src="/js/app.js"></script>
   <script type="text/javascript" src="/js/controllers.js"></script>
   <script type="text/javascript" src="/js/directives.js"></script>
@@ -25,16 +27,16 @@
       </header>
     </div>
     <div class="row" ng-controller="EventAddCtrl">
-      <form id="event-add-form" role="form" ng-submit="submit()" novalidate>
+      <form id="event-add-form" role="form" novalidate>
         <fieldset id="event-add-basic" class="form-group">
           <legend>Basic Information</legend>
 
           <fieldset class="form-group">
-            <div class="col-md-10">
+            <div class="col-md-12">
               <label for="title">Title <small><i>this is what a title should look like</i></small></label>
               <input name="title" class="form-control" ng-model="event.title">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
               <label for="shortTitle">Short Title</label>
               <input name="shortTitle" class="form-control" ng-model="event.shortTitle">
             </div>
