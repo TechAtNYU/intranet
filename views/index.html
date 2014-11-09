@@ -88,7 +88,6 @@
                   output-model="selectedCoorgs"
                   button-label="name"
                   item-label="name"
-                  tick-property="ticked"
               >
               </div>
               <label for="presenters">Presenters</label>
@@ -99,7 +98,6 @@
                   output-model="selectedPresenters"
                   button-label="name"
                   item-label="name"
-                  tick-property="ticked"
               >
               </div>
               <button class="btn btn-default" ng-click="addPresenter()">Add Presenter</button>
@@ -111,10 +109,16 @@
 
           <!-- We're gonna need some kind of typeahead library for this -->
           <div class="col-md-10">
-            <label for="venue-name">Venue Name</label>
-            <input name="venue-name" class="form-control" type="text">
-            <label for="venue">Venue ID</label>
-            <input name="venue" class="form-control" type="text" ng-model="event.venue">
+            <label for="venue">Venue</label>
+            <!-- <input name="venue" class="form-control" type="text" ng-model="event.venue"> -->
+            <div     
+                  multi-select
+                  input-model="venues"
+                  output-model="selectedVenue"
+                  button-label="name"
+                  item-label="name"
+                  selection-mode="single"
+              >
     <button class="btn btn-default" ng-click="addVenue()">Add Venue</button>
           </div>
         </fieldset>

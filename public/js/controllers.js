@@ -64,6 +64,17 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData
       console.log(status);
     });
 
+  $scope.venues = [];
+  $http.get("https://api.tnyu.org/v1.0/venues")
+    .success(function(data){
+      data["venues"].forEach(function(venue) {
+        $scope.venues.push({ name: venue.name, id: venue.id, ticked : false});
+      });
+    })
+    .error(function(data, status){
+      console.log(status);
+    });
+
   $scope.toggleTeam = function(teamid) {
     console.log(teamid);
     if($scope.selectedTeams[teamid])
@@ -87,6 +98,8 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData
     $scope.selectedCoorgs.forEach(function(coorganizer) {
       $scope.event.links.coorganizers.push(coorganizer.id);
     });
+
+    $scope.event.links.venue = $scope.selectedVenue[0].id;
 
     console.log($scope.event);
 
