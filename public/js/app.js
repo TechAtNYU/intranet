@@ -7,6 +7,8 @@ angular.module('app', [
   'app.filters',
   'app.services',
   'app.directives',
-]).config(function ($routeProvider, $locationProvider) {
+]).config(function (datepickerConfig) {
+      datepickerConfig.showWeeks = false;
+}).config(function ($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
 });

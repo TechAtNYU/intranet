@@ -72,6 +72,7 @@
               <textarea name="details" class="form-control" rows="8" ng-model="event.details"></textarea>
             </div>
           </fieldset>
+
           <fieldset class="form-group">
             <div class="col-md-6">
               <label for="coorganizers">Co-Organizers</label>
@@ -92,6 +93,7 @@
             </div>
           </fieldset>
         </fieldset>
+
         <fieldset id="event-add-venue" class="form-group">
           <legend>Venue</legend>
 
@@ -101,9 +103,10 @@
             <input name="venue-name" class="form-control" type="text">
             <label for="venue">Venue ID</label>
             <input name="venue" class="form-control" type="text" ng-model="event.venue">
-    <button class="btn btn-default" ng-click="addVenue()">Add Venue</button>
+             <button class="btn btn-default" ng-click="addVenue()">Add Venue</button>
           </div>
         </fieldset>
+
         <fieldset id="event-add-facebook" class="form-group">
           <legend>Event Listing</legend>
           <div class="col-md-10">
@@ -111,8 +114,11 @@
             <input type="url" name="event-rsvp-url" class="form-control" />          
           </div>
         </fieldset>
-        <input name="addedBy" type="text" model="event.addedBy" hidden="hidden">
-        <input type="submit" value="Add Event">
+
+        <fieldset id="event-submit" class="form-group">
+        <input name="addedBy" type="text" model="event.addedBy" hidden="hidden" />
+        <input type="submit" class="btn btn-primary" value="Add Event" />
+        </fieldset>
       </form>
 
       <div class="col-md-6">
@@ -122,13 +128,13 @@
             {{event.title}}
 
             <h4>Details</h4>
-  <pre class="copyable-plaintext">
-  {{event.description}}
+            <pre class="copyable-plaintext">
+            {{event.description}}
 
-  {{event.details}}
+            {{event.details}}
 
-  All tech@nyu events are covered by a strict anti-harassment policy: http://techatnyu.org/anti-harassment
-  </pre>
+            All tech@nyu events are covered by a strict anti-harassment policy: http://techatnyu.org/anti-harassment
+            </pre>
 
             <h4>When</h4>
             <p>{{event.startDateTime | date: 'MM/dd h:mma' : 'UTC'}} &ndash; {{event.endDateTime | date: 'MM/dd h:mma' : 'UTC'}}</p>
