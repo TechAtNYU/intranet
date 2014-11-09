@@ -3,6 +3,7 @@
 angular.module('app', [
   'ngRoute',
   'ui.bootstrap',
+  'multi-select',
   'app.controllers',
   'app.filters',
   'app.services',
