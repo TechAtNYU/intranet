@@ -6,22 +6,26 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData
   // User Initialization
   (function() {
     userData.getInformation(function(data){
+      // Put the user into the current scope
       $scope.currentUser = data;
+      // Fix the addedBy null in the event scope
+      $scope.event.addedBy = $scope.currentUser['id'];
+      // Check if the user is Logged in
       if (userData.isLoggedIn($scope.currentUser)) {
         console.log("User logged in");
       }
+      // Get the teams corresponding to a particular user
       userData.onTeams($scope.currentUser, function(teamData){
-        console.log(teamData);
+        $scope.currentUserTeams = teamData;
       });
     });
   })();
 
   // Data Initialization
-  $scope.event = { addedBy: "Max", links: {} };
+  $scope.event = { addedBy: null, links: {} };
   $scope.selectedTeams = {};
   $http.get("https://api.tnyu.org/v1.0/teams?isMeta=false")
     .success(function(data){
-      console.log(data);
       $scope.teams = data.teams;
     })
     .error(function(data, status){
