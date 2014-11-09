@@ -145,8 +145,64 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData
   };
 });
 
-controllers.controller('AddPresenterCtrl', function($scope, $modalInstance) {
-  $scope.ok = function() {
+controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $http) {
+  function serializeData(data) {
+    console.log('aoeu', data);
+
+    var result = {};
+    result.links = {};
+    result.links['presenters.currentEmployer'] = {};
+    result.links['presenters.currentEmployer'].type = 'organizations';
+
+    result.presenters = {};
+
+    for(var key in data) {
+      result.presenters[key] = data[key];
+    }
+
+    delete result.presenters.currentEmployer;
+
+    result.presenters.links = {};
+    result.presenters.links.currentEmployer = data.currentEmployer;
+
+    return result;
+  }
+
+  $scope.formData = {};
+
+  $scope.processForm = function() {
+    // var testObject = {
+    //   "links": {
+    //     "presenters.currentEmployer": {
+    //       "type": "organizations"
+    //     }
+    //   },
+    //   "presenters": {
+    //     "name": "Justin",
+    //     "contact": {
+    //       "twitter": "tsiraetn",
+    //       "email": "bo@gmail.com"
+    //     },
+    //     "links": {
+    //       "currentEmployer": "543f1d54ceb990925e68d2c1"
+    //     }
+    //   }
+    // };
+
+    $http({
+      method  : 'POST',
+      url     : 'https://api.tnyu.org/v1.0/presenters',
+      data    : serializeData($scope.formData),
+      headers : { 'Content-Type': 'application/vnd.api+json' }
+    })
+    .success(function(data) {
+      // $scope.formData = {};
+      console.log('Submitted form.');
+    });
+  };
+
+  $scope.submitPresenter = function() {
+    $scope.processForm();
     $modalInstance.close();
   };
 
@@ -165,7 +221,7 @@ controllers.controller('AddVenueCtrl', function($scope, $modalInstance) {
   };
 });
 
- controllers.controller('DatePickerCtrl', function ($scope) {
+controllers.controller('DateTimePickerCtrl', function ($scope, $timeout) {
 
   $scope.today = function() {
     $scope.dt = new Date();
@@ -193,4 +249,17 @@ controllers.controller('AddVenueCtrl', function($scope, $modalInstance) {
   };
 
   $scope.format = 'shortDate';
+  $scope.hourStep = 1;
+  $scope.minuteStep = 15;
+
+  $scope.timeOptions = {
+    hourStep: [1, 2, 3],
+    minuteStep: [1, 5, 10, 15, 25, 30]
+  };
+
+  $scope.showMeridian = true;
+  $scope.timeToggleMode = function() {
+    $scope.showMeridian = !$scope.showMeridian;
+  };
+  
 });
