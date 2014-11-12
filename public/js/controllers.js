@@ -100,7 +100,8 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData
       $scope.event.links.coorganizers.push(coorganizer.id);
     });
 
-    $scope.event.links.venue = $scope.selectedVenue[0].id;
+    if($scope.selectedVenue[0])
+      $scope.event.links.venue = $scope.selectedVenue[0].id;
 
     console.log($scope.event);
 

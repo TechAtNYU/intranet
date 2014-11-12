@@ -33,7 +33,7 @@
       </header>
     </div>
     <div class="row" ng-controller="EventAddCtrl">
-      <form id="event-add-form" role="form" novalidate>
+      <form id="event-add-form" role="form" ng-submit="submit()" novalidate>
         <fieldset id="event-add-basic" class="form-group">
           <legend>Basic Information</legend>
 
@@ -62,11 +62,11 @@
          <fieldset class="form-group" ng-controller="DateTimePickerCtrl" >
             <div class="col-md-5">
               <label for="startDateTime">Starts</label>
-                <datetimepicker name="startDateTime" min-date="minDate" show-weeks="showWeeks" hour-step="hourStep" minute-step="minuteStep" ng-model="date.start" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
+                <datetimepicker name="startDateTime" min-date="minDate" show-weeks="showWeeks" hour-step="hourStep" minute-step="minuteStep" ng-model="event.startDateTime" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
             </div>
             <div class="col-md-5">
               <label for="endDateTime">Ends</label>
-                <datetimepicker name="endDateTime" min-date="minDate" show-weeks="showWeeks" hour-step="hourStep" minute-step="minuteStep" ng-model="date.end" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
+                <datetimepicker name="endDateTime" min-date="minDate" show-weeks="showWeeks" hour-step="hourStep" minute-step="minuteStep" ng-model="event.endDateTime" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
             </div>
           </fieldset>
           
