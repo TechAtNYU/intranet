@@ -130,6 +130,13 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData
         console.log(status);
       });
   }
+  
+  $scope.addCoorganizer = function addCoorganizer() {
+  $modal.open({
+    templateUrl: '/partials/coorganizer.html',
+    controller: 'AddCoorganizerCtrl'
+  });
+  };
 
   $scope.addPresenter = function addPresenter() {
     $modal.open({
@@ -213,6 +220,16 @@ controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $htt
 });
 
 controllers.controller('AddVenueCtrl', function($scope, $modalInstance) {
+  $scope.ok = function() {
+    $modalInstance.close();
+  };
+
+  $scope.cancel = function() {
+    $modalInstance.dismiss('cancel');
+  };
+});
+
+controllers.controller('AddCoorganizerCtrl', function($scope, $modalInstance) {
   $scope.ok = function() {
     $modalInstance.close();
   };
