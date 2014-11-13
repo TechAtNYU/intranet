@@ -20,7 +20,7 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
   });
 
   // Data Initialization
-  $scope.event = { addedBy: null, links: {} };
+  $scope.event = { addedBy: null, links: {}, startDateTime: new Date(), endDateTime: new Date()};
   $scope.selectedTeams = {};
   $http.get("https://api.tnyu.org/v1.0/teams?isMeta=false")
     .success(function(data){
@@ -153,7 +153,7 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
   };
 
   $interval(function() {
-    console.log($scope.startDateTime);
+    console.log($scope.event.startDateTime);
   }, 500);
 });
 
