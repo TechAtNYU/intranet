@@ -84,6 +84,9 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
   }
 
   $scope.submit = function() {
+    $scope.event.startDateTime = $scope.event.startDateTime.toISOString();
+    $scope.event.endDateTime = $scope.event.endDateTime.toISOString();
+
     // Aggregrate all selected teams into our event to be submitted.
     $scope.event.links.teams = [];
     Object.keys($scope.selectedTeams).forEach(function(teamid) {
@@ -151,10 +154,6 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
       controller: 'AddVenueCtrl'
     });
   };
-
-  $interval(function() {
-    console.log($scope.event.startDateTime);
-  }, 500);
 });
 
 controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $http) {
