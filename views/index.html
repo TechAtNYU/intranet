@@ -59,14 +59,14 @@
             </div>
           </fieldset>
 
-         <fieldset class="form-group" ng-controller="DateTimePickerCtrl" >
+         <fieldset class="form-group">
             <div class="col-md-5">
               <label for="startDateTime">Starts</label>
-                <datetimepicker name="startDateTime" min-date="minDate" show-weeks="showWeeks" hour-step="hourStep" minute-step="minuteStep" ng-model="event.startDateTime" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
+              <datetimepicker name="startDateTime" min-date="Date.now()" minute-step="15" ng-model="event.startDateTime" date-format="dd-MMM-yyyy"></datetimepicker>
             </div>
             <div class="col-md-5">
               <label for="endDateTime">Ends</label>
-                <datetimepicker name="endDateTime" min-date="minDate" show-weeks="showWeeks" hour-step="hourStep" minute-step="minuteStep" ng-model="event.endDateTime" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
+              <datetimepicker name="startDateTime" min-date="Date.now()" minute-step="15" ng-model="event.endDateTime" date-format="dd-MMM-yyyy"></datetimepicker>
             </div>
           </fieldset>
           
