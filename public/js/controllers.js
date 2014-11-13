@@ -2,7 +2,7 @@
 
 var controllers = angular.module('app.controllers', [])
 
-controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData) {
+controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interval, userData) {
   // User Initialization
   userData.getInformation(function(data){
     // Put the user into the current scope
@@ -132,10 +132,10 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData
   }
   
   $scope.addCoorganizer = function addCoorganizer() {
-  $modal.open({
-    templateUrl: '/partials/coorganizer.html',
-    controller: 'AddCoorganizerCtrl'
-  });
+    $modal.open({
+      templateUrl: '/partials/coorganizer.html',
+      controller: 'AddCoorganizerCtrl'
+    });
   };
 
   $scope.addPresenter = function addPresenter() {
@@ -146,11 +146,15 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, userData
   };
 
   $scope.addVenue = function addVenue() {
-  $modal.open({
-    templateUrl: '/partials/venue.html',
-    controller: 'AddVenueCtrl'
-  });
+    $modal.open({
+      templateUrl: '/partials/venue.html',
+      controller: 'AddVenueCtrl'
+    });
   };
+
+  $interval(function() {
+    console.log($scope.startDateTime);
+  }, 500);
 });
 
 controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $http) {
@@ -179,24 +183,6 @@ controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $htt
   $scope.formData = {};
 
   $scope.processForm = function() {
-    // var testObject = {
-    //   "links": {
-    //     "presenters.currentEmployer": {
-    //       "type": "organizations"
-    //     }
-    //   },
-    //   "presenters": {
-    //     "name": "Justin",
-    //     "contact": {
-    //       "twitter": "tsiraetn",
-    //       "email": "bo@gmail.com"
-    //     },
-    //     "links": {
-    //       "currentEmployer": "543f1d54ceb990925e68d2c1"
-    //     }
-    //   }
-    // };
-
     $http({
       method  : 'POST',
       url     : 'https://api.tnyu.org/v1.0/presenters',
@@ -237,47 +223,4 @@ controllers.controller('AddCoorganizerCtrl', function($scope, $modalInstance) {
   $scope.cancel = function() {
     $modalInstance.dismiss('cancel');
   };
-});
-
-controllers.controller('DateTimePickerCtrl', function ($scope, $timeout) {
-
-  $scope.today = function() {
-    $scope.dt = new Date();
-  };
-  $scope.today();
-
-  $scope.clear = function () {
-    $scope.dt = null;
-  };
-
-  $scope.toggleMin = function() {
-    $scope.minDate = $scope.minDate ? null : new Date();
-  };
-  $scope.toggleMin();
-
-  $scope.toggleOpenDatePicker = function($event,datePicker) {
-   $event.preventDefault();
-   $event.stopPropagation();
-   $scope[datePicker] = !$scope[datePicker];
-  };
-  
-  $scope.dateOptions = {
-    formatYear: 'yy',
-    startingDay: 1
-  };
-
-  $scope.format = 'shortDate';
-  $scope.hourStep = 1;
-  $scope.minuteStep = 15;
-
-  $scope.timeOptions = {
-    hourStep: [1, 2, 3],
-    minuteStep: [1, 5, 10, 15, 25, 30]
-  };
-
-  $scope.showMeridian = true;
-  $scope.timeToggleMode = function() {
-    $scope.showMeridian = !$scope.showMeridian;
-  };
-  
 });
