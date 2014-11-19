@@ -1,11 +1,9 @@
 <div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
     <h3 class="modal-title">Add Coorganizer</h3>
-    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>
-<div class="modal-body">
-  <form id="venue-form" method="POST" action="" role="form">
-    <legend>Coorganizer</legend>
-
+<form id="venue-form" method="POST" action="" role="form">
+  <div class="modal-body">
     <fieldset class="form-group">
       <div class="col-md-10">
         <label>Organization Name</label>
@@ -23,8 +21,11 @@
       </div>
       
       <div class="col-md-3">
-      <input type="submit" class="btn btn-primary" name="addVenue" class="form-control"></input>
       </div>
     </fieldset>
-  </form>
-</div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+    <input type="submit" class="btn btn-primary" name="addVenue" class="form-control"></input>
+  </div>
+</form>

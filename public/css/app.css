@@ -1,7 +1,8 @@
 /* app css stylesheet */
 
 button.selected {
-  background-color: rgb(255, 255, 0) !important;
+  color: #fff !important;
+  background-color: #428bca !important;
 }
 
 .menu {

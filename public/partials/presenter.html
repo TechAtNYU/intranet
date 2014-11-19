@@ -1,9 +1,9 @@
 <div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
     <h3 class="modal-title">Add Presenter</h3>
-    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>
-<div class="modal-body">
-  <form id="presenter-form" role="form" ng-submit="submitPresenter()">
+<form id="presenter-form" role="form" ng-submit="submitPresenter()">
+  <div class="modal-body">
     <fieldset class="form-group">
       <div class="col-md-10">
         <label for="title">Title</label>
@@ -69,10 +69,10 @@
         <label>Notes</label>
         <textarea name="notes" ng-model="formData.notes" class="form-control"></textarea>
       </div>
-
-      <div class="col-md-3">
-      <input type="submit" class="btn btn-primary" name="addPresenter" class="form-control"></input>
-      </div>
     </fieldset>
-  </form>
-</div>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+      <input type="submit" class="btn btn-primary" name="addPresenter" class="form-control"></input>
+  </div>
+</form>
