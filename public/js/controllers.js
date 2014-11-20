@@ -158,8 +158,6 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
 
 controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $http) {
   function serializeData(data) {
-    console.log('aoeu', data);
-
     var result = {};
     result.links = {};
     result.links['presenters.currentEmployer'] = {};
@@ -176,6 +174,7 @@ controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $htt
     result.presenters.links = {};
     result.presenters.links.currentEmployer = data.currentEmployer;
 
+    console.log('JSON Presenter', result);
     return result;
   }
 
@@ -204,8 +203,41 @@ controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $htt
   };
 });
 
-controllers.controller('AddVenueCtrl', function($scope, $modalInstance) {
-  $scope.ok = function() {
+controllers.controller('AddVenueCtrl', function($scope, $modalInstance, $http) {
+  function serializeData(data) {
+    var result = {};
+    result.links = {};
+    result.links['venues.organization'] = {};
+    result.links['venues.organization'].type = 'organizations';
+
+    result.venues = {};
+
+    for(var key in data) {
+      result.venues[key] = data[key];
+    }
+
+    delete result.venues.organization;
+
+    result.venues.links = {};
+    result.venues.links.organization = data.organization;
+
+    console.log('JSON Venue', result);
+    return result;
+  }
+
+  $scope.formData = {};
+
+  $scope.submitVenue = function() {
+    $http({
+      method  : 'POST',
+      url     : 'https://api.tnyu.org/v1.0/venues',
+      data    : serializeData($scope.formData),
+      headers : { 'Content-Type': 'application/vnd.api+json' }
+    })
+    .success(function(data) {
+      // $scope.formData = {};
+      console.log('Submitted form.');
+    });
     $modalInstance.close();
   };
 
@@ -214,8 +246,41 @@ controllers.controller('AddVenueCtrl', function($scope, $modalInstance) {
   };
 });
 
-controllers.controller('AddCoorganizerCtrl', function($scope, $modalInstance) {
-  $scope.ok = function() {
+controllers.controller('AddCoorganizerCtrl', function($scope, $modalInstance, $http) {
+  function serializeData(data) {
+    var result = {};
+    result.links = {};
+    result.links['related-clubs.liasons'] = {};
+    result.links['related-clubs.liasons'].type = 'organizations';
+
+    result['related-clubs'] = {};
+
+    for(var key in data) {
+      result['related-clubs'][key] = data[key];
+    }
+
+    delete result['related-clubs'].liasons;
+
+    result['related-clubs'].links = {};
+    result['related-clubs'].links.liasons = data.liasons;
+
+    console.log('JSON Coorganizer', result);
+    return result;
+  }
+
+  $scope.formData = {};
+
+  $scope.submitCoorganizer = function() {
+    $http({
+      method  : 'POST',
+      url     : 'https://api.tnyu.org/v1.0/related-clubs',
+      data    : serializeData($scope.formData),
+      headers : { 'Content-Type': 'application/vnd.api+json' }
+    })
+    .success(function(data) {
+      // $scope.formData = {};
+      console.log('Submitted form.');
+    });
     $modalInstance.close();
   };
 
