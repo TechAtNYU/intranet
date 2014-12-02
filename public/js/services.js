@@ -10,7 +10,7 @@ angular.module('app.services', [])
 				}).error(function(data){
 					var status = data["errors"]["status"];
 					if(status == "401") {
-	                			var destinationUrl = "https://api.tnyu.org/auth/twitter?success=" + window.location;
+	                			var destinationUrl = "https://api.tnyu.org/v1.0/auth/twitter?success=" + window.location;
 	                			window.location = destinationUrl;
 	            			}
 				});
