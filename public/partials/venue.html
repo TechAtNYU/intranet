@@ -12,7 +12,16 @@
 
       <div class="col-md-10">
         <label>Company</label>
-        <input type="text" name="company" class="form-control" ng-model="formData.organization"></input>
+        <!-- <input type="text" name="company" class="form-control" ng-model="formData.organization"></input> -->
+        <div     
+            multi-select
+            input-model="companies"
+            output-model="formData.organization"
+            button-label="name"
+            item-label="name"
+            tick-property="ticked"
+            selection-mode="single"
+        ></div>
       </div>
 
       <div class="col-md-10">

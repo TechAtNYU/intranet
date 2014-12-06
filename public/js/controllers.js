@@ -204,6 +204,17 @@ controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $htt
 });
 
 controllers.controller('AddVenueCtrl', function($scope, $modalInstance, $http) {
+  $scope.companies = [];
+  $http.get("https://api.tnyu.org/v1.0/organizations")
+    .success(function(data){
+      data.organizations.forEach(function(organization) {
+        $scope.companies.push({ name: organization.name, id: organization.id, ticked: false});
+      });
+    })
+    .error(function(data, status){
+      console.log(status);
+    });
+
   function serializeData(data) {
     var result = {};
     result.links = {};
