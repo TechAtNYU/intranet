@@ -169,6 +169,11 @@
     padding: 8px;   
 }
 
+.checkBoxContainer {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
 /* ! to show / hide the checkbox layer above */
 .multiSelect .show {
     display: block !important;
