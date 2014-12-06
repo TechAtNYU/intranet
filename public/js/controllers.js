@@ -252,7 +252,7 @@ controllers.controller('AddCoorganizerCtrl', function($scope, $modalInstance, $h
   $scope.liasons = [];
   $http.get("https://api.tnyu.org/v1.0/people")
     .success(function(data){
-      data.presenters.forEach(function(person) {
+      data.people.forEach(function(person) {
         $scope.liasons.push({ name: person.name, id: person.id, ticked: false});
       });
     })
@@ -260,22 +260,22 @@ controllers.controller('AddCoorganizerCtrl', function($scope, $modalInstance, $h
       console.log(status);
     });
 
-  function serializeData(data) {
+  function serializeData(data, resource) {
     var result = {};
     result.links = {};
-    result.links['related-clubs.liasons'] = {};
-    result.links['related-clubs.liasons'].type = 'organizations';
+    result.links[resource + '.liasons'] = {};
+    result.links[resource + '.liasons'].type = 'organizations';
 
-    result['related-clubs'] = {};
+    result[resource] = {};
 
     for(var key in data) {
-      result['related-clubs'][key] = data[key];
+      result[resource][key] = data[key];
     }
 
-    delete result['related-clubs'].liasons;
+    delete result[resource].liasons;
 
-    result['related-clubs'].links = {};
-    result['related-clubs'].links.liasons = data.liasons;
+    result[resource].links = {};
+    result[resource].links.liasons = data.liasons;
 
     console.log('JSON Coorganizer', result);
     return result;
@@ -284,10 +284,12 @@ controllers.controller('AddCoorganizerCtrl', function($scope, $modalInstance, $h
   $scope.formData = { inNYUEN: false };
 
   $scope.submitCoorganizer = function() {
+    var resource = $scope.isRelatedClub ? 'related-clubs' : 'organizations';
+
     $http({
       method  : 'POST',
-      url     : 'https://api.tnyu.org/v1.0/related-clubs',
-      data    : serializeData($scope.formData),
+      url     : 'https://api.tnyu.org/v1.0/' + resource,
+      data    : serializeData($scope.formData, resource),
       headers : { 'Content-Type': 'application/vnd.api+json' }
     })
     .success(function(data) {
