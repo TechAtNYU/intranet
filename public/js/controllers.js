@@ -249,11 +249,11 @@ controllers.controller('AddVenueCtrl', function($scope, $modalInstance, $http) {
 });
 
 controllers.controller('AddCoorganizerCtrl', function($scope, $modalInstance, $http) {
-  $scope.liasons = [];
+  $scope.liaisons = [];
   $http.get("https://api.tnyu.org/v1.0/people")
     .success(function(data){
       data.people.forEach(function(person) {
-        $scope.liasons.push({ name: person.name, id: person.id, ticked: false});
+        $scope.liaisons.push({ name: person.name, id: person.id, ticked: false});
       });
     })
     .error(function(data, status){
@@ -263,8 +263,8 @@ controllers.controller('AddCoorganizerCtrl', function($scope, $modalInstance, $h
   function serializeData(data, resource) {
     var result = {};
     result.links = {};
-    result.links[resource + '.liasons'] = {};
-    result.links[resource + '.liasons'].type = 'organizations';
+    result.links[resource + '.liaisons'] = {};
+    result.links[resource + '.liaisons'].type = 'organizations';
 
     result[resource] = {};
 
@@ -272,10 +272,10 @@ controllers.controller('AddCoorganizerCtrl', function($scope, $modalInstance, $h
       result[resource][key] = data[key];
     }
 
-    delete result[resource].liasons;
+    delete result[resource].liaisons;
 
     result[resource].links = {};
-    result[resource].links.liasons = data.liasons;
+    result[resource].links.liaisons = data.liaisons;
 
     console.log('JSON Coorganizer', result);
     return result;
