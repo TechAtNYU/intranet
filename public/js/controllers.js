@@ -258,6 +258,17 @@ controllers.controller('AddVenueCtrl', function($scope, $modalInstance, $http) {
 });
 
 controllers.controller('AddCoorganizerCtrl', function($scope, $modalInstance, $http) {
+  $scope.liasons = [];
+  $http.get("https://api.tnyu.org/v1.0/people")
+    .success(function(data){
+      data.presenters.forEach(function(person) {
+        $scope.liasons.push({ name: person.name, id: person.id, ticked: false});
+      });
+    })
+    .error(function(data, status){
+      console.log(status);
+    });
+
   function serializeData(data) {
     var result = {};
     result.links = {};
@@ -279,7 +290,7 @@ controllers.controller('AddCoorganizerCtrl', function($scope, $modalInstance, $h
     return result;
   }
 
-  $scope.formData = {};
+  $scope.formData = { inNYUEN: false };
 
   $scope.submitCoorganizer = function() {
     $http({
