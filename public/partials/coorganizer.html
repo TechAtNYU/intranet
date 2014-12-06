@@ -4,49 +4,57 @@
 </div>
 <form id="coorganizer-form" method="POST" action="" role="form" ng-submit="submitCoorganizer()">
   <div class="modal-body">
-    <fieldset class="form-group">
-      <div class="col-md-10">
-        <label>Organization Name</label>
-        <input type="text" name="name" class="form-control" ng-model="formData.name"></input>
-      </div>
+    <div class="form-group">
+      <label>Organization Name</label>
+      <input type="text" name="name" class="form-control" ng-model="formData.name"></input>
+    </div>
 
-      <div class="col-md-10">
-        <label>URL</label>
-        <input type="text" name="url" class="form-control" ng-model="formData.url"></input>
-      </div>
+    <div class="form-group">
+      <label>URL</label>
+      <input type="text" name="url" class="form-control" ng-model="formData.url"></input>
+    </div>
 
-      <div class="col-md-10">
-        <label>Description</label>
-        <input type="text" name="description" class="form-control" ng-model="formData.description"></input>
-      </div>
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" name="description" class="form-control" ng-model="formData.description"></input>
+    </div>
 
-      <div class="col-md-10">
+    <div class="form-group">
+      <label>Liaisons</label>
+      <div     
+          multi-select
+          input-model="liaisons"
+          output-model="formData.liaisons"
+          button-label="name"
+          item-label="name"
+          tick-property="ticked" 
+      ></div>
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="isRelatedClub"></input> This is a related club
+      </label>
+    </div>
+
+
+    <div ng-if="isRelatedClub">
+      <div class="form-group">
         <label>School</label>
         <input type="text" name="school" class="form-control" ng-model="formData.school"></input>
       </div>
 
-      <div class="col-md-10">
+      <div class="form-group">
         <label>Notes</label>
         <textarea type="text" name="notes" class="form-control" ng-model="formData.notes"></textarea>
       </div>
 
-      <div class="col-md-10">
-        <label>In NYUEN?</label>
-        <input type="checkbox" name="in-nyuen" class="form-control" ng-model="formData.inNYUEN"></input>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="in-nyuen" ng-model="formData.inNYUEN"></input> In NYUEN?
+        </label>
       </div>
-
-      <div class="col-md-10">
-        <label>Liasons</label>
-        <div     
-            multi-select
-            input-model="liasons"
-            output-model="formData.liasons"
-            button-label="name"
-            item-label="name"
-            tick-property="ticked" 
-        ></div>
-      </div>
-    </fieldset>
+    </div>
   </div>
   <div class="modal-footer">
     <button class="btn btn-default" ng-click="cancel()">Cancel</button>
