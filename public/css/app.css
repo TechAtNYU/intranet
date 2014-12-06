@@ -1,5 +1,15 @@
 /* app css stylesheet */
 
+@media (min-width: 0px) {    
+    .container{
+        width: 100%;
+    }
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
 button.selected {
   color: #fff !important;
   background-color: #428bca !important;

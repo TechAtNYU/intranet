@@ -2,165 +2,169 @@
 <html>
 <head>
   <title>Tech@NYU Intranet</title>
-  <link rel="stylesheet" href="/css/app.css"/>
+
+  <!--CSS Libraries-->
+  <link href="http://zhaber.github.io/datetimepicker/datetimepicker.css" type="text/css" rel="stylesheet"> 
   <link rel="stylesheet" href="/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="/css/multi-select.css"/>
 
+  <!--User Defined CSS-->
+  <link rel="stylesheet" href="/css/app.css"/>
 
+  <!--Crossdomain-->
   <script src="http://cdn.rawgit.com/jpillora/xdomain/0.6.15/dist/0.6/xdomain.min.js" slave="https://api.tnyu.org/v1.0/proxy.html"></script>
+
+  <!--JavaScript Libraries-->
   <script type="text/javascript"  src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
   <script  type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.min.js"></script>
-
   <script src="http://zhaber.github.io/datetimepicker/datetimepicker-tpls-0.11.js"></script>
-  <link href="http://zhaber.github.io/datetimepicker/datetimepicker.css" type="text/css" rel="stylesheet"> 
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
+  <!--User Defined JavaScript-->
   <script type="text/javascript" src="/js/app.js"></script>
   <script type="text/javascript" src="/js/controllers.js"></script>
   <script type="text/javascript" src="/js/directives.js"></script>
   <script type="text/javascript" src="/js/filters.js"></script>
   <script type="text/javascript" src="/js/services.js"></script>
-  <script type="text/javascript" src="/scripts/multi-select.js"></script>
+  <script type="text/javascript" src="/js/lib/multi-select.js"></script>
 </head>
-<body ng-app="app">
-  <main class="content container">
-    <div class="content-header-container row">
-      <header class="content-header">
-        <h2>Add New Event</h2>
-      </header>
-    </div>
-    <div class="row" ng-controller="EventAddCtrl">
+<body ng-app="app" ng-controller="EventAddCtrl">
+  <main class="content container col-md-12">
+
+    <!--Form-->
+    <div class="col-md-offset-1 col-md-5">
       <form id="event-add-form" role="form" ng-submit="submit()" novalidate>
-        <fieldset id="event-add-basic" class="form-group">
-          <legend>Basic Information</legend>
-
-          <fieldset class="form-group">
-            <div class="col-md-12">
-              <label for="title">Title <small><i>this is what a title should look like</i></small></label>
-              <input name="title" class="form-control" ng-model="event.title">
-            </div>
-            <div class="col-md-12">
-              <label for="shortTitle">Short Title</label>
-              <input name="shortTitle" class="form-control" ng-model="event.shortTitle">
-            </div>
-          </fieldset>
-
-          <fieldset class="form-group">
-            <div class="col-md-10">
-              <label>Team</label>
-              <ul class="inlineblock-li event__team-selector">
-                <li ng-repeat="team in teams">
-                  <button class="btn" ng-class="{selected: selectedTeams[team.id]}" type="button" ng-click="toggleTeam(team.id)">{{team.name}}</button>
-                </li>
-              </ul>
-            </div>
-          </fieldset>
-
-         <fieldset class="form-group">
-            <div class="col-md-5">
-              <label for="startDateTime">Starts</label>
-              <datetimepicker name="startDateTime" min-date="Date.now()" minute-step="15" ng-model="event.startDateTime" date-format="dd-MMM-yyyy"></datetimepicker>
-            </div>
-            <div class="col-md-5">
-              <label for="endDateTime">Ends</label>
-              <datetimepicker name="startDateTime" min-date="Date.now()" minute-step="15" ng-model="event.endDateTime" date-format="dd-MMM-yyyy"></datetimepicker>
-            </div>
-          </fieldset>
-          
-          <fieldset class="form-group">
-            <div class="col-md-6">
-              <label for="description">Description</label>
-              <textarea name="description" class="form-control" rows="2" ng-model="event.description"></textarea>
-
-              <label for="details">Details</label>
-              <textarea name="details" class="form-control" rows="8" ng-model="event.details"></textarea>
-            </div>
-          </fieldset>
-
-          <fieldset class="form-group">
-            <div class="col-md-6">
-              <label for="coorganizers">Co-Organizers</label>
-              <p><em>This should be a multi-select typeahead listing all organizations, with related clubs towards the top.</em></p>
-              <div     
-                  multi-select
-                  input-model="coorganizers"
-                  output-model="selectedCoorgs"
-                  button-label="name"
-                  item-label="name"
-                  tick-property="ticked" 
-              ></div>
-              <button class="btn btn-default" ng-click="addCoorganizer()">Add Coorganizer</button>
-              <br>
-              <label for="presenters">Presenters</label>
-              <p><em>This should be a multi-select typeahead listing al organizations, with related clubs towards the top.</em></p>
-              <div     
-                  multi-select
-                  input-model="presenters"
-                  output-model="selectedPresenters"
-                  button-label="name"
-                  item-label="name"
-                  tick-property="ticked" 
-              ></div>
-              <button class="btn btn-default" ng-click="addPresenter()">Add Presenter</button>
-            </div>
-          </fieldset>
-        </fieldset>
-
-        <fieldset id="event-add-venue" class="form-group">
-          <legend>Venue</legend>
-
-          <!-- We're gonna need some kind of typeahead library for this -->
-          <div class="col-md-10">
-            <label for="venue">Venue</label>
-            <!-- <input name="venue" class="form-control" type="text" ng-model="event.venue"> -->
-            <div     
-                  multi-select
-                  input-model="venues"
-                  output-model="selectedVenue"
-                  button-label="name"
-                  item-label="name"
-                  selection-mode="single"
-                  tick-property="ticked" 
-              ></div>
-            <button class="btn btn-default" ng-click="addVenue()">Add Venue</button>
-          </div>
-        </fieldset>
-
-        <fieldset id="event-add-facebook" class="form-group">
-          <legend>Event Listing</legend>
-          <div class="col-md-10">
-            <label for="event-rsvp-url">RSVP Url</label>
-            <input type="url" name="event-rsvp-url" class="form-control" />          
-          </div>
-        </fieldset>
-
-        <fieldset id="event-submit" class="form-group">
-        <input name="addedBy" type="text" model="event.addedBy" hidden="hidden" />
-        <input type="submit" class="btn btn-primary" value="Add Event" />
-        </fieldset>
-      </form>
-
-      <div class="col-md-6">
-        <label>Facebook Event Info</label>
-          <div id="event-add-preview" class="well">
-            <h4>Name</h4>
-            {{event.title}}
-
-            <h4>Details</h4>
-            <pre class="copyable-plaintext">
-            {{event.description}}
-
-            {{event.details}}
-
-            All tech@nyu events are covered by a strict anti-harassment policy: http://techatnyu.org/anti-harassment
-            </pre>
-
-            <h4>When</h4>
-            <p>{{event.startDateTime | date: 'MM/dd h:mma' : 'UTC'}} &ndash; {{event.endDateTime | date: 'MM/dd h:mma' : 'UTC'}}</p>
+        <!--Header-->
+        <div class="row content-header-container">
+          <legend><h2>Add New Event</h2></legend>
         </div>
+
+        <!--Title-->
+        <div class="row">
+          <label for="title">Title</label>
+          <input name="title" class="form-control" ng-model="event.title">
+        </div>
+
+        <!--Short Title-->
+        <div class="row">
+          <label for="shortTitle">Short Title</label>
+          <input name="shortTitle" class="form-control" ng-model="event.shortTitle">
+        </div>
+
+        <!--RSVP URL-->
+        <div class="row">
+          <label for="event-rsvp-url">RSVP URL</label>
+          <input type="url" name="event-rsvp-url" class="form-control" />
+        </div>
+        
+        <!--Team Selectors-->
+        <div class="row">
+          <label>Team</label>
+          <ul class="inlineblock-li event__team-selector">
+            <li ng-repeat="team in teams">
+              <button class="btn" ng-class="{selected: selectedTeams[team.id]}" type="button" ng-click="toggleTeam(team.id)">{{team.name}}</button>
+            </li>
+          </ul>
+        </div>
+
+        <!--Start Time-->
+        <div class="row">
+          <label for="startDateTime">Starts</label><br/>
+          <datetimepicker name="startDateTime" min-date="Date.now()" minute-step="15" ng-model="event.startDateTime" date-format="dd-MMM-yyyy"></datetimepicker>
+        </div>
+
+        <!--End Time-->
+        <div class="row">
+          <label for="endDateTime">Ends</label><br/>
+          <datetimepicker name="startDateTime" min-date="Date.now()" minute-step="15" ng-model="event.endDateTime" date-format="dd-MMM-yyyy"></datetimepicker>
+        </div>
+
+        <!--Description-->
+        <div class="row">
+          <label for="description">Description</label>
+          <textarea name="description" class="form-control" rows="6" ng-model="event.description"></textarea>
+        </div>
+
+        <!--Details-->
+        <div class="row">
+          <label for="details">Details</label>
+          <textarea name="details" class="form-control" rows="6" ng-model="event.details"></textarea>
+        </div>
+
+        <!--Co-Organizers-->
+        <div class="row">
+          <label for="coorganizers">Co-Organizers</label>
+          <div
+            multi-select
+            input-model="coorganizers"
+            output-model="selectedCoorgs"
+            button-label="name"
+            item-label="name"
+            tick-property="ticked" 
+          ></div>
+          <button class="btn btn-default btn-block" ng-click="addCoorganizer()">+ New Coorganizer</button>
+        </div>
+
+        <!--Presenters-->
+        <div class="row">
+          <label for="presenters">Presenters</label>
+          <div
+            multi-select
+            input-model="presenters"
+            output-model="selectedPresenters"
+            button-label="name"
+            item-label="name"
+            tick-property="ticked"
+          ></div>
+          <button class="btn btn-default btn-block" ng-click="addPresenter()">+ New Presenter</button>
+        </div>
+
+        <!--Venues-->
+        <div class="row">
+          <label for="presenters">Venues</label>
+          <div     
+            multi-select
+            input-model="venues"
+            output-model="selectedVenue"
+            button-label="name"
+            item-label="name"
+            selection-mode="single"
+            tick-property="ticked" 
+          ></div>
+          <button class="btn btn-default btn-block" ng-click="addVenue()">+ New Venue</button>
+        </div>
+
+        <!--Add Button-->
+        <div class="row text-center">
+          <input name="addedBy" type="text" model="event.addedBy" hidden="hidden" />
+          <button type="submit" class="btn btn-primary btn-block">Add Event</button>
+        </div>
+      </form>
+    </div>
+
+    <!--Preview-->
+    <div class="col-sm-offset-1 col-md-4">
+      <div class="content-header-container row">
+        <header class="content-header">
+          <legend><h2>Preview</h2></legend>
+        </header>
+      </div>
+      <div id="event-add-preview" class="well">
+        <h4>Name</h4>
+        {{event.title}}
+
+        <h4>Details</h4>
+        <pre class="copyable-plaintext">
+          {{event.description}}
+
+          {{event.details}}
+
+          All tech@nyu events are covered by a strict anti-harassment policy: http://techatnyu.org/anti-harassment
+        </pre>
+
+        <h4>When</h4>
+        <p>{{event.startDateTime | date: 'MM/dd h:mma' : 'UTC'}} &ndash; {{event.endDateTime | date: 'MM/dd h:mma' : 'UTC'}}</p>
       </div>
     </div>
   </main>
