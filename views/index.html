@@ -23,7 +23,7 @@
   <script type="text/javascript" src="/js/directives.js"></script>
   <script type="text/javascript" src="/js/filters.js"></script>
   <script type="text/javascript" src="/js/services.js"></script>
-  <script type="text/javascript" src="/scripts/multi-select.js"></script>
+  <script type="text/javascript" src="/js/lib/multi-select.js"></script>
 </head>
 <body ng-app="app">
   <main class="content container">
@@ -103,6 +103,7 @@
                   button-label="name"
                   item-label="name"
                   tick-property="ticked" 
+                  max-labels="10"
               ></div>
               <button class="btn btn-default" ng-click="addPresenter()">Add Presenter</button>
             </div>
