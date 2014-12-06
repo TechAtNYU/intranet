@@ -35,38 +35,48 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
    * to the current scope.
    */
 
-  $scope.presenters = [];
-  $http.get("https://api.tnyu.org/v1.0/presenters")
-    .success(function(data){
-      data.presenters.forEach(function(presenter) {
-        $scope.presenters.push({ name: presenter.name, id: presenter.id, ticked: false});
+  $scope.refreshPresenters = function() {
+    $scope.presenters = [];
+    $http.get("https://api.tnyu.org/v1.0/presenters")
+      .success(function(data){
+        data.presenters.forEach(function(presenter) {
+          $scope.presenters.push({ name: presenter.name, id: presenter.id, ticked: false});
+        });
+      })
+      .error(function(data, status){
+        console.log(status);
       });
-    })
-    .error(function(data, status){
-      console.log(status);
-    });
+  }
 
-  $scope.coorganizers = [];
-  $http.get("https://api.tnyu.org/v1.0/related-clubs")
-    .success(function(data){
-      data["related-clubs"].forEach(function(club) {
-        $scope.coorganizers.push({ name: club.name, id: club.id, ticked : false});
+  $scope.refreshCoorganizers = function() {
+    $scope.coorganizers = [];
+    $http.get("https://api.tnyu.org/v1.0/organizations")
+      .success(function(data) {
+        data["organizations"].forEach(function(club) {
+          $scope.coorganizers.push({ name: club.name, id: club.id, ticked : false});
+        });
+      })
+      .error(function(data, status){
+        console.log(status);
       });
-    })
-    .error(function(data, status){
-      console.log(status);
-    });
+  }
 
-  $scope.venues = [];
-  $http.get("https://api.tnyu.org/v1.0/venues")
-    .success(function(data){
-      data["venues"].forEach(function(venue) {
-        $scope.venues.push({ name: venue.name, id: venue.id, ticked : false});
+  $scope.refreshVenues = function() {
+    $scope.venues = [];
+    $http.get("https://api.tnyu.org/v1.0/venues")
+      .success(function(data){
+        data["venues"].forEach(function(venue) {
+          $scope.venues.push({ name: venue.name, id: venue.id, ticked : false});
+        });
+      })
+      .error(function(data, status){
+        console.log(status);
       });
-    })
-    .error(function(data, status){
-      console.log(status);
-    });
+  }
+
+  $scope.refreshPresenters();
+  $scope.refreshCoorganizers();
+  $scope.refreshVenues();
 
   $scope.toggleTeam = function(teamid) {
     if($scope.selectedTeams[teamid])
@@ -129,6 +139,8 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
     $modal.open({
       templateUrl: '/partials/coorganizer.html',
       controller: 'AddCoorganizerCtrl'
+    }).result.then(function() {
+      $scope.refreshCoorganizers();
     });
   };
 
@@ -136,6 +148,8 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
     $modal.open({
       templateUrl: '/partials/presenter.html',
       controller: 'AddPresenterCtrl'
+    }).result.then(function() {
+      $scope.refreshPresenters();
     });
   };
 
@@ -143,6 +157,8 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
     $modal.open({
       templateUrl: '/partials/venue.html',
       controller: 'AddVenueCtrl'
+    }).result.then(function() { // This fires on modal close (not dismiss)
+      $scope.refreshVenues();
     });
   };
 });
