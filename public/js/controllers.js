@@ -52,15 +52,6 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
       data["related-clubs"].forEach(function(club) {
         $scope.coorganizers.push({ name: club.name, id: club.id, ticked : false});
       });
-      $http.get("https://api.tnyu.org/v1.0/organizations")
-        .success(function(data){
-          data.organizations.forEach(function(organization) {
-            $scope.coorganizers.push({ name: organization.name, id: organization.id, ticked: false});
-          });
-        })
-        .error(function(data, status){
-          console.log(status);
-        });
     })
     .error(function(data, status){
       console.log(status);
