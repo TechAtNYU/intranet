@@ -206,6 +206,12 @@ controllers.controller('AddVenueCtrl', function($scope, $modalInstance, $http) {
       console.log(status);
     });
 
+  $scope.showAddCompanyForm = false;
+
+  $scope.addCompany = function() {
+    $scope.showAddCompanyForm = true;
+  };
+
   function serializeData(data) {
     var result = {};
     result.links = {};

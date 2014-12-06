@@ -1,52 +1,71 @@
+<!--Header-->
 <div class="modal-header">
     <button type="button" class="close" ng-click="cancel()" aria-hidden="true">&times;</button>
     <h3 class="modal-title">Add Venue</h3>
 </div>
-<form id="venue-form" method="POST" action="" role="form" ng-submit="submitVenue()">
-  <div class="modal-body">
-    <fieldset class="form-group">
-      <div class="col-md-10">
-        <label>Name</label>
-        <input type="text" name="name" class="form-control" ng-model="formData.name"></input>
-      </div>
 
-      <div class="col-md-10">
-        <label>Company</label>
-        <!-- <input type="text" name="company" class="form-control" ng-model="formData.organization"></input> -->
-        <div     
-            multi-select
-            input-model="companies"
-            output-model="formData.organization"
-            button-label="name"
-            item-label="name"
-            tick-property="ticked"
-            selection-mode="single"
+<!--Body-->
+<div class="modal-body col-md-10 col-md-offset-1">
+  <!--Form-->
+  <form id="venue-form" method="POST" action="" role="form" ng-submit="submitVenue()">
+    <!--Name-->
+    <div class="row">
+      <label>Name</label>
+      <input type="text" name="name" class="form-control" ng-model="formData.name"></input>
+    </div>
+
+    <!--Company-->
+    <div class="row">
+      <label>Company</label>
+      <br/>
+      <div class="col-md-6">
+        <div multi-select
+           input-model="companies"
+           output-model="formData.organization"
+           button-label="name"
+           item-label="name"
+           tick-property="ticked"
+           selection-mode="single"
         ></div>
       </div>
-
-      <div class="col-md-10">
-        <label>Address</label>
-        <input type="text" name="address" class="form-control" ng-model="formData.address"></input>
+      <div class="col-md-6">
+        <button type="button" class="btn btn-default btn-block" ng-click="addCompany()" ng-show="!showAddCompanyForm">+ New Company</button>
       </div>
 
-      <div class="col-md-10">
-        <label>Kind</label>
-        <input type="text" name="kind" class="form-control" ng-model="formData.kind"></input>
+      <div class="col-md-12" ng-show="showAddCompanyForm">
+        This should be hidden until the new company button is clicked.
       </div>
+    </div>
 
-      <div class="col-md-10">
-        <label>Seats</label>
-        <input type="text" name="seats" class="form-control" ng-model="formData.seats"></input>
-      </div>
+    <!--Address-->
+    <div class="row">
+      <label>Address</label>
+      <input type="text" name="address" class="form-control" ng-model="formData.address"></input>
+    </div>
 
-      <div class="col-md-10">
-        <label>Notes</label>
-        <textarea name="notes" class="form-control" ng-model="formData.notes"></textarea>
-      </div>
-    </fieldset>
+    <!--Kind-->
+    <div class="row">
+      <label>Kind</label>
+      <input type="text" name="kind" class="form-control" ng-model="formData.kind"></input>
+    </div>
+
+    <!--Seats-->
+    <div class="row">
+      <label>Seats</label>
+      <input type="text" name="seats" class="form-control" ng-model="formData.seats"></input>
+    </div>
+
+    <!--Notes-->
+    <div class="row">
+      <label>Notes</label>
+      <textarea name="notes" rows="3" class="form-control" ng-model="formData.notes"></textarea>
+    </div>
+  </form>
+</div>
+
+<!--Footer-->
+<div class="modal-footer">
+  <div class="col-md-10 col-md-offset-1">
+    <button type="submit" class="btn btn-primary btn-block" name="addPresenter" class="form-control">Submit</button>
   </div>
-  <div class="modal-footer">
-      <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-      <input type="submit" class="btn btn-primary" name="addPresenter" class="form-control"></input>
-  </div>
-</form>
+</div>
