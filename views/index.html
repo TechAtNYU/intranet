@@ -43,6 +43,7 @@
         <!--Title-->
         <div class="row" ng-init="titleLength = 1000">
           <label for="title">Title</label>
+          <p>No need to mention the initiative name or the speaker.</p>
           <input name="title" class="form-control" ng-model="event.title"
           ng-maxlength={{titleLength}}>
 
@@ -72,6 +73,7 @@
         <!--RSVP URL-->
         <div class="row">
           <label for="event-rsvp-url">RSVP URL</label>
+          <p>Place here the generated URL of the Facebook event after you post it.</p>
           <input type="url" name="event-rsvp-url" class="form-control" />
         </div>
         
@@ -101,6 +103,7 @@
         <div class="row" ng-init="descriptionLength = 10000">
           <!-- Label and input-->
           <label for="description">Description</label>
+          <p> Why would someone come to the event? Don’t just restate what you’ll cover, but what that thing will let you do. (E.g. “Learn to predict trends and behaviors with data” is far better than “Learn the basics of data science.”) </p>
           <textarea name="description" class="form-control" rows="6" ng-model="event.description" ng-maxlength={{descriptionLength}}></textarea>
 
           <!-- Show characters left if available -->
