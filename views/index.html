@@ -135,6 +135,15 @@
           <button type="button" class="btn btn-default btn-block" ng-click="addVenue()">+ New Venue</button>
         </div>
 
+        <div class="row">
+          <label for="statuses">Event Status</label>
+          <select name="statuses" class="form-control" ng-model="event.status">
+            <option ng-repeat="status in eventStatuses" ng-value="status.id">
+              {{status.name}}
+            </option>
+          </select>
+        </div>
+
         <!--Add Button-->
         <div class="row text-center">
           <input name="addedBy" type="text" model="event.addedBy" hidden="hidden" />
