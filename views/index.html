@@ -41,7 +41,7 @@
         </div>
 
         <!--Title-->
-        <div class="row" ng-init="titleLength = 10">
+        <div class="row" ng-init="titleLength = 1000">
           <label for="title">Title</label>
           <input name="title" class="form-control" ng-model="event.title"
           ng-maxlength={{titleLength}}>
@@ -56,13 +56,13 @@
         </div>
 
         <!--Short Title-->
-        <div class="row" ng-init="shortTitleLength = 10">
+        <div class="row" ng-init="shortTitleLength = 25">
           <label for="shortTitle">Short Title</label>
           <input name="shortTitle" class="form-control" ng-model="event.shortTitle" ng-maxlength="{{shortTitleLength}}">
 
           <!-- Show characters left if available -->
           <span ng-show="!form.shortTitle.$error.maxlength">
-            {{titleLength - event.shortTitle.length}} chars left
+            {{shortTitleLength - event.shortTitle.length}} chars left
           </span>
 
           <!--Show error if input is too long-->
@@ -98,7 +98,7 @@
         </div>
 
         <!--Description-->
-        <div class="row" ng-init="descriptionLength = 100">
+        <div class="row" ng-init="descriptionLength = 10000">
           <!-- Label and input-->
           <label for="description">Description</label>
           <textarea name="description" class="form-control" rows="6" ng-model="event.description" ng-maxlength={{descriptionLength}}></textarea>
@@ -113,7 +113,7 @@
         </div>
 
         <!--Details-->
-        <div class="row" ng-init="detailsLength = 100">
+        <div class="row" ng-init="detailsLength = 10000">
           <!-- Label and input -->
           <label for="details">Details</label>
           <textarea name="details" class="form-control" rows="6" ng-model="event.details" ng-maxlength={{detailsLength}}></textarea>
