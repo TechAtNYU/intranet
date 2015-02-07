@@ -15,6 +15,10 @@ button.selected {
   background-color: #428bca !important;
 }
 
+.sidebar {
+  position: fixed;
+}
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;

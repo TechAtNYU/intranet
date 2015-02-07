@@ -30,6 +30,15 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
       console.log("Failed to fetch teams from API with error " + status);
     });
 
+  $scope.eventStatuses = [];
+  $http.get("https://api.tnyu.org/v1.0/event-statuses")
+    .success(function(data) {
+      $scope.eventStatuses = data["event-statuses"];
+    })
+    .error(function(data, status) {
+      console.log("Failed to fetch event-statuses from API with error " + status);
+    });
+
   /* Multi-select requires an input model as an array of object literals. An optional
    * output model can also be specified. This writes an array of selected object literals
    * to the current scope.
@@ -146,14 +155,18 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
               "events.genderRep": {
                 "type": "person"
               },
-            }, "events": $scope.event
+              "events.status": {
+                "type": "event-statuses"
+              }
+            }, 
+            "events": $scope.event
           }, 
           { headers: { "Content-Type": "application/vnd.api+json" } })
       .success(function(data) {
         console.log(data);
       })
       .error(function(data, status) {
-        console.log(status);
+        $scope.validationErrors = data.errors;
       });
   }
   
