@@ -16,7 +16,8 @@ button.selected {
 }
 
 .multiSelect .button,
-.multiSelect .checkboxLayer {
+.multiSelect .checkboxLayer,
+.multiSelect .checkBoxContainer {
   width: 100%;
 }
 
