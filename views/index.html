@@ -34,22 +34,39 @@
 
     <!--Form-->
     <div class="col-md-offset-1 col-md-5">
-      <form id="event-add-form" role="form" ng-submit="submit()" novalidate>
+      <form id="event-add-form" role="form" name="form" ng-submit="submit()" novalidate>
         <!--Header-->
         <div class="row content-header-container">
           <legend><h2>Add New Event</h2></legend>
         </div>
 
         <!--Title-->
-        <div class="row">
+        <div class="row" ng-init="titleLength = 10">
           <label for="title">Title</label>
-          <input name="title" class="form-control" ng-model="event.title">
+          <input name="title" class="form-control" ng-model="event.title"
+          ng-maxlength={{titleLength}}>
+
+          <!-- Show characters left if available -->
+          <span ng-show="!form.title.$error.maxlength">
+            {{titleLength - event.title.length}} chars left
+          </span>
+
+          <!--Show error if input is too long-->
+          <span ng-show="form.title.$error.maxlength">Too long</span>
         </div>
 
         <!--Short Title-->
-        <div class="row">
+        <div class="row" ng-init="shortTitleLength = 10">
           <label for="shortTitle">Short Title</label>
-          <input name="shortTitle" class="form-control" ng-model="event.shortTitle">
+          <input name="shortTitle" class="form-control" ng-model="event.shortTitle" ng-maxlength="{{shortTitleLength}}">
+
+          <!-- Show characters left if available -->
+          <span ng-show="!form.shortTitle.$error.maxlength">
+            {{titleLength - event.shortTitle.length}} chars left
+          </span>
+
+          <!--Show error if input is too long-->
+          <span ng-show="form.shortTitle.$error.maxlength">Too long</span>
         </div>
 
         <!--RSVP URL-->
@@ -81,15 +98,33 @@
         </div>
 
         <!--Description-->
-        <div class="row">
+        <div class="row" ng-init="descriptionLength = 100">
+          <!-- Label and input-->
           <label for="description">Description</label>
-          <textarea name="description" class="form-control" rows="6" ng-model="event.description"></textarea>
+          <textarea name="description" class="form-control" rows="6" ng-model="event.description" ng-maxlength={{descriptionLength}}></textarea>
+
+          <!-- Show characters left if available -->
+          <span ng-show="!form.description.$error.maxlength">
+            {{descriptionLength - event.description.length}} chars left
+          </span> 
+
+          <!--Show error if input is too long-->
+          <span ng-show="form.description.$error.maxlength">Too long</span>
         </div>
 
         <!--Details-->
-        <div class="row">
+        <div class="row" ng-init="detailsLength = 100">
+          <!-- Label and input -->
           <label for="details">Details</label>
-          <textarea name="details" class="form-control" rows="6" ng-model="event.details"></textarea>
+          <textarea name="details" class="form-control" rows="6" ng-model="event.details" ng-maxlength={{detailsLength}}></textarea>
+
+          <!-- Show characters left if available -->
+          <span ng-show="!form.details.$error.maxlength">
+            {{detailsLength - event.details.length}} chars left
+          </span>
+
+          <!--Show error if input is too long-->
+          <span ng-show="form.details.$error.maxlength">Too long</span>
         </div>
 
         <!--Co-Organizers-->
