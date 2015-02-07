@@ -122,7 +122,7 @@
 
         <!--Venues-->
         <div class="row">
-          <label for="presenters">Venues</label>
+          <label for="venues">Venues</label>
           <div     
             multi-select
             input-model="venues"
@@ -133,6 +133,22 @@
             tick-property="ticked" 
           ></div>
           <button type="button" class="btn btn-default btn-block" ng-click="addVenue()">+ New Venue</button>
+        </div>
+
+        <!--Gender Representative-->
+        <div class="row">
+          <label for="gender-rep">
+            Gender Representative
+          </label>
+          <div     
+            multi-select
+            input-model="genderRep"
+            output-model="selectedGenderRep"
+            button-label="name"
+            item-label="name"
+            selection-mode="single"
+            tick-property="ticked" 
+          ></div>
         </div>
 
         <!--Add Button-->
