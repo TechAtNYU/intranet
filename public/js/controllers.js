@@ -222,6 +222,16 @@ controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $htt
 
   $scope.formData = {};
 
+  $scope.companies = [];
+  $http.get("https://api.tnyu.org/v1.0/organizations")
+    .success(function(data) {
+      $scope.companies = data["organizations"];
+      console.log(data);
+    })
+    .error(function(data, status) {
+      console.log("Failed to fetch companies from API with error " + status);
+    });
+
   $scope.processForm = function() {
     $http({
       method  : 'POST',
