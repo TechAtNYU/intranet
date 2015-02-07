@@ -83,9 +83,24 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
       });
   }
 
+  $scope.refreshGenderRep = function() {
+    $scope.genderRep = [];
+    $http.get("https://api.tnyu.org/v1.0/people/board")
+      .success(function(data){
+        data["people"].forEach(function(person) {
+          $scope.genderRep.push(
+            { name: person.name, id: person.id, ticked : false});
+        });
+      })
+      .error(function(data, status){
+        console.log(status);
+      });
+  }
+
   $scope.refreshPresenters();
   $scope.refreshCoorganizers();
   $scope.refreshVenues();
+  $scope.refreshGenderRep();
 
   $scope.toggleTeam = function(teamid) {
     if($scope.selectedTeams[teamid])
@@ -116,6 +131,10 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
     if($scope.selectedVenue[0])
       $scope.event.links.venue = $scope.selectedVenue[0].id;
 
+    if($scope.selectedGenderRep) {
+      $scope.event.links.genderRep = $scope.selectedGenderRep;
+    }
+
     console.log($scope.event);
 
     $http.post('https://api.tnyu.org/v1.0/events', 
@@ -133,10 +152,14 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
               "events.teams": {
                 "type": "teams"
               },
+              "events.genderRep": {
+                "type": "person"
+              },
               "events.status": {
                 "type": "event-statuses"
               }
-            }, "events": $scope.event
+            }, 
+            "events": $scope.event
           }, 
           { headers: { "Content-Type": "application/vnd.api+json" } })
       .success(function(data) {
