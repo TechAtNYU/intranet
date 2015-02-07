@@ -15,6 +15,11 @@ button.selected {
   background-color: #428bca !important;
 }
 
+.multiSelect .button,
+.multiSelect .checkboxLayer {
+  width: 100%;
+}
+
 .sidebar {
   position: fixed;
 }
