@@ -131,7 +131,7 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
         console.log(data);
       })
       .error(function(data, status) {
-        console.log(status);
+        $scope.validationErrors = data.errors;
       });
   }
   
