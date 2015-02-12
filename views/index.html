@@ -56,6 +56,12 @@
           <span ng-show="form.title.$error.maxlength">Too long</span>
         </div>
 
+        <!--Internal Event Specifier-->
+        <div class="row">
+          <label for="isInternal">Internal Event</label>
+          <input name="isInternal" class="form-control" type="checkbox" value="false">
+        </div>
+
         <!--Short Title-->
         <div class="row" ng-init="shortTitleLength = 25">
           <label for="shortTitle">Short Title</label>

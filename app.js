@@ -21,7 +21,7 @@ var app = module.exports = express();
  */
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3333);
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('dev'));
