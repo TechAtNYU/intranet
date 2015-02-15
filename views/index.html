@@ -106,11 +106,11 @@
         </div>
 
         <!--Description-->
-        <div class="row" ng-init="descriptionLength = 10000">
+        <div class="row" ng-init="descriptionLength = 100">
           <!-- Label and input-->
           <label for="description">Description</label>
           <p> Why would someone come to the event? Don’t just restate what you’ll cover, but what that thing will let you do. (E.g. “Learn to predict trends and behaviors with data” is far better than “Learn the basics of data science.”) </p>
-          <textarea name="description" class="form-control" rows="6" ng-model="event.description" ng-maxlength={{descriptionLength}}></textarea>
+          <input type="text" name="description" class="form-control" rows="6" ng-model="event.description" ng-maxlength={{descriptionLength}} />
 
           <!-- Show characters left if available -->
           <span ng-show="!form.description.$error.maxlength">
