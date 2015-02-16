@@ -183,8 +183,26 @@
 
         <!--Gender Representative-->
         <div class="row">
+          <label for="host">
+            Host
+            <p>A tech@nyu member who will attend the event, wearing a tech@nyu shirt, and welcome people.</p>
+          </label>
+          <div     
+            multi-select
+            input-model="host"
+            output-model="selectedHost"
+            button-label="name"
+            item-label="name"
+            selection-mode="single"
+            tick-property="ticked" 
+          ></div>
+        </div>
+
+        <!--Gender Representative-->
+        <div class="row">
           <label for="gender-rep">
             Gender Representative
+            <p>Another board member who will attend the event, and who is a different gender than the host.</p>
           </label>
           <div     
             multi-select
