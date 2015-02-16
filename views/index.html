@@ -43,7 +43,7 @@
         <!--Title-->
         <div class="row" ng-init="titleLength = 1000">
           <label for="title">Title</label>
-          <p>No need to mention the initiative name or the speaker.</p>
+          <p>What topic will be covered? There's generally no need to mention the initiative name or the speaker, as those are specified below.</p>
           <input name="title" class="form-control" ng-model="event.title"
           ng-maxlength={{titleLength}}>
 
@@ -56,15 +56,10 @@
           <span ng-show="form.title.$error.maxlength">Too long</span>
         </div>
 
-        <!--Internal Event Specifier-->
-        <div class="row">
-          <label for="isInternal">Internal Event</label>
-          <input name="isInternal" class="form-control" type="checkbox" value="false">
-        </div>
-
         <!--Short Title-->
-        <div class="row" ng-init="shortTitleLength = 25">
+        <div class="row" ng-init="shortTitleLength = 26">
           <label for="shortTitle">Short Title</label>
+          <p>This is shown when the above title would be too long.</p>
           <input name="shortTitle" class="form-control" ng-model="event.shortTitle" ng-maxlength="{{shortTitleLength}}">
 
           <!-- Show characters left if available -->
@@ -79,8 +74,14 @@
         <!--RSVP URL-->
         <div class="row">
           <label for="event-rsvp-url">RSVP URL</label>
-          <p>Place here the generated URL of the Facebook event after you post it.</p>
+          <p>The facebook or Meetup URL where people can RSVP for this event.</p>
           <input type="url" name="event-rsvp-url" class="form-control" />
+        </div>
+        
+        <!--Internal Event Specifier-->
+        <div class="row">
+          <label for="isInternal">Internal Event? (i.e. Is this just for our board?)</label>
+          <input name="isInternal" class="form-control" type="checkbox" value="false">
         </div>
         
         <!--Team Selectors-->
@@ -167,7 +168,7 @@
 
         <!--Venues-->
         <div class="row">
-          <label for="venues">Venues</label>
+          <label for="venues">Venue</label>
           <div     
             multi-select
             input-model="venues"
