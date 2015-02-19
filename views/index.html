@@ -59,7 +59,7 @@
         <!--Short Title-->
         <div class="row" ng-init="shortTitleLength = 26">
           <label for="shortTitle">Short Title</label>
-          <p>This is shown when the above title would be too long.</p>
+          <p>Add a shorter title for when the above is too long.</p>
           <input name="shortTitle" class="form-control" ng-model="event.shortTitle" ng-maxlength="{{shortTitleLength}}">
 
           <!-- Show characters left if available -->
@@ -74,7 +74,7 @@
         <!--RSVP URL-->
         <div class="row">
           <label for="event-rsvp-url">RSVP URL</label>
-          <p>The facebook or Meetup URL where people can RSVP for this event.</p>
+          <p>The Facebook or Meetup URL where people can RSVP for this event.</p>
           <input type="url" name="event-rsvp-url" class="form-control" />
         </div>
         
@@ -110,7 +110,7 @@
         <div class="row" ng-init="descriptionLength = 100">
           <!-- Label and input-->
           <label for="description">Description</label>
-          <p> Why would someone come to the event? Don’t just restate what you’ll cover, but what that thing will let you do. (E.g. “Learn to predict trends and behaviors with data” is far better than “Learn the basics of data science.”) </p>
+          <p> Why would someone come to the event? Don’t just restate what you’ll cover, but how the topic(s) learned can be applied. (E.g. “Learn to predict trends and behaviors with data” is far better than “Learn the basics of data science.”) </p>
           <input type="text" name="description" class="form-control" rows="6" ng-model="event.description" ng-maxlength={{descriptionLength}} />
 
           <!-- Show characters left if available -->
@@ -126,7 +126,7 @@
         <div class="row" ng-init="detailsLength = 10000">
           <!-- Label and input -->
           <label for="details">Details</label>
-          <p>What exactly will attendees make? What they should install in advance? How do they get into the building? Et cetera. Do not include info about the speakers, if any.</p>
+          <p>What exactly will attendees build? What they should install in advance? How do they get into the building? Et cetera. Do not include info about the speakers, if any.</p>
           <textarea name="details" class="form-control" rows="6" ng-model="event.details" ng-maxlength={{detailsLength}}></textarea>
 
           <!-- Show characters left if available -->
@@ -140,7 +140,7 @@
 
         <!--Co-Organizers-->
         <div class="row">
-          <label for="coorganizers">Co-Organizers</label>
+          <label for="coorganizers">Coorganizers</label>
           <div
             multi-select
             input-model="coorganizers"
@@ -185,7 +185,7 @@
         <div class="row">
           <label for="host">
             Host
-            <p>A tech@nyu member who will attend the event, wearing a tech@nyu shirt, and welcome people.</p>
+            <p>A tech@nyu member who will attend the event, wear a tech@nyu shirt, and welcome people.</p>
           </label>
           <div     
             multi-select
