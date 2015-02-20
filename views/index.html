@@ -40,10 +40,22 @@
           <legend><h2>Add New Event</h2></legend>
         </div>
 
+        <!--Team Selectors-->
+        <div class="row">
+          <label>Team(s) Hosting the Event</label>
+          <ul class="inlineblock-li event__team-selector">
+            <li ng-repeat="team in teams">
+              <button class="btn" ng-class="{selected: selectedTeams[team.id]}" type="button" ng-click="toggleTeam(team.id)">{{team.name}}</button>
+            </li>
+          </ul>
+        </div>
+
         <!--Title-->
         <div class="row" ng-init="titleLength = 1000">
-          <label for="title">Title</label>
-          <p>What topic will be covered? There's generally no need to mention the initiative name or the speaker, as those are specified below.</p>
+          <label for="title">
+            Title
+            <p>What topic(s) will be covered? There's generally no need to mention the initiative name or the speaker, as those are specified elsewhere.</p>
+          </label>
           <input name="title" class="form-control" ng-model="event.title"
           ng-maxlength={{titleLength}}>
 
@@ -58,8 +70,10 @@
 
         <!--Short Title-->
         <div class="row" ng-init="shortTitleLength = 26">
-          <label for="shortTitle">Short Title</label>
-          <p>Add a shorter title for when the above is too long.</p>
+          <label for="shortTitle">
+            Short Title
+            <p>Add a shorter title for when the above is too long.</p>
+          </label>
           <input name="shortTitle" class="form-control" ng-model="event.shortTitle" ng-maxlength="{{shortTitleLength}}">
 
           <!-- Show characters left if available -->
@@ -71,46 +85,13 @@
           <span ng-show="form.shortTitle.$error.maxlength">Too long</span>
         </div>
 
-        <!--RSVP URL-->
-        <div class="row">
-          <label for="event-rsvp-url">RSVP URL</label>
-          <p>The Facebook or Meetup URL where people can RSVP for this event.</p>
-          <input type="url" name="event-rsvp-url" class="form-control" />
-        </div>
-        
-        <!--Internal Event Specifier-->
-        <div class="row">
-          <label for="isInternal">Internal Event? (i.e. Is this just for our board?)</label>
-          <input name="isInternal" class="form-control" type="checkbox" value="false">
-        </div>
-        
-        <!--Team Selectors-->
-        <div class="row">
-          <label>Team</label>
-          <ul class="inlineblock-li event__team-selector">
-            <li ng-repeat="team in teams">
-              <button class="btn" ng-class="{selected: selectedTeams[team.id]}" type="button" ng-click="toggleTeam(team.id)">{{team.name}}</button>
-            </li>
-          </ul>
-        </div>
-
-        <!--Start Time-->
-        <div class="row">
-          <label for="startDateTime">Starts</label><br/>
-          <datetimepicker name="startDateTime" min-date="Date.now()" minute-step="15" ng-model="event.startDateTime" date-format="dd-MMM-yyyy"></datetimepicker>
-        </div>
-
-        <!--End Time-->
-        <div class="row">
-          <label for="endDateTime">Ends</label><br/>
-          <datetimepicker name="startDateTime" min-date="Date.now()" minute-step="15" ng-model="event.endDateTime" date-format="dd-MMM-yyyy"></datetimepicker>
-        </div>
-
         <!--Description-->
         <div class="row" ng-init="descriptionLength = 100">
           <!-- Label and input-->
-          <label for="description">Description</label>
-          <p> Why would someone come to the event? Don’t just restate what you’ll cover, but how the topic(s) learned can be applied. (E.g. “Learn to predict trends and behaviors with data” is far better than “Learn the basics of data science.”) </p>
+          <label for="description">
+            Description
+            <p>Why would someone come to the event? Don’t just restate what you’ll cover, but how the content can be applied. (E.g. “Learn to predict trends and behaviors with data” is far better than “Learn the basics of data science.”) </p>
+          </label>
           <input type="text" name="description" class="form-control" rows="6" ng-model="event.description" ng-maxlength={{descriptionLength}} />
 
           <!-- Show characters left if available -->
@@ -125,8 +106,10 @@
         <!--Details-->
         <div class="row" ng-init="detailsLength = 10000">
           <!-- Label and input -->
-          <label for="details">Details</label>
-          <p>What exactly will attendees build? What they should install in advance? How do they get into the building? Et cetera. Do not include info about the speakers, if any.</p>
+          <label for="details">
+            Details
+            <p>What exactly will attendees build? What they should install in advance? (Linking to a working version of the final product is ideal.) Or, what will the speaker discuss? (But don't include the speakers' bio, if ay.) Also, how do attendees get into the building? Etc.</p>
+          </label>
           <textarea name="details" class="form-control" rows="6" ng-model="event.details" ng-maxlength={{detailsLength}}></textarea>
 
           <!-- Show characters left if available -->
@@ -138,9 +121,36 @@
           <span ng-show="form.details.$error.maxlength">Too long</span>
         </div>
 
+        <!--RSVP URL-->
+        <div class="row">
+          <label for="event-rsvp-url">
+            RSVP URL
+            <p>The Facebook or Meetup URL where people can RSVP for this event.</p>
+          </label>
+          <input type="url" name="event-rsvp-url" class="form-control" />
+        </div>
+        
+        <!--Internal Event Specifier-->
+        <div class="row">
+          <label for="isInternal">Internal Event? (i.e. Is this just for our board?)</label>
+          <input name="isInternal" class="form-control" type="checkbox" value="false">
+        </div>
+
+        <!--Start Time-->
+        <div class="row">
+          <label for="startDateTime">Starts</label><br/>
+          <datetimepicker name="startDateTime" min-date="Date.now()" minute-step="15" ng-model="event.startDateTime" date-format="dd-MMM-yyyy"></datetimepicker>
+        </div>
+
+        <!--End Time-->
+        <div class="row">
+          <label for="endDateTime">Ends</label><br/>
+          <datetimepicker name="startDateTime" min-date="Date.now()" minute-step="15" ng-model="event.endDateTime" date-format="dd-MMM-yyyy"></datetimepicker>
+        </div>
+
         <!--Co-Organizers-->
         <div class="row">
-          <label for="coorganizers">Coorganizers</label>
+          <label for="coorganizers">Coorganizing Clubs or Organizations</label>
           <div
             multi-select
             input-model="coorganizers"
