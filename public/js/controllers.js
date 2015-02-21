@@ -45,7 +45,6 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
    */
 
   $scope.refreshPresenters = function(selectedId) {
-    console.log(selectedId);
     $scope.presenters = [];
     $http.get("https://api.tnyu.org/v1.0/presenters")
       .success(function(data){
@@ -218,8 +217,8 @@ controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $htt
   function serializeData(data) {
     var result = {};
     result.links = {};
-    result.links['presenters.currentEmployer'] = {};
-    result.links['presenters.currentEmployer'].type = 'organizations';
+    result.links['presenters.currentEmployer'] = { type: 'organizations' };
+    result.links['presenters.skills'] = { type: 'skills' };
 
     result.presenters = {};
 
@@ -231,6 +230,8 @@ controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $htt
 
     result.presenters.links = {};
     result.presenters.links.currentEmployer = data.currentEmployer;
+    console.log($scope.selectedSkills);
+    result.presenters.links.skills = $scope.selectedSkills;
 
     console.log('JSON Presenter', result);
     return result;
@@ -242,7 +243,36 @@ controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $htt
   $http.get("https://api.tnyu.org/v1.0/organizations")
     .success(function(data) {
       $scope.companies = data["organizations"];
-      console.log(data);
+    })
+    .error(function(data, status) {
+      console.log("Failed to fetch companies from API with error " + status);
+    });
+
+  $scope.skills = [];
+  $http.get("https://api.tnyu.org/v1.0/skills")
+    .success(function(data) {
+      $scope.skills = data["skills"];
+    })
+    .error(function(data, status) {
+      console.log("Failed to fetch companies from API with error " + status);
+    });
+
+  $scope.schools = [];
+  $http.get("https://api.tnyu.org/v1.0/people?fields=schools")
+    .success(function(data) {
+      $scope.schools = [];
+      var schools = {};
+      var people = data["people"];
+      people.forEach(function(person) {
+        if(person.schools) {
+          person.schools.forEach(function(school) {
+            if(!schools[school]) {
+              schools[school] = true;
+              $scope.schools.push({ name: school });
+            }
+          });
+        }
+      });
     })
     .error(function(data, status) {
       console.log("Failed to fetch companies from API with error " + status);

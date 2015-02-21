@@ -17,15 +17,13 @@
 
       <div class="col-md-10">
         <label>Company</label>
-        <!-- <input type="text" name="currentEmployer" ng-model="formData.employer" class="form-control"></input> -->
         <div     
             multi-select
             input-model="companies"
             output-model="selectedCompany"
             button-label="name"
             item-label="name"
-            selection-mode="single"
-            tick-property="ticked" 
+            tick-property="ticked"
           ></div>
       </div>
 
@@ -56,7 +54,15 @@
 
       <div class="col-md-10">
         <label>Skills</label>
-        <input type="text" name="skills" ng-model="formData.skills" class="form-control"></input>
+        <!-- <input type="text" name="skills" ng-model="formData.skills" class="form-control"></input> -->
+        <div     
+            multi-select
+            input-model="skills"
+            output-model="selectedSkills"
+            button-label="name"
+            item-label="name"
+            tick-property="ticked" 
+          ></div>
       </div>
 
       <div class="col-md-10">
@@ -65,8 +71,16 @@
       </div>
 
       <div class="col-md-10">
-        <label>School</label>
-        <input type="text" name="school" ng-model="formData.school" class="form-control"></input>
+        <label>Schools</label>
+        <!-- <input type="text" name="school" ng-model="formData.school" class="form-control"></input> -->
+        <div
+            multi-select
+            input-model="schools"
+            output-model="formData.schools"
+            button-label="name"
+            item-label="name"
+            tick-property="ticked" 
+          ></div>
       </div>
 
       <div class="col-md-10">
