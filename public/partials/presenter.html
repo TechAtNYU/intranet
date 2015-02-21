@@ -66,8 +66,15 @@
       </div>
 
       <div class="col-md-10">
-        <label>Image URL</label>
-        <input type="text" name="imageUrl" ng-model="formData.imageUrl" class="form-control"></input>
+        <label for="imageUrl">Image URL</label>
+        <input type="hidden" name="imageUrl" ng-model="formData.imageUrl" class="form-control"></input>
+        <div>
+          <img ng-src="{{formData.imageUrl}}" alt="No image uploaded" class="headshot img-thumbnail">
+        </div>
+        <div class="form-group" ng-controller="AddPersonImageCtrl">
+          <input name="imageFile" type="file" onchange="angular.element(this).scope().setFile(this.files)">
+          <button type="button" class="btn btn-xs btn-default" ng-click="uploadFile(file)">Upload</button>
+        </div>
       </div>
 
       <div class="col-md-10">

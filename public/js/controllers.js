@@ -1,6 +1,6 @@
 'use strict';
 
-var controllers = angular.module('app.controllers', [])
+var controllers = angular.module('app.controllers', []);
 
 controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interval, userData) {
   // User Initialization
@@ -296,6 +296,28 @@ controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $htt
 
   $scope.cancel = function() {
     $modalInstance.dismiss('cancel');
+  };
+});
+
+controllers.controller('AddPersonImageCtrl', function($scope, $http) {
+  $scope.setFile = function(files) {
+    $scope.file = files ? files[0] : undefined;
+  }
+
+  $scope.uploadFile = function(file) {
+    var fd = new FormData();
+    //Take the first selected file
+    fd.append("upload", file);
+
+    $http.post('http://services.tnyu.org/upload', fd, {
+        headers: { 'Content-Type': undefined },
+        transformRequest: angular.identity
+    }).success(function(data) {
+      console.log(data);
+      $scope.$parent.formData.imageUrl = data.filePath;
+    }).error(function(status, error) {
+      console.log(status, error);
+    });
   };
 });
 

@@ -83,3 +83,8 @@ button.selected {
   margin: 0 5px 5px 0;
   background-color: #eee;
 }
+
+img.headshot {
+  width: 200px;
+  height: 200px;
+}
