@@ -44,12 +44,13 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
    * to the current scope.
    */
 
-  $scope.refreshPresenters = function() {
+  $scope.refreshPresenters = function(selectedId) {
+    console.log(selectedId);
     $scope.presenters = [];
     $http.get("https://api.tnyu.org/v1.0/presenters")
       .success(function(data){
         data.presenters.forEach(function(presenter) {
-          $scope.presenters.push({ name: presenter.name, id: presenter.id, ticked: false});
+          $scope.presenters.push({ name: presenter.name, id: presenter.id, ticked: presenter.id == selectedId});
         });
       })
       .error(function(data, status){
@@ -57,28 +58,28 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
       });
   }
 
-  $scope.refreshCoorganizers = function() {
+  $scope.refreshCoorganizers = function(selectedId) {
     $scope.coorganizers = [];
     $http.get("https://api.tnyu.org/v1.0/organizations")
       .success(function(data) {
         data["organizations"].forEach(function(club) {
-          $scope.coorganizers.push({ name: club.name, id: club.id, ticked : false});
+          $scope.coorganizers.push({ name: club.name, id: club.id, ticked : club.id == selectedId});
         });
       })
-      .error(function(data, status){
+      .error(function(data, status) {
         console.log(status);
       });
   }
 
-  $scope.refreshVenues = function() {
+  $scope.refreshVenues = function(selectedId) {
     $scope.venues = [];
     $http.get("https://api.tnyu.org/v1.0/venues")
       .success(function(data){
         data["venues"].forEach(function(venue) {
-          $scope.venues.push({ name: venue.name, id: venue.id, ticked : false});
+          $scope.venues.push({ name: venue.name, id: venue.id, ticked : venue.id == selectedId});
         });
       })
-      .error(function(data, status){
+      .error(function(data, status) {
         console.log(status);
       });
   }
@@ -111,9 +112,9 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
       });
   }
 
-  $scope.refreshPresenters();
-  $scope.refreshCoorganizers();
-  $scope.refreshVenues();
+  $scope.refreshPresenters(null);
+  $scope.refreshCoorganizers(null);
+  $scope.refreshVenues(null);
   $scope.refreshGenderRep();
   $scope.refreshHost();
 
@@ -189,8 +190,8 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
     $modal.open({
       templateUrl: '/partials/coorganizer.html',
       controller: 'AddCoorganizerCtrl'
-    }).result.then(function() {
-      $scope.refreshCoorganizers();
+    }).result.then(function(orgs) {
+      $scope.refreshCoorganizers(orgs.id);
     });
   };
 
@@ -198,8 +199,8 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
     $modal.open({
       templateUrl: '/partials/presenter.html',
       controller: 'AddPresenterCtrl'
-    }).result.then(function() {
-      $scope.refreshPresenters();
+    }).result.then(function(presenters) {
+      $scope.refreshPresenters(presenters.id);
     });
   };
 
@@ -207,8 +208,8 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
     $modal.open({
       templateUrl: '/partials/venue.html',
       controller: 'AddVenueCtrl'
-    }).result.then(function() { // This fires on modal close (not dismiss)
-      $scope.refreshVenues();
+    }).result.then(function(venues) { // This fires on modal close (not dismiss)
+      $scope.refreshVenues(venues.id);
     });
   };
 });
@@ -255,14 +256,12 @@ controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $htt
       headers : { 'Content-Type': 'application/vnd.api+json' }
     })
     .success(function(data) {
-      // $scope.formData = {};
-      console.log('Submitted form.');
+      $modalInstance.close(data.presenters);
     });
   };
 
   $scope.submitPresenter = function() {
     $scope.processForm();
-    $modalInstance.close();
   };
 
   $scope.cancel = function() {
@@ -319,10 +318,8 @@ controllers.controller('AddVenueCtrl', function($scope, $modalInstance, $http) {
       headers : { 'Content-Type': 'application/vnd.api+json' }
     })
     .success(function(data) {
-      // $scope.formData = {};
-      console.log('Submitted form.');
+      $modalInstance.close(data.venues);
     });
-    $modalInstance.close();
   };
 
   $scope.cancel = function() {
@@ -375,10 +372,8 @@ controllers.controller('AddCoorganizerCtrl', function($scope, $modalInstance, $h
       headers : { 'Content-Type': 'application/vnd.api+json' }
     })
     .success(function(data) {
-      // $scope.formData = {};
-      console.log('Submitted form.');
+      $modalInstance.close(data[resource]);
     });
-    $modalInstance.close();
   };
 
   $scope.cancel = function() {
