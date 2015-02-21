@@ -97,10 +97,25 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
       });
   }
 
+  $scope.refreshHost = function() {
+    $scope.host = [];
+    $http.get("https://api.tnyu.org/v1.0/people/board")
+      .success(function(data){
+        data["people"].forEach(function(person) {
+          $scope.host.push(
+            { name: person.name, id: person.id, ticked : false});
+        });
+      })
+      .error(function(data, status){
+        console.log(status);
+      });
+  }
+
   $scope.refreshPresenters();
   $scope.refreshCoorganizers();
   $scope.refreshVenues();
   $scope.refreshGenderRep();
+  $scope.refreshHost();
 
   $scope.toggleTeam = function(teamid) {
     if($scope.selectedTeams[teamid])

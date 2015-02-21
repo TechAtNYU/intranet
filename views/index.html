@@ -4,9 +4,9 @@
   <title>Tech@NYU Intranet</title>
 
   <!--CSS Libraries-->
-  <link href="http://zhaber.github.io/datetimepicker/datetimepicker.css" type="text/css" rel="stylesheet"> 
-  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
-  <link rel="stylesheet" href="/css/multi-select.css" type="text/css" rel="stylesheet"/>
+  <link  rel="stylesheet" href="http://zhaber.github.io/datetimepicker/datetimepicker.css"> 
+  <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/css/multi-select.css"/>
 
   <!--User Defined CSS-->
   <link rel="stylesheet" href="/css/app.css"/>
@@ -15,19 +15,19 @@
   <script src="http://cdn.rawgit.com/jpillora/xdomain/0.6.15/dist/0.6/xdomain.min.js" slave="https://api.tnyu.org/v1.0/proxy.html"></script>
 
   <!--JavaScript Libraries-->
-  <script type="text/javascript"  src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
-  <script  type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"></script>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.min.js"></script>
   <script src="http://zhaber.github.io/datetimepicker/datetimepicker-tpls-0.11.js"></script>
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
   <!--User Defined JavaScript-->
-  <script type="text/javascript" src="/js/app.js"></script>
-  <script type="text/javascript" src="/js/controllers.js"></script>
-  <script type="text/javascript" src="/js/directives.js"></script>
-  <script type="text/javascript" src="/js/filters.js"></script>
-  <script type="text/javascript" src="/js/services.js"></script>
-  <script type="text/javascript" src="/js/lib/multi-select.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/controllers.js"></script>
+  <script src="/js/directives.js"></script>
+  <script src="/js/filters.js"></script>
+  <script src="/js/services.js"></script>
+  <script src="/js/lib/multi-select.js"></script>
 </head>
 <body ng-app="app" ng-controller="EventAddCtrl">
   <main class="content container col-md-12">
@@ -40,10 +40,22 @@
           <legend><h2>Add New Event</h2></legend>
         </div>
 
+        <!--Team Selectors-->
+        <div class="row">
+          <label>Team(s) Hosting the Event</label>
+          <ul class="inlineblock-li event__team-selector">
+            <li ng-repeat="team in teams">
+              <button class="btn" ng-class="{selected: selectedTeams[team.id]}" type="button" ng-click="toggleTeam(team.id)">{{team.name}}</button>
+            </li>
+          </ul>
+        </div>
+
         <!--Title-->
         <div class="row" ng-init="titleLength = 1000">
-          <label for="title">Title</label>
-          <p>No need to mention the initiative name or the speaker.</p>
+          <label for="title">
+            Title
+            <p>What topic(s) will be covered? There's generally no need to mention the initiative name or the speaker, as those are specified elsewhere.</p>
+          </label>
           <input name="title" class="form-control" ng-model="event.title"
           ng-maxlength={{titleLength}}>
 
@@ -56,15 +68,12 @@
           <span ng-show="form.title.$error.maxlength">Too long</span>
         </div>
 
-        <!--Internal Event Specifier-->
-        <div class="row">
-          <label for="isInternal">Internal Event</label>
-          <input name="isInternal" class="form-control" type="checkbox" value="false">
-        </div>
-
         <!--Short Title-->
-        <div class="row" ng-init="shortTitleLength = 25">
-          <label for="shortTitle">Short Title</label>
+        <div class="row" ng-init="shortTitleLength = 26">
+          <label for="shortTitle">
+            Short Title
+            <p>Add a shorter title for when the above is too long.</p>
+          </label>
           <input name="shortTitle" class="form-control" ng-model="event.shortTitle" ng-maxlength="{{shortTitleLength}}">
 
           <!-- Show characters left if available -->
@@ -76,21 +85,55 @@
           <span ng-show="form.shortTitle.$error.maxlength">Too long</span>
         </div>
 
+        <!--Description-->
+        <div class="row" ng-init="descriptionLength = 100">
+          <!-- Label and input-->
+          <label for="description">
+            Description
+            <p>Why would someone come to the event? Don’t just restate what you’ll cover, but how the content can be applied. (E.g. “Learn to predict trends and behaviors with data” is far better than “Learn the basics of data science.”) </p>
+          </label>
+          <input type="text" name="description" class="form-control" rows="6" ng-model="event.description" ng-maxlength={{descriptionLength}} />
+
+          <!-- Show characters left if available -->
+          <span ng-show="!form.description.$error.maxlength">
+            {{descriptionLength - event.description.length}} chars left
+          </span> 
+
+          <!--Show error if input is too long-->
+          <span ng-show="form.description.$error.maxlength">Too long</span>
+        </div>
+
+        <!--Details-->
+        <div class="row" ng-init="detailsLength = 10000">
+          <!-- Label and input -->
+          <label for="details">
+            Details
+            <p>What exactly will attendees build? What they should install in advance? (Linking to a working version of the final product is ideal.) Or, what will the speaker discuss? (But don't include the speakers' bio, if ay.) Also, how do attendees get into the building? Etc.</p>
+          </label>
+          <textarea name="details" class="form-control" rows="6" ng-model="event.details" ng-maxlength={{detailsLength}}></textarea>
+
+          <!-- Show characters left if available -->
+          <span ng-show="!form.details.$error.maxlength">
+            {{detailsLength - event.details.length}} chars left
+          </span>
+
+          <!--Show error if input is too long-->
+          <span ng-show="form.details.$error.maxlength">Too long</span>
+        </div>
+
         <!--RSVP URL-->
         <div class="row">
-          <label for="event-rsvp-url">RSVP URL</label>
-          <p>Place here the generated URL of the Facebook event after you post it.</p>
+          <label for="event-rsvp-url">
+            RSVP URL
+            <p>The Facebook or Meetup URL where people can RSVP for this event.</p>
+          </label>
           <input type="url" name="event-rsvp-url" class="form-control" />
         </div>
         
-        <!--Team Selectors-->
+        <!--Internal Event Specifier-->
         <div class="row">
-          <label>Team</label>
-          <ul class="inlineblock-li event__team-selector">
-            <li ng-repeat="team in teams">
-              <button class="btn" ng-class="{selected: selectedTeams[team.id]}" type="button" ng-click="toggleTeam(team.id)">{{team.name}}</button>
-            </li>
-          </ul>
+          <label for="isInternal">Internal Event? (i.e. Is this just for our board?)</label>
+          <input name="isInternal" class="form-control" type="checkbox" value="false">
         </div>
 
         <!--Start Time-->
@@ -105,41 +148,9 @@
           <datetimepicker name="startDateTime" min-date="Date.now()" minute-step="15" ng-model="event.endDateTime" date-format="dd-MMM-yyyy"></datetimepicker>
         </div>
 
-        <!--Description-->
-        <div class="row" ng-init="descriptionLength = 10000">
-          <!-- Label and input-->
-          <label for="description">Description</label>
-          <p> Why would someone come to the event? Don’t just restate what you’ll cover, but what that thing will let you do. (E.g. “Learn to predict trends and behaviors with data” is far better than “Learn the basics of data science.”) </p>
-          <textarea name="description" class="form-control" rows="6" ng-model="event.description" ng-maxlength={{descriptionLength}}></textarea>
-
-          <!-- Show characters left if available -->
-          <span ng-show="!form.description.$error.maxlength">
-            {{descriptionLength - event.description.length}} chars left
-          </span> 
-
-          <!--Show error if input is too long-->
-          <span ng-show="form.description.$error.maxlength">Too long</span>
-        </div>
-
-        <!--Details-->
-        <div class="row" ng-init="detailsLength = 10000">
-          <!-- Label and input -->
-          <label for="details">Details</label>
-          <p>What exactly will attendees make? What they should install in advance? How do they get into the building? Et cetera. Do not include info about the speakers, if any.</p>
-          <textarea name="details" class="form-control" rows="6" ng-model="event.details" ng-maxlength={{detailsLength}}></textarea>
-
-          <!-- Show characters left if available -->
-          <span ng-show="!form.details.$error.maxlength">
-            {{detailsLength - event.details.length}} chars left
-          </span>
-
-          <!--Show error if input is too long-->
-          <span ng-show="form.details.$error.maxlength">Too long</span>
-        </div>
-
         <!--Co-Organizers-->
         <div class="row">
-          <label for="coorganizers">Co-Organizers</label>
+          <label for="coorganizers">Coorganizing Clubs or Organizations</label>
           <div
             multi-select
             input-model="coorganizers"
@@ -167,7 +178,7 @@
 
         <!--Venues-->
         <div class="row">
-          <label for="venues">Venues</label>
+          <label for="venues">Venue</label>
           <div     
             multi-select
             input-model="venues"
@@ -182,8 +193,26 @@
 
         <!--Gender Representative-->
         <div class="row">
+          <label for="host">
+            Host
+            <p>A tech@nyu member who will attend the event, wear a tech@nyu shirt, and welcome people.</p>
+          </label>
+          <div     
+            multi-select
+            input-model="host"
+            output-model="selectedHost"
+            button-label="name"
+            item-label="name"
+            selection-mode="single"
+            tick-property="ticked" 
+          ></div>
+        </div>
+
+        <!--Gender Representative-->
+        <div class="row">
           <label for="gender-rep">
             Gender Representative
+            <p>Another board member who will attend the event, and who is a different gender than the host.</p>
           </label>
           <div     
             multi-select
