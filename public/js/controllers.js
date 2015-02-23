@@ -15,6 +15,10 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
     }
     // Get the teams corresponding to a particular user
     userData.onTeams($scope.currentUser, function(teamData){
+      if(teamData.length == 0){
+        var destinationUrl = "https://api.tnyu.org/v1.0/people/me/"
+        window.location = destinationUrl;
+      }
       $scope.currentUserTeams = teamData;
     });
   });
