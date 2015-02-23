@@ -1,6 +1,7 @@
 # AngularJS & Node.JS .gitignore file
-
 .DS_Store
+Makefile
+static
 
 # Logs
 logs
