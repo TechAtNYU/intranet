@@ -1,5 +1,7 @@
 ##Tech@NYU Intranet
 
+- Master runs on a githook
+
 ###Installation
 
     git clone https://github.com/TechAtNYU/intranet
