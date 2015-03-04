@@ -36,8 +36,10 @@ angular
 	$scope.formData = {};
 
 	$scope.submitVenue = function() {
-		var data = serializeData($scope.formData);
-		Restangular.all('venues').post(data);
+		var formData = serializeData($scope.formData);
+		Restangular.all('venues').post(formData).then(function(createdObject) {
+			$modalInstance.close(createdObject);
+		});
 	};
 
 	$scope.cancel = function() {
