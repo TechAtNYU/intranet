@@ -1,6 +1,6 @@
 'use strict';
 
-var controllers = angular.module('app.controllers', []);
+var controllers = angular.module('app.controllers', ['restangular']);
 
 controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interval, userData) {
   // User Initialization
@@ -217,7 +217,7 @@ controllers.controller('EventAddCtrl', function ($scope, $http, $modal, $interva
   };
 });
 
-controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $http) {
+controllers.controller('AddPresenterCtrl', function($scope, $modalInstance, $http, Restangular) {
   function serializeData(data) {
     var result = {};
     result.links = {};
