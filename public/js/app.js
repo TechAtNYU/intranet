@@ -1,5 +1,7 @@
 'use strict';
 
+angular.module('app.controllers', []);
+
 angular.module('app', [
   'ngRoute',
   'ui.bootstrap',
