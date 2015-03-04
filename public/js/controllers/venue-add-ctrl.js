@@ -7,6 +7,7 @@ angular
 	// into a plain object that our view can use
 	$scope.companies = Restangular.all('organizations').getList().$object;
 	$scope.showAddCompanyForm = false;
+	$scope.formData = {};
 
 	$scope.addCompany = function() {
 		$scope.showAddCompanyForm = true;
@@ -14,9 +15,9 @@ angular
 
 	function serializeData(data) {
 		var result = {};
-		result.links = {};
-		result.links['venues.organization'] = {};
-		result.links['venues.organization'].type = 'organizations';
+		result.links = {
+			'venues.organization': { type: 'organizations' }
+		};
 
 		result.venues = {};
 
@@ -32,8 +33,6 @@ angular
 		console.log('JSON Venue', result);
 		return result;
 	}
-
-	$scope.formData = {};
 
 	$scope.submitVenue = function() {
 		var formData = serializeData($scope.formData);
