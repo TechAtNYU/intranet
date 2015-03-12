@@ -27,5 +27,4 @@ angular.module('app', [
 	RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
 		return data[Object.keys(data)[0]]; // Return the first child of the returned data
 	});
-
 });

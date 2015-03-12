@@ -7,8 +7,9 @@ angular
 	// into a plain object that our view can use
 	$scope.companies = Restangular.all('organizations').getList().$object;
 	$scope.showAddCompanyForm = false;
-	$scope.formData = {};
 
+	$scope.formData = {};
+	
 	$scope.addCompany = function() {
 		$scope.showAddCompanyForm = true;
 	};
@@ -27,8 +28,9 @@ angular
 
 		delete result.venues.organization;
 
-		result.venues.links = {};
-		result.venues.links.organization = data.organization;
+		result.venues.links = {
+			organization: data.organization
+		};
 
 		console.log('JSON Venue', result);
 		return result;
@@ -36,9 +38,10 @@ angular
 
 	$scope.submitVenue = function() {
 		var formData = serializeData($scope.formData);
-		Restangular.all('venues').post(formData).then(function(createdObject) {
-			$modalInstance.close(createdObject);
-		});
+		Restangular.all('venues').post(formData)
+			.then(function(createdObject) {
+				$modalInstance.close(createdObject);
+			});
 	};
 
 	$scope.cancel = function() {
