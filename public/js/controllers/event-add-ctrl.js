@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('EventAddCtrl', function ($scope, $http, $modal, $interval, userData) {
+.controller('EventAddCtrl', function ($scope, $http, $modal, $interval, userData, Restangular) {
   // User Initialization
   userData.getInformation(function(data){
     // Put the user into the current scope
@@ -24,24 +24,17 @@ angular
   });
 
   // Data Initialization
-  $scope.event = { addedBy: null, links: {}, startDateTime: new Date(), endDateTime: new Date()};
-  $scope.selectedTeams = {};
-  $http.get("https://api.tnyu.org/v1.0/teams?isMeta=false")
-    .success(function(data){
-      $scope.teams = data.teams;
-    })
-    .error(function(data, status){
-      console.log("Failed to fetch teams from API with error " + status);
-    });
+  $scope.event = { 
+    addedBy: null, 
+    links: {}, 
+    startDateTime: new Date(), 
+    endDateTime: new Date()
+  };
 
-  $scope.eventStatuses = [];
-  $http.get("https://api.tnyu.org/v1.0/event-statuses")
-    .success(function(data) {
-      $scope.eventStatuses = data["event-statuses"];
-    })
-    .error(function(data, status) {
-      console.log("Failed to fetch event-statuses from API with error " + status);
-    });
+  $scope.selectedTeams = {};
+  $scope.teams = Restangular.all('teams').getList({isMeta: false}).$object;
+
+  $scope.eventStatuses = Restangular.all('event-statuses').getList().$object;
 
   /* Multi-select requires an input model as an array of object literals. An optional
    * output model can also be specified. This writes an array of selected object literals
@@ -49,70 +42,44 @@ angular
    */
 
   $scope.refreshPresenters = function(selectedId) {
-    $scope.presenters = [];
-    $http.get("https://api.tnyu.org/v1.0/presenters")
-      .success(function(data){
-        data.presenters.forEach(function(presenter) {
-          $scope.presenters.push({ name: presenter.name, id: presenter.id, ticked: presenter.id == selectedId});
-        });
-      })
-      .error(function(data, status){
-        console.log(status);
+    Restangular.all('presenters').getList()
+      .then(function(data) {
+        $scope.presenters =
+          _.map(data, function(presenter) {
+            presenter.ticked = presenter.id === selectedId;
+            return presenter;
+          });
       });
   }
 
   $scope.refreshCoorganizers = function(selectedId) {
-    $scope.coorganizers = [];
-    $http.get("https://api.tnyu.org/v1.0/organizations")
-      .success(function(data) {
-        data["organizations"].forEach(function(club) {
-          $scope.coorganizers.push({ name: club.name, id: club.id, ticked : club.id == selectedId});
-        });
-      })
-      .error(function(data, status) {
-        console.log(status);
+    Restangular.all('organizations').getList()
+      .then(function(data) {
+        $scope.coorganizers =
+          _.map(data, function(org) {
+            org.ticked = org.id === selectedId;
+            return org;
+          });
       });
   }
 
   $scope.refreshVenues = function(selectedId) {
-    $scope.venues = [];
-    $http.get("https://api.tnyu.org/v1.0/venues")
-      .success(function(data){
-        data["venues"].forEach(function(venue) {
-          $scope.venues.push({ name: venue.name, id: venue.id, ticked : venue.id == selectedId});
-        });
-      })
-      .error(function(data, status) {
-        console.log(status);
+    Restangular.all('venues').getList()
+      .then(function(data) {
+        $scope.venues =
+          _.map(data, function(venue) {
+            venue.ticked = venue.id === selectedId;
+            return venue;
+          });
       });
   }
 
   $scope.refreshGenderRep = function() {
-    $scope.genderRep = [];
-    $http.get("https://api.tnyu.org/v1.0/people/board")
-      .success(function(data){
-        data["people"].forEach(function(person) {
-          $scope.genderRep.push(
-            { name: person.name, id: person.id, ticked : false});
-        });
-      })
-      .error(function(data, status){
-        console.log(status);
-      });
+    $scope.genderRep = Restangular.all('people/board').getList().$object;
   }
 
   $scope.refreshHost = function() {
-    $scope.host = [];
-    $http.get("https://api.tnyu.org/v1.0/people/board")
-      .success(function(data){
-        data["people"].forEach(function(person) {
-          $scope.host.push(
-            { name: person.name, id: person.id, ticked : false});
-        });
-      })
-      .error(function(data, status){
-        console.log(status);
-      });
+    $scope.host = Restangular.all('people/board').getList().$object;
   }
 
   $scope.refreshPresenters(null);

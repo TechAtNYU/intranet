@@ -2,88 +2,59 @@
 
 angular
 .module('app.controllers')
-.controller('PresenterAddCtrl', function($scope, $modalInstance, $http) {
-  function serializeData(data) {
-    var result = {};
-    result.links = {};
-    result.links['presenters.currentEmployer'] = { type: 'organizations' };
-    result.links['presenters.skills'] = { type: 'skills' };
+.controller('PresenterAddCtrl', function($scope, $modalInstance, $http, Restangular) {
+	$scope.companies = Restangular.all('organizations').getList().$object;
+	$scope.skills = Restangular.all('skills').getList().$object;
 
-    result.presenters = {};
+	Restangular.all('people').getList()
+		.then(function(data) {
+			$scope.schools = 
+				_(data)
+					.pluck('schools') // Extract schools arrays from people
+					.flatten() // Flatten school arrays into one big array
+					.unique() // Remove duplicates
+					.without(null) // Remove the null value (which will be present from people with no school)
+					.map(function(school) { // Put into structure required by multi-select
+						return { name: school };
+					})
+					.value(); // Extract real value
+		});
+		
+	$scope.formData = {};
+	
+	function serializeData(data) {
+		var result = {};
+		result.links = {
+			'presenters.currentEmployer': { type: 'organizations' },
+			'presenters.skills': { type: 'skills' }
+		};
 
-    for(var key in data) {
-      result.presenters[key] = data[key];
-    }
+		result.presenters = {};
 
-    delete result.presenters.currentEmployer;
+		for(var key in data) {
+			result.presenters[key] = data[key];
+		}
 
-    result.presenters.links = {};
-    result.presenters.links.currentEmployer = data.currentEmployer;
-    console.log($scope.selectedSkills);
-    result.presenters.links.skills = $scope.selectedSkills;
+		delete result.presenters.currentEmployer;
 
-    console.log('JSON Presenter', result);
-    return result;
-  }
+		result.presenters.links = {
+			currentEmployer: data.currentEmployer,
+			skills: $scope.selectedSkills
+		};
 
-  $scope.formData = {};
+		console.log('JSON Presenter', result);
+		return result;
+	}
 
-  $scope.companies = [];
-  $http.get("https://api.tnyu.org/v1.0/organizations")
-    .success(function(data) {
-      $scope.companies = data["organizations"];
-    })
-    .error(function(data, status) {
-      console.log("Failed to fetch companies from API with error " + status);
-    });
+	$scope.submitPresenter = function() {
+		var formData = serializeData($scope.formData);
+		Restangular.all('presenters').post(formData)
+			.then(function(createdObject) {
+				$modalInstance.close(createdObject);
+			});
+	};
 
-  $scope.skills = [];
-  $http.get("https://api.tnyu.org/v1.0/skills")
-    .success(function(data) {
-      $scope.skills = data["skills"];
-    })
-    .error(function(data, status) {
-      console.log("Failed to fetch companies from API with error " + status);
-    });
-
-  $scope.schools = [];
-  $http.get("https://api.tnyu.org/v1.0/people?fields=schools")
-    .success(function(data) {
-      $scope.schools = [];
-      var schools = {};
-      var people = data["people"];
-      people.forEach(function(person) {
-        if(person.schools) {
-          person.schools.forEach(function(school) {
-            if(!schools[school]) {
-              schools[school] = true;
-              $scope.schools.push({ name: school });
-            }
-          });
-        }
-      });
-    })
-    .error(function(data, status) {
-      console.log("Failed to fetch companies from API with error " + status);
-    });
-
-  $scope.processForm = function() {
-    $http({
-      method  : 'POST',
-      url     : 'https://api.tnyu.org/v1.0/presenters',
-      data    : serializeData($scope.formData),
-      headers : { 'Content-Type': 'application/vnd.api+json' }
-    })
-    .success(function(data) {
-      $modalInstance.close(data.presenters);
-    });
-  };
-
-  $scope.submitPresenter = function() {
-    $scope.processForm();
-  };
-
-  $scope.cancel = function() {
-    $modalInstance.dismiss('cancel');
-  };
+	$scope.cancel = function() {
+		$modalInstance.dismiss('cancel');
+	};
 });
