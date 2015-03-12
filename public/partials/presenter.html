@@ -24,6 +24,7 @@
             button-label="name"
             item-label="name"
             tick-property="ticked"
+             selection-mode="single"
           ></div>
       </div>
 
@@ -66,7 +67,7 @@
         <div>
           <img ng-src="{{formData.imageUrl}}" alt="No image uploaded" class="headshot img-thumbnail">
         </div>
-        <div class="form-group" ng-controller="AddPersonImageCtrl">
+        <div class="form-group" ng-controller="PersonAddImageCtrl">
           <input name="imageFile" type="file" onchange="angular.element(this).scope().setFile(this.files)">
           <button type="button" class="btn btn-xs btn-default" ng-click="uploadFile(file)">Upload</button>
         </div>

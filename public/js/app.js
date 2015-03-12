@@ -1,10 +1,13 @@
 'use strict';
 
+angular.module('app.controllers', []);
+
 angular.module('app', [
   'ngRoute',
   'ui.bootstrap',
   'ui.bootstrap.datetimepicker',
   'multi-select',
+  'restangular',
   'app.controllers',
   'app.filters',
   'app.services',
@@ -13,4 +16,15 @@ angular.module('app', [
   datepickerConfig.showWeeks = false;
 }).config(function ($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
+}).config(function(RestangularProvider) {
+	RestangularProvider.setBaseUrl('https://api.tnyu.org/v1.0');
+
+	// Configuring Restangular to work with JSONAPI spec
+	RestangularProvider.setDefaultHeaders({
+		'Content-Type': 'application/vnd.api+json; charset=utf-8'
+	});
+
+	RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+		return data[Object.keys(data)[0]]; // Return the first child of the returned data
+	});
 });
