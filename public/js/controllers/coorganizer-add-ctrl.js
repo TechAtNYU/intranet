@@ -2,17 +2,8 @@
 
 angular
 .module('app.controllers')
-.controller('CoorganizerAddCtrl', function($scope, $modalInstance, $http) {
-  $scope.liaisons = [];
-  $http.get("https://api.tnyu.org/v1.0/people")
-    .success(function(data){
-      data.people.forEach(function(person) {
-        $scope.liaisons.push({ name: person.name, id: person.id, ticked: false});
-      });
-    })
-    .error(function(data, status){
-      console.log(status);
-    });
+.controller('CoorganizerAddCtrl', function($scope, $modalInstance, $http, Restangular) {
+  $scope.liaisons = Restangular.all('people').getList().$object;
 
   function serializeData(data, resource) {
     var result = {};
@@ -28,8 +19,9 @@ angular
 
     delete result[resource].liaisons;
 
-    result[resource].links = {};
-    result[resource].links.liaisons = data.liaisons;
+    result[resource].links = {
+      liaisons: data.liaisons
+    };
 
     console.log('JSON Coorganizer', result);
     return result;
@@ -40,15 +32,10 @@ angular
   $scope.submitCoorganizer = function() {
     var resource = $scope.isRelatedClub ? 'related-clubs' : 'organizations';
 
-    $http({
-      method  : 'POST',
-      url     : 'https://api.tnyu.org/v1.0/' + resource,
-      data    : serializeData($scope.formData, resource),
-      headers : { 'Content-Type': 'application/vnd.api+json' }
-    })
-    .success(function(data) {
-      $modalInstance.close(data[resource]);
-    });
+    Restangular.all(resource).post(formData)
+      .then(function(createdObject) {
+        $modalInstance.close(createdObject);
+      });
   };
 
   $scope.cancel = function() {
