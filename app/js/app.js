@@ -37,13 +37,19 @@ angular.module('app', [
       templateUrl: 'partials/index/index.html',
       controller: 'MainCtrl'
     })
-    .state('resource', {
+    .state('list', {
       url: 'r/:resourceName/list/:selectionMode',
-      urlProvider: function($stateParams) {
-        console.log('Resolving url...');
-
-      },
       templateUrl: 'partials/actions/list.html',
       controller: 'ListCtrl'
+    })
+    .state('add', {
+      url: 'r/:resourceName/add',
+      templateUrl: 'partials/actions/add.html',
+      controller: 'AddCtrl'
+    })
+    .state('edit', {
+      url: 'r/:resourceName/edit/:id',
+      templatUrl: 'partials/actions/edit.html',
+      controller: 'EditCtrl'
     });
 });
