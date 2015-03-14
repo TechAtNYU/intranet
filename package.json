@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "./node_modules/http-server/bin/http-server ./app -p 3000",
+    "start": "./node_modules/http-server/bin/http-server ./app -p 3000 -c-1",
     "test": "./node_modules/karma/bin/karma start ./test/karma.conf.js"
   },
   "dependencies": {
