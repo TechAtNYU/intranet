@@ -17,7 +17,7 @@ Start the HTTP server with:
 
     npm start
 
-### Test
+### Testing
 The application uses Karma + Jasmine for unit testing and by default executes using PhantomJS. Unit tests can be found in `/test/unit`.
 
 Start the unit-test server with:
