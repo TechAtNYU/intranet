@@ -5,7 +5,7 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: '../',
 
 
     // frameworks to use
@@ -19,10 +19,10 @@ module.exports = function(config) {
       "http://code.jquery.com/jquery-2.1.1.min.js",
       "http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.js",
       "http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js",
-      "http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.min.js",
-      "http://zhaber.github.io/datetimepicker/datetimepicker-tpls-0.11.js",
       "http://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.3.1/lodash.min.js",
       "http://cdnjs.cloudflare.com/ajax/libs/restangular/1.3.1/restangular.js",
+      "http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.min.js",
+      "./app/js/lib/datetimepicker-tpls-0.11.js",
       "./app/js/lib/multi-select.js",
 
     // App Files

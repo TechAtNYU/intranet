@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "./node_modules/http-server/bin/http-server ./app -p 3000",
-    "test": "./node_modules/karma/bin/karma start"
+    "test": "./node_modules/karma/bin/karma start ./test/karma.conf.js"
   },
   "dependencies": {
     "http-server": "^0.7.5"
