@@ -2,6 +2,6 @@
 
 angular
 .module('app.controllers')
-.controller('ListCtrl', function($scope, $rootScope, $stateParams, Restangular) {
+.controller('EditCtrl', function($scope, $rootScope, $stateParams, Restangular) {
 
 });
