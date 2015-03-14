@@ -12,9 +12,7 @@ angular.module('app', [
   'app.filters',
   'app.services',
   'app.directives',
-]).config(function (datepickerConfig) {
-  datepickerConfig.showWeeks = false;
-}).config(function(RestangularProvider) {
+]).config(function(RestangularProvider) {
 	RestangularProvider.setBaseUrl('https://api.tnyu.org/v1.0');
 
 	// Configuring Restangular to work with JSONAPI spec
@@ -25,4 +23,33 @@ angular.module('app', [
 	RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
 		return data[Object.keys(data)[0]]; // Return the first child of the returned data
 	});
+}).config(function (datepickerConfig) {
+  datepickerConfig.showWeeks = false;
+}).config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+  // TODO: Enable this when server is properly configured
+  // $locationProvider.html5Mode(true);
+
+  $urlRouterProvider.otherwise('/');
+
+  $stateProvider
+    .state('index', {
+      url: '/',
+      templateUrl: 'partials/index/index.html',
+      controller: 'MainCtrl'
+    })
+    .state('list', {
+      url: 'r/:resourceName/list/:selectionMode',
+      templateUrl: 'partials/actions/list.html',
+      controller: 'ListCtrl'
+    })
+    .state('add', {
+      url: 'r/:resourceName/add',
+      templateUrl: 'partials/actions/add.html',
+      controller: 'AddCtrl'
+    })
+    .state('edit', {
+      url: 'r/:resourceName/edit/:id',
+      templatUrl: 'partials/actions/edit.html',
+      controller: 'EditCtrl'
+    });
 });
