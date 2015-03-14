@@ -49,7 +49,7 @@ angular.module('app', [
     })
     .state('edit', {
       url: 'r/:resourceName/edit/:id',
-      templatUrl: 'partials/actions/edit.html',
+      templateUrl: 'partials/actions/edit.html',
       controller: 'EditCtrl'
     });
 });
