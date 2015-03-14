@@ -3,7 +3,7 @@
 angular.module('app.controllers', []);
 
 angular.module('app', [
-  'ngRoute',
+  'ui.router',
   'ui.bootstrap',
   'ui.bootstrap.datetimepicker',
   'multi-select',
@@ -14,8 +14,6 @@ angular.module('app', [
   'app.directives',
 ]).config(function (datepickerConfig) {
   datepickerConfig.showWeeks = false;
-}).config(function ($routeProvider, $locationProvider) {
-  $locationProvider.html5Mode(true);
 }).config(function(RestangularProvider) {
 	RestangularProvider.setBaseUrl('https://api.tnyu.org/v1.0');
 
