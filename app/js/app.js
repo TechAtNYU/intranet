@@ -41,9 +41,9 @@ angular.module('app', [
       url: 'r/:resourceName/list/:selectionMode',
       urlProvider: function($stateParams) {
         console.log('Resolving url...');
-        
+
       },
-      templateUrl: 'partials/presenters/list.html',
+      templateUrl: 'partials/actions/list.html',
       controller: 'ListCtrl'
     });
 });
