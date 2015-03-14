@@ -3,16 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "./node_modules/http-server/bin/http-server ./app -p 3000",
     "test": "./node_modules/karma/bin/karma start"
   },
   "dependencies": {
-    "body-parser": "^1.0.2",
-    "errorhandler": "*",
-    "express": "~4.1.1",
-    "method-override": "^1.0.0",
-    "morgan": "^1.0.0",
-    "ejs": "~1.0.0"
+    "http-server": "^0.7.5"
   },
   "devDependencies": {
     "jasmine-core": "^2.2.0",
