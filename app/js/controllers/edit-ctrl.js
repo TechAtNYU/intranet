@@ -18,7 +18,10 @@ angular
         // transform presenter from Array to String 
         presenter.schools = presenter.schools.join(',');
         // format date for input[type=date]
-        presenter.graduationDate = presenter.graduationDate.formatForInputTypeDate(); // see extentions file 
+        if (presenter.graduationDate) {
+          presenter.graduationDate = presenter.graduationDate.formatForInputTypeDate(); // see extentions file 
+        }
+        
         $scope.presenter = presenter; 
       })
 
