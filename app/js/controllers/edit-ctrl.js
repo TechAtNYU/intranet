@@ -8,19 +8,25 @@ angular
       resourceId = //$stateParams.id; 
       '53f54dd98d1e62ff12539dbb'; // test id 
 
-  Restangular
-    .one(resourceName, resourceId)
-    .get()
-      .then(function(presenter){
+  var resource = Restangular.one(resourceName, resourceId);
 
-        // transform presenter from Array to String 
-        presenter.schools = presenter.schools.join(',');
-        // format date for input[type=date]
-        if (presenter.graduationDate) {
-          presenter.graduationDate = presenter.graduationDate.formatForInputTypeDate(); // see js/lib/extentions.js file 
-        }
-        
-        $scope.presenter = presenter; 
-      })
+  resource.get()
+    .then(function(presenter){
 
+      // transform schools to String 
+      presenter.schools = presenter.schools.join(',');
+
+      // format date for input[type=date]
+      if (presenter.graduationDate) {
+        presenter.graduationDate = presenter.graduationDate.formatForInputTypeDate(); // see js/lib/extentions.js  
+      }
+    
+      $scope.presenter = Restangular.stripRestangular(presenter);
+    });
+
+  // FAKE, but more or less like this...  
+  $scope.updateResource = function(){
+    console.log($scope.presenter);
+    // resource.put($scope.presenter); ClayReedA gets 403 Forbidden 
+  };
 });
