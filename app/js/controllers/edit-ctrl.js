@@ -6,7 +6,7 @@ angular
 
   var resourceName = $stateParams.resourceName,
       resourceId = //$stateParams.id; 
-      '53f54dd98d1e62ff12539dbb';
+      '53f54dd98d1e62ff12539dbb'; // test id 
 
   
 
@@ -16,14 +16,9 @@ angular
       .then(function(presenter){
 
         // transform presenter from Array to String 
-        presenter.schools = presenter.schools.join(' ');
-
-        // yyyy-MM-dd INSANITY 
-        var d = new Date(presenter.graduationDate);
-        var yyyy = d.getFullYear().toString(),
-              mm = d.getMonth() + 1,
-              dd = d.getDate();
-        presenter.graduationDate = yyyy + '-' + (mm > 9 ? mm.toString() : '0' + mm) + '-' + (dd.toString() > 9 ? dd : '0' + dd);
+        presenter.schools = presenter.schools.join(',');
+        // format date for input[type=date]
+        presenter.graduationDate = presenter.graduationDate.formatForInputTypeDate(); // see extentions file 
         $scope.presenter = presenter; 
       })
 
