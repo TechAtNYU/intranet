@@ -1,0 +1,25 @@
+general:
+  branches:
+    only:
+      - master
+
+machine:
+  timezone:
+    America/Los_Angeles
+
+test:
+  override:
+    - echo "No tests are needed"
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - mkdir output
+      - mv public/js output/js
+      - mv public/fonts output/fonts
+      - mv public/css output/css
+      - mv public/partials output/partials
+      - mv views/index.html output/index.html
+      - mv views/404.html output/404.html
+      - turbolift -u $RAXUSER -a $RAXAPIKEY --os-rax-auth $RAXREGION upload -s $HOME/$CIRCLE_PROJECT_REPONAME/output -c $CONTAINER
