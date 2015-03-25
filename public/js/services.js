@@ -6,7 +6,7 @@ angular.module('app.services', [])
     var user = {
       getInformation: function (callback) {
         $http.get('https://api.tnyu.org/v1.0/people/me').success(function(data) {
-          return(callback(data["people"]));
+          return(callback(data["people"] || data["presenters"]));
         }).error(function(data){
           var status = data["errors"]["status"];
           if(status == "401") {
