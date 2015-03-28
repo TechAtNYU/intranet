@@ -4,7 +4,7 @@
 
 	<div class="form-group" ng-repeat="field in rdesc.fields">
 		<label>{{field.friendlyName}}</label>
-		<input class="form-control" ng-init="property = 'model.' + field.name" ng-model="presenter[property]">
+		<div ng-include="fep.getTemplateUrl(field.kind)"></div>
 		<p class="help-block" ng-bind-html="field.description"></p>
 	</div>
 </div>

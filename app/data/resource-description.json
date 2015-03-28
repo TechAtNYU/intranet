@@ -59,6 +59,7 @@
             },
             {
                "name":"twitterId",
+               "friendlyName":"Twitter Id",
                "kind":"String",
                "description":"Not the person’s twitter username, but their <a href='http://gettwitterid.com/'>numerical twitter id</a>. This is needed for security, as a person can change usernames, but their id always remains.",
                "requirements":{
@@ -83,6 +84,7 @@
             },
             {
                "name":"contact.phone",
+               "friendlyName":"Contact.phone",
                "kind":"String",
                "description":"No dashes, no spaces. Just <span style=\"white-space:nowrap;\">+[CountryCode][Number]</span>, e.g. +13104398032. <p class=\"restrictecTo\">This field is only shown in API responses if the user making the request has either the TEAM_MEMBER or ADMIN roles.</p>",
                "requirements":{
@@ -99,6 +101,7 @@
             },
             {
                "name":"contact.twitter",
+               "friendlyName":"Contact.twitter",
                "kind":"String",
                "description":"The person’s twitter username.",
                "requirements":{
@@ -123,6 +126,7 @@
             },
             {
                "name":"roles",
+               "friendlyName":"Roles",
                "kind":"Array[String]",
                "description":"A list of roles the Person has, each of which grants them various permissions. This field can't be modified through the API—all attempts to do so will be silently ignored. Instead, the roles are a function of the TeamMembership's that the user is associated with.",
                "requirements":{
@@ -131,6 +135,7 @@
             },
             {
                "name":"notes",
+               "friendlyName":"Notes",
                "kind":"String",
                "description":"Stores our notes about the Person, which can be useful for presenters, eboard applicants, club liaisons, etc. If you add content to this field, please note in the text which parts you put in; in other words, all content in this field should be attributeable to an author.<p class='restrictecTo'>This field is only shown in API responses if the user making the request has either the TEAM_LEAD or ADMIN roles.</p>",
                "requirements":{
@@ -208,6 +213,7 @@
          "fields":[
             {
                "name":"title",
+               "friendlyName":"Title",
                "kind":"String",
                "description":"Used for meetup, facebook, etc.",
                "requirements":{
@@ -216,6 +222,7 @@
             },
             {
                "name":"shortTitle",
+               "friendlyName":"Short Title",
                "kind":"String",
                "description":"For the homepage of our site, where the title is character constrained.",
                "requirements":{
@@ -224,6 +231,7 @@
             },
             {
                "name":"description",
+               "friendlyName":"Description",
                "kind":"String",
                "description":"One or two sentences on the event's purpose.",
                "requirements":{
@@ -232,6 +240,7 @@
             },
             {
                "name":"details",
+               "friendlyName":"Details",
                "kind":"String",
                "description":"Information like: exactly what attendees will make, what they should install in advance, how to get into the building, etc. (Does not include the speakers' bios, if any.)",
                "requirements":{
@@ -458,6 +467,7 @@
             },
             {
                "name":"postingFee",
+               "friendlyName":"Posting Fee",
                "kind":"Number",
                "description":"How much Tech@NYU was paid to post this Job.",
                "requirements":{
@@ -754,6 +764,7 @@
             },
             {
                "name":"notes",
+               "friendlyName":"Notes",
                "kind":"String",
                "description":"Info about the venue's availability, how to book, its price, etc.",
                "requirements":{
@@ -842,6 +853,7 @@
             },
             {
                "name":"isMeta",
+               "friendlyName":"Is Meta",
                "kind":"Boolean",
                "description":"Some teams put on events (e.g. the Demo Days team). Meta teams are those teams that support the event teams (e.g. Marketing, Infrastructure, etc).",
                "requirements":{
@@ -1151,6 +1163,7 @@
             },
             {
                "name":"title",
+               "friendlyName":"Title",
                "kind":"String",
                "description":"A short name summarizing the proposal’s subject matter.",
                "requirements":{
@@ -1159,6 +1172,7 @@
             },
             {
                "name":"body",
+               "friendlyName":"Body",
                "kind":"String",
                "description":"The ‘What’ of the proposal. Exactly what changes are being suggested?",
                "requirements":{
@@ -1167,6 +1181,7 @@
             },
             {
                "name":"valueToClub",
+               "friendlyName":"Value To Club",
                "kind":"String",
                "description":"The ‘Why’ of the proposal. What’s broken now that's motivating this proposal? How will these changes make things better? ",
                "requirements":{
@@ -1175,6 +1190,7 @@
             },
             {
                "name":"implementationSteps",
+               "friendlyName":"Implementation Steps",
                "kind":"String",
                "description":"What work would be required to carry the proposal out? (It’s important to think through this upfront so we understand exactly how time-consuming implementing a proposal would be before we vote on it.)",
                "requirements":{
@@ -1183,6 +1199,7 @@
             },
             {
                "name":"assignees",
+               "friendlyName":"Assignees",
                "kind":"String",
                "description":"Who would be responsible for doing the work described in the implementation steps? Sometimes, it may make sense to make approval of a proposal contingent on someone(s) volunteering to help with implementation.",
                "requirements":{
@@ -1191,6 +1208,7 @@
             },
             {
                "name":"drawbacks",
+               "friendlyName":"Drawbacks",
                "kind":"String",
                "description":"The drawbacks identified by the proposal’s author(s) at the time of submission. Further drawbacks may be discovered in the course of the debate; those should be discussed in the debateSummary.",
                "requirements":{
@@ -1199,6 +1217,7 @@
             },
             {
                "name":"alternatives",
+               "friendlyName":"Alternatives",
                "kind":"String",
                "description":"The alternatives considered (and presumably rejected) by the proposal’s author(s) before its submission. Further alternatives may be identified in the course of the debate; those should be discussed in the debateSummary and may give rise to amended (i.e. child) versions of this proposal.",
                "requirements":{
@@ -1207,6 +1226,7 @@
             },
             {
                "name":"unresolvedQuestions",
+               "friendlyName":"Unresolved Questions",
                "kind":"String",
                "description":"What are the known unknowns surrounding this proposal?",
                "requirements":{
@@ -1215,6 +1235,7 @@
             },
             {
                "name":"successMetrics",
+               "friendlyName":"Success Metrics",
                "kind":"String",
                "description":"How will we know whether this proposal’s been a success? The assumption should be that, if the proposal doesn’t meet these metrics, we’ll revisit it.",
                "requirements":{

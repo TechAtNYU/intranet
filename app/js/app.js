@@ -62,6 +62,7 @@ angular.module('app', [
       url: 'r/:resourceName/edit/:id',
       templateUrl: 'partials/actions/edit.html',
       controller: 'EditCtrl',
+      controllerAs: 'ctrl',
       resolve: {
         apiDescription: function($http) {
           return $http.get('/data/resource-description.json')
