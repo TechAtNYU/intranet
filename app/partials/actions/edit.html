@@ -2,10 +2,10 @@
 	<h3>Edit {{rdesc.name.singular}}</h3>
 	<h5>{{rdesc.description}}</h5>
 
-	<div class="form-group" ng-repeat="field in rdesc.fields">
-		<label>{{field.friendlyName}}</label>
-		<div ng-include="fep.getTemplateUrl(field.kind)"></div>
-		<p class="help-block" ng-bind-html="field.description"></p>
+	<div class="form-group" ng-repeat="field in rdesc.fields" ng-include="'/partials/fields/default-field.html'">
+	</div>
+
+	<div class="form-group">
+    	<button class="btn btn-primary" ng-click="updateResource()">Submit</button>
 	</div>
 </div>
-
