@@ -2,26 +2,27 @@
 
 angular
 .module('app.controllers')
-.controller('EditCtrl', function($scope, $rootScope, $stateParams, Restangular) {
-
+.controller('EditCtrl', function($scope, $rootScope, $stateParams, $sce, Restangular, apiDescription) {
   var resourceName = $stateParams.resourceName,
       resourceId = //$stateParams.id; 
       '53f54dd98d1e62ff12539dbb'; // test id 
+  $scope.rdesc = apiDescription.resource(resourceName);
+  console.log($scope.rdesc);
 
   var resource = Restangular.one(resourceName, resourceId);
 
   resource.get()
-    .then(function(presenter){
+    .then(function(presenter) {
 
-      // transform schools to String 
-      presenter.schools = presenter.schools.join(',');
+      // // transform schools to String 
+      // presenter.schools = presenter.schools.join(',');
 
-      // format date for input[type=date]
-      if (presenter.graduationDate) {
-        presenter.graduationDate = presenter.graduationDate.formatForInputTypeDate(); // see js/lib/extentions.js  
-      }
+      // // format date for input[type=date]
+      // if (presenter.graduationDate) {
+      //   presenter.graduationDate = presenter.graduationDate.formatForInputTypeDate(); // see js/lib/extentions.js  
+      // }
     
-      $scope.presenter = Restangular.stripRestangular(presenter);
+      // $scope.presenter = Restangular.stripRestangular(presenter);
     });
 
   // FAKE, but more or less like this...  

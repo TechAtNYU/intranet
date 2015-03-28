@@ -3,6 +3,7 @@
 angular.module('app.controllers', []);
 
 angular.module('app', [
+  'ngSanitize',
   'ui.router',
   'ui.bootstrap',
   'ui.bootstrap.datetimepicker',
@@ -40,16 +41,42 @@ angular.module('app', [
     .state('list', {
       url: 'r/:resourceName/list/:selectionMode',
       templateUrl: 'partials/actions/list.html',
-      controller: 'ListCtrl'
+      controller: 'ListCtrl',
+      resolve: {
+        apiDescription: function($http) {
+          return $http.get('/data/resource-description.json');
+        }
+      }
     })
     .state('add', {
       url: 'r/:resourceName/add',
       templateUrl: 'partials/actions/add.html',
-      controller: 'AddCtrl'
+      controller: 'AddCtrl',
+      resolve: {
+        apiDescription: function($http) {
+          return $http.get('/data/resource-description.json');
+        }
+      }
     })
     .state('edit', {
       url: 'r/:resourceName/edit/:id',
       templateUrl: 'partials/actions/edit.html',
-      controller: 'EditCtrl'
+      controller: 'EditCtrl',
+      resolve: {
+        apiDescription: function($http) {
+          return $http.get('/data/resource-description.json')
+          .then(function(data) {
+            data = {
+              data: data.data.data,
+              resource: function(name) {
+                return _.find(data.data, function(r) {
+                  return r.id === name;
+                });
+              }
+            };
+            return data;
+          });
+        }
+      }
     });
 });

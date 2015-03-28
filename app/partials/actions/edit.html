@@ -1,76 +1,11 @@
 <div class="container">
-  <form>
-    <h3>Person</h3>
-    <div class="form-group">
-      <label>Name</label>
-      <input class="form-control" ng-model="presenter.name">
-    </div>
+	<h3>Edit {{rdesc.name.singular}}</h3>
+	<h5>{{rdesc.description}}</h5>
 
-    <div class="form-group">
-      <div class="row">
-        <div class="col-md-8">
-          <label>Schools</label> 
-          <input class="form-control" ng-model="presenter.schools">
-      </div>
-      <div class="col-md-4">
-          <label>Graduation Date</label>
-          <input type="date" class="form-control" ng-model="presenter.graduationDate">
-      </div>
-    </div>
-    </div>
-    <div class="form-group">
-      <div class="row">
-        <div class="col-md-6">
-          <label>Twitter</label>
-          <input class="form-control" ng-model="presenter.contact.twitter">
-        </div>
-        <div class="col-md-6">
-          <label>Email</label>
-          <input type="email" class="form-control" ng-model="presenter.contact.email">
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="row">
-        <div class="col-md-6">
-          <label>Gender</label>
-          <select ng-model="presenter.gender">
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-            <option value="male">Male</option>
-          </select>
-        </div>
-        <div class="col-md-6">
-          <label>Phone</label>
-          <input type="tel" class="form-control" ng-model="presenter.contact.phone">
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>Notes</label>
-      <textarea class="form-control" ng-model="presenter.notes"></textarea>
-    </div>
-    <div class="form-group">
-      <label>Image URL</label>
-      <input type="url" class="form-control" ng-model="presenter.imgUrl">
-    </div>
-    <hr>
-    <h3>Presenter</h3>
-    <div class="form-group">
-      <label>Title</label>
-      <input class="form-control" ng-model="presenter.title">
-    </div>
-    <div class="form-group">
-      <label>URL</label>
-      <input type="url" class="form-control" ng-model="presenter.url">
-    </div>
-    <div class="form-group">
-      <label>Short Bio</label>
-      <textarea class="form-control" ng-model="presenter.shortBio"></textarea>
-    </div>
-
-    <button class="btn btn-default" ng-click="updateResource()">Submit</button>
-  </form>
-
+	<div class="form-group" ng-repeat="field in rdesc.fields">
+		<label>{{field.friendlyName}}</label>
+		<input class="form-control" ng-init="property = 'model.' + field.name" ng-model="presenter[property]">
+		<p class="help-block" ng-bind-html="field.description"></p>
+	</div>
 </div>
+

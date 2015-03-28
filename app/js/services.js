@@ -36,7 +36,7 @@ angular.module('app.services', [])
               for(var eachMemberships in data["teams"][eachTeam]["links"]["memberships"]){
                 for(var eachUserTeam in allTeamIds){
                   if(data["teams"][eachTeam]["links"]["memberships"][eachMemberships] == allTeamIds[eachUserTeam]){
-                    allTeamObjects.push(data["teams"][eachTeam])
+                    allTeamObjects.push(data["teams"][eachTeam]);
                   }
                 }
               }
