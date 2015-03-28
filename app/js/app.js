@@ -27,24 +27,18 @@ angular.module('app', [
 	});
 
   RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
-    console.log(data);
-
     var flattenTree = function(resource) {
-      console.log(resource);
       var flatten = function(object, parentKey) {
-        console.log(object);
-        if(_.isObject(object)) {
+        if(_.isObject(object) && !_.isArray(object)) {
           Object.keys(object).forEach(function(key) {
             flatten(object[key], parentKey + '.' + key);
           });
         } else {
-          console.log(parentKey);
           resource[parentKey] = object;
         }
       };
 
       Object.keys(resource).forEach(function(key) {
-        console.log(key);
         if(key === 'links') {
           return;
         } else if(!_.isArray(resource[key])) {
@@ -58,7 +52,36 @@ angular.module('app', [
     } else {
       flattenTree(data);
     }
-    console.log(data);
+    return data;
+  });
+
+  RestangularProvider.addRequestInterceptor(function(data, operation, what, url) {
+    // 'deepening' to perform before sending out any request data.
+    // This reverses the above flattening process.
+
+    if(operation === 'getList' || operation === 'get') {
+      return data;
+    }
+
+    _.forOwn(data, function(value, key) {
+      var tokens = key.split('.');
+      if(tokens.length > 1) {
+        var p = data;
+        for(var i = 0; i < tokens.length; ++i) {
+          var t = tokens[i];
+          if(!p[t]) {
+            p[t] = {};
+          }
+          if(i === tokens.length - 1) {
+            console.log('\t=>', p);
+            p[t] = value;
+          } else {
+            p = p[t];
+          }
+        }
+      }
+    });
+
     return data;
   });
 }).config(function (datepickerConfig) {
