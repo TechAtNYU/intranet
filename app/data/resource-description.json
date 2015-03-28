@@ -1,0 +1,48 @@
+{
+    "data": [
+        {
+            "resourceType": "people",
+            "singularName": "Person",
+            "pluralName": "People",
+            "description": "Everyone in the API",
+            "type": "descriptions",
+            "access": {
+                "LIST": [],
+                "READ": [],
+                "UPDATE": [],
+                "DELETE": []
+            },
+            "fields": [
+                {
+                    "name": "name",
+                    "friendlyName": "Name",
+                    "description": "Full name of the person",
+                    "hint": "John Smith",
+                    "requirements": {
+                        "maxLength": 25,
+                        "isRequired": true
+                    },
+                    "kind": {
+                        "name": "String"
+                    },
+                },
+                {
+                    "name": "currentEmployer",
+                    "friendlyName": "Current Employer",
+                    "description": "This person's current employer",
+                    "hint": "Google",
+                    "requirements": {
+                        "isRequired": true
+                    },
+                    "kind": {
+                        "name": "Link",
+                        "resource": "organizations"
+                    }
+                },
+            ],
+            "links": {
+                "collection": "https://api.tnyu.org/v1.0/people
+            }
+        }
+    ]
+}
