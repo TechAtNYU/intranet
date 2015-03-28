@@ -2,14 +2,15 @@
 
 angular
 .module('app.controllers')
-.controller('EditCtrl', function($scope, $rootScope, $stateParams, $sce, Restangular, apiDescription, formElementProvider) {
+.controller('EditCtrl', function($scope, $rootScope, $stateParams, $sce, $interval, Restangular, apiDescription, formElementProvider) {
   var resourceName = $stateParams.resourceName,
       resourceId = //$stateParams.id; 
       '53f54dd98d1e62ff12539dbb'; // test id 
   $scope.rdesc = apiDescription.resource(resourceName);
   $scope.fep = formElementProvider;
+  $scope.model = {};
   console.log($scope.rdesc);
-
+  $interval(function() { console.log($scope.model); }, 500);
   var resource = Restangular.one(resourceName, resourceId);
 
   resource.get()
@@ -26,7 +27,7 @@ angular
     });
 
   // FAKE, but more or less like this...  
-  $scope.updateResource = function(){
+  $scope.updateResource = function() {
     console.log($scope.presenter);
     // resource.put($scope.presenter); ClayReedA gets 403 Forbidden 
   };
