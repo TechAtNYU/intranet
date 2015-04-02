@@ -7,5 +7,20 @@
 				ng-model="model" 
 				ng-options="m.name for m in data"
 				style="width: 500px;">
+		</select>
+	</div>
+
+	<div class="form-group">
+		<table class="table table-hover table-condensed">
+			<tr ng-repeat="field in rdesc.fields">
+				<th>{{field.friendlyName}}</th>
+				<td>{{model[field.name]}}</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="form-group">
+		<button class="btn btn-primary">Edit</button>
+		<button class="btn btn-danger">Delete</button>
 	</div>
 </div>
