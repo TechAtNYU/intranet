@@ -1,6 +1,10 @@
-<div>
-	<p>Hi folks!</p>
+<div class="container">
+	<h3>Tech@NYU Intranet</h3>
 
-    <a ui-sref="list({resourceName: 'people', selectionMode: 'multiple'})">Add Presenter</a>
-    <a ui-sref="edit({resourceName: 'people', id: '53f54dd98d1e62ff12539dbb'})">Edit Presenter</a>
+	<div class="form-group" ng-repeat="rdesc in apidesc">
+		<h4>
+			{{rdesc.name.plural}} 
+			<a ui-sref="list({resourceName: rdesc.id})" class="btn btn-default">List</a>
+		</h4>
+	</div>
 </div>
