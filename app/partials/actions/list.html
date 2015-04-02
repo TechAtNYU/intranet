@@ -1,13 +1,11 @@
-<div class="row">
-	<label style="text-transform: capitalize;">{{resourceName}}</label>
-	<div
-		multi-select
-		input-model="models"
-		output-model="selectedModels"
-		button-label="name"
-		item-label="name"
-		selection-mode="{{selectionMode}}"
-		tick-property="ticked"
-	></div>
-	<!-- <button type="button" class="btn btn-default btn-block" ng-click="addPresenter()">+ New Presenter</button> -->
+<div class="container">
+	<h3>List {{rdesc.name.singular}}</h3>
+	<h5>{{rdesc.description}}</h5>
+
+	<div class="form-group">
+		<select chosen 
+				ng-model="model" 
+				ng-options="m.name for m in data"
+				style="width: 500px;">
+	</div>
 </div>
