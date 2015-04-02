@@ -7,11 +7,12 @@
 				ng-model="model" 
 				ng-options="m.name for m in data"
 				style="width: 500px;">
+			<option value=""></option>
 		</select>
 	</div>
 
 	<div class="form-group">
-		<table class="table table-hover table-condensed">
+		<table class="table table-hover table-bordered table-condensed">
 			<tr ng-repeat="field in rdesc.fields">
 				<th>{{field.friendlyName}}</th>
 				<td>{{model[field.name]}}</td>
