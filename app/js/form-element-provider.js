@@ -3,9 +3,9 @@ angular.module('app.services')
 	'use strict';
 
 	var templates = {
-		'String': 'partials/fields/default-input.html',
-		'Date': 'partials/fields/date-input.html',
-		'Link': 'partials/fields/link-input.html'
+		'String': 'partials/inputs/default-input.html',
+		'Date': 'partials/inputs/date-input.html',
+		'Link': 'partials/inputs/link-input.html'
 	};
 
 	return {
