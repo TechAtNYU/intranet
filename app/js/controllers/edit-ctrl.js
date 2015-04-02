@@ -12,9 +12,7 @@ angular
 	$scope.model = resource.get().$object;
 	// $interval(function() { console.log($scope.model); }, 500);
 
-	// FAKE, but more or less like this...  
 	$scope.updateResource = function() {
-		console.log($scope.model);
 		resource.patch($scope.model);
 	};
 });
