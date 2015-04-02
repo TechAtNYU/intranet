@@ -31,21 +31,21 @@
 
   <!--User Defined JavaScript-->
   <script src="/js/app.js"></script>
+  <script src="/js/routes.js"></script>
+  <script src="/js/directives.js"></script>
+  <script src="/js/filters.js"></script>
+  
   <script src="/js/controllers/main-ctrl.js"></script>
   <script src="/js/controllers/list-ctrl.js"></script>
   <script src="/js/controllers/edit-ctrl.js"></script>
   <script src="/js/controllers/add-ctrl.js"></script>
-
-  <script src="/js/directives.js"></script>
-  <script src="/js/filters.js"></script>
-  <script src="/js/services.js"></script>
   
-  <script src="/js/form-element-provider.js"></script>
+  <script src="/js/services/user-data.js"></script>
+  <script src="/js/services/form-element-provider.js"></script>
 </head>
 <body ng-app="app">
   <main class="content container col-md-12">
-    <div id="primary-view" ui-view>
-    </div ui-view>
+    <div id="primary-view" ui-view></div>
   </main>
 </body>
 </html>
