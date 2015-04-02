@@ -99,7 +99,7 @@ angular.module('app', [
 			controller: 'MainCtrl'
 		})
 		.state('list', {
-			url: 'r/:resourceName/list/:selectionMode',
+			url: '/r/:resourceName/list/:selectionMode',
 			templateUrl: 'partials/actions/list.html',
 			controller: 'ListCtrl',
 			resolve: {
@@ -120,7 +120,7 @@ angular.module('app', [
 			}
 		})
 		.state('add', {
-			url: 'r/:resourceName/add',
+			url: '/r/:resourceName/add',
 			templateUrl: 'partials/actions/add.html',
 			controller: 'AddCtrl',
 			resolve: {
@@ -141,7 +141,7 @@ angular.module('app', [
 			}
 		})
 		.state('edit', {
-			url: 'r/:resourceName/edit/:id',
+			url: '/r/:resourceName/edit/:id',
 			templateUrl: 'partials/actions/edit.html',
 			controller: 'EditCtrl',
 			controllerAs: 'ctrl',
