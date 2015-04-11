@@ -19,7 +19,7 @@ angular
   _.each($scope.rdesc.fields, function(field){
 
     var fieldName = field.kind.name,
-        fieldResourceType = field.kind.resourceType; 
+        fieldResourceType = field.kind.targetType; 
 
     if((fieldName === 'Link') &&
       !(fieldResourceType in $scope.data)){
