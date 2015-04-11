@@ -10,8 +10,15 @@ angular.module('app.services')
 				return 'partials/inputs/default-input.html';
 			}
 		},
-		'Date': 'partials/inputs/date-input.html',
-		'Link': 'partials/inputs/link-input.html'
+		'Link': function(field) {
+			if(field.kind.isArray) {
+				return 'partials/inputs/link-multiple-input.html';
+			}
+			else {
+				return 'partials/inputs/link-input.html';
+			}
+		},
+		'Date': 'partials/inputs/date-input.html'
 	};
 
 	return {
