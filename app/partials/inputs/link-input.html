@@ -1,3 +1,3 @@
-<select chosen ng-model="model[field.name]" ng-options="m.name || m.title for m in data[field.kind.resourceType]">
+<select chosen ng-model="model[field.name]" ng-options="m.name || m.title for m in data[field.kind.targetType]" ng-disabled="field.validation.readOnly">
 	<option value=""></option>
 </select>
