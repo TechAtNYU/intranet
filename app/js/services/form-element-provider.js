@@ -3,7 +3,13 @@ angular.module('app.services')
 	'use strict';
 
 	var templates = {
-		'String': 'partials/inputs/default-input.html',
+		'String': function(field) {
+			if(field && field.validation.allowedHtml) {
+				return 'partials/inputs/tinymce-input.html';
+			} else {
+				return 'partials/inputs/default-input.html';
+			}
+		},
 		'Date': 'partials/inputs/date-input.html',
 		'Link': 'partials/inputs/link-input.html'
 	};
@@ -11,8 +17,13 @@ angular.module('app.services')
 	return {
 		$get: function() {
 			return {
-				getTemplateUrl: function(kind) {
-					return templates[kind] || templates['String'];
+				getTemplateUrl: function(field) {
+					var t = templates[field.kind.name];
+					if(_.isFunction(t)) {
+						return t(field);
+					} else {
+						return t || templates['String']();
+					}
 				}
 			};
 		}

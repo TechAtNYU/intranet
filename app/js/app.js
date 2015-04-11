@@ -7,6 +7,7 @@ angular.module('app', [
 	'ui.router',
 	'ui.bootstrap',
 	'ui.bootstrap.datetimepicker',
+	'ui.tinymce',
 	'restangular',
 	'localytics.directives',
 	'app.filters',
