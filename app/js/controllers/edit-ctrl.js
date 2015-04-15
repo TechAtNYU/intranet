@@ -3,29 +3,29 @@
 angular
 .module('app.controllers')
 .controller('EditCtrl', function($scope, $rootScope, $stateParams, $interval, Restangular, apiDescription, formElementProvider) {
-  $scope.data = {};
+	$scope.data = {};
 
 	var resourceName = $stateParams.resourceName, 
-		    resourceId = $stateParams.id;
+				resourceId = $stateParams.id;
 
 	var resource = Restangular.one(resourceName, resourceId);
 
 	$scope.rdesc = apiDescription.resource(resourceName);
 	$scope.fep = formElementProvider;
 
-  // Fetch linked resources & 
-  // store them in $scope.data for typeahead
-  
-  _.each($scope.rdesc.fields, function(field){
+	// Fetch linked resources & 
+	// store them in $scope.data for typeahead
+	
+	_.each($scope.rdesc.fields, function(field){
 
-    var fieldName = field.kind.name,
-        fieldResourceType = field.kind.targetType; 
+		var fieldName = field.kind.name,
+				fieldResourceType = field.kind.targetType; 
 
-    if((fieldName === 'Link') &&
-      !(fieldResourceType in $scope.data)){
-      $scope.data[fieldResourceType] = Restangular.all(fieldResourceType).getList().$object; 
-    } 
-  });
+		if((fieldName === 'Link') &&
+			!(fieldResourceType in $scope.data)){
+			$scope.data[fieldResourceType] = Restangular.all(fieldResourceType).getList().$object; 
+		} 
+	});
 
 
 

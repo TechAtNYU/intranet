@@ -2,19 +2,34 @@
 
 angular
 .module('app.controllers')
-.controller('AddCtrl', function($scope, $rootScope, $stateParams, Restangular, apiDescription, formElementProvider) {
+.controller('AddCtrl', function($scope, $rootScope, $stateParams, $interval, Restangular, apiDescription, formElementProvider) {
+	$scope.data = {};
+
 	var resourceName = $stateParams.resourceName, 
-		resourceId = $stateParams.id;
+			resourceId = $stateParams.id;
 
 	var resource = Restangular.one(resourceName, resourceId);
+
 	$scope.rdesc = apiDescription.resource(resourceName);
 	$scope.fep = formElementProvider;
-	$scope.model = resource.get().$object;
-	// $interval(function() { console.log($scope.model); }, 500);
 
-	// FAKE, but more or less like this...  
+	// Fetch linked resources & 
+	// store them in $scope.data for typeahead
+
+	_.each($scope.rdesc.fields, function(field){
+
+		var fieldName = field.kind.name,
+			fieldResourceType = field.kind.targetType; 
+
+		if((fieldName === 'Link') && !(fieldResourceType in $scope.data)) {
+		  $scope.data[fieldResourceType] = Restangular.all(fieldResourceType).getList().$object; 
+		} 
+	});
+
+
+	$scope.model = {};
+
 	$scope.updateResource = function() {
-		console.log($scope.model);
-		resource.patch($scope.model);
+		resource.post($scope.model);
 	};
 });
