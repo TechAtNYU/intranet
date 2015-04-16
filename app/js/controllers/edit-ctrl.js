@@ -27,8 +27,6 @@ angular
 		} 
 	});
 
-
-
 	$scope.model = resource.get().$object;
 	// $interval(function() { console.log($scope.model); }, 500);
 
