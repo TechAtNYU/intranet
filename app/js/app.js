@@ -27,6 +27,10 @@ angular.module('app', [
 		return data.data;
 	});
 
+	RestangularProvider.addRequestInterceptor(function(data, operation, what, url) {
+		return { data: data };
+	});
+	
 	RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
 		var flattenTree = function(resource) {
 			var flatten = function(object, parentKey) {
@@ -80,11 +84,13 @@ angular.module('app', [
 						p = p[t];
 					}
 				}
+				delete data[key];
 			}
 		});
 
 		return data;
 	});
+
 }).config(function (datepickerConfig) {
 	datepickerConfig.showWeeks = false;
 });

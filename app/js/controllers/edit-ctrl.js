@@ -25,8 +25,15 @@ angular
 
 	$scope.updateResource = function(model, rdesc) {
 		var finalModel = relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
+		delete finalModel.modified;
+		delete finalModel.created;
+
 		console.log(finalModel);
-		resource.patch(model);
+		resource.patch(finalModel).then(function() {
+			alert('Successfully submitted!');
+		}).catch(function(err) {
+			alert('Could not submit to resource. API returned the following error: ' + err);
+		});
 	};
 
 	// Fetches linked resources & 
@@ -86,11 +93,13 @@ angular
 							id: value
 						};
 					});
-				} else {
+				} else if(model[field.name]) {
 					linkage = {
 						type: fieldTargetType,
-						id: model[field.name] || null
+						id: model[field.name]
 					};
+				} else {
+					linkage = null;
 				}
 
 				links[field.name]  = { linkage: linkage };
