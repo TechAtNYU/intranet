@@ -1,1 +1,10 @@
-<input type="date" class="form-control" ng-model="model[field.name]" ng-disabled="field.validation.readOnly"> This is a date though.
+<!-- <input type="date" class="form-control" ng-model="model[field.name]" ng-disabled="field.validation.readOnly"> This is a date though. -->
+
+<div class="input-group" ng-controller="DateCtrl">
+	<span class="input-group-btn">
+		<button type="button" class="btn btn-default" ng-click="open($event)">
+			<i class="glyphicon glyphicon-calendar"></i>
+		</button>
+	</span>
+	<input type="text" class="form-control" datepicker-popup="short" ng-model="model[field.name]" is-open="opened" datepicker-options="dateOptions" date-disabled="field.validation.readOnly" close-text="Close">
+</div>
