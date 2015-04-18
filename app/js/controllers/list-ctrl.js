@@ -15,5 +15,15 @@ angular
 	}
 	$scope.selectionMode = selectionMode;
 	$scope.data = Restangular.all(resourceName).getList().$object;
-	// $scope.model = {};
+
+	$scope.deleteResource = function(id) {
+		Restangular.one(resourceName, id).remove()
+			.then(function() {
+				alert('Successfully deleted this entry');
+			}).catch(function() {
+				alert('Could not delete the entry');
+			});
+
+		$scope.data = Restangular.all(resourceName).getList().$object;
+	};
 });
