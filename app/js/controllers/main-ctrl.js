@@ -2,6 +2,8 @@
 
 angular
 .module('app.controllers')
-.controller('MainCtrl', function($scope, apiDescription) {
-	$scope.apidesc = apiDescription.data;
+.controller('MainCtrl', function($scope, apiDescriptor) {
+	apiDescriptor.then(function(apiDescription) {
+		$scope.apidesc = apiDescription.data;
+	});
 });

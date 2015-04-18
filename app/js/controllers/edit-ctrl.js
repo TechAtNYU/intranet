@@ -2,40 +2,48 @@
 
 angular
 .module('app.controllers')
-.controller('EditCtrl', function($scope, $rootScope, $stateParams, $interval, Restangular, apiDescription, formElementProvider) {
+.controller('EditCtrl', function($scope, $rootScope, $stateParams, $interval, Restangular, apiDescriptor, formElementProvider) {
 	$scope.data = {};
 
-	var resourceName = $stateParams.resourceName, 
-				resourceId = $stateParams.id;
+	var resourceName = $stateParams.resourceName;
+	var resourceId = $stateParams.id;
 
 	var resource = Restangular.one(resourceName, resourceId);
 
-	$scope.rdesc = apiDescription.resource(resourceName);
 	$scope.fep = formElementProvider;
 
-	// Fetch linked resources & 
-	// store them in $scope.data for typeahead
-	
-	_.each($scope.rdesc.fields, function(field){
-
-		var fieldName = field.kind.name,
-			fieldResourceType = field.kind.targetType; 
-
-		if((fieldName === 'Link') &&
-			!(fieldResourceType in $scope.data)){
-			$scope.data[fieldResourceType] = Restangular.all(fieldResourceType).getList().$object; 
-		} 
+	apiDescriptor.then(function(apiDescription) {
+		$scope.rdesc = apiDescription.resource(resourceName);
+		$scope.data = loadLinkedData($scope.rdesc);
 	});
 
 	resource.get().then(function(data) {
+		console.log(data);
 		$scope.model = delink(data);
+		console.log($scope.model);
 	});
-	// $interval(function() { console.log($scope.model); }, 500);
 
-	$scope.updateResource = function() {
-		var finalModel = relink(angular.copy(Restangular.stripRestangular($scope.model)), $scope.rdesc);
+	$scope.updateResource = function(model, rdesc) {
+		var finalModel = relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
 		console.log(finalModel);
-		resource.patch($scope.model);
+		resource.patch(model);
+	};
+
+	// Fetches linked resources & 
+	// store them in $scope.data for typeahead
+	var loadLinkedData = function(rdesc) {
+		var data = {};
+
+		_.each(rdesc.fields, function(field){
+			var fieldName = field.kind.name,
+				fieldResourceType = field.kind.targetType; 
+
+			if((fieldName === 'Link') && !(fieldResourceType in data)) {
+				data[fieldResourceType] = Restangular.all(fieldResourceType).getList().$object; 
+			}
+		});
+
+		return data;
 	};
 
 	var delink = function(model) {
@@ -53,6 +61,8 @@ angular
 				model[name] = linkage.id;
 			}
 		});
+
+		return model;
 	};
 
 	// Transforms the linking fields on a model from being located at
@@ -91,9 +101,5 @@ angular
 		model.links = links;
 
 		return model;
-	};
-
-	$scope.change = function() {
-		console.log($scope.model);
 	};
 });

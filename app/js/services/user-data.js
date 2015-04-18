@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('app.services', [])
+angular
+.module('app.services')
 .factory('userData', function($http){
 	var user = {
 		getInformation: function (callback) {

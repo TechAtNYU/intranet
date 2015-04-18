@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('app.controllers', []);
+angular.module('app.services', ['restangular']);
+angular.module('app.controllers', ['app.services']);
 
 angular.module('app', [
 	'ngSanitize',
@@ -13,7 +14,7 @@ angular.module('app', [
 	'app.services',
 	'app.directives',
 	'app.controllers',
-]).config(function(RestangularProvider, apiDescription) {
+]).config(function(RestangularProvider) {
 	RestangularProvider.setBaseUrl('https://api.tnyu.org/v2');
 
 	// Configuring Restangular to work with JSONAPI spec

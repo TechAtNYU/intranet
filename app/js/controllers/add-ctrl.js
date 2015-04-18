@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('AddCtrl', function($scope, $rootScope, $stateParams, $interval, Restangular, apiDescription, formElementProvider) {
+.controller('AddCtrl', function($scope, $rootScope, $stateParams, $interval, Restangular, apiDescriptor, formElementProvider) {
 	$scope.data = {};
 
 	var resourceName = $stateParams.resourceName, 
@@ -10,7 +10,7 @@ angular
 
 	var resource = Restangular.one(resourceName, resourceId);
 
-	$scope.rdesc = apiDescription.resource(resourceName);
+	$scope.rdesc = apiDescriptor.resource(resourceName);
 	$scope.fep = formElementProvider;
 
 	// Fetch linked resources & 
