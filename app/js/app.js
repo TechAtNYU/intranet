@@ -13,7 +13,7 @@ angular.module('app', [
 	'app.services',
 	'app.directives',
 	'app.controllers',
-]).config(function(RestangularProvider) {
+]).config(function(RestangularProvider, apiDescription) {
 	RestangularProvider.setBaseUrl('https://api.tnyu.org/v2');
 
 	// Configuring Restangular to work with JSONAPI spec
