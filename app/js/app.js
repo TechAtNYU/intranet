@@ -6,7 +6,6 @@ angular.module('app', [
 	'ngSanitize',
 	'ui.router',
 	'ui.bootstrap',
-	'ui.bootstrap.datetimepicker',
 	'ui.tinymce',
 	'restangular',
 	'localytics.directives',

@@ -31,6 +31,7 @@ angular
 	// $interval(function() { console.log($scope.model); }, 500);
 
 	$scope.updateResource = function() {
+		console.log($scope.model);
 		resource.patch($scope.model);
 	};
 });
