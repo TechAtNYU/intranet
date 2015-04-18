@@ -3,7 +3,10 @@
 angular
 .module('app.controllers')
 .controller('EditCtrl', function($scope, $rootScope, $stateParams, $interval, Restangular, apiDescriptor, formElementProvider) {
-	$scope.data = {};
+	apiDescriptor.then(function(apiDescription) {
+		$scope.rdesc = apiDescription.resource(resourceName);
+		$scope.data = loadLinkedData($scope.rdesc);
+	});
 
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
@@ -12,15 +15,9 @@ angular
 
 	$scope.fep = formElementProvider;
 
-	apiDescriptor.then(function(apiDescription) {
-		$scope.rdesc = apiDescription.resource(resourceName);
-		$scope.data = loadLinkedData($scope.rdesc);
-	});
-
+	$scope.data = {};
 	resource.get().then(function(data) {
-		console.log(data);
 		$scope.model = delink(data);
-		console.log($scope.model);
 	});
 
 	$scope.updateResource = function(model, rdesc) {

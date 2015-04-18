@@ -78,7 +78,6 @@ angular.module('app', [
 						p[t] = {};
 					}
 					if(i === tokens.length - 1) {
-						console.log('\t=>', p);
 						p[t] = value;
 					} else {
 						p = p[t];

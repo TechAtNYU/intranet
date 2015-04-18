@@ -1,11 +1,11 @@
 <div class="container">
-	<h3>Edit {{rdesc.name.singular}}</h3>
+	<h3>Add {{rdesc.name.singular}}</h3>
 	<h5>{{rdesc.description}}</h5>
 
 	<div class="form-group" ng-repeat="field in rdesc.fields" ng-include="'/partials/fields/default-field.html'">
 	</div>
 
 	<div class="form-group">
-		<button class="btn btn-primary" ng-click="updateResource()">Create</button>
+		<button class="btn btn-primary" ng-click="updateResource(model, rdesc)">Create</button>
 	</div>
 </div>
