@@ -8,7 +8,7 @@ angular
 			data = {
 				data: data,
 				resource: function(name) {
-					return _.find(data.data, function(r) {
+					return _.find(this.data, function(r) {
 						return r.id === name;
 					});
 				}
