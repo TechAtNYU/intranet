@@ -1,4 +1,4 @@
-> **NOTE**: Master branch runs on a git hook!
+[![Circle CI](https://circleci.com/gh/TechAtNYU/intranet/tree/master.svg?style=svg)](https://circleci.com/gh/TechAtNYU/intranet/tree/master)
 
 ##Tech@NYU Intranet
 
