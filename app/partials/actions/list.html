@@ -6,10 +6,7 @@
 	<h5>{{rdesc.description}}</h5>
 
 	<div class="form-group">
-		<select chosen 
-				ng-model="model" 
-				ng-options="m.name || m.title for m in data"
-				style="width: 500px;">
+		<select chosen ng-model="model" ng-options="m.id as (m.name || m.title || m.schoolName || m.id) for m in data" ng-disabled="field.validation.readOnly" style="min-width: 300px;">
 			<option value=""></option>
 		</select>
 		<button ui-sref="add({resourceName: rdesc.id})" class="btn btn-sm btn-success">Add</button>
