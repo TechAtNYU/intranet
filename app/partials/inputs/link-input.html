@@ -1,0 +1,3 @@
+<select chosen ng-model="model[field.name]" ng-options="m.id as (m.name || m.title || m.schoolName) for m in data[field.kind.targetType]" ng-disabled="field.validation.readOnly" style="min-width: 300px;">
+	<option value=""></option>
+</select>

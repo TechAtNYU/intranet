@@ -1,0 +1,32 @@
+<div class="container">
+	<h3>
+		<a ui-sref="index"><i class="glyphicon glyphicon-home" aria-hidden="false"></i></a> 
+		List {{rdesc.name.singular}}
+	</h3>
+	<h5>{{rdesc.description}}</h5>
+
+	<div class="form-group">
+		<select chosen 
+				ng-model="model" 
+				ng-options="m.name || m.title for m in data"
+				style="width: 500px;">
+			<option value=""></option>
+		</select>
+		<button ui-sref="add({resourceName: rdesc.id})" class="btn btn-sm btn-success">Add</button>
+		<button ui-sref="edit({resourceName: rdesc.id, id: model.id})" ng-disabled="!model" class="btn btn-sm btn-primary">Edit</button>
+		<button href="#" ng-click="deleteResource(model.id)" ng-disabled="!model" class="btn btn-sm btn-danger">Delete</button>
+	</div>
+
+	<div class="form-group">
+		<table class="table table-hover table-bordered table-condensed">
+			<tr ng-repeat="field in rdesc.fields">
+				<th>{{field.friendlyName}}</th>
+				<td>{{model[field.name]}}</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="form-group">
+
+	</div>
+</div>

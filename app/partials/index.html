@@ -1,0 +1,10 @@
+<div class="container">
+	<h3>Tech@NYU Intranet</h3>
+
+	<div class="form-group" ng-repeat="rdesc in apidesc">
+		<h4>
+			{{rdesc.name.plural}} 
+			<a ui-sref="list({resourceName: rdesc.id})" class="btn btn-default">List</a>
+		</h4>
+	</div>
+</div>
