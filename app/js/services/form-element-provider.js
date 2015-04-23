@@ -6,6 +6,8 @@ angular.module('app.services')
 		'String': function(field) {
 			if(field && field.validation.allowedHtml) {
 				return 'partials/inputs/tinymce-input.html';
+			} else if(field && field.validation.oneOf) {
+				return 'partials/inputs/enum-input';
 			} else {
 				return 'partials/inputs/default-input.html';
 			}
