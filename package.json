@@ -3,19 +3,17 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "./node_modules/http-server/bin/http-server ./app -p 3000 -c-1",
+    "test": "./node_modules/karma/bin/karma start ./test/karma.conf.js"
   },
   "dependencies": {
-    "body-parser": "^1.0.2",
-    "errorhandler": "*",
-    "express": "~4.1.1",
-    "method-override": "^1.0.0",
-    "morgan": "^1.0.0",
-    "ejs": "~1.0.0"
+    "http-server": "^0.7.5"
   },
   "devDependencies": {
     "jasmine-core": "^2.2.0",
     "karma": "^0.12.31",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-phantomjs-launcher": "^0.1.4",
     "karma-jasmine": "^0.2.2"
   }
 }

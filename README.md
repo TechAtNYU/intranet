@@ -1,8 +1,8 @@
+[![Circle CI](https://circleci.com/gh/TechAtNYU/intranet/tree/master.svg?style=svg)](https://circleci.com/gh/TechAtNYU/intranet/tree/master)
+
 ##Tech@NYU Intranet
 
-- Master runs on a githook
-
-###Installation
+### Installation
 
     git clone https://github.com/TechAtNYU/intranet
 
@@ -10,17 +10,16 @@
 
     npm install
 
-    # if you don't have nodemon already
-    npm install -g nodemon
+### Running
+The application is 100% front-end and runs using the `http-server` package.
 
-###Running the Application
+Start the HTTP server with:
 
-    # development
     npm start
 
-    # production
-    NODE_ENV=production node app.js
+### Testing
+The application uses Karma + Jasmine for unit testing and by default executes using PhantomJS. Unit tests can be found in `/test/unit`.
 
-###Test
+Start the unit-test server with:
 
     npm test
