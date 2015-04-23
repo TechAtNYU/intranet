@@ -16,3 +16,4 @@ deployment:
     branch: master
     commands:
       - turbolift -u $RAXUSER -a $RAXAPIKEY --os-rax-auth $RAXREGION upload -s $HOME/$CIRCLE_PROJECT_REPONAME/app -c $CONTAINER
+      - cd $HOME/$CIRCLE_PROJECT_REPONAME/app/js && touch app2.js && sed 's%https://api.tnyu.org/v2%https://api.tnyu.org/v2-test%g' app.js > app2.js && rm app.js && mv app2.js app.js turbolift -u $RAXUSER -a $RAXAPIKEY --os-rax-auth $RAXREGION upload -s $HOME/$CIRCLE_PROJECT_REPONAME/app -c $CONTAINER"-test"
