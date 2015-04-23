@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "./node_modules/http-server/bin/http-server ./app -p 3000 -c-1",
+    "start": "./node_modules/superstatic/bin/server ./app --port 3000 -c superstatic.json",
     "test": "./node_modules/karma/bin/karma start ./test/karma.conf.js"
   },
   "dependencies": {
-    "http-server": "^0.7.5"
+    "http-server": "^0.7.5",
+    "superstatic": "^2.2.0"
   },
   "devDependencies": {
     "jasmine-core": "^2.2.0",
