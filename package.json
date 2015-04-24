@@ -7,7 +7,8 @@
     "test": "./node_modules/karma/bin/karma start ./test/karma.conf.js"
   },
   "dependencies": {
-    "http-server": "^0.7.5"
+    "http-server": "^0.7.5",
+    "coveralls": "^2.11.2"
   },
   "devDependencies": {
     "jasmine-core": "^2.2.0",
