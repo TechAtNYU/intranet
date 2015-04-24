@@ -1,4 +1,4 @@
-[![Circle CI](https://circleci.com/gh/TechAtNYU/intranet/tree/master.svg?style=svg)](https://circleci.com/gh/TechAtNYU/intranet/tree/master)
+[![Circle CI](https://circleci.com/gh/TechAtNYU/intranet/tree/master.svg?style=svg)](https://circleci.com/gh/TechAtNYU/intranet/tree/master) [![Code Climate](https://codeclimate.com/github/TechAtNYU/intranet/badges/gpa.svg)](https://codeclimate.com/github/TechAtNYU/intranet)
 
 ##Tech@NYU Intranet
 
