@@ -2,19 +2,19 @@
 
 angular
 .module('app.services')
-.factory('userData', function($http){
+.factory('userData', function($http, Restangular){
 	var user = {
-		getInformation: function (callback) {
-			$http.get('https://api.tnyu.org/v1.0/people/me').success(function(data) {
-				return(callback(data['people']));
-			}).error(function(data){
-				var status = data['errors']['status'];
-				if(status === '401') {
-					var destinationUrl = 'https://api.tnyu.org/v1.0/auth/twitter?success=' + window.location;
-					window.location = destinationUrl;
-				}
-			});
-			return;
+		getInformation: function () {
+			return Restangular.one('people/me')
+				.get()
+				.catch(function(data){
+					console.log(data);
+					var status = data.data.errors[0].status;
+					if(status === '401') {
+						var destinationUrl = 'https://api.tnyu.org/v2/auth/facebook?success=' + window.location;
+						window.location = destinationUrl;
+					}
+				});
 		},
 		isLoggedIn: function (currentUser) {
 			if(Object.keys(currentUser).length !== 0){
