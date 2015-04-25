@@ -1,3 +1,5 @@
 <select chosen multiple ng-model="model[field.name]" ng-options="m.id as (m.name || m.title || m.schoolName || m.id) for m in data[field.kind.targetType]" ng-disabled="field.validation.readOnly" style="min-width: 300px;" ng-change="change()">
 	<option value=""></option>
 </select>
+<a ui-sref="add({resourceName: field.kind.targetType})" target="_blank" class="btn btn-sm btn-success" role="button">Add</a>
+<button class="btn btn-sm btn-default" ng-click="refreshData(data, field.kind.targetType)"><i class="glyphicon glyphicon-refresh"></i></button>
