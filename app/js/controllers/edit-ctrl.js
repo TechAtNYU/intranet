@@ -33,6 +33,10 @@ angular
 		});
 	};
 
+	$scope.refreshData = function(data, fieldResourceType) {
+		data[fieldResourceType] = Restangular.all(fieldResourceType).getList().$object; 
+	};
+
 	// Fetches linked resources & 
 	// store them in $scope.data for typeahead
 	var loadLinkedData = function(rdesc) {
@@ -43,7 +47,7 @@ angular
 				fieldResourceType = field.kind.targetType; 
 
 			if((fieldName === 'Link') && !(fieldResourceType in data)) {
-				data[fieldResourceType] = Restangular.all(fieldResourceType).getList().$object; 
+				$scope.refreshData(data, fieldResourceType);
 			}
 		});
 
@@ -107,5 +111,9 @@ angular
 		model.links = links;
 
 		return model;
+	};
+
+	$scope.change = function(v) {
+		console.log(v);
 	};
 });

@@ -1,3 +1,7 @@
 <select chosen ng-model="model[field.name]" ng-options="m.id as (m.name || m.title || m.schoolName || m.id) for m in data[field.kind.targetType]" ng-disabled="field.validation.readOnly" style="min-width: 300px;">
 	<option value=""></option>
 </select>
+<a ui-sref="add({resourceName: field.kind.targetType})" target="_blank" class="btn btn-sm btn-success" role="button">Add</a>
+<a ui-sref="edit({resourceName: field.kind.targetType, id: model[field.name]})" target="_blank" class="btn btn-sm btn-primary" role="button" ng-disabled="!model[field.name]">Edit</a>
+<!-- <button href="#" ng-click="deleteResource(model.id)" ng-disabled="!model" class="btn btn-sm btn-danger">Delete</button> -->
+<button class="btn btn-sm btn-default" ng-click="refreshData(data, field.kind.targetType)"><i class="glyphicon glyphicon-refresh"></i></button>
