@@ -17,10 +17,12 @@ angular.module('app', [
 ]).config(function(RestangularProvider) {
 	RestangularProvider.setBaseUrl('https://api.tnyu.org/v2');
 
+	var ApiKey = prompt("Provide an API key please!");
 	// Configuring Restangular to work with JSONAPI spec
 	RestangularProvider.setDefaultHeaders({
 		'Accept': 'application/vnd.api+json, application/*, */*',
-		'Content-Type': 'application/vnd.api+json; ext=bulk'
+		'Content-Type': 'application/vnd.api+json; ext=bulk',
+		'x-api-key': ApiKey
 	});
 
 	RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
