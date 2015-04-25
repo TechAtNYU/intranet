@@ -8,6 +8,8 @@ angular.module('app.services')
 				return 'partials/inputs/tinymce-input.html';
 			} else if(field && field.validation.oneOf) {
 				return 'partials/inputs/enum-input.html';
+			} else if(field && field.validation.maxlength && field.validation.maxlength > 140) {
+				return 'partials/inputs/textarea-input.html';
 			} else {
 				return 'partials/inputs/default-input.html';
 			}
