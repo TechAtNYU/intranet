@@ -17,7 +17,7 @@ angular.module('app', [
 ]).config(function(RestangularProvider) {
 	RestangularProvider.setBaseUrl('https://api.tnyu.org/v2');
 
-	var ApiKey = prompt("Provide an API key please!");
+	var ApiKey = "";
 	// Configuring Restangular to work with JSONAPI spec
 	RestangularProvider.setDefaultHeaders({
 		'Accept': 'application/vnd.api+json, application/*, */*',
