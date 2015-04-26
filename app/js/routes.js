@@ -13,7 +13,7 @@ angular.module('app')
 			controller: 'MainCtrl'
 		})
 		.state('list', {
-			url: '/r/:resourceName/list/:id/?selectionMode',
+			url: '/r/:resourceName/list/:id?selectionMode',
 			templateUrl: 'partials/actions/list.html',
 			controller: 'ListCtrl'
 		})
