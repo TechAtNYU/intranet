@@ -22,7 +22,6 @@ angular
 
 	$scope.signOut = function() {
 		var url = 'https://api.tnyu.org/v2/auth/facebook/logout?doExternalServiceLogout=true&success=' + window.encodeURIComponent('http://google.com/');
-		// window.location = url;
-		console.log(url);
+		window.location = url;
 	};
 });
