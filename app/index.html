@@ -54,8 +54,8 @@
           Tech@NYU Intranet
         </a>
       </div>
-      <span class="navbar-right">
-        <span class="navbar-text" ng-if="user">Hi, {{user.name}}! </span>
+      <span class="navbar-right" ng-if="user">
+        <span class="navbar-text">Hi, {{user.name}}! </span>
         <a type="button" class="btn btn-sm btn-default navbar-btn" ui-sref="edit({resourceName: 'people', id: user.id})">
           Profile&nbsp;
           <i class="glyphicon glyphicon-user" aria-hidden="false"></i>
@@ -67,18 +67,20 @@
       </span>
     </div>
   </nav>
-  <main class="content container col-md-12">
+  <main class="content">
     <div ng-switch="!!user">
       <div id="primary-view" ng-switch-when="true">
         <div ui-view></div>
       </div>
       <div id="unauthorized-view" ng-switch-default>
-        <h3>Unauthorized!</h3>
+        <div class="container">
+          <h3>Unauthorized!</h3>
 
-        You must be signed in to the API to use this page.
-        <button class="btn btn-primary" ng-click="signIn()">
-          Sign-in
-        </button>
+          <p>You must be signed in to the API to use this page.</p>
+          <button class="btn btn-primary" ng-click="signIn()">
+            Sign-in
+          </button>
+        </div>
       </div>
     </div>
   </main>
