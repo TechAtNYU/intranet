@@ -4,6 +4,7 @@ angular
 .module('app.controllers')
 .controller('ListCtrl', function($scope, $rootScope, $stateParams, Restangular, apiDescriptor) {
 	var resourceName = $stateParams.resourceName;
+	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;
 	apiDescriptor.then(function(apiDescription) {
 		$scope.rdesc = apiDescription.resource(resourceName);
@@ -14,7 +15,12 @@ angular
 		selectionMode = 'multiple';
 	}
 	$scope.selectionMode = selectionMode;
-	$scope.data = Restangular.all(resourceName).getList().$object;
+	Restangular.all(resourceName).getList().then(function(data) {
+		$scope.data = data;
+		if(resourceId) {
+			$scope.model = _.find($scope.data, {id: resourceId});
+		}
+	});
 
 	$scope.deleteResource = function(id) {
 		Restangular.one(resourceName, id).remove()
