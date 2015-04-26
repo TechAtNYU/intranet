@@ -7,9 +7,8 @@ angular
 		getInformation: function () {
 			return Restangular.one('people/me')
 				.get()
-				.catch(function(data){
-					console.log(data);
-					var status = data.data.errors[0].status;
+				.catch(function(res){
+					var status = res.data.errors[0].status;
 					if(status === '401') {
 						var destinationUrl = 'https://api.tnyu.org/v2/auth/facebook?success=' + window.location;
 						window.location = destinationUrl;

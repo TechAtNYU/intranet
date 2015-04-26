@@ -8,8 +8,8 @@ angular
 		.then(function(data) {
 			$scope.user = data;
 		})
-		.catch(function(data) {
-			var status = data.data.errors[0].status;
+		.catch(function(res) {
+			var status = res.data.errors[0].status;
 			if(status === '401') {
 				$scope.signIn();
 			}
@@ -21,7 +21,7 @@ angular
 	};
 
 	$scope.signOut = function() {
-		var url = 'https://api.tnyu.org/v2/auth/facebook/logout?success=' + window.encodeURIComponent($location.absUrl());
+		var url = 'https://api.tnyu.org/v2/auth/facebook/logout?doExternalServiceLogout=true&success=' + window.encodeURIComponent('http://google.com/');
 		// window.location = url;
 		console.log(url);
 	};
