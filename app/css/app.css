@@ -1,90 +1,27 @@
-/* app css stylesheet */
-
-@media (min-width: 0px) {    
-    .container{
-        width: 100%;
-    }
+body {
+  padding-top: 50px;
 }
 
-.row {
-  margin-bottom: 20px;
+.chosen-container-single .chosen-single {
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: none;
+  box-shadow: none;
+  color: #444;
+  line-height: 30px;
+
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 
-button.selected {
-  color: #fff !important;
-  background-color: #428bca !important;
+.chosen-container-active, .chosen-width-drop{
+  background: none;
 }
 
-.multiSelect .button,
-.multiSelect .checkboxLayer,
-.multiSelect .checkBoxContainer {
-  width: 100%;
-}
-
-.sidebar {
-  position: fixed;
-}
-
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
-}
-
-.menu:before {
-  content: "[";
-}
-
-.menu:after {
-  content: "]";
-}
-
-.menu > li {
-  display: inline;
-}
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
-}
-
-.input-valid {
-  color: green;
-}
-
-.input-invalid {
-  color: red;
-}
-
-.input-warning {
-  color: orange;
-}
-
-.copyable-plaintext {
-  font-family: inherit;
-  word-wrap: normal;
-  white-space: pre-wrap;
-  word-break: normal;
-}
-.inlineblock-li {
-  padding: 0;
-}
-.inlineblock-li li {
-  list-style: none;
-  display: inline-block;
-}
-.event__team-selector button {
-  margin: 0 5px 5px 0;
-  background-color: #eee;
-}
-
-img.headshot {
-  width: 200px;
-  height: 200px;
+.chosen-container-single .chosen-single div b {
+  background-position-y: 4px;
 }
