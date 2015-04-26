@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('EditCtrl', function($scope, $rootScope, $stateParams, $interval, Restangular, apiDescriptor, formElementProvider) {
+.controller('EditCtrl', function($scope, $rootScope, $stateParams, $state, $interval, Restangular, apiDescriptor, formElementProvider) {
 	apiDescriptor.then(function(apiDescription) {
 		$scope.rdesc = apiDescription.resource(resourceName);
 		$scope.data = loadLinkedData($scope.rdesc);
@@ -26,8 +26,8 @@ angular
 		delete finalModel.created;
 
 		console.log(finalModel);
-		resource.patch(finalModel).then(function() {
-			alert('Successfully submitted!');
+		resource.patch(finalModel).then(function(data) {
+			$state.go('list', {resourceName: resourceName, selectionMode: 'single', id: data.id});
 		}).catch(function(err) {
 			alert('Could not submit to resource. API returned the following error: ' + err.data.errors[0].title);
 		});
