@@ -10,23 +10,7 @@ angular.module('app')
 		.state('index', {
 			url: '/',
 			templateUrl: 'partials/index.html',
-			controller: 'MainCtrl',
-			resolve: {
-				apiDescription: function(Restangular) {
-					return Restangular.all('').getList()
-					.then(function(data) {
-						data = {
-							data: data,
-							resource: function(name) {
-								return _.find(data.data, function(r) {
-									return r.id === name;
-								});
-							}
-						};
-						return data;
-					});
-				}
-			}
+			controller: 'MainCtrl'
 		})
 		.state('list', {
 			url: '/r/:resourceName/list/:selectionMode',

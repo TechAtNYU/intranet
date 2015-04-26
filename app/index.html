@@ -4,7 +4,6 @@
   <title>Tech@NYU Intranet</title>
 
   <!--CSS Libraries-->
-  <link rel="stylesheet" href="http://zhaber.github.io/datetimepicker/datetimepicker.css">
   <link rel="stylesheet" href="/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="/js/lib/chosen_v1.4.2/chosen.css"> 
 
@@ -36,6 +35,7 @@
   <script src="/js/directives.js"></script>
   <script src="/js/filters.js"></script>
   
+  <script src="/js/controllers/auth-ctrl.js"></script>
   <script src="/js/controllers/main-ctrl.js"></script>
   <script src="/js/controllers/list-ctrl.js"></script>
   <script src="/js/controllers/edit-ctrl.js"></script>
@@ -43,12 +43,44 @@
   <script src="/js/controllers/inputs/date-ctrl.js"></script>
   
   <script src="/js/services/api-descriptor.js"></script>
-  <script src="/js/services/user-data.js"></script>
   <script src="/js/services/form-element-provider.js"></script>
 </head>
-<body ng-app="app">
+<body ng-app="app" ng-controller="AuthCtrl">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" ui-sref="index">
+          <i class="glyphicon glyphicon-home" aria-hidden="false"></i>
+          Tech@NYU Intranet
+        </a>
+      </div>
+      <span class="navbar-right">
+        <span class="navbar-text" ng-if="user">Hi, {{user.name}}! </span>
+        <a type="button" class="btn btn-sm btn-default navbar-btn" ui-sref="edit({resourceName: 'people', id: user.id})">
+          Profile
+          <i class="glyphicon glyphicon-user" aria-hidden="false"></i>
+        </a> 
+        <button type="button" class="btn btn-sm btn-default navbar-btn" ng-click="signOut()">
+          Sign out
+          <i class="glyphicon glyphicon-off" aria-hidden="false"></i>
+        </button> 
+      </span>
+    </div>
+  </nav>
   <main class="content container col-md-12">
-    <div id="primary-view" ui-view></div>
+    <div ng-switch="!!user">
+      <div id="primary-view" ng-switch-when="true">
+        <div ui-view></div>
+      </div>
+      <div id="unauthorized-view" ng-switch-default>
+        <h3>Unauthorized!</h3>
+
+        You must be signed in to the API to use this page.
+        <button class="btn btn-primary" ng-click="signIn()">
+          Sign-in
+        </button>
+      </div>
+    </div>
   </main>
 </body>
 </html>
