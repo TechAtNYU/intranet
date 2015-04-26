@@ -27,7 +27,7 @@ angular
 		resource.post(finalModel).then(function() {
 			alert('Successfully submitted!');
 		}).catch(function(err) {
-			alert('Could not submit to resource. API returned the following error: ' + err);
+			alert('Could not submit to resource. API returned the following error: ' + err.data.errors[0].title);
 		});
 	};
 
