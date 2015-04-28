@@ -23,7 +23,8 @@ angular.module('app.services')
 			}
 		},
 		'Date': 'partials/inputs/date-input.html',
-		'Boolean': 'partials/inputs/boolean-input.html'
+		'Boolean': 'partials/inputs/boolean-input.html',
+		'Number': 'partials/inputs/number-input.html'
 	};
 
 	return {
