@@ -15,4 +15,5 @@ deployment:
   production:
     branch: master
     commands:
-      - (turbolift -u $RAXUSER -a $RAXAPIKEY --os-rax-auth $RAXREGION upload -s $HOME/$CIRCLE_PROJECT_REPONAME/app -c $CONTAINER; cd $HOME/$CIRCLE_PROJECT_REPONAME/app/js && touch app2.js && sed 's%var ApiKey = "";%var ApiKey = prompt("Provide an API key please!");%g' app.js > app2.js && rm app.js && mv app2.js app.js && turbolift -u $RAXUSER -a $RAXAPIKEY --os-rax-auth $RAXREGION upload -s $HOME/$CIRCLE_PROJECT_REPONAME/app -c "intranet-test")
+      - turbolift -u $RAXUSER -a $RAXAPIKEY --os-rax-auth $RAXREGION upload -s $HOME/$CIRCLE_PROJECT_REPONAME/app -c $CONTAINER;
+      - cp -r $HOME/$CIRCLE_PROJECT_REPONAME/app2 && cd $HOME/$CIRCLE_PROJECT_REPONAME/app2/js && touch app2.js && sed 's%var ApiKey = "";%var ApiKey = prompt("Provide an API key please!");%g' app.js > app2.js && rm app.js && mv app2.js app.js && turbolift -u $RAXUSER -a $RAXAPIKEY --os-rax-auth $RAXREGION upload -s $HOME/$CIRCLE_PROJECT_REPONAME/app2 -c "intranet-test")
