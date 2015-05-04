@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('ListCtrl', function($scope, $rootScope, $stateParams, Restangular, apiDescriptor) {
+.controller('ListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;
@@ -21,6 +21,10 @@ angular
 			$scope.model = _.find($scope.data, {id: resourceId});
 		}
 	});
+
+	$scope.updateSelection = function(newModelId) {
+		$state.go("list", {id: newModelId});
+	}
 
 	$scope.deleteResource = function(id) {
 		Restangular.one(resourceName, id).remove()
