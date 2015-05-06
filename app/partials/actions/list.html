@@ -5,9 +5,10 @@
 	<h5>{{rdesc.description}}</h5>
 
 	<div class="form-group">
-		<select chosen 
-				ng-model="model" 
+		<select chosen
+				ng-model="model"
 				ng-options="(m.name || m.title || m.schoolName || m.id) for m in data"
+				ng-change="updateSelection(model.id)"
 				style="width: 500px;">
 			<option value=""></option>
 		</select>
