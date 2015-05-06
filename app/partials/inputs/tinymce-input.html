@@ -1,1 +1,5 @@
-<textarea ui-tinymce="fep.getTinyMceConfiguration(field)" ng-model="model[field.name]" ng-disabled="field.validation.readOnly"></textarea>
+<textarea
+  ng-controller="TinyMceCtrl"
+  ui-tinymce="getTinyMceConfiguration(field)"
+  ng-model="model[field.name]">
+</textarea>
