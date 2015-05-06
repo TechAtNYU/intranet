@@ -2,6 +2,15 @@ angular.module('app.services')
 .provider('formElementProvider', function() {
 	'use strict';
 
+	var useTextarea = function(field) {
+		var acceptsLongValues = (field.validation.maxlength || 0) > 140;
+		var acceptsEmailOrUrl = field.validation.url || field.validation.email;
+
+		// For the rationale behind never giving email and url fields a
+		// textarea, see https://github.com/TechAtNYU/intranet/issues/102
+		return acceptsLongValues && !acceptsEmailOrUrl;
+	};
+
 	var templates = {
 		'String': function(field) {
 			if(field && field.validation.allowedHtml) {
@@ -42,12 +51,3 @@ angular.module('app.services')
 		}
 	};
 });
-
-function useTextarea(field) {
-	var acceptsLongValues = (field.validation.maxlength || 0) > 140;
-	var acceptsEmailOrUrl = field.validation.url || field.validation.email;
-
-	// For the rationale behind never giving email and url fields a
-	// textarea, see https://github.com/TechAtNYU/intranet/issues/102
-	return acceptsLongValues && !acceptsEmailOrUrl;
-}
