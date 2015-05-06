@@ -4,8 +4,10 @@
 	</h3>
 	<h5>{{rdesc.description}}</h5>
 
-	<div class="form-group" ng-repeat="field in rdesc.fields" ng-include="'/partials/fields/default-field.html'">
-	</div>
+	<form name="form" novalidate>
+		<div class="form-group" ng-repeat="field in rdesc.fields" ng-include="'/partials/fields/default-field.html'">
+		</div>
+	</form>
 
 	<div class="form-group">
 		<button class="btn btn-primary" ng-click="updateResource(model, rdesc)">Submit</button>
