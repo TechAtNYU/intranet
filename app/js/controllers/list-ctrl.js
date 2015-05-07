@@ -38,10 +38,10 @@ angular
 		Restangular.one(resourceName, id).remove()
 			.then(function() {
 				alert('Successfully deleted this entry');
+				$scope.data = Restangular.all(resourceName).getList().$object;
 			}).catch(function() {
 				alert('Could not delete the entry');
 			});
 
-		$scope.data = Restangular.all(resourceName).getList().$object;
 	};
 });

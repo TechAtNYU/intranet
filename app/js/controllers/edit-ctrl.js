@@ -22,12 +22,12 @@ angular
 
 	$scope.updateResource = function(model, rdesc) {
 		var finalModel = relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
-		delete finalModel.modified;
-		delete finalModel.created;
+		delete finalModel.attributes.modified;
+		delete finalModel.attributes.created;
 		console.log('Pre', finalModel);
-		_.each($scope.rdesc.fields, function(field) {
+		$scope.rdesc.attributes.fields.forEach(function(field) {
 			if(field.validation.readOnly && field.name !== 'id') {
-				delete finalModel[field.name];
+				delete finalModel.attributes[field.name];
 			}
 		});
 		console.log('Post', finalModel);
@@ -47,7 +47,7 @@ angular
 	var loadLinkedData = function(rdesc) {
 		var data = {};
 
-		_.each(rdesc.fields, function(field){
+		_.each(rdesc.attributes.fields, function(field){
 			var fieldName = field.kind.name,
 				fieldResourceType = field.kind.targetType; 
 
@@ -69,9 +69,9 @@ angular
 			if(!linkage) {
 				return;
 			} else if(_.isArray(linkage)) {
-				model[name] = _.pluck(linkage, 'id');
+				model.attributes[name] = _.pluck(linkage, 'id');
 			} else {
-				model[name] = linkage.id;
+				model.attributes[name] = linkage.id;
 			}
 		});
 
@@ -84,7 +84,7 @@ angular
 	var relink = function(model, rdesc) {
 		var links = {};
 
-		_.each(rdesc.fields, function(field) {
+		_.each(rdesc.attributes.fields, function(field) {
 			var fieldType = field.kind.name,
 				fieldTargetType = field.kind.targetType,
 				fieldArray = field.kind.isArray; 
@@ -93,23 +93,23 @@ angular
 				var linkage = null;
 
 				if(fieldArray) {
-					linkage = _.map(model[field.name], function(value) {
+					linkage = _.map(model.attributes[field.name], function(value) {
 						return {
 							type: fieldTargetType,
 							id: value
 						};
 					});
-				} else if(model[field.name]) {
+				} else if(model.attributes[field.name]) {
 					linkage = {
 						type: fieldTargetType,
-						id: model[field.name]
+						id: model.attributes[field.name]
 					};
 				} else {
 					linkage = null;
 				}
 
 				links[field.name]  = { linkage: linkage };
-				delete model[field.name];
+				delete model.attributes[field.name];
 			}
 		});
 

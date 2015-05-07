@@ -7,7 +7,7 @@
 	<div class="form-group">
 		<select chosen
 				ng-model="model"
-				ng-options="(m.name || m.title || m.schoolName || m.id) for m in data"
+				ng-options="(m.attributes.name || m.attributes.title || m.attributes.schoolName || m.attributes.id) for m in data"
 				ng-change="updateSelection(model.id)"
 				style="width: 500px;">
 			<option value=""></option>
@@ -19,9 +19,13 @@
 
 	<div class="form-group">
 		<table class="table table-hover table-bordered table-condensed">
-			<tr ng-repeat="field in rdesc.fields">
+			<tr>
+				<th>ID</th>
+				<td>{{model.id}}</td>
+			</tr>
+			<tr ng-repeat="field in rdesc.attributes.fields">
 				<th>{{field.friendlyName}}</th>
-				<td>{{model[field.name]}}</td>
+				<td>{{model.attributes[field.name]}}</td>
 			</tr>
 		</table>
 	</div>
