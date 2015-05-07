@@ -17,7 +17,7 @@ angular
 	$scope.data = {};
 	$scope.model = { attributes: {} };
 
-	$scope.updateResource = function(model, rdesc) {
+	$scope.createResource = function(model, rdesc) {
 		var finalModel = relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
 		finalModel.type = rdesc.id;
 
