@@ -7,7 +7,7 @@
 	<div class="form-group">
 		<select chosen
 				ng-model="model"
-				ng-options="(m.attributes.name || m.attributes.title || m.attributes.schoolName || m.attributes.id) for m in data"
+				ng-options="(m.attributes.name || m.attributes.title || m.attributes.schoolName || m.id) for m in data"
 				ng-change="updateSelection(model.id)"
 				style="width: 500px;">
 			<option value=""></option>
