@@ -1,4 +1,4 @@
-<select chosen ng-model="model[field.name]" ng-options="m.id as (m.name || m.title || m.schoolName || m.id) for m in data[field.kind.targetType]" ng-disabled="field.validation.readOnly" style="min-width: 300px;">
+<select chosen name="value" ng-model="model.attributes[field.name]" ng-options="m.id as (m.attributes.name || m.attributes.title || m.attributes.schoolName || m.id) for m in data[field.kind.targetType]" ng-disabled="field.validation.readOnly" style="min-width: 300px;">
 	<option value=""></option>
 </select>
 <a ui-sref="add({resourceName: field.kind.targetType})" target="_blank" class="btn btn-sm btn-success" role="button">Add</a>

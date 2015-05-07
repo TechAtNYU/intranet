@@ -17,12 +17,10 @@ angular.module('app', [
 ]).config(function(RestangularProvider) {
 	RestangularProvider.setBaseUrl('https://api.tnyu.org/v2');
 
-	var ApiKey = "";
 	// Configuring Restangular to work with JSONAPI spec
 	RestangularProvider.setDefaultHeaders({
 		'Accept': 'application/vnd.api+json, application/*, */*',
-		'Content-Type': 'application/vnd.api+json; ext=bulk',
-		'x-api-key': ApiKey
+		'Content-Type': 'application/vnd.api+json; ext=bulk'
 	});
 
 	RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
@@ -46,18 +44,14 @@ angular.module('app', [
 			};
 
 			Object.keys(resource).forEach(function(key) {
-				if(key === 'links') {
-					return;
-				} else if(!_.isArray(resource[key])) {
-					flatten(resource[key], key);
-				}
+				flatten(resource[key], key);
 			});
 		};
 
 		if(_.isArray(data)) {
-			data.forEach(flattenTree);
+			_.pluck(data, 'attributes').forEach(flattenTree);
 		} else {
-			flattenTree(data);
+			flattenTree(data.attributes);
 		}
 		return data;
 	});

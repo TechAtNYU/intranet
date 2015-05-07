@@ -56,7 +56,7 @@
         </a>
       </div>
       <span class="navbar-right" ng-if="user">
-        <span class="navbar-text">Hi, {{user.name}}! </span>
+        <span class="navbar-text">Hi, {{user.attributes.name}}! </span>
         <a type="button" class="btn btn-sm btn-default navbar-btn" ui-sref="edit({resourceName: 'people', id: user.id})">
           Profile&nbsp;
           <i class="glyphicon glyphicon-user" aria-hidden="false"></i>

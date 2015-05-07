@@ -1,4 +1,4 @@
 <div class="btn-group btn-toggle"> 
-	<button class="btn btn-default" ng-class="{active: model[field.name]}" ng-click="model[field.name] = true">YES</button>
-	<button class="btn btn-default" ng-class="{active: !model[field.name]}" ng-click="model[field.name] = false">NO</button>
+	<input name="value.true" type="button" class="btn btn-default" value="YES" ng-class="{active: model[field.name]}" ng-click="model.attributes[field.name] = true"></input>
+	<input name="value.false" type="button" class="btn btn-default" value="NO" ng-class="{active: !model[field.name]}" ng-click="model.attributes[field.name] = false"></input>
 </div>

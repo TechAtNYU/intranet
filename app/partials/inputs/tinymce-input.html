@@ -1,5 +1,6 @@
 <textarea
-  ng-controller="TinyMceCtrl"
-  ui-tinymce="getTinyMceConfiguration(field)"
-  ng-model="model[field.name]">
+	name="value" 
+	ng-controller="TinyMceCtrl"
+	ui-tinymce="getTinyMceConfiguration(field)"
+	ng-model="model.attributes[field.name]">
 </textarea>
