@@ -1,1 +1,6 @@
-<textarea ui-tinymce="{ valid_elements: field.validation.allowedHtml.join(',') }" ng-model="model[field.name]" ng-disabled="field.validation.readOnly"></textarea>
+<textarea
+	name="value" 
+	ng-controller="TinyMceCtrl"
+	ui-tinymce="getTinyMceConfiguration(field)"
+	ng-model="model.attributes[field.name]">
+</textarea>

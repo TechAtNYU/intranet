@@ -15,12 +15,12 @@ angular
 	$scope.fep = formElementProvider;
 
 	$scope.data = {};
-	$scope.model = {};
+	$scope.model = { attributes: {} };
 
 	$scope.updateResource = function(model, rdesc) {
 		var finalModel = relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
-		delete finalModel.modified;
-		delete finalModel.created;
+		delete finalModel.attributes.modified;
+		delete finalModel.attributes.created;
 		finalModel.type = rdesc.id;
 
 		console.log(finalModel);
@@ -40,7 +40,7 @@ angular
 	var loadLinkedData = function(rdesc) {
 		var data = {};
 
-		_.each(rdesc.fields, function(field){
+		_.each(rdesc.attributes.fields, function(field){
 			var fieldName = field.kind.name,
 				fieldResourceType = field.kind.targetType; 
 
@@ -58,7 +58,7 @@ angular
 	var relink = function(model, rdesc) {
 		var links = {};
 
-		_.each(rdesc.fields, function(field) {
+		_.each(rdesc.attributes.fields, function(field) {
 			var fieldType = field.kind.name,
 				fieldTargetType = field.kind.targetType,
 				fieldArray = field.kind.isArray; 
@@ -67,23 +67,23 @@ angular
 				var linkage = null;
 
 				if(fieldArray) {
-					linkage = _.map(model[field.name], function(value) {
+					linkage = _.map(model.attributes[field.name], function(value) {
 						return {
 							type: fieldTargetType,
 							id: value
 						};
 					});
-				} else if(model[field.name]) {
+				} else if(model.attributes[field.name]) {
 					linkage = {
 						type: fieldTargetType,
-						id: model[field.name]
+						id: model.attributes[field.name]
 					};
 				} else {
 					linkage = null;
 				}
 
 				links[field.name]  = { linkage: linkage };
-				delete model[field.name];
+				delete model.attributes[field.name];
 			}
 		});
 
