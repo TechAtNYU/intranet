@@ -24,8 +24,13 @@ angular
 		var finalModel = relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
 		delete finalModel.modified;
 		delete finalModel.created;
-
-		console.log(finalModel);
+		console.log('Pre', finalModel);
+		_.each($scope.rdesc.fields, function(field) {
+			if(field.validation.readOnly && field.name !== 'id') {
+				delete finalModel[field.name];
+			}
+		});
+		console.log('Post', finalModel);
 		resource.patch(finalModel).then(function(data) {
 			$state.go('list', {resourceName: resourceName, selectionMode: 'single', id: data.id});
 		}).catch(function(err) {
