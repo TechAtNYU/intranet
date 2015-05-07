@@ -22,8 +22,7 @@ angular
 
 	$scope.updateResource = function(model, rdesc) {
 		var finalModel = relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
-		delete finalModel.attributes.modified;
-		delete finalModel.attributes.created;
+
 		console.log('Pre', finalModel);
 		$scope.rdesc.attributes.fields.forEach(function(field) {
 			if(field.validation.readOnly && field.name !== 'id') {

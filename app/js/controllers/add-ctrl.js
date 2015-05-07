@@ -19,8 +19,6 @@ angular
 
 	$scope.updateResource = function(model, rdesc) {
 		var finalModel = relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
-		delete finalModel.attributes.modified;
-		delete finalModel.attributes.created;
 		finalModel.type = rdesc.id;
 
 		console.log(finalModel);
