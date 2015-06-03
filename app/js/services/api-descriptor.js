@@ -1,8 +1,8 @@
-'use strict';
-
 angular
 .module('app.services')
 .factory('apiDescriptor', function(Restangular) {
+	'use strict';
+	
 	return Restangular.all('').getList()
 		.then(function(data) {
 			data = {

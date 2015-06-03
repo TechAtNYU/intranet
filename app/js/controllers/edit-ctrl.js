@@ -2,7 +2,8 @@
 
 angular
 .module('app.controllers')
-.controller('EditCtrl', function($scope, $rootScope, $stateParams, $state, $interval, Restangular, apiDescriptor, formElementProvider) {
+.controller('EditCtrl', function($scope, $rootScope, $stateParams, $state, 
+		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
 	apiDescriptor.then(function(apiDescription) {
 		$scope.rdesc = apiDescription.resource(resourceName);
 		$scope.data = loadLinkedData($scope.rdesc);
@@ -17,11 +18,11 @@ angular
 
 	$scope.data = {};
 	resource.get().then(function(data) {
-		$scope.model = delink(data);
+		$scope.model = dataTransformer.delink(data);
 	});
 
 	$scope.updateResource = function(model, rdesc) {
-		var finalModel = relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
+		var finalModel = dataTransformer.relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
 
 		console.log('Pre', finalModel);
 		$scope.rdesc.attributes.fields.forEach(function(field) {
@@ -56,65 +57,6 @@ angular
 		});
 
 		return data;
-	};
-
-	var delink = function(model) {
-		var links = model.links;
-
-		_.each(links, function(link, name) {
-			var linkage = link.linkage;
-			
-			// This is primarily to omit the 'self' property
-			if(!linkage) {
-				return;
-			} else if(_.isArray(linkage)) {
-				model.attributes[name] = _.pluck(linkage, 'id');
-			} else {
-				model.attributes[name] = linkage.id;
-			}
-		});
-
-		return model;
-	};
-
-	// Transforms the linking fields on a model from being located at
-	// model[field.name] to the required structure for linking resources
-	// in the JSON API specification
-	var relink = function(model, rdesc) {
-		var links = {};
-
-		_.each(rdesc.attributes.fields, function(field) {
-			var fieldType = field.kind.name,
-				fieldTargetType = field.kind.targetType,
-				fieldArray = field.kind.isArray; 
-
-			if(fieldType === 'Link') {
-				var linkage = null;
-
-				if(fieldArray) {
-					linkage = _.map(model.attributes[field.name], function(value) {
-						return {
-							type: fieldTargetType,
-							id: value
-						};
-					});
-				} else if(model.attributes[field.name]) {
-					linkage = {
-						type: fieldTargetType,
-						id: model.attributes[field.name]
-					};
-				} else {
-					linkage = null;
-				}
-
-				links[field.name]  = { linkage: linkage };
-				delete model.attributes[field.name];
-			}
-		});
-
-		model.links = links;
-
-		return model;
 	};
 
 	$scope.change = function(v) {

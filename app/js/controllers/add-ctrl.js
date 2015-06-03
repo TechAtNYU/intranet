@@ -2,7 +2,8 @@
 
 angular
 .module('app.controllers')
-.controller('AddCtrl', function($scope, $rootScope, $stateParams, $state, $interval, Restangular, apiDescriptor, formElementProvider) {
+.controller('AddCtrl', function($scope, $rootScope, $stateParams, $state, 
+		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
 	apiDescriptor.then(function(apiDescription) {
 		$scope.rdesc = apiDescription.resource(resourceName);
 		$scope.data = loadLinkedData($scope.rdesc);
@@ -18,7 +19,7 @@ angular
 	$scope.model = { attributes: {} };
 
 	$scope.createResource = function(model, rdesc) {
-		var finalModel = relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
+		var finalModel = dataTransformer.relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
 		finalModel.type = rdesc.id;
 
 		console.log(finalModel);
@@ -48,45 +49,5 @@ angular
 		});
 
 		return data;
-	};
-
-	// Transforms the linking fields on a model from being located at
-	// model[field.name] to the required structure for linking resources
-	// in the JSON API specification
-	var relink = function(model, rdesc) {
-		var links = {};
-
-		_.each(rdesc.attributes.fields, function(field) {
-			var fieldType = field.kind.name,
-				fieldTargetType = field.kind.targetType,
-				fieldArray = field.kind.isArray; 
-
-			if(fieldType === 'Link') {
-				var linkage = null;
-
-				if(fieldArray) {
-					linkage = _.map(model.attributes[field.name], function(value) {
-						return {
-							type: fieldTargetType,
-							id: value
-						};
-					});
-				} else if(model.attributes[field.name]) {
-					linkage = {
-						type: fieldTargetType,
-						id: model.attributes[field.name]
-					};
-				} else {
-					linkage = null;
-				}
-
-				links[field.name]  = { linkage: linkage };
-				delete model.attributes[field.name];
-			}
-		});
-
-		model.links = links;
-
-		return model;
 	};
 });
