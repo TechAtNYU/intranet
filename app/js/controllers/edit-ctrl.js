@@ -4,10 +4,6 @@ angular
 .module('app.controllers')
 .controller('EditCtrl', function($scope, $rootScope, $stateParams, $state, 
 		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
-	apiDescriptor.then(function(apiDescription) {
-		$scope.rdesc = apiDescription.resource(resourceName);
-		$scope.data = loadLinkedData($scope.rdesc);
-	});
 
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
@@ -18,6 +14,10 @@ angular
 
 	$scope.data = {};
 	resource.get().then(function(data) {
+		apiDescriptor.then(function(apiDescription) {
+			$scope.rdesc = apiDescription.resource(resourceName);
+			$scope.data = loadLinkedData($scope.rdesc);
+		});
 		$scope.model = dataTransformer.delink(data);
 	});
 
