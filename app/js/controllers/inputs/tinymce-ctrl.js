@@ -4,6 +4,7 @@ angular
 .module('app.controllers')
 .controller('TinyMceCtrl', function($scope) {
 	$scope.getTinyMceConfiguration = function(field) {
+		console.log(field);
 		return tinymceConfig(
 			field.validation.allowedHtml,
 			field.validation.maxlength || false,
@@ -31,7 +32,7 @@ angular
 		// Build the items in formatsListItems based on the allowedTags. We do want
 		// to add the formats to formatsListItems in the order they're defined in
 		// the object literal below, so it's reassuring to know that object member
-		// enumeration is in fact deteministic in ES6.
+		// enumeration is in fact deterministic in ES6.
 		var tagsToFormats = {
 			'h1': {title: 'Heading', format: 'h1'},
 			'h2': {title: 'Subheading', format: 'h2'},
