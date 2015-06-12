@@ -4,7 +4,6 @@ angular
 .module('app.controllers')
 .controller('TinyMceCtrl', function($scope) {
 	$scope.getTinyMceConfiguration = function(field) {
-		console.log(field);
 		return tinymceConfig(
 			field.validation.allowedHtml,
 			field.validation.maxlength || false,
@@ -112,7 +111,7 @@ angular
 			statusbar: false,
 			object_resizing : false,
 			templates: [],
-			valid_elements: allowedTags.join(' '), // the array from the api
+			valid_elements: allowedTags.join(','), // the array from the api
 			relative_urls: false,
 			style_formats: formatsListItems,
 			style_formats_merge: false,
