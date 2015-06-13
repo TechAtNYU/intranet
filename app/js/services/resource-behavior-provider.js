@@ -9,8 +9,7 @@ angular
 
 	var calculateActualBehaviors = function(defaultBehavior, customBehaviors) {
 		if (customBehaviors) {
-			return customBehaviors
-				.map(function(customBehavior) {
+			return customBehaviors.map(function(customBehavior) {
 					return angular.merge(customBehavior, defaultBehavior);
 				});
 		}
@@ -19,13 +18,13 @@ angular
 	};
 
 	this.setDefaultBehavior = function(defaults) {
-		this.defaultBehavior = defaults;
-		actualBehaviors = calculateActualBehaviors(this.defaultBehavior, this.customBehaviors);
+		defaultBehavior = defaults;
+		actualBehaviors = calculateActualBehaviors(defaultBehavior, customBehaviors);
 	};
 
 	this.setCustomBehaviors = function(customs) {
-		this.customBehaviors = customs;
-		actualBehaviors = calculateActualBehaviors(this.defaultBehavior, this.customBehaviors);
+		customBehaviors = customs;
+		actualBehaviors = calculateActualBehaviors(defaultBehavior, customBehaviors);
 	};
 
 	this.$get = function() {
