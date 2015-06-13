@@ -3,10 +3,10 @@
 angular
 .module('app.controllers')
 .controller('DateCtrl', function($scope) {
-	$scope.open = function($event) {
+	$scope.toggleOpen = function($event) {
 		$event.preventDefault();
 		$event.stopPropagation();
 
-		$scope.opened = true;
+		$scope.opened = !$scope.opened;
 	};
 });
