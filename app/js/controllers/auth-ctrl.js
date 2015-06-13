@@ -10,7 +10,7 @@ angular
 		})
 		.catch(function(res) {
 			var status = res.data.errors[0].status;
-			if(status === '401') {
+			if (status === '401') {
 				$scope.signIn();
 			}
 		});
