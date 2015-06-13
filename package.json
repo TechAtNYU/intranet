@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "./node_modules/http-server/bin/http-server ./app -p 3000 -c-1",
-    "test": "./node_modules/karma/bin/karma start ./test/karma.conf.js"
+    "start": "./node_modules/.bin/http-server ./app -p 3000 -c-1",
+    "test": "./node_modules/.bin/karma start ./test/karma.conf.js"
   },
   "dependencies": {
-    "http-server": "^0.7.5",
+    "http-server": "^0.8.0",
     "coveralls": "^2.11.2"
   },
   "devDependencies": {

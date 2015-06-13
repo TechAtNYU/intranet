@@ -42,8 +42,7 @@ angular
 		data[fieldResourceType] = Restangular.all(fieldResourceType).getList().$object; 
 	};
 
-	// Fetches linked resources & 
-	// store them in $scope.data for typeahead
+	// Fetches linked resources and stores them in $scope.data for typeahead
 	var loadLinkedData = function(rdesc) {
 		var data = {};
 
