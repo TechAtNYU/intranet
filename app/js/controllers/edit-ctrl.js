@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('EditCtrl', function($scope, $rootScope, $stateParams, $state, 
+.controller('EditCtrl', function($scope, $rootScope, $stateParams, $state,
 		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
 
 	var resourceName = $stateParams.resourceName;
@@ -26,7 +26,7 @@ angular
 
 		console.log('Pre', finalModel);
 		$scope.rdesc.attributes.fields.forEach(function(field) {
-			if(field.validation.readOnly && field.name !== 'id') {
+			if (field.validation.readOnly && field.name !== 'id') {
 				delete finalModel.attributes[field.name];
 			}
 		});
@@ -50,7 +50,7 @@ angular
 			var fieldName = field.kind.name,
 				fieldResourceType = field.kind.targetType; 
 
-			if((fieldName === 'Link') && !(fieldResourceType in data)) {
+			if ((fieldName === 'Link') && !(fieldResourceType in data)) {
 				$scope.refreshData(data, fieldResourceType);
 			}
 		});
