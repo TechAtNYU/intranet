@@ -3,18 +3,16 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "./node_modules/.bin/http-server ./app -p 3000 -c-1",
-    "test": "./node_modules/.bin/karma start ./test/karma.conf.js"
+    "start": "http-server ./app -p 3000 -c-1",
+    "test": "karma start ./test/karma.conf.js"
   },
-  "dependencies": {
-    "http-server": "^0.8.0",
-    "coveralls": "^2.11.2"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "http-server": "^0.8.5",
     "jasmine-core": "^2.2.0",
     "karma": "^0.12.31",
     "karma-chrome-launcher": "^0.1.7",
-    "karma-phantomjs-launcher": "^0.1.4",
-    "karma-jasmine": "^0.2.2"
+    "karma-jasmine": "^0.2.2",
+    "karma-phantomjs-launcher": "^0.1.4"
   }
 }
