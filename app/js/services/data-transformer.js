@@ -37,9 +37,10 @@ angular
 					links[field.name]  = { linkage: linkage };
 					delete model.attributes[field.name];
 				}
-			});
+			})
 
-			model.links = links;
+			//changed from model.links to relationships
+			model.relationships = links;
 
 			return model;
 		},
@@ -50,7 +51,7 @@ angular
 			var links = model.links;
 
 			_.each(links, function(link, name) {
-				var linkage = link.linkage;
+				var linkage = link.data;
 				
 				// This is primarily to omit the 'self' property
 				if(!linkage) {
