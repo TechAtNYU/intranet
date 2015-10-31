@@ -26,7 +26,7 @@ angular
 
 		console.log('Pre', finalModel);
 		$scope.rdesc.attributes.fields.forEach(function(field) {
-			if(field.validation.readOnly && field.name !== 'id') {
+			if(field.validation["read-only"] && field.name !== 'id') {
 				delete finalModel.attributes[field.name];
 			}
 		});
