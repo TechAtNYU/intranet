@@ -5,9 +5,9 @@ angular
 .controller('TinyMceCtrl', function($scope) {
 	$scope.getTinyMceConfiguration = function(field) {
 		return tinymceConfig(
-			field.validation.allowedHtml,
+			field.validation["allowed-html"],
 			field.validation.maxlength || false,
-			field.validation.readOnly
+			field.validation["read-only"]
 		);
 	};
 
@@ -23,7 +23,7 @@ angular
 	 * out a property that angular can observe to make falsey when over maxlength.
 	 */
 	var tinymceConfig = function(allowedTags, charLimit, disabled) {
-		var toolbarItems = [], 
+		var toolbarItems = [],
 			formatsListItems = [],
 			allowsBlockFormatting = false,
 			allowsInlineFormatting = false;

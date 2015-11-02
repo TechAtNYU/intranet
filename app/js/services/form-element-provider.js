@@ -13,9 +13,9 @@ angular.module('app.services')
 
 	var templates = {
 		'String': function(field) {
-			if(field && field.validation.allowedHtml) {
+			if(field && field.validation["allowed-html"]) {
 				return 'partials/inputs/tinymce-input.html';
-			} else if(field && field.validation.oneOf) {
+			} else if(field && field.validation["one-of"]) {
 				return 'partials/inputs/enum-input.html';
 			} else if(field && useTextarea(field)) {
 				return 'partials/inputs/textarea-input.html';
@@ -23,8 +23,8 @@ angular.module('app.services')
 				return 'partials/inputs/default-input.html';
 			}
 		},
-		'Link': function(field) {
-			if(field.kind.isArray) {
+		'Relationship': function(field) {
+			if(field.kind["is-array"]) {
 				return 'partials/inputs/link-multiple-input.html';
 			}
 			else {
@@ -40,7 +40,7 @@ angular.module('app.services')
 		$get: function() {
 			return {
 				getTemplateUrl: function(field) {
-					var t = templates[field.kind.name];
+					var t = templates[field.kind["base-type"]];
 					if(_.isFunction(t)) {
 						return t(field);
 					} else {

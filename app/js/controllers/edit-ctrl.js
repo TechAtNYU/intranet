@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('EditCtrl', function($scope, $rootScope, $stateParams, $state, 
+.controller('EditCtrl', function($scope, $rootScope, $stateParams, $state,
 		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
 
 	var resourceName = $stateParams.resourceName;
@@ -39,7 +39,7 @@ angular
 	};
 
 	$scope.refreshData = function(data, fieldResourceType) {
-		data[fieldResourceType] = Restangular.all(fieldResourceType).getList().$object; 
+		data[fieldResourceType] = Restangular.all(fieldResourceType).getList().$object;
 	};
 
 	// Fetches linked resources and stores them in $scope.data for typeahead
@@ -47,10 +47,10 @@ angular
 		var data = {};
 
 		_.each(rdesc.attributes.fields, function(field){
-			var fieldName = field.kind.name,
-				fieldResourceType = field.kind.targetType; 
+			var fieldBaseType = field.kind["base-type"],
+				fieldLinkedType = field.kind["target-type"];
 
-			if((fieldName === 'Link') && !(fieldResourceType in data)) {
+			if((fieldBaseType === 'Relationship') && !(fieldLinkedType in data)) {
 				$scope.refreshData(data, fieldResourceType);
 			}
 		});
