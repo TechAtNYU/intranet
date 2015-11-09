@@ -30,7 +30,7 @@ angular
 				delete finalModel.attributes[field.name];
 			}
 		});
-		console.log('Post', finalModel);
+		console.log(finalModel.relationships);
 		resource.patch(finalModel).then(function(data) {
 			$state.go('list', {resourceName: resourceName, selectionMode: 'single', id: data.id});
 		}).catch(function(err) {
@@ -47,10 +47,10 @@ angular
 		var data = {};
 
 		_.each(rdesc.attributes.fields, function(field){
-			var fieldName = field.kind.name,
-				fieldResourceType = field.kind.targetType; 
+			var fieldName = field.kind['base-type'],
+				fieldResourceType = field.kind['target-type']; 
 
-			if((fieldName === 'Link') && !(fieldResourceType in data)) {
+			if((fieldName === 'Relationship') && !(fieldResourceType in data)) {
 				$scope.refreshData(data, fieldResourceType);
 			}
 		});

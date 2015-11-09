@@ -23,8 +23,8 @@ angular.module('app.services')
 				return 'partials/inputs/default-input.html';
 			}
 		},
-		'Link': function(field) {
-			if(field.kind.isArray) {
+		'Relationship': function(field) {
+			if(field.kind['is-array']) {
 				return 'partials/inputs/link-multiple-input.html';
 			}
 			else {
@@ -40,7 +40,7 @@ angular.module('app.services')
 		$get: function() {
 			return {
 				getTemplateUrl: function(field) {
-					var t = templates[field.kind.name];
+					var t = templates[field.kind['base-type']];
 					if(_.isFunction(t)) {
 						return t(field);
 					} else {

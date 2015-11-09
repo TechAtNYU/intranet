@@ -35,13 +35,15 @@ angular
 	};
 
 	$scope.deleteResource = function(id) {
+		console.log(resourceName, id)
 		Restangular.one(resourceName, id).remove()
 			.then(function() {
+				console.log("success")
 				alert('Successfully deleted this entry');
 				$scope.data = Restangular.all(resourceName).getList().$object;
 			}).catch(function() {
+				console.log("can not delete")
 				alert('Could not delete the entry');
 			});
-
 	};
 });

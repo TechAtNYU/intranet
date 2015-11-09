@@ -31,6 +31,7 @@ angular
 	};
 
 	$scope.refreshData = function(data, fieldResourceType) {
+		console.log('data', fieldResourceType);
 		data[fieldResourceType] = Restangular.all(fieldResourceType).getList().$object; 
 	};
 
@@ -40,10 +41,10 @@ angular
 		var data = {};
 
 		_.each(rdesc.attributes.fields, function(field){
-			var fieldName = field.kind.name,
-				fieldResourceType = field.kind.targetType; 
+			var fieldName = field.kind['base-type'],
+				fieldResourceType = field.kind['target-type']; 
 
-			if((fieldName === 'Link') && !(fieldResourceType in data)) {
+			if((fieldName === 'Relationship') && !(fieldResourceType in data)) {
 				$scope.refreshData(data, fieldResourceType);
 			}
 		});

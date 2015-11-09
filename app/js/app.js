@@ -32,6 +32,7 @@ angular.module('app', [
 	});
 
 	RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+
 		var flattenTree = function(resource) {
 			var flatten = function(object, parentKey) {
 				if (_.isObject(object) && !_.isArray(object)) {
@@ -59,9 +60,12 @@ angular.module('app', [
 	RestangularProvider.addRequestInterceptor(function(data, operation, what, url) {
 		// 'deepening' to perform before sending out any request data.
 		// This reverses the above flattening process.
-
+		console.log(data, operation, what, url);
 		if (operation === 'getList' || operation === 'get') {
 			return data;
+		} else if (operation === 'remove') {
+			console.log("removing");
+			return null;
 		}
 
 		_.forOwn(data, function(value, key) {
@@ -82,7 +86,7 @@ angular.module('app', [
 				delete data[key];
 			}
 		});
-
+		console.log("nothing");
 		return data;
 	});
 

@@ -8,14 +8,15 @@ angular
 		// model[field.name] to the required structure for linking resources
 		// in the JSON API specification
 		relink: function(model, rdesc) {
+			console.log("relinking", model, rdesc);
 			var links = {};
 
 			_.each(rdesc.attributes.fields, function(field) {
-				var fieldType = field.kind.name,
-					fieldTargetType = field.kind.targetType,
-					fieldArray = field.kind.isArray; 
-
-				if(fieldType === 'Link') {
+				var fieldType = field.kind['base-type'],
+					fieldTargetType = field.kind['target-type'],
+					fieldArray = field.kind['is-array']; 
+				console.log(field);
+				if(fieldType === 'Relationship') {
 					var linkage = null;
 
 					if(fieldArray) {
@@ -38,17 +39,15 @@ angular
 					delete model.attributes[field.name];
 				}
 			})
-
-			//changed from model.links to relationships
 			model.relationships = links;
-
 			return model;
 		},
 		// The inverse of the above transformation; given a model in JSON API
 		// format, takes all elements in its links property and makes them into
 		// a normal, flat object
 		delink: function(model) {
-			var links = model.links;
+			console.log('model', model);
+			var links = model.relationships;
 
 			_.each(links, function(link, name) {
 				var linkage = link.data;
@@ -58,11 +57,12 @@ angular
 					return;
 				} else if(_.isArray(linkage)) {
 					model.attributes[name] = _.pluck(linkage, 'id');
+					console.log("rand", model.attributes[name])
 				} else {
 					model.attributes[name] = linkage.id;
 				}
 			});
-
+			console.log('model2', model);
 			return model;
 		}
 	};
