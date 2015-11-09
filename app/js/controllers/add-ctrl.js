@@ -30,8 +30,9 @@ angular
 		});
 	};
 
+	//data: array of array type data
+	//fieldResourceType: which field to grab
 	$scope.refreshData = function(data, fieldResourceType) {
-		console.log('data', fieldResourceType);
 		data[fieldResourceType] = Restangular.all(fieldResourceType).getList().$object; 
 	};
 

@@ -24,13 +24,12 @@ angular
 	$scope.updateResource = function(model, rdesc) {
 		var finalModel = dataTransformer.relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
 
-		console.log('Pre', finalModel);
 		$scope.rdesc.attributes.fields.forEach(function(field) {
 			if(field.validation["read-only"] && field.name !== 'id') {
 				delete finalModel.attributes[field.name];
 			}
 		});
-		console.log(finalModel.relationships);
+
 		resource.patch(finalModel).then(function(data) {
 			$state.go('list', {resourceName: resourceName, selectionMode: 'single', id: data.id});
 		}).catch(function(err) {

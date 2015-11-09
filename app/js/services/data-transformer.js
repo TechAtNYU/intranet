@@ -35,7 +35,7 @@ angular
 						linkage = null;
 					}
 
-					links[field.name]  = { linkage: linkage };
+					links[field.name]  = { data: linkage };
 					delete model.attributes[field.name];
 				}
 			})
@@ -46,7 +46,7 @@ angular
 		// format, takes all elements in its links property and makes them into
 		// a normal, flat object
 		delink: function(model) {
-			console.log('model', model);
+			console.log('delinking', model);
 			var links = model.relationships;
 
 			_.each(links, function(link, name) {
@@ -62,7 +62,6 @@ angular
 					model.attributes[name] = linkage.id;
 				}
 			});
-			console.log('model2', model);
 			return model;
 		}
 	};
