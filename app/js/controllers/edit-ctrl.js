@@ -25,7 +25,7 @@ angular
 	$scope.updateResource = function(model, rdesc) {
 		var finalModel = dataTransformer.relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
 		$scope.rdesc.attributes.fields.forEach(function(field) {
-			if(field.validation["read-only"] && field.name !== 'id' || field.name === 'categories' && resourceName === 'events') {
+			if(field.validation["read-only"] && field.name !== 'id') {
 				delete finalModel.attributes[field.name];
 			}
 		});
@@ -43,7 +43,6 @@ angular
 	// Fetches linked resources and stores them in $scope.data for typeahead
 	var loadLinkedData = function(rdesc) {
 		var data = {};
-		console.log('linking!');
 		_.each(rdesc.attributes.fields, function(field){
 			var fieldName = field.kind['base-type'],
 				fieldResourceType = field.kind['target-type']; 

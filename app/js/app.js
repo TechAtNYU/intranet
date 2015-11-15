@@ -24,7 +24,7 @@ angular.module('app', [
 	});
 
 	RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
-		console.log("addResponseInterceptor", data, response);
+		//console.log("addResponseInterceptor", data, response);
 		if ( operation === "remove" ){
 			return null;
 		}
