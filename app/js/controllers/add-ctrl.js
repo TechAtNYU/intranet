@@ -42,11 +42,11 @@ angular
 		var data = {};
 
 		_.each(rdesc.attributes.fields, function(field){
-			var fieldName = field.kind['base-type'],
-				fieldResourceType = field.kind['target-type']; 
+			var fieldBaseType = field.kind["base-type"],
+				fieldLinkedType = field.kind["target-type"]; 
 
-			if((fieldName === 'Relationship') && !(fieldResourceType in data)) {
-				$scope.refreshData(data, fieldResourceType);
+			if((fieldBaseType === 'Relationship') && !(fieldLinkedType in data)) {
+				$scope.refreshData(data, fieldLinkedType);
 			}
 		});
 
