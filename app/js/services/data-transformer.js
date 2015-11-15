@@ -12,10 +12,9 @@ angular
 			var links = {};
 
 			_.each(rdesc.attributes.fields, function(field) {
-				var fieldType = field.kind['base-type'],
-					fieldTargetType = field.kind['target-type'],
-					fieldArray = field.kind['is-array']; 
-				console.log(field);
+				var fieldType = field.kind["base-type"],
+					fieldTargetType = field.kind["target-type"],
+					fieldArray = field.kind["is-array"];
 				if(fieldType === 'Relationship') {
 					var linkage = null;
 
@@ -46,12 +45,11 @@ angular
 		// format, takes all elements in its links property and makes them into
 		// a normal, flat object
 		delink: function(model) {
-			console.log('delinking', model);
 			var links = model.relationships;
 
 			_.each(links, function(link, name) {
 				var linkage = link.data;
-				
+
 				// This is primarily to omit the 'self' property
 				if(!linkage) {
 					return;
