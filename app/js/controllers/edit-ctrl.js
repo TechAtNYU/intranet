@@ -14,6 +14,7 @@ angular
 
 	$scope.data = {};
 	resource.get().then(function(data) {
+		console.log('hey');
 		apiDescriptor.then(function(apiDescription) {
 			$scope.rdesc = apiDescription.resource(resourceName);
 			$scope.data = loadLinkedData($scope.rdesc);
@@ -23,13 +24,11 @@ angular
 
 	$scope.updateResource = function(model, rdesc) {
 		var finalModel = dataTransformer.relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
-
 		$scope.rdesc.attributes.fields.forEach(function(field) {
-			if(field.validation["read-only"] && field.name !== 'id') {
+			if(field.validation["read-only"] && field.name !== 'id' || field.name === 'categories' && resourceName === 'events') {
 				delete finalModel.attributes[field.name];
 			}
 		});
-
 		resource.patch(finalModel).then(function(data) {
 			$state.go('list', {resourceName: resourceName, selectionMode: 'single', id: data.id});
 		}).catch(function(err) {
@@ -44,11 +43,11 @@ angular
 	// Fetches linked resources and stores them in $scope.data for typeahead
 	var loadLinkedData = function(rdesc) {
 		var data = {};
-
+		console.log('linking!');
 		_.each(rdesc.attributes.fields, function(field){
 			var fieldName = field.kind['base-type'],
 				fieldResourceType = field.kind['target-type']; 
-
+			console.log('+', fieldName, fieldResourceType);
 			if((fieldName === 'Relationship') && !(fieldResourceType in data)) {
 				$scope.refreshData(data, fieldResourceType);
 			}

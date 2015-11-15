@@ -56,8 +56,8 @@ angular
 				if(!linkage) {
 					return;
 				} else if(_.isArray(linkage)) {
+					console.log('lik', linkage);
 					model.attributes[name] = _.pluck(linkage, 'id');
-					console.log("rand", model.attributes[name])
 				} else {
 					model.attributes[name] = linkage.id;
 				}

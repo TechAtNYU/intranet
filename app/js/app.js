@@ -15,7 +15,7 @@ angular.module('app', [
 	'app.directives',
 	'app.controllers',
 ]).config(function(RestangularProvider) {
-	RestangularProvider.setBaseUrl('https://api.tnyu.org/v3');
+	RestangularProvider.setBaseUrl('https://api.tnyu.org/v3-test');
 
 	// Configuring Restangular to work with JSONAPI spec
 	RestangularProvider.setDefaultHeaders({
@@ -24,15 +24,27 @@ angular.module('app', [
 	});
 
 	RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+		console.log("addResponseInterceptor", data, response);
+		if ( operation === "remove" ){
+			return null;
+		}
 		return data.data;
 	});
 
+	//called before sending any data to the server
 	RestangularProvider.addRequestInterceptor(function(data, operation, what, url) {
+		if ( operation === "remove" ) {
+			return null;
+		}
 		return {data: data};
 	});
 
+	//called after we get a response from the server
 	RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
-
+		//console.log('wee', data, operation, what, url);
+		if (operation === "remove"){
+			return null;
+		}
 		var flattenTree = function(resource) {
 			var flatten = function(object, parentKey) {
 				if (_.isObject(object) && !_.isArray(object)) {
@@ -60,13 +72,9 @@ angular.module('app', [
 	RestangularProvider.addRequestInterceptor(function(data, operation, what, url) {
 		// 'deepening' to perform before sending out any request data.
 		// This reverses the above flattening process.
-		console.log(data, operation, what, url);
 		if (operation === 'getList' || operation === 'get') {
 			return data;
-		} else if (operation === 'remove') {
-			console.log("removing");
-			return null;
-		}
+		} 
 
 		_.forOwn(data, function(value, key) {
 			var tokens = key.split('.');
@@ -86,7 +94,6 @@ angular.module('app', [
 				delete data[key];
 			}
 		});
-		console.log("nothing");
 		return data;
 	});
 

@@ -35,7 +35,7 @@ angular
 	};
 
 	$scope.deleteResource = function(id) {
-		console.log(resourceName, id)
+		console.log("deleteResource", resourceName, id)
 		Restangular.one(resourceName, id).remove()
 			.then(function() {
 				console.log("success")
