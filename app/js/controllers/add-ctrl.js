@@ -22,7 +22,6 @@ angular
 		var finalModel = dataTransformer.relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
 		finalModel.type = rdesc.id;
 
-		console.log(finalModel);
 		resource.post(finalModel).then(function(data) {
 			$state.go('list', {resourceName: resourceName, selectionMode: 'single', id: data.id});
 		}).catch(function(err) {

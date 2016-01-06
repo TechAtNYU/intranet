@@ -5,9 +5,9 @@ angular
 .controller('TinyMceCtrl', function($scope) {
 	$scope.getTinyMceConfiguration = function(field) {
 		return tinymceConfig(
-			field.validation.allowedHtml,
+			field.validation['allowed-html'],
 			field.validation.maxlength || false,
-			field.validation.readOnly
+			field.validation['read-only']
 		);
 	};
 

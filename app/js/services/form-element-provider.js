@@ -13,9 +13,9 @@ angular.module('app.services')
 
 	var templates = {
 		'String': function(field) {
-			if (field && field.validation.allowedHtml) {
+			if (field && field.validation['allowed-html']) {
 				return 'partials/inputs/tinymce-input.html';
-			} else if (field && field.validation.oneOf) {
+			} else if (field && field.validation['one-of']) {
 				return 'partials/inputs/enum-input.html';
 			} else if (field && useTextarea(field)) {
 				return 'partials/inputs/textarea-input.html';

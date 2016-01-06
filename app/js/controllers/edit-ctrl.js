@@ -43,11 +43,10 @@ angular
 	var loadLinkedData = function(rdesc) {
 		var data = {};
 		_.each(rdesc.attributes.fields, function(field) {
-			var fieldName = field.kind['base-type'];
-			var fieldResourceType = field.kind['target-type'];
-			console.log('+', fieldName, fieldResourceType);
-			if (fieldName === 'Relationship' && !(fieldResourceType in data)) {
-				$scope.refreshData(data, fieldResourceType);
+			var fieldBaseType = field.kind['base-type'];
+			var fieldTargetType = field.kind['target-type'];
+			if (fieldBaseType === 'Relationship' && !(fieldTargetType in data)) {
+				$scope.refreshData(data, fieldTargetType);
 			}
 		});
 
