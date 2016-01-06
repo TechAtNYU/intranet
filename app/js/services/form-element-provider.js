@@ -45,7 +45,12 @@ angular.module('app.services')
 					} else {
 						return t || templates['String']();
 					}
-				}
+				},
+				hiddenFields: [
+					'id',
+					'created',
+					'modified'
+				]
 			};
 		}
 	};
