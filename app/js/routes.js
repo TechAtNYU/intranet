@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 	// TODO: Enable this when server is properly configured
 	// $locationProvider.html5Mode(true);
 

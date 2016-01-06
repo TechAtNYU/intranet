@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('AddCtrl', function($scope, $rootScope, $stateParams, $state, 
+.controller('AddCtrl', function($scope, $rootScope, $stateParams, $state,
 		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
 	apiDescriptor.then(function(apiDescription) {
 		$scope.rdesc = apiDescription.resource(resourceName);
@@ -16,7 +16,7 @@ angular
 	$scope.fep = formElementProvider;
 
 	$scope.data = {};
-	$scope.model = { attributes: {} };
+	$scope.model = {attributes: {}};
 
 	$scope.createResource = function(model, rdesc) {
 		var finalModel = dataTransformer.relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
@@ -33,19 +33,19 @@ angular
 	//data: array of array type data
 	//fieldResourceType: which field to grab
 	$scope.refreshData = function(data, fieldResourceType) {
-		data[fieldResourceType] = Restangular.all(fieldResourceType).getList().$object; 
+		data[fieldResourceType] = Restangular.all(fieldResourceType).getList().$object;
 	};
 
-	// Fetches linked resources & 
+	// Fetches linked resources &
 	// store them in $scope.data for typeahead
 	var loadLinkedData = function(rdesc) {
 		var data = {};
 
-		_.each(rdesc.attributes.fields, function(field){
-			var fieldName = field.kind['base-type'],
-				fieldResourceType = field.kind['target-type']; 
+		_.each(rdesc.attributes.fields, function(field) {
+			var fieldName = field.kind['base-type'];
+			var fieldResourceType = field.kind['target-type'];
 
-			if((fieldName === 'Relationship') && !(fieldResourceType in data)) {
+			if (fieldName === 'Relationship' && !(fieldResourceType in data)) {
 				$scope.refreshData(data, fieldResourceType);
 			}
 		});
