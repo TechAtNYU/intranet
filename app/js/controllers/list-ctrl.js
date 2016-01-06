@@ -26,23 +26,25 @@ angular
 		// $state.go("list", {id: newModelId});
 		$state.transitionTo('list', 
 			{id: newModelId}, 
-			{ 
-				location: true, 
-				inherit: true, 
-				relative: $state.$current, 
-				notify: false 
-			});
+			{notify: false}
+		);
 	};
 
 	$scope.deleteResource = function(id) {
-		console.log("deleteResource", resourceName, id)
 		Restangular.one(resourceName, id).remove()
 			.then(function() {
-				console.log("success")
 				alert('Successfully deleted this entry');
 				$scope.data = Restangular.all(resourceName).getList().$object;
+				$scope.model = {};
+				$state.transitionTo('list', 
+					{resourceName: resourceName},
+					{
+						inherit: false,
+						notify: false,
+						reload: true
+					}
+				);
 			}).catch(function() {
-				console.log("can not delete")
 				alert('Could not delete the entry');
 			});
 	};
