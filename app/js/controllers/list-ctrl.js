@@ -11,27 +11,23 @@ angular
 	});
 
 	var selectionMode = $stateParams.selectionMode;
-	if(!selectionMode || (selectionMode !== 'single ' && selectionMode !== 'multiple')) {
+	if (!selectionMode || (selectionMode !== 'single ' && selectionMode !== 'multiple')) {
 		selectionMode = 'multiple';
 	}
 	$scope.selectionMode = selectionMode;
 	Restangular.all(resourceName).getList().then(function(data) {
 		$scope.data = data;
-		if(resourceId) {
+		if (resourceId) {
 			$scope.model = _.find($scope.data, {id: resourceId});
 		}
 	});
 
 	$scope.updateSelection = function(newModelId) {
 		// $state.go("list", {id: newModelId});
-		$state.transitionTo('list', 
-			{id: newModelId}, 
-			{ 
-				location: true, 
-				inherit: true, 
-				relative: $state.$current, 
-				notify: false 
-			});
+		$state.transitionTo('list',
+			{id: newModelId},
+			{notify: false}
+		);
 	};
 
 	$scope.deleteResource = function(id) {
@@ -39,9 +35,17 @@ angular
 			.then(function() {
 				alert('Successfully deleted this entry');
 				$scope.data = Restangular.all(resourceName).getList().$object;
+				$scope.model = {};
+				$state.transitionTo('list',
+					{resourceName: resourceName},
+					{
+						inherit: false,
+						notify: false,
+						reload: true
+					}
+				);
 			}).catch(function() {
 				alert('Could not delete the entry');
 			});
-
 	};
 });

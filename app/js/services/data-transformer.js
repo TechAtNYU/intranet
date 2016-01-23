@@ -11,21 +11,21 @@ angular
 			var links = {};
 
 			_.each(rdesc.attributes.fields, function(field) {
-				var fieldType = field.kind.name,
-					fieldTargetType = field.kind.targetType,
-					fieldArray = field.kind.isArray; 
+				var fieldType = field.kind['base-type'];
+				var fieldTargetType = field.kind['target-type'];
+				var fieldArray = field.kind['is-array'];
 
-				if(fieldType === 'Link') {
+				if (fieldType === 'Relationship') {
 					var linkage = null;
 
-					if(fieldArray) {
+					if (fieldArray) {
 						linkage = _.map(model.attributes[field.name], function(value) {
 							return {
 								type: fieldTargetType,
 								id: value
 							};
 						});
-					} else if(model.attributes[field.name]) {
+					} else if (model.attributes[field.name]) {
 						linkage = {
 							type: fieldTargetType,
 							id: model.attributes[field.name]
@@ -34,34 +34,31 @@ angular
 						linkage = null;
 					}
 
-					links[field.name]  = { linkage: linkage };
+					links[field.name]  = {data: linkage};
 					delete model.attributes[field.name];
 				}
 			});
 
-			model.links = links;
-
+			model.relationships = links;
 			return model;
 		},
 		// The inverse of the above transformation; given a model in JSON API
 		// format, takes all elements in its links property and makes them into
 		// a normal, flat object
 		delink: function(model) {
-			var links = model.links;
+			var links = model.relationships;
 
 			_.each(links, function(link, name) {
-				var linkage = link.linkage;
-				
+				var linkage = link.data;
 				// This is primarily to omit the 'self' property
-				if(!linkage) {
+				if (!linkage) {
 					return;
-				} else if(_.isArray(linkage)) {
+				} else if (_.isArray(linkage)) {
 					model.attributes[name] = _.pluck(linkage, 'id');
 				} else {
 					model.attributes[name] = linkage.id;
 				}
 			});
-
 			return model;
 		}
 	};

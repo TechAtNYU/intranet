@@ -23,8 +23,8 @@
 				<th>ID</th>
 				<td>{{model.id}}</td>
 			</tr>
-			<tr ng-repeat="field in rdesc.attributes.fields">
-				<th>{{field.friendlyName}}</th>
+			<tr ng-repeat="field in rdesc.attributes.fields" ng-if="field.name !== 'id'">
+				<th>{{field['friendly-name']}}</th>
 				<td>{{model.attributes[field.name]}}</td>
 			</tr>
 		</table>

@@ -1,5 +1,5 @@
 <div ng-form name="subForm">
-	<label>{{field.friendlyName}}</label>
+	<label>{{field['friendly-name']}}</label>
 	<p class="help-block" ng-bind-html="field.description"></p>
 	<div ng-include="fep.getTemplateUrl(field)"></div ng-form>
 </div>
