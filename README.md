@@ -19,7 +19,7 @@ Start the HTTP server with:
 
 Navigate to
 ```
-    localhost:3000
+localhost:3000
 ```
 
 If you try to use `127.0.0.1:3000`, it will tell you that you are unauthorized.
