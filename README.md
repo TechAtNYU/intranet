@@ -17,6 +17,7 @@ Start the HTTP server with:
 
     npm start
 
+Make sure you are logged into the [api](https://api.tnyu.org/v3)
 Navigate to
 ```
 localhost:3000
