@@ -17,6 +17,14 @@ Start the HTTP server with:
 
     npm start
 
+Make sure you are logged into the [api](https://api.tnyu.org/v3)
+Navigate to
+```
+localhost:3000
+```
+
+If you try to use `127.0.0.1:3000`, it will tell you that you are unauthorized.
+
 ### Testing
 The application uses Karma + Jasmine for unit testing and by default executes using PhantomJS. Unit tests can be found in `/test/unit`.
 
