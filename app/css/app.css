@@ -1,8 +1,59 @@
+@import 'https://fonts.googleapis.com/css?family=Khula:300,400,700';
+
 body {
   padding-top: 50px;
+  font-family: 'Khula', Helvetica, Sans-Serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+p, a {
+  font-weight: 300;
+}
+
+/* divs */
+.api-area {
+  display: inline-block;
+}
+
+.panel {
+  margin: 30px;
+  width: 300px;
+  display: inline-block;
+}
+
+.api-areas {
+  margin-top: 60px;
+}
+
+.navbar-brand {
+  font-weight: 700;
+}
+
+.container {
+  margin-top: 100px;
+  text-align: center;
+  width: 850px;
+}
+
+.form-group, .list-buttons {
+  margin: 60px 0;
+}
+
+/* buttons */
+.btn-success {
+  background-color: #15a700;
 }
 
 .chosen-container-single .chosen-single, .chosen-container-multi .chosen-choices {
+  padding-top: 10px;
+  padding-bottom: 10px;
   min-height: 30px !important;
   height: auto;
   border: 1px solid #ccc;
