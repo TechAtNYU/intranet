@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('ListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor) {
+.controller('DefaultListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;

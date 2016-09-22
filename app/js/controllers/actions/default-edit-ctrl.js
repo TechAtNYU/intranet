@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('EditCtrl', function($scope, $rootScope, $stateParams, $state,
+.controller('DefaultEditCtrl', function($scope, $rootScope, $stateParams, $state,
 		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
 
 	var resourceName = $stateParams.resourceName;

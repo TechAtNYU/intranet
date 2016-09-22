@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('AddCtrl', function($scope, $rootScope, $stateParams, $state,
+.controller('DefaultAddCtrl', function($scope, $rootScope, $stateParams, $state,
 		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
 	apiDescriptor.then(function(apiDescription) {
 		$scope.rdesc = apiDescription.resource(resourceName);

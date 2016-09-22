@@ -15,17 +15,26 @@ angular.module('app')
 		})
 		.state('list', {
 			url: '/r/:resourceName/list/:id?selectionMode',
-			templateUrl: 'partials/actions/list.html',
-			controller: 'ListCtrl'
+			templateUrl: 'partials/actions/action.html',
+			controller: 'ActionCtrl',
+			data: {
+				action: 'list'
+			}
 		})
 		.state('add', {
 			url: '/r/:resourceName/add',
-			templateUrl: 'partials/actions/add.html',
-			controller: 'AddCtrl'
+			templateUrl: 'partials/actions/action.html',
+			controller: 'ActionCtrl',
+			data: {
+				action: 'add'
+			}
 		})
 		.state('edit', {
 			url: '/r/:resourceName/edit/:id',
-			templateUrl: 'partials/actions/edit.html',
-			controller: 'EditCtrl'
+			templateUrl: 'partials/actions/action.html',
+			controller: 'ActionCtrl',
+			data: {
+				action: 'edit'
+			}
 		});
 });
