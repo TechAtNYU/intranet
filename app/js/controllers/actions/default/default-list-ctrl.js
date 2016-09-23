@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('DefaultListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor) {
+.controller('DefaultListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;
@@ -31,21 +31,18 @@ angular
 	};
 
 	$scope.deleteResource = function(id) {
-		Restangular.one(resourceName, id).remove()
-			.then(function() {
-				alert('Successfully deleted this entry');
-				$scope.data = Restangular.all(resourceName).getList().$object;
-				$scope.model = {};
-				$state.transitionTo('list',
-					{resourceName: resourceName},
-					{
-						inherit: false,
-						notify: false,
-						reload: true
-					}
-				);
-			}).catch(function() {
-				alert('Could not delete the entry');
-			});
+		dataTransformer.deleteResource($scope.resourceName, id).then(function() {
+			alert('Successfully deleted this entry');
+			$scope.data = Restangular.all($scope.resourceName).getList().$object;
+			$scope.model = {};
+			$state.transitionTo('list',
+				{resourceName: $scope.resourceName},
+				{
+					inherit: false,
+					notify: false,
+					reload: true
+				}
+			);
+		});
 	};
 });

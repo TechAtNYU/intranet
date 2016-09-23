@@ -1,6 +1,6 @@
 angular
 .module('app.services')
-.factory('dataTransformer', function() {
+.factory('dataTransformer', function(Restangular) {
 	'use strict';
 
 	return {
@@ -60,6 +60,50 @@ angular
 				}
 			});
 			return model;
+		},
+
+		// Fetches linked resources and stores them in $scope.data for typeahead
+		// callback = $scope.refreshData
+		loadLinkedData: function(rdesc, callback) {
+			var data = {};
+			_.each(rdesc.attributes.fields, function(field) {
+				var fieldBaseType = field.kind['base-type'];
+				var fieldTargetType = field.kind['target-type'];
+				if (fieldBaseType === 'Relationship' && !(fieldTargetType in data)) {
+					callback(data, fieldTargetType);
+				}
+			});
+			return data;
+		},
+
+		updateResource: function(model, rdesc, resource, callback) {
+			var finalModel = this.relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
+			rdesc.attributes.fields.forEach(function(field) {
+				if (field.validation['read-only'] && field.name !== 'id') {
+					delete finalModel.attributes[field.name];
+				}
+			});
+			return resource.patch(finalModel)
+			.catch(function(err) {
+				alert('Could not submit to resource. API returned the following error: ' + err.data.errors[0].title);
+			});
+		},
+
+		createResource: function(model, rdesc, resource) {
+			var finalModel = this.relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
+			finalModel.type = rdesc.id;
+
+			return resource.post(finalModel)
+			.catch(function(err) {
+				alert('Could not submit to resource. API returned the following error: ' + err.data.errors[0].title);
+			});
+		},
+
+		deleteResource: function(resourceName, id, callback) {
+		return Restangular.one(resourceName, id).remove()
+			.catch(function() {
+				alert('Could not delete the entry');
+			});
 		}
 	};
 });
