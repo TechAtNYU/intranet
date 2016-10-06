@@ -1,8 +1,16 @@
-<div class="container">
+<div class="container" ng-controller="EventAddCtrl">
 	<h3>
 		Add {{rdesc.attributes.name.singular}}
 	</h3>
 	<h5>{{rdesc.attributes.description}}</h5>
+<!-- 
+	<div class="form-group">
+		<label>{{fieldOne['friendly-name']}}</label>
+		<div ng-include="fep.getTemplateUrl(fieldOne)"></div>
+
+		<input type="text" placeholder="{{fieldOne.name}}" />
+	</div> -->
+
 
 	<div class="form-group"
 		ng-repeat="field in rdesc.attributes.fields"
