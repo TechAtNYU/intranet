@@ -2,6 +2,15 @@ body {
   padding-top: 50px;
 }
 
+label {
+  margin-bottom: 0px;
+}
+
+.form-group {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
 .chosen-container-single .chosen-single, .chosen-container-multi .chosen-choices {
   min-height: 30px !important;
   height: auto;
