@@ -30,8 +30,4 @@ angular
 	$scope.refreshData = function(data, fieldResourceType) {
 		data[fieldResourceType] = Restangular.all(fieldResourceType).getList().$object;
 	};
-
-	$scope.change = function(v) {
-		console.log(v);
-	};
 });

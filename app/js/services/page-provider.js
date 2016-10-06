@@ -2,7 +2,7 @@ angular.module('app.services')
 .provider('pageProvider', function() {
 
 	var templates = {
-		'Default': {
+		'__defaults__': {
 			'edit': 'partials/actions/default/default-edit.html',
 			'add': 'partials/actions/default/default-add.html',
 			'list': 'partials/actions/default/default-list.html'
@@ -16,8 +16,8 @@ angular.module('app.services')
 		$get: function() {
 			return {
 				getTemplateUrl: function(action, resourceName) {
-					var t = templates[resourceName] || templates['Default'];
-					t = t[action] || templates['Default'][action];
+					var t = templates[resourceName] || templates['__defaults__'];
+					t = t[action] || templates['__defaults__'][action];
 					if (_.isFunction(t)) {
 						return t(action);
 					} else {

@@ -4,11 +4,6 @@ angular
 .module('app.controllers')
 .controller('EventAddCtrl', function($scope, $rootScope, $stateParams, $state,
 		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
-	apiDescriptor.then(function(apiDescription) {
-		$scope.rdesc = apiDescription.resource(resourceName);
-		$scope.fieldOne = $scope.rdesc.attributes.fields[0];
-		$scope.data = dataTransformer.loadLinkedData($scope.rdesc, $scope.refreshData);
-	});
 
 	var resourceName = $stateParams.resourceName;
 
@@ -18,6 +13,12 @@ angular
 
 	$scope.data = {};
 	$scope.model = {attributes: {}};
+
+	apiDescriptor.then(function(apiDescription) {
+		$scope.rdesc = apiDescription.resource(resourceName);
+		$scope.fieldOne = $scope.rdesc.attributes.fields[0];
+		$scope.data = dataTransformer.loadLinkedData($scope.rdesc, $scope.refreshData);
+	});
 
 	$scope.createResource = function (model, rdesc) {
 		dataTransformer.createResource(model, rdesc, resource).then(function(data) {

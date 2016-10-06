@@ -100,7 +100,7 @@ angular
 		},
 
 		deleteResource: function(resourceName, id, callback) {
-		return Restangular.one(resourceName, id).remove()
+			return Restangular.one(resourceName, id).remove()
 			.catch(function() {
 				alert('Could not delete the entry');
 			});
