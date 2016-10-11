@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('DefaultAddCtrl', function($scope, $rootScope, $stateParams, $state,
+.controller('MembershipAddCtrl', function($scope, $rootScope, $stateParams, $state,
 		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
 	
 	var resourceName = $stateParams.resourceName;

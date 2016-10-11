@@ -1,0 +1,50 @@
+<div class="container" ng-controller="MembershipListCtrl">
+	<h3>
+		List {{rdesc.attributes.name.singular}}
+	</h3>
+	<h5>{{rdesc.attributes.description}}</h5>
+
+	<!-- <ul>
+		<li ng-repeat="person in rolesMap">
+	      {{person.id}} {{person.role}}
+	    </li>
+</ul> -->
+
+	<div class="form-group">
+		<select chosen
+				ng-model="select_id"
+				ng-options="id as role for (id,role) in rolesMap"
+				ng-change="updateSelection(select_id)"
+				style="width: 500px;">
+			<option value=""></option>
+		</select>
+		<button ui-sref="add({resourceName: rdesc.id})" class="btn btn-sm btn-success">Add</button>
+		<button ui-sref="edit({resourceName: rdesc.id, id: model.id})" ng-disabled="!model" class="btn btn-sm btn-primary">Edit</button>
+		<button ng-click="deleteResource(model.id)" ng-disabled="!model" class="btn btn-sm btn-danger">Delete</button>
+	</div>
+
+	<div class="form-group">
+		<table class="table table-hover table-bordered table-condensed">
+			<tr>
+				<th>ID</th>
+				<td>{{model.id}}</td>
+			</tr>
+			<tr>
+				<th>Name</th>
+				<td>{{details[model.id].name}}</td>
+			</tr>
+			<tr>
+				<th>Position</th>
+				<td>{{details[model.id].position}}</td>
+			</tr>
+			<tr ng-repeat="field in rdesc.attributes.fields" ng-if="field.name !== 'id' && field.name !== 'member' && field.name !== 'position'">
+				<th>{{field['friendly-name']}}</th>
+				<td>{{model.attributes[field.name]}}</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="form-group">
+
+	</div>
+</div>
