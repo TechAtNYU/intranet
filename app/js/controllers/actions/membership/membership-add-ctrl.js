@@ -5,7 +5,6 @@ angular
 .controller('MembershipAddCtrl', function($scope, $rootScope, $stateParams, $state,
 		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
 
-
 	var resourceName = $stateParams.resourceName;
 
 	var resource = Restangular.all(resourceName);
