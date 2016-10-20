@@ -11,40 +11,39 @@ angular
 	});
 
 
-	var selectionMode = $stateParams.selectionMode;
-	if (!selectionMode || (selectionMode !== 'single ' && selectionMode !== 'multiple')) {
-		selectionMode = 'multiple';
-	}
-	var teamsMap = {};
-	$scope.rolesMap = {};
-	$scope.details = {};
-	$scope.selectionMode = selectionMode;
+	var teamsIdToName = {};
+	$scope.memberDetails = {};
+
+	//mapping teamID to teamName
 	Restangular.all('teams')
 		.getList()
 		.then(function(teams) {
 			_.each(teams, function(element) {
-				teamsMap[element.id] = element.attributes.name;
+				teamsIdToName[element.id] = element.attributes.name;
 			});
 		});
+
+
 	Restangular.all(resourceName)
 	.getList()
 	.then(function(data) {
 		$scope.data = data;
 		if (resourceId) {
 			var index = _.findIndex($scope.data, {id: resourceId});
-			$scope.model = dataTransformer.delink($scope.data[index]);
+			$scope.model = $scope.data[index];
 		}
+		//mapping memberID to name, position and display information
 		_.each($scope.data, function(element) {
 			Restangular.one("people/" + element.relationships.member.data.id)
 			.get()
 			.then(function(person) {
-				Restangular.one("positions/" + element.relationships.position.data.id + "?include=team")
+				Restangular.one("positions/" + element.relationships.position.data.id)
 				.get()
 				.then(function(position) {
-					$scope.rolesMap[element.id] = person.attributes.name + " | " +teamsMap[position.relationships.team.data.id] + (position.attributes.isLead ? " (Lead)" : "");
-					$scope.details[element.id] = {
+					$scope.memberDetails[element.id] = {
 						'name': person.attributes.name,
-						'position': teamsMap[position.relationships.team.data.id] + (position.attributes.isLead ? " (Lead)" : "")
+						'position': teamsIdToName[position.relationships.team.data.id] + (position.attributes.isLead ? " (Lead)" : ""),
+						'display': person.attributes.name + " | " + teamsIdToName[position.relationships.team.data.id] + (position.attributes.isLead ? " (Lead)" : "")
 					};
 				});
 			});
@@ -55,21 +54,16 @@ angular
 	$scope.updateSelection = function(newModelId) {
 		var index =	_.findIndex($scope.data, {'id': newModelId});
 		$scope.model = $scope.data[index];
-		// console.log(newModelId);
-		// console.log($scope.data);
-		// $state.go("list", {'id': newModelId});
 		$state.transitionTo('list',
 			{id: newModelId, resourceName: resourceName},
 			{notify: false}
 		);
 	};
 
-
 	$scope.deleteResource = function(id) {
 		dataTransformer.deleteResource($scope.resourceName, id).then(function() {
 			alert('Successfully deleted this entry');
-			$scope.data = Restangular.all($scope.resourceName).getList().$object;
-			console.log($scope.data);
+			//$scope.data = Restangular.all($scope.resourceName).getList().$object;
 			$scope.model = {};
 			$state.transitionTo('list',
 				{resourceName: $scope.resourceName},
@@ -81,4 +75,5 @@ angular
 			);
 		});
 	};
+
 });

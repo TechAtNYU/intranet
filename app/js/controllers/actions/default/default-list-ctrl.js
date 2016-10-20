@@ -14,6 +14,7 @@ angular
 	if (!selectionMode || (selectionMode !== 'single ' && selectionMode !== 'multiple')) {
 		selectionMode = 'multiple';
 	}
+
 	$scope.selectionMode = selectionMode;
 	Restangular.all(resourceName).getList().then(function(data) {
 		$scope.data = data;
