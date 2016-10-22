@@ -13,6 +13,9 @@ angular.module('app.services')
 		'memberships': {
 			'add':'partials/actions/membership/membership-add.html',
 			'list':'partials/actions/membership/membership-list.html'
+		},
+		'organizations': {
+			'list': 'partials/actions/organization/organization-list.html'
 		}
 	}
 
