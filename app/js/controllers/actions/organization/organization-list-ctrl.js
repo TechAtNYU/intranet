@@ -12,7 +12,7 @@ angular
 
 	//maps organizationID to an array of liaison details object
 	var orgIdToLiaisons = {};
-	//maps organizationID to the display information of liaisons
+	//maps organizationID to the information to display
 	$scope.liaisonsDisplay = {};
 
 	Restangular.all(resourceName)
@@ -33,7 +33,6 @@ angular
 						.then(function(person) {
 							var details = {
 								'name': person.attributes.name
-								//other details to save?
 							}
 
 							if (orgIdToLiaisons[element.id] == null) {
@@ -42,7 +41,7 @@ angular
 								orgIdToLiaisons[element.id].push(details);
 							}
 
-							//generating display text of the list of liaisons
+							//generating display text
 							var displayText = "";
 							for (var i = 0; i < orgIdToLiaisons[element.id].length; i++) {
 								if (i == 0) {
