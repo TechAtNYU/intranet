@@ -1,0 +1,93 @@
+<div class="container" ng-controller="EventListCtrl">
+	<h3>
+		List {{rdesc.attributes.name.singular}}
+	</h3>
+	<h5>{{rdesc.attributes.description}}</h5>
+
+	<div class="form-group">
+		<select chosen
+				ng-model="model"
+				ng-options="(m.attributes.name || m.attributes.title || m.id) for m in data"
+				ng-change="updateSelection(model.id)"
+				style="width: 500px;">
+			<option value=""></option>
+		</select>
+		<button ui-sref="add({resourceName: rdesc.id})" class="btn btn-sm btn-success">Add</button>
+		<button ui-sref="edit({resourceName: rdesc.id, id: model.id})" ng-disabled="!model" class="btn btn-sm btn-primary">Edit</button>
+		<button ng-click="deleteResource(model.id)" ng-disabled="!model" class="btn btn-sm btn-danger">Delete</button>
+	</div>
+
+	<div class="form-group">
+		<table class="table table-hover table-bordered table-condensed">
+			<tr>
+				<th>ID</th>
+				<td>{{model.id}}</td>
+			</tr>
+
+			<tr ng-repeat="field in rdesc.attributes.fields" ng-if="field.name !== 'id' && field.name !== 'survey' && field.name !== 'venue' && field.name !== 'teams'">
+				<th>{{field['friendly-name']}}</th>
+				<td>{{model.attributes[field.name]}}</td>
+			</tr>
+
+			<tr>
+				<th>Venue</th>
+				<td>{{eventDetails.venue[model.id]}}</td>
+			</tr>
+
+			<tr>
+				<th>Teams</th>
+				<td>{{eventDetails.team[model.id]}}</td>
+			</tr>
+
+			<tr>
+				<th>Surveys</th>
+				<td>{{eventDetails.survey[model.id]}}</td>
+			</tr>
+
+			<tr>
+				<th>Number of RSVPs</th>
+				<td>{{eventRSVPCount[model.id]}}</td>
+			</tr>
+
+			<tr>
+				<th>Coorganizers</th>
+				<td>{{eventDetails.coorganizers[model.id]}}</td>
+			</tr>
+
+			<tr>
+				<th>Feedback</th>
+				<td>{{eventFeedback[model.id]}}</td>
+			</tr>
+
+			<tr>
+				<th>Added By</th>
+				<td>{{eventDetails.addedBy[model.id]}}</td>
+			</tr>
+
+			<tr>
+				<th>Presenters</th>
+				<td>{{eventDetails.presenters[model.id]}}</td>
+			</tr>
+
+			<tr>
+				<th>Feedback</th>
+				<td>{{eventDetails.feedback[model.id]}}</td>
+			</tr>
+
+			<tr>
+				<th>Attendees</th>
+				<td>{{eventDetails.attendees[model.id]}}</td>
+			</tr>
+
+			<tr>
+				<th>Number of Attendees</th>
+				<td>{{eventDetails.attendeesCoun[model.id]}}</td>
+			</tr>
+		</table>
+	</table>
+	</div>
+
+	<div class="form-group">
+
+	</div>
+</div>
