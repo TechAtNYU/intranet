@@ -30,24 +30,37 @@
 					&& field.name !== 'presenters' && field.name !== 'coorganizers'
 					&& field.name !== 'attendees' && field.name !== 'addedBy'
 					&& field.name !== 'teaches' && field.name !== 'feedback'
-					&& field.name !== 'level' && field.name !== 'rsvpUrl'">
+					&& field.name !== 'level' && field.name !== 'rsvpUrl'
+					&& field.name !== 'body' && field.name !== 'aims'
+					&& field.name !== 'rsvps' && field.name !== 'alternateRsvpUrls'
+					&& field.name !== 'categories' && field.name !== 'details'">
 				<th>{{field['friendly-name']}}</th>
 				<td>{{model.attributes[field.name]}}</td>
 			</tr>
 
 			<tr>
+				<th>Body</th>
+				<td ng-bind-html="model.attributes['body']"></td>
+			</tr>
+
+			<tr>
+				<th>Details</th>
+				<td ng-bind-html="model.attributes['details']"></td>
+			</tr>
+
+			<tr>
+				<th>Categories</th>
+				<td>{{eventDetails.categories[model.id]}}</td>
+			</tr>
+
+			<tr>
+				<th>Aims</th>
+				<td>{{eventDetails.aims[model.id]}}</td>
+			</tr>
+
+			<tr>
 				<th>Venue</th>
-				<td>{{eventDetails.venue[model.id]}}</td>
-			</tr>
-
-			<tr>
-				<th>RSVP URLs</th>
-				<td><a ng-href={{model.attributes.rsvpUrl}}>{{model.attributes.rsvpUrl}}</a></td>
-			</tr>
-
-			<tr>
-				<th>No. of RSVPs</th>
-				<td>{{eventRSVPCount[model.id]}}</td>
+				<td ng-bind-html="eventDetails.venue[model.id]"></td>
 			</tr>
 
 			<tr>
@@ -81,8 +94,8 @@
 			</tr>
 
 			<tr>
-				<th>Attendees</th>
-				<td>{{eventDetails.attendees[model.id]}}</td>
+				<th>Teaches</th>
+				<td>{{eventDetails.teaches[model.id]}}</td>
 			</tr>
 
 			<tr>
@@ -91,8 +104,28 @@
 			</tr>
 
 			<tr>
-				<th>Teaches</th>
-				<td>{{eventDetails.teaches[model.id]}}</td>
+				<th>RSVP URLs</th>
+				<td><a ng-href={{model.attributes.rsvpUrl}}>{{model.attributes.rsvpUrl}}</a></td>
+			</tr>
+
+			<tr>
+				<th>Alt RSVP</th>
+				<td ng-bind-html="eventDetails.altRsvps[model.id]"></td>
+			</tr>
+
+			<tr>
+				<th>No. of RSVPs</th>
+				<td>{{eventDetails.rsvpCount[model.id]}}</td>
+			</tr>
+
+			<tr>
+				<th>Attendees</th>
+				<td>{{eventDetails.attendees[model.id]}}</td>
+			</tr>
+
+			<tr>
+				<th>RSVPs</th>
+				<td>{{eventDetails.rsvps[model.id]}}</a></td>
 			</tr>
 		</table>
 	</table>
