@@ -7,7 +7,7 @@
 	<div class="form-group">
 		<select chosen
 				ng-model="model"
-				ng-options="(m.attributes.name || m.attributes.title || m.id) for m in data"
+				ng-options="(m.attributes.title) group by displayDate(m.attributes.startDateTime) for m in data | orderBy: 'attributes.startDateTime': true"
 				ng-change="updateSelection(model.id)"
 				style="width: 500px;">
 			<option value=""></option>
@@ -24,7 +24,13 @@
 				<td>{{model.id}}</td>
 			</tr>
 
-			<tr ng-repeat="field in rdesc.attributes.fields" ng-if="field.name !== 'id' && field.name !== 'survey' && field.name !== 'venue' && field.name !== 'teams'">
+			<tr ng-repeat="field in rdesc.attributes.fields"
+					ng-if="field.name !== 'id' && field.name !== 'survey'
+					&& field.name !== 'venue' && field.name !== 'teams'
+					&& field.name !== 'presenters' && field.name !== 'coorganizers'
+					&& field.name !== 'attendees' && field.name !== 'addedBy'
+					&& field.name !== 'teaches' && field.name !== 'feedback'
+					&& field.name !== 'level' && field.name !== 'rsvpUrl'">
 				<th>{{field['friendly-name']}}</th>
 				<td>{{model.attributes[field.name]}}</td>
 			</tr>
@@ -35,18 +41,18 @@
 			</tr>
 
 			<tr>
+				<th>RSVP URLs</th>
+				<td><a ng-href={{model.attributes.rsvpUrl}}>{{model.attributes.rsvpUrl}}</a></td>
+			</tr>
+
+			<tr>
+				<th>No. of RSVPs</th>
+				<td>{{eventRSVPCount[model.id]}}</td>
+			</tr>
+
+			<tr>
 				<th>Teams</th>
 				<td>{{eventDetails.team[model.id]}}</td>
-			</tr>
-
-			<tr>
-				<th>Surveys</th>
-				<td>{{eventDetails.survey[model.id]}}</td>
-			</tr>
-
-			<tr>
-				<th>Number of RSVPs</th>
-				<td>{{eventRSVPCount[model.id]}}</td>
 			</tr>
 
 			<tr>
@@ -56,7 +62,12 @@
 
 			<tr>
 				<th>Feedback</th>
-				<td>{{eventFeedback[model.id]}}</td>
+				<td><a ng-href="https://api.tnyu.org/v3-test/survey-responses/{{eventDetails.feedback[model.id]}}">{{eventDetails.feedback[model.id]}}</a></td>
+			</tr>
+
+			<tr>
+				<th>Surveys</th>
+				<td><a ng-href={{eventDetails.survey[model.id]}}>{{eventDetails.survey[model.id]}}</a></td>
 			</tr>
 
 			<tr>
@@ -70,18 +81,18 @@
 			</tr>
 
 			<tr>
-				<th>Feedback</th>
-				<td>{{eventDetails.feedback[model.id]}}</td>
-			</tr>
-
-			<tr>
 				<th>Attendees</th>
 				<td>{{eventDetails.attendees[model.id]}}</td>
 			</tr>
 
 			<tr>
-				<th>Number of Attendees</th>
-				<td>{{eventDetails.attendeesCoun[model.id]}}</td>
+				<th>No. of Attendees</th>
+				<td>{{eventDetails.attendeesCount[model.id]}}</td>
+			</tr>
+
+			<tr>
+				<th>Teaches</th>
+				<td>{{eventDetails.teaches[model.id]}}</td>
 			</tr>
 		</table>
 	</table>

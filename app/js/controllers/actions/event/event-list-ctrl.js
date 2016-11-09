@@ -10,9 +10,13 @@ angular
 		$scope.rdesc = apiDescription.resource(resourceName);
 	});
 
-	var selectionMode = $stateParams.selectionMode;
-	if (!selectionMode || (selectionMode !== 'single ' && selectionMode !== 'multiple')) {
-		selectionMode = 'multiple';
+
+	$scope.displayDate = function(date) {
+		if (date == undefined) { return; };
+		var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		var year = parseInt(date.substring(0,4));
+		var month = parseInt(date.substring(5, 7));
+		return monthNames[month - 1] + " " + year;
 	}
 
 	var teamsIdToName = {};
@@ -20,7 +24,7 @@ angular
 	var organizationIdToName = {};
 	var personIdToName = {};
 	$scope.eventRSVPCount = {};
-	//eventDetails to have: venue, teams, survey, attendee count, rsvp count
+
 	$scope.eventDetails = {
 		venue : {},
 		team 	: {},
@@ -30,7 +34,9 @@ angular
 		presenters: {},
 		addedBy: {},
 		attendees: {},
-		attendeesCount: {}
+		attendeesCount: {},
+		teaches: {},
+		date: {}
 	};
 
 	//mapping teamID to teamName
@@ -85,7 +91,7 @@ angular
 				$scope.eventDetails.venue[element.id] = venuesIdToName[element.relationships.venue.data.id];
 			};//end
 
-			//mapping eventID to team name
+			//mapping eventID to team names
 			if (element.relationships.teams.data.length > 0) {
 				element.relationships.teams.data.forEach( team => {
 					if ($scope.eventDetails.team[element.id] == undefined) {
@@ -124,7 +130,7 @@ angular
 			$scope.eventDetails.attendeesCount[element.id] = element.relationships.attendees.data.length;
 			if (element.relationships.attendees.data.length > 0) {
 				element.relationships.attendees.data.forEach(response => {
-					if ($scope.eventDetails.attendees[element.id] == undefined) {
+					if ($scope.eventDetails.attendees[element.id] === undefined) {
 						$scope.eventDetails.attendees[element.id] = personIdToName[response.id];
 					} else {
 						var string = $scope.eventDetails.attendees[element.id];
@@ -149,6 +155,23 @@ angular
 							var string = $scope.eventDetails.feedback[element.id];
 							string = string + ", " + data.id;
 							$scope.eventDetails.feedback[element.id] = string;
+						}
+					});
+				})
+			}//end
+
+			//mapping eventID to teaches
+			if (element.relationships.teaches.data.length > 0) {
+				element.relationships.teaches.data.forEach(response => {
+					Restangular.one("skills/" + response.id)
+					.get()
+					.then(function(data) {
+						if ($scope.eventDetails.teaches[element.id] == undefined) {
+							$scope.eventDetails.teaches[element.id] = data.attributes.name;
+						} else {
+							var string = $scope.eventDetails.teaches[element.id];
+							string = string + ", " + data.attributes.name;
+							$scope.eventDetails.teaches[element.id] = string;
 						}
 					});
 				})
