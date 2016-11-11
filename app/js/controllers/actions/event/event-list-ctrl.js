@@ -206,9 +206,10 @@ angular
 	});
 
 	$scope.updateSelection = function(newModelId) {
-		// $state.go("list", {id: newModelId});
+		var index =	_.findIndex($scope.data, {'id': newModelId});
+		$scope.model = $scope.data[index];
 		$state.transitionTo('list',
-			{id: newModelId},
+			{id: newModelId, resourceName: resourceName},
 			{notify: false}
 		);
 	};
