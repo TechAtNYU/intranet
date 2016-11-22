@@ -9,6 +9,14 @@ angular.module('app.services')
 		},
 		'events': {
 			'add': 'partials/actions/event/event-add.html'
+		},
+		'memberships': {
+			'add':'partials/actions/membership/membership-add.html',
+			'edit':'partials/actions/membership/membership-edit.html',
+			'list':'partials/actions/membership/membership-list.html'
+		},
+		'organizations': {
+			'list': 'partials/actions/organization/organization-list.html'
 		}
 	}
 
