@@ -13,21 +13,20 @@ angular.module('app.services')
 
 	var templates = {
 		'String': function(field) {
-			if(field && field.validation["allowed-html"]) {
+			if (field && field.validation['allowed-html']) {
 				return 'partials/inputs/tinymce-input.html';
-			} else if(field && field.validation["one-of"]) {
+			} else if (field && field.validation['one-of']) {
 				return 'partials/inputs/enum-input.html';
-			} else if(field && useTextarea(field)) {
+			} else if (field && useTextarea(field)) {
 				return 'partials/inputs/textarea-input.html';
 			} else {
 				return 'partials/inputs/default-input.html';
 			}
 		},
 		'Relationship': function(field) {
-			if(field.kind["is-array"]) {
+			if (field.kind['is-array']) {
 				return 'partials/inputs/link-multiple-input.html';
-			}
-			else {
+			} else {
 				return 'partials/inputs/link-input.html';
 			}
 		},
@@ -40,13 +39,18 @@ angular.module('app.services')
 		$get: function() {
 			return {
 				getTemplateUrl: function(field) {
-					var t = templates[field.kind["base-type"]];
-					if(_.isFunction(t)) {
+					var t = templates[field.kind['base-type']];
+					if (_.isFunction(t)) {
 						return t(field);
 					} else {
 						return t || templates['String']();
 					}
-				}
+				},
+				hiddenFields: [
+					'id',
+					'created',
+					'modified'
+				]
 			};
 		}
 	};

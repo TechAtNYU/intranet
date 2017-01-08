@@ -24,13 +24,21 @@ angular.module('app', [
 	});
 
 	RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+		if (operation === 'remove') {
+			return null;
+		}
 		return data.data;
 	});
 
+	//called before sending any data to the server
 	RestangularProvider.addRequestInterceptor(function(data, operation, what, url) {
+		if (operation === 'remove') {
+			return null;
+		}
 		return {data: data};
 	});
 
+	//called after we get a response from the server
 	RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
 		var flattenTree = function(resource) {
 			var flatten = function(object, parentKey) {
@@ -48,7 +56,9 @@ angular.module('app', [
 			});
 		};
 
-		if (_.isArray(data)) {
+		if (data === null) {
+			return null;
+		} else if (_.isArray(data)) {
 			_.pluck(data, 'attributes').forEach(flattenTree);
 		} else {
 			flattenTree(data.attributes);
@@ -59,7 +69,6 @@ angular.module('app', [
 	RestangularProvider.addRequestInterceptor(function(data, operation, what, url) {
 		// 'deepening' to perform before sending out any request data.
 		// This reverses the above flattening process.
-
 		if (operation === 'getList' || operation === 'get') {
 			return data;
 		}
@@ -82,7 +91,6 @@ angular.module('app', [
 				delete data[key];
 			}
 		});
-
 		return data;
 	});
 

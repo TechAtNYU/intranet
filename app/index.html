@@ -18,7 +18,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.3.1/lodash.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-sanitize.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/restangular/1.3.1/restangular.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.min.js"></script>
   <script src="/js/lib/chosen_v1.4.2/chosen.jquery.js" type="text/javascript"></script>
@@ -37,15 +37,22 @@
 
   <script src="/js/controllers/auth-ctrl.js"></script>
   <script src="/js/controllers/main-ctrl.js"></script>
-  <script src="/js/controllers/list-ctrl.js"></script>
-  <script src="/js/controllers/edit-ctrl.js"></script>
-  <script src="/js/controllers/add-ctrl.js"></script>
+  <script src="/js/controllers/action-ctrl.js"></script>
+  <script src="/js/controllers/actions/default/default-list-ctrl.js"></script>
+  <script src="/js/controllers/actions/default/default-edit-ctrl.js"></script>
+  <script src="/js/controllers/actions/default/default-add-ctrl.js"></script>
+  <script src="/js/controllers/actions/event/event-add-ctrl.js"></script>
+  <script src="/js/controllers/actions/membership/membership-add-ctrl.js"></script>
+  <script src="/js/controllers/actions/membership/membership-list-ctrl.js"></script>
+  <script src="/js/controllers/actions/membership/membership-edit-ctrl.js"></script>
+  <script src="/js/controllers/actions/organization/organization-list-ctrl.js"></script>
   <script src="/js/controllers/inputs/date-ctrl.js"></script>
   <script src="/js/controllers/inputs/tinymce-ctrl.js"></script>
 
   <script src="/js/services/api-descriptor.js"></script>
   <script src="/js/services/data-transformer.js"></script>
   <script src="/js/services/form-element-provider.js"></script>
+  <script src="/js/services/page-provider.js"></script>
 </head>
 <body ng-app="app" ng-controller="AuthCtrl">
   <nav class="navbar navbar-default navbar-fixed-top">

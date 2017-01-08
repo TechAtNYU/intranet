@@ -5,9 +5,9 @@ angular
 .controller('TinyMceCtrl', function($scope) {
 	$scope.getTinyMceConfiguration = function(field) {
 		return tinymceConfig(
-			field.validation["allowed-html"],
+			field.validation['allowed-html'],
 			field.validation.maxlength || false,
-			field.validation["read-only"]
+			field.validation['read-only']
 		);
 	};
 
@@ -23,10 +23,10 @@ angular
 	 * out a property that angular can observe to make falsey when over maxlength.
 	 */
 	var tinymceConfig = function(allowedTags, charLimit, disabled) {
-		var toolbarItems = [],
-			formatsListItems = [],
-			allowsBlockFormatting = false,
-			allowsInlineFormatting = false;
+		var toolbarItems = [];
+		var formatsListItems = [];
+		var allowsBlockFormatting = false;
+		var allowsInlineFormatting = false;
 
 		// Build the items in formatsListItems based on the allowedTags. We do want
 		// to add the formats to formatsListItems in the order they're defined in
@@ -49,8 +49,8 @@ angular
 			'blockquote': 'blockquote'
 		};
 
-		for(var tag in tagsToFormats) {
-			if(allowedTags.indexOf(tag) !== -1) {
+		for (var tag in tagsToFormats) {
+			if (allowedTags.indexOf(tag) !== -1) {
 				formatsListItems.push(tagsToFormats[tag]);
 			}
 		}
@@ -61,18 +61,18 @@ angular
 
 		// Add inline formatting buttons
 		['strong','em'].forEach(function(tag) {
-			if(allowedTags.indexOf(tag) !== -1) {
+			if (allowedTags.indexOf(tag) !== -1) {
 				toolbarItems.push(tagsToButtonNames[tag]);
 				allowsInlineFormatting = true;
 			}
 		});
 
-		if(allowsInlineFormatting) {
+		if (allowsInlineFormatting) {
 			toolbarItems.push('spacer');
 		}
 
 		// Add Link buttons
-		if(allowedTags.indexOf('a') !== -1) {
+		if (allowedTags.indexOf('a') !== -1) {
 			toolbarItems.push('link');
 			toolbarItems.push('anchor');
 			toolbarItems.push('spacer');
@@ -80,13 +80,13 @@ angular
 
 		// Add block formatting buttons.
 		['ul', 'ol', 'blockquote'].forEach(function(tag) {
-			if(allowedTags.indexOf(tag) !== -1) {
+			if (allowedTags.indexOf(tag) !== -1) {
 				toolbarItems.push(tagsToButtonNames[tag]);
 				allowsBlockFormatting = true;
 			}
 		});
 
-		if(allowsBlockFormatting) {
+		if (allowsBlockFormatting) {
 			toolbarItems.push('spacer');
 		}
 
@@ -104,12 +104,12 @@ angular
 				'template textpattern'
 			],
 			toolbar: toolbarItems.join(' '),
-			browser_spellcheck : true,
-			fix_list_elements : true,
+			browser_spellcheck: true,
+			fix_list_elements: true,
 			image_advtab: true,
 			menubar: false,
 			statusbar: false,
-			object_resizing : false,
+			object_resizing: false,
 			templates: [],
 			valid_elements: allowedTags.join(','), // the array from the api
 			relative_urls: false,
@@ -120,5 +120,3 @@ angular
 		};
 	};
 });
-
-

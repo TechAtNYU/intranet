@@ -1,7 +1,7 @@
-<select chosen name="value" ng-model="model.attributes[field.name]" ng-options="m.id as (m.attributes.name || m.attributes.title || m.id) for m in data[field.kind.targetType]" ng-disabled="field.validation['read-only']" style="min-width: 300px;">
+<select chosen name="value" ng-model="model.attributes[field.name]" ng-options="m.id as (m.attributes.name || m.attributes.title || m.id) for m in data[field.kind['target-type']]" ng-disabled="field.validation['read-only']" style="min-width: 300px;">
 	<option value=""></option>
 </select>
-<a ui-sref="add({resourceName: field.kind.targetType})" target="_blank" class="btn btn-sm btn-success" role="button">Add</a>
-<a ui-sref="edit({resourceName: field.kind.targetType, id: model[field.name]})" target="_blank" class="btn btn-sm btn-primary" role="button" ng-disabled="!model[field.name]">Edit</a>
+<a ui-sref="add({resourceName: field.kind['target-type']})" target="_blank" class="btn btn-sm btn-success" role="button">Add</a>
+<a ui-sref="edit({resourceName: field.kind['target-type'], id: model[field.name]})" target="_blank" class="btn btn-sm btn-primary" role="button" ng-disabled="!model[field.name]">Edit</a>
 <!-- <button href="#" ng-click="deleteResource(model.id)" ng-disabled="!model" class="btn btn-sm btn-danger">Delete</button> -->
-<button class="btn btn-sm btn-default" ng-click="refreshData(data, field.kind.targetType)"><i class="glyphicon glyphicon-refresh"></i></button>
+<button class="btn btn-sm btn-default" ng-click="refreshData(data, field.kind['target-type'])"><i class="glyphicon glyphicon-refresh"></i></button>

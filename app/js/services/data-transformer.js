@@ -1,6 +1,6 @@
 angular
 .module('app.services')
-.factory('dataTransformer', function() {
+.factory('dataTransformer', function(Restangular) {
 	'use strict';
 
 	return {
@@ -11,21 +11,21 @@ angular
 			var links = {};
 
 			_.each(rdesc.attributes.fields, function(field) {
-				var fieldType = field.kind["base-type"],
-					fieldTargetType = field.kind["target-type"],
-					fieldArray = field.kind["is-array"];
+				var fieldType = field.kind['base-type'];
+				var fieldTargetType = field.kind['target-type'];
+				var fieldArray = field.kind['is-array'];
 
-				if(fieldType === 'Relationship') {
+				if (fieldType === 'Relationship') {
 					var linkage = null;
 
-					if(fieldArray) {
+					if (fieldArray) {
 						linkage = _.map(model.attributes[field.name], function(value) {
 							return {
 								type: fieldTargetType,
 								id: value
 							};
 						});
-					} else if(model.attributes[field.name]) {
+					} else if (model.attributes[field.name]) {
 						linkage = {
 							type: fieldTargetType,
 							id: model.attributes[field.name]
@@ -34,14 +34,12 @@ angular
 						linkage = null;
 					}
 
-					links[field.name]  = { data: linkage };
+					links[field.name]  = {data: linkage};
 					delete model.attributes[field.name];
 				}
-			})
+			});
 
-			//changed from model.links to relationships
 			model.relationships = links;
-
 			return model;
 		},
 		// The inverse of the above transformation; given a model in JSON API
@@ -52,18 +50,60 @@ angular
 
 			_.each(links, function(link, name) {
 				var linkage = link.data;
-
 				// This is primarily to omit the 'self' property
-				if(!linkage) {
+				if (!linkage) {
 					return;
-				} else if(_.isArray(linkage)) {
+				} else if (_.isArray(linkage)) {
 					model.attributes[name] = _.pluck(linkage, 'id');
 				} else {
 					model.attributes[name] = linkage.id;
 				}
 			});
-
 			return model;
+		},
+
+		// Fetches linked resources and stores them in $scope.data for typeahead
+		// callback = $scope.refreshData
+		loadLinkedData: function(rdesc, callback) {
+			var data = {};
+			_.each(rdesc.attributes.fields, function(field) {
+				var fieldBaseType = field.kind['base-type'];
+				var fieldTargetType = field.kind['target-type'];
+				if (fieldBaseType === 'Relationship' && !(fieldTargetType in data)) {
+					callback(data, fieldTargetType);
+				}
+			});
+			return data;
+		},
+
+		updateResource: function(model, rdesc, resource, callback) {
+			var finalModel = this.relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
+			rdesc.attributes.fields.forEach(function(field) {
+				if (field.validation['read-only'] && field.name !== 'id') {
+					delete finalModel.attributes[field.name];
+				}
+			});
+			return resource.patch(finalModel)
+			.catch(function(err) {
+				alert('Could not submit to resource. API returned the following error: ' + err.data.errors[0].title);
+			});
+		},
+
+		createResource: function(model, rdesc, resource) {
+			var finalModel = this.relink(angular.copy(Restangular.stripRestangular(model)), rdesc);
+			finalModel.type = rdesc.id;
+
+			return resource.post(finalModel)
+			.catch(function(err) {
+				alert('Could not submit to resource. API returned the following error: ' + err.data.errors[0].title);
+			});
+		},
+
+		deleteResource: function(resourceName, id, callback) {
+			return Restangular.one(resourceName, id).remove()
+			.catch(function() {
+				alert('Could not delete the entry');
+			});
 		}
 	};
 });
