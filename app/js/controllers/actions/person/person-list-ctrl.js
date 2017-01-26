@@ -42,7 +42,6 @@ angular
 					}
 					personData.roles = roles;
 				})
-
 			}
 
 			//getting currentEmployer
@@ -50,8 +49,6 @@ angular
 				Restangular.one("organizations/" + person.relationships.currentEmployer.data.id)
 				.get()
 				.then(function(org) {
-					// console.log(org.attributes.name);
-					// console.log(org.attributes.url); //some URLs are undefined...
 					personData.currentEmployer= org.attributes.name;
 				});
 			}
@@ -68,7 +65,7 @@ angular
 						} else {
 							schools = schools + ", " + data.attributes.schoolName;
 						}
-						personData.schools = schools;// console.log(schools);
+						personData.schools = schools;
 					});
 				})
 			};
@@ -85,7 +82,7 @@ angular
 						} else {
 							skills = skills + ", " + data.attributes.name;
 						}
-						personData.skills = skills;// console.log(skills);
+						personData.skills = skills;
 					});
 				});
 			}
@@ -102,7 +99,7 @@ angular
 						} else {
 							learn = learn + ", " + data.attributes.name;
 						}
-						personData.learn = learn;// console.log(learn);
+						personData.learn = learn;
 					});
 				});
 			}
@@ -119,9 +116,17 @@ angular
 						} else {
 							hire =  hire + ", " + data.attributes.name;
 						}
-						personData.wantsToHire = hire; //console.log(hire);
+						personData.wantsToHire = hire;
 					});
 				});
+			}
+
+			//get image url
+			var imgURL = '';
+			if (person.attributes.imgUrl != null || person.attributes.imgUrl != undefined) {
+				var url = person.attributes.imgUrl;
+				imgURL = "<a href=\"" + url + "\">" + url + "</a>";
+				personData.imgURL = imgURL;
 			}
 
 			$scope.personIDtoAttr[person.id] = personData;

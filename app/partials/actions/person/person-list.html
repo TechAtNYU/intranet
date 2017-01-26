@@ -39,6 +39,11 @@
 				</tr>
 
 				<tr>
+					<th>Title</th>
+					<td ng-bind-html="model.attributes['title']"></td>
+				</tr>
+
+				<tr>
 					<th>Skills</th>
 					<td>{{personIDtoAttr[model.id].skills}}</td>
 				</tr>
@@ -53,6 +58,11 @@
 					<td>{{personIDtoAttr[model.id].wantsToHire}}</td>
 				</tr>
 
+				<tr>
+					<th>Image URL</th>
+					<td ng-bind-html="personIDtoAttr[model.id].imgURL"></td>
+				</tr>
+
 			</tr>
 			<tr ng-repeat="field in rdesc.attributes.fields"
 					ng-if="field.name !== 'id' && field.name !== 'skills'
@@ -60,7 +70,9 @@
 								&& field.name !== 'wantsToLearn'
 								&& field.name !== 'currentEmployer'
 								&& field.name !== 'schools'
-								&& field.name !== 'roles'">
+								&& field.name !== 'roles'
+								&& field.name !== 'title'
+								&& field.name !== 'imgUrl'">
 				<th>{{field['friendly-name']}}</th>
 				<td>{{model.attributes[field.name]}}</td>
 			</tr>
