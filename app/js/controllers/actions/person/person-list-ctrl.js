@@ -15,13 +15,7 @@ angular
 		selectionMode = 'multiple';
 	}
 
-	// var currentEmployer = '';
-	// var schools = '';
-	// var roles = {};
-	// var skills = {};
-	// var wantsToLearn = {};
-
-	//image URL to render a link!
+	$scope.personIDtoAttr = {};
 
 	$scope.selectionMode = selectionMode;
 	Restangular.all(resourceName)
@@ -35,6 +29,22 @@ angular
 
 		//mapping personID to name, position and display information
 		_.each($scope.data, function(person) {
+
+			var personData= {};
+			//getting roles
+			var roles = '';
+			if (person.attributes.roles != null && person.attributes.roles.length > 0) {
+				person.attributes.roles.forEach(function(role) {
+					if (roles.length === 0) {
+						roles = role;
+					} else {
+						roles = roles + ", " + role;
+					}
+					personData.roles = roles;
+				})
+
+			}
+
 			//getting currentEmployer
 			if (person.relationships.currentEmployer.data != null) {
 				Restangular.one("organizations/" + person.relationships.currentEmployer.data.id)
@@ -42,6 +52,7 @@ angular
 				.then(function(org) {
 					// console.log(org.attributes.name);
 					// console.log(org.attributes.url); //some URLs are undefined...
+					personData.currentEmployer= org.attributes.name;
 				});
 			}
 
@@ -57,7 +68,7 @@ angular
 						} else {
 							schools = schools + ", " + data.attributes.schoolName;
 						}
-						// console.log(schools);
+						personData.schools = schools;// console.log(schools);
 					});
 				})
 			};
@@ -74,7 +85,7 @@ angular
 						} else {
 							skills = skills + ", " + data.attributes.name;
 						}
-						// console.log(skills);
+						personData.skills = skills;// console.log(skills);
 					});
 				});
 			}
@@ -91,19 +102,38 @@ angular
 						} else {
 							learn = learn + ", " + data.attributes.name;
 						}
-						// console.log(learn);
+						personData.learn = learn;// console.log(learn);
 					});
 				});
 			}
 
+			//get wantsToHire
+			var hire = '';
+			if (person.relationships.wantsToHire.data != null && person.relationships.wantsToHire.data.length > 0) {
+				person.relationships.wantsToHire.data.forEach(function(name) {
+					Restangular.one("skills/" + name.id)
+					.get()
+					.then(function(data) {
+						if (hire.length === 0) {
+							hire = data.attributes.name;
+						} else {
+							hire =  hire + ", " + data.attributes.name;
+						}
+						personData.wantsToHire = hire; //console.log(hire);
+					});
+				});
+			}
+
+			$scope.personIDtoAttr[person.id] = personData;
 		});//end for each loop
 	});
 
 
 	$scope.updateSelection = function(newModelId) {
-		// $state.go("list", {id: newModelId});
+		var index =	_.findIndex($scope.data, {'id': newModelId});
+		$scope.model = $scope.data[index];
 		$state.transitionTo('list',
-			{id: newModelId},
+			{id: newModelId, resourceName: resourceName},
 			{notify: false}
 		);
 	};

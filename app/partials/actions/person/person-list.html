@@ -22,8 +22,45 @@
 			<tr>
 				<th>ID</th>
 				<td>{{model.id}}</td>
+
+				<tr>
+					<th>Roles</th>
+					<td>{{personIDtoAttr[model.id].roles}}</td>
+				</tr>
+
+				<tr>
+					<th>Schools</th>
+					<td>{{personIDtoAttr[model.id].schools}}</td>
+				</tr>
+
+				<tr>
+					<th>Current Employer</th>
+					<td>{{personIDtoAttr[model.id].currentEmployer}}</td>
+				</tr>
+
+				<tr>
+					<th>Skills</th>
+					<td>{{personIDtoAttr[model.id].skills}}</td>
+				</tr>
+
+				<tr>
+					<th>Wants To Learn</th>
+					<td>{{personIDtoAttr[model.id].wantsToLearn}}</td>
+				</tr>
+
+				<tr>
+					<th>Wants To Hire</th>
+					<td>{{personIDtoAttr[model.id].wantsToHire}}</td>
+				</tr>
+
 			</tr>
-			<tr ng-repeat="field in rdesc.attributes.fields" ng-if="field.name !== 'id'">
+			<tr ng-repeat="field in rdesc.attributes.fields"
+					ng-if="field.name !== 'id' && field.name !== 'skills'
+								&& field.name !== 'wantsToHire'
+								&& field.name !== 'wantsToLearn'
+								&& field.name !== 'currentEmployer'
+								&& field.name !== 'schools'
+								&& field.name !== 'roles'">
 				<th>{{field['friendly-name']}}</th>
 				<td>{{model.attributes[field.name]}}</td>
 			</tr>
