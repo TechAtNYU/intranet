@@ -8,7 +8,8 @@ angular.module('app.services')
 			'list': 'partials/actions/default/default-list.html'
 		},
 		'events': {
-			'add': 'partials/actions/event/event-add.html'
+			'add': 'partials/actions/event/event-add.html',
+			'list': 'partials/actions/event/event-list.html'
 		},
 		'memberships': {
 			'add':'partials/actions/membership/membership-add.html',
@@ -16,7 +17,8 @@ angular.module('app.services')
 			'list':'partials/actions/membership/membership-list.html'
 		},
 		'organizations': {
-			'list': 'partials/actions/organization/organization-list.html'
+			'list': 'partials/actions/organization/organization-list.html',
+			'add': 'partials/actions/event/event-add.html'
 		}
 	}
 
