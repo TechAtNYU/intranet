@@ -32,16 +32,8 @@ angular
 
 			var personData= {};
 			//getting roles
-			var roles = '';
 			if (person.attributes.roles != null && person.attributes.roles.length > 0) {
-				person.attributes.roles.forEach(function(role) {
-					if (roles.length === 0) {
-						roles = role;
-					} else {
-						roles = roles + ", " + role;
-					}
-					personData.roles = roles;
-				})
+				personData.roles = person.attributes.roles.join(', ');
 			}
 
 			//getting currentEmployer
@@ -54,69 +46,53 @@ angular
 			}
 
 			//getting schools
-			var schools = '';
+			var schools = [];
 			if (person.relationships.schools.data != null && person.relationships.schools.data.length > 0) {
 				person.relationships.schools.data.forEach(function(school) {
 					Restangular.one("school-attendances/" + school.id)
 					.get()
 					.then(function(data) {
-						if (schools.length === 0) {
-							schools = data.attributes.schoolName;
-						} else {
-							schools = schools + ", " + data.attributes.schoolName;
-						}
-						personData.schools = schools;
+						schools.push(data.attributes.schoolName);
+						personData.schools = schools.join(', ');
 					});
 				})
 			};
 
 			//get skills
-			var skills = '';
+			var skills = [];
 			if (person.relationships.skills.data != null && person.relationships.skills.data.length > 0) {
 				person.relationships.skills.data.forEach(function(skill) {
 					Restangular.one("skills/" + skill.id)
 					.get()
 					.then(function(data) {
-						if (skills.length === 0) {
-							skills = data.attributes.name;
-						} else {
-							skills = skills + ", " + data.attributes.name;
-						}
-						personData.skills = skills;
+						skills.push(data.attributes.name);
+						personData.skills = skills.join(', ');
 					});
 				});
 			}
 
 			//get wantsToLearn
-			var learn = '';
+			var learn = [];
 			if (person.relationships.wantsToLearn.data != null && person.relationships.wantsToLearn.data.length > 0) {
 				person.relationships.wantsToLearn.data.forEach(function(name) {
 					Restangular.one("skills/" + name.id)
 					.get()
 					.then(function(data) {
-						if (learn.length === 0) {
-							learn = data.attributes.name;
-						} else {
-							learn = learn + ", " + data.attributes.name;
-						}
-						personData.learn = learn;
+						learn.push(data.attributes.name);
+						personData.learn = learn.join(', ');
 					});
 				});
 			}
 
 			//get wantsToHire
-			var hire = '';
+			var hire = [];
 			if (person.relationships.wantsToHire.data != null && person.relationships.wantsToHire.data.length > 0) {
 				person.relationships.wantsToHire.data.forEach(function(name) {
 					Restangular.one("skills/" + name.id)
 					.get()
 					.then(function(data) {
-						if (hire.length === 0) {
-							hire = data.attributes.name;
-						} else {
-							hire =  hire + ", " + data.attributes.name;
-						}
-						personData.wantsToHire = hire;
+						hire.push(data.attributes.name);
+						personData.wantsToHire = hire.join(', ');
 					});
 				});
 			}

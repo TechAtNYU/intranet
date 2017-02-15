@@ -19,7 +19,6 @@ angular.module('app.services')
 		'organizations': {
 			'list': 'partials/actions/organization/organization-list.html',
 			'add': 'partials/actions/event/event-add.html'
-		}
 		},
 		'people': {
 			'add':'partials/actions/people/people-add.html',
