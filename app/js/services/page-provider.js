@@ -29,7 +29,7 @@ angular.module('app.services')
 			'add':'partials/actions/jobs/jobs-add.html',
 			'edit':'partials/actions/jobs/jobs-edit.html',
 			'list': 'partials/actions/jobs/jobs-list.html'
-		},
+		}
 	}
 
 	return {
