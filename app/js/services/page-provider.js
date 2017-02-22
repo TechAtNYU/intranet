@@ -25,6 +25,11 @@ angular.module('app.services')
 			'edit':'partials/actions/people/people-edit.html',
 			'list': 'partials/actions/person/person-list.html'
 		},
+		'jobs': {
+			'add':'partials/actions/jobs/jobs-add.html',
+			'edit':'partials/actions/jobs/jobs-edit.html',
+			'list': 'partials/actions/jobs/jobs-list.html'
+		}
 	}
 
 	return {
