@@ -28,14 +28,14 @@ angular
 		$scope.organizations = {};
 		//mapping venueID to organizations
 		_.each($scope.data, function(element) {
-				if (element.relationships.organization.data !== null) {
-					Restangular.one("organizations/" + element.relationships.organization.data.id)
-					.get()
-					.then(org => {
-						$scope.organizations[element.id] = org.attributes.name;
-					});
-				}
-			})
+			if (element.relationships.organization.data !== null) {
+				Restangular.one("organizations/" + element.relationships.organization.data.id)
+				.get()
+				.then(org => {
+					$scope.organizations[element.id] = org.attributes.name;
+				});
+			}
+		})
 	});
 
 	$scope.updateSelection = function(newModelId) {
