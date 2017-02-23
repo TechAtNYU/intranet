@@ -12,7 +12,10 @@ angular
 
 
 	var teamsIdToName = {};
-	$scope.memberDetails = {};
+
+	$scope.displayActivity = function(isActive) {
+		return isActive ? 'Active Members' : 'Inactive Members';
+	}
 
 	//mapping teamID to teamName
 	Restangular.all('teams')
@@ -32,6 +35,7 @@ angular
 			var index = _.findIndex($scope.data, {id: resourceId});
 			$scope.model = $scope.data[index];
 		}
+		$scope.memberDetails = [];
 		//mapping memberID to name, position and display information
 		_.each($scope.data, function(element) {
 			Restangular.one("people/" + element.relationships.member.data.id)
@@ -40,11 +44,17 @@ angular
 				Restangular.one("positions/" + element.relationships.position.data.id)
 				.get()
 				.then(function(position) {
-					$scope.memberDetails[element.id] = {
+					$scope.memberDetails.push({
+						'id': element.id,
+						'display': person.attributes.name + " | " + teamsIdToName[position.relationships.team.data.id] + (position.attributes.isLead ? " (Lead)" : ""),
 						'name': person.attributes.name,
+            'team': teamsIdToName[position.relationships.team.data.id],
 						'position': teamsIdToName[position.relationships.team.data.id] + (position.attributes.isLead ? " (Lead)" : ""),
-						'display': person.attributes.name + " | " + teamsIdToName[position.relationships.team.data.id] + (position.attributes.isLead ? " (Lead)" : "")
-					};
+						'isActive': element.attributes.isActive,
+            'isLead': position.attributes.isLead,
+						'startDate': element.attributes.startDate,
+						'endDate': element.attributes.endDate
+					});
 				});
 			});
 		});
@@ -52,8 +62,8 @@ angular
 
 
 	$scope.updateSelection = function(newModelId) {
-		var index =	_.findIndex($scope.data, {'id': newModelId});
-		$scope.model = $scope.data[index];
+		var index =	_.findIndex($scope.memberDetails, {'id': newModelId});
+		$scope.model = $scope.memberDetails[index];
 		$state.transitionTo('list',
 			{id: newModelId, resourceName: resourceName},
 			{notify: false}
