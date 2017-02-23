@@ -34,6 +34,11 @@ angular.module('app.services')
 			'add':'partials/actions/venues/venues-add.html',
 			'edit':'partials/actions/venues/venues-edit.html',
 			'list': 'partials/actions/venues/venues-list.html'
+		},
+		'incomes': {
+			'add':'partials/actions/incomes/incomes-add.html',
+			'edit':'partials/actions/incomes/incomes-edit.html',
+			'list': 'partials/actions/incomes/incomes-list.html'
 		}
 	}
 
