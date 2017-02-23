@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('IncomesListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer) {
+.controller('IncomesListCtrl', function($scope, $filter, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;
@@ -11,11 +11,7 @@ angular
 	});
 
 	$scope.displayDate = function(date) {
-		if (date === undefined) { return; };
-		var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-		var year = parseInt(date.substring(0,4));
-		var month = parseInt(date.substring(5, 7));
-		return monthNames[month - 1] + " " + year;
+		return $filter('date')(date, 'MMMM yyyy');
 	}
 
 	$scope.authorizer = {};
