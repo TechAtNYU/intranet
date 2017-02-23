@@ -20,7 +20,6 @@ angular
 
 	$scope.authorizer = {};
 
-
 	Restangular.all(resourceName).getList().then(function(data) {
 		$scope.data = data;
 		if (resourceId) {
