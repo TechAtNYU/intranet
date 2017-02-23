@@ -33,7 +33,7 @@ angular
 
 
 	$scope.updateSelection = function(newModelId) {
-		var index =	_.findIndex($scope.data, {'id': newModelId});
+		var index = _.findIndex($scope.data, {'id': newModelId});
 		$scope.model = $scope.data[index];
 		$state.transitionTo('list',
 			{id: newModelId, resourceName: resourceName},
