@@ -40,7 +40,7 @@ angular.module('app.services')
 			'edit':'partials/actions/incomes/incomes-edit.html',
 			'list': 'partials/actions/incomes/incomes-list.html'
 		},
-    	'reimbursement-requests': {
+		'reimbursement-requests': {
 			'add':'partials/actions/reimbursements/reimbursements-add.html',
 			'edit':'partials/actions/reimbursements/reimbursements-edit.html',
 			'list': 'partials/actions/reimbursements/reimbursements-list.html'
