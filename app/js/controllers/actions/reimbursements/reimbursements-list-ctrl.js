@@ -16,7 +16,6 @@ angular
 
 	$scope.personToReimburse = {};
 
-console.log("asda");
 	Restangular.all(resourceName).getList().then(function(data) {
 		$scope.data = data;
 		if (resourceId) {
@@ -24,7 +23,6 @@ console.log("asda");
 		}
 
 		_.each($scope.data, element => {
-      console.log(element);
 			Restangular.one("people/" + element.relationships.personToReimburse.data.id)
 			.get()
 			.then(data => {
