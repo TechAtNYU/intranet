@@ -4,10 +4,29 @@
 	</h3>
 	<h5>{{rdesc.attributes.description}}</h5>
 
+	<div class="form-group" ng-form>
+		<label>Position</label>
+		<p class="help-block"></p>
+		<select chosen name="value"
+				ng-model="model.attributes[rdesc.attributes.fields[1].name]"
+				ng-options="m.id as positionIdToName[m.id] for m in data[rdesc.attributes.fields[1].kind['target-type']]"
+				ng-disabled="rdesc.attributes.fields[1].validation['read-only']"
+				style="min-width: 300px;">
+		<option value=""></option>
+		</select>
+
+		<a ui-sref="add({resourceName: rdesc.attributes.fields[1].kind['target-type']})" target="_blank" class="btn btn-sm btn-success" role="button">Add</a>
+		<a ui-sref="edit({resourceName: rdesc.attributes.fields[1].kind['target-type'], id: model[rdesc.attributes.fields[1].name]})" target="_blank" class="btn btn-sm btn-primary" role="button" ng-disabled="!model[rdesc.attributes.fields[1].name]">Edit</a>
+		<button class="btn btn-sm btn-default" ng-click="refreshData(data, rdesc.attributes.fields[1].kind['target-type'])"><i class="glyphicon glyphicon-refresh"></i></button>
+	</div ng-form>
+
+
 	<div class="form-group"
 		ng-repeat="field in rdesc.attributes.fields"
-		ng-if="fep.hiddenFields.indexOf(field.name) == -1 && field.name !== 'isActive'"
+		ng-if="fep.hiddenFields.indexOf(field.name) == -1
+				&& field.name !== 'isActive' && field.name !== 'position'"
 		ng-include="'/partials/fields/default-field.html'">
+		<div ng-form name="subForm">
 	</div>
 
 	<div class="form-group">
