@@ -34,6 +34,7 @@ angular
 				const isLead = element.attributes.isLead;
 				const teamName = teamsIdToName[element.relationships.team.data.id];
 				$scope.positionIdToName[element.id] = `${teamName} ${(isLead ? '- Lead' : '')}`;
+				$scope.refreshData($scope.data, $scope.rdesc.attributes.fields[1].kind['target-type']);
 			});
 		});
 	});
