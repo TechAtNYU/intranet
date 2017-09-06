@@ -1,0 +1,31 @@
+<div class="container" ng-controller="JobsEditCtrl">
+	<h3>
+		Edit {{rdesc.attributes.name.singular}}
+	</h3>
+	<h5>{{rdesc.attributes.description}}</h5>
+
+	<form name="form" novalidate>
+		<div class="form-group"
+			ng-repeat="field in rdesc.attributes.fields"
+			ng-if="fep.hiddenFields.indexOf(field.name) == -1 && field.name !== 'isActive'
+					&& field.name !== 'exiresAt'"
+			ng-include="'/partials/fields/default-field.html'">
+		</div>
+	</form>
+
+	<div class="form-group" ng-form>
+ 		<label>Expires At</label>
+ 		<div class="input-group" ng-controller="DateCtrl">
+ 		<span class="input-group-btn">
+ 			<button type="button" class="btn btn-default" ng-click="open($event)">
+ 				<i class="glyphicon glyphicon-calendar"></i>
+ 			</button>
+ 		</span>
+ 		<input name="value" type="text" class="form-control" datepicker-popup="short" ng-model="model.attributes[exiresAt]" is-open="opened" datepicker-options="dateOptions" date-disabled="field.validation['read-only']" close-text="Close" readonly>
+ 		</div>
+ 	</div ng-form>
+
+	<div class="form-group">
+		<button class="btn btn-primary" ng-click="updateResource(model, rdesc)">Submit</button>
+	</div>
+</div>

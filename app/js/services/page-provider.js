@@ -18,6 +18,32 @@ angular.module('app.services')
 		},
 		'organizations': {
 			'list': 'partials/actions/organization/organization-list.html'
+			'add': 'partials/actions/event/event-add.html'
+		},
+		'people': {
+			'add':'partials/actions/people/people-add.html',
+			'edit':'partials/actions/people/people-edit.html',
+			'list': 'partials/actions/person/person-list.html'
+		},
+		'jobs': {
+			'add':'partials/actions/jobs/jobs-add.html',
+			'edit':'partials/actions/jobs/jobs-edit.html',
+			'list': 'partials/actions/jobs/jobs-list.html'
+		},
+		'venues': {
+			'add':'partials/actions/venues/venues-add.html',
+			'edit':'partials/actions/venues/venues-edit.html',
+			'list': 'partials/actions/venues/venues-list.html'
+		},
+		'incomes': {
+			'add':'partials/actions/incomes/incomes-add.html',
+			'edit':'partials/actions/incomes/incomes-edit.html',
+			'list': 'partials/actions/incomes/incomes-list.html'
+		},
+		'reimbursement-requests': {
+			'add':'partials/actions/reimbursements/reimbursements-add.html',
+			'edit':'partials/actions/reimbursements/reimbursements-edit.html',
+			'list': 'partials/actions/reimbursements/reimbursements-list.html'
 		}
 	}
 
