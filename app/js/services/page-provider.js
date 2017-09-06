@@ -17,12 +17,12 @@ angular.module('app.services')
 			'list':'partials/actions/membership/membership-list.html'
 		},
 		'organizations': {
-			'list': 'partials/actions/organization/organization-list.html'
+			'list': 'partials/actions/organization/organization-list.html',
 			'add': 'partials/actions/event/event-add.html'
 		},
 		'people': {
-			'add':'partials/actions/people/people-add.html',
-			'edit':'partials/actions/people/people-edit.html',
+			'add':'partials/actions/person/person-add.html',
+			'edit':'partials/actions/person/person-edit.html',
 			'list': 'partials/actions/person/person-list.html'
 		},
 		'jobs': {

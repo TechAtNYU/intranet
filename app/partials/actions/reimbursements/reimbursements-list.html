@@ -26,7 +26,7 @@
 
 			<tr ng-repeat="field in rdesc.attributes.fields"
 				ng-if="field.name !== 'id' && field.name !== 'dateOfExpense'
-					&& field.name !== g'created' && field.name !== 'modified'
+					&& field.name !== 'created' && field.name !== 'modified'
 					&& field.name !== 'personToReimburse'">
 				<th>{{field['friendly-name']}}</th>
 				<td>{{model.attributes[field.name]}}</td>
