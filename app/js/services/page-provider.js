@@ -21,8 +21,8 @@ angular.module('app.services')
 			'add': 'partials/actions/event/event-add.html'
 		},
 		'people': {
-			'add':'partials/actions/people/people-add.html',
-			'edit':'partials/actions/people/people-edit.html',
+			'add':'partials/actions/person/person-add.html',
+			'edit':'partials/actions/person/person-edit.html',
 			'list': 'partials/actions/person/person-list.html'
 		},
 		'jobs': {
@@ -39,6 +39,11 @@ angular.module('app.services')
 			'add':'partials/actions/incomes/incomes-add.html',
 			'edit':'partials/actions/incomes/incomes-edit.html',
 			'list': 'partials/actions/incomes/incomes-list.html'
+		},
+		'reimbursement-requests': {
+			'add':'partials/actions/reimbursements/reimbursements-add.html',
+			'edit':'partials/actions/reimbursements/reimbursements-edit.html',
+			'list': 'partials/actions/reimbursements/reimbursements-list.html'
 		}
 	}
 

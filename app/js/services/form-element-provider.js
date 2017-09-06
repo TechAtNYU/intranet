@@ -3,7 +3,7 @@ angular.module('app.services')
 	'use strict';
 
 	var useTextarea = function(field) {
-		var acceptsLongValues = (field.validation.maxlength || 0) > 140;
+		var acceptsLongValues = (field.validation.maxlength || 0) > 200;
 		var acceptsEmailOrUrl = field.validation.url || field.validation.email;
 
 		// For the rationale behind never giving email and url fields a
