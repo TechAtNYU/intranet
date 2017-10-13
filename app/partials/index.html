@@ -1,15 +1,15 @@
 <div class="container">
 
+<div class="card-deck">
     <div ng-repeat="rdesc in apidesc">
-    	  <div class="col-4">
-    		      <div class="card">
+      <div class="card" style="width: 300px; height: 200px; margin: 30px;">
         <div class="card-block">
           <h4 class="card-title">{{rdesc.attributes.name.plural}}</h4>
           <h6 class="card-subtitle mb-2 text-muted">{{rdesc.attributes.description}}</h6>
           <a ui-sref="list({resourceName: rdesc.id})" class="btn btn-outline-primary">List</a>
           <a ui-sref="add({resourceName: rdesc.id})" class="btn btn-success">Add</a>
         </div>
+      </div>
     </div>
   </div>
-</div>
 </div>
