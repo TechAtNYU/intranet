@@ -35,3 +35,7 @@ label {
 .chosen-container-single .chosen-single div b {
   background-position-y: 4px;
 }
+
+.content {
+  padding-top: 20px;
+}
