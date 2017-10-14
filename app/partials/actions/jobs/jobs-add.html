@@ -15,8 +15,8 @@
  		<label>Expires At</label>
  		<div class="input-group" ng-controller="DateCtrl">
  		<span class="input-group-btn">
- 			<button type="button" class="btn btn-default" ng-click="open($event)">
- 				<i class="glyphicon glyphicon-calendar"></i>
+ 			<button type="button" class="btn btn-outline-primary" ng-click="open($event)">
+ 				<i class="fa fa-calendar" aria-hidden="true"></i>
  			</button>
  		</span>
  		<input name="value" type="text" class="form-control" datepicker-popup="short" ng-model="model.attributes[exiresAt]" is-open="opened" datepicker-options="dateOptions" date-disabled="field.validation['read-only']" close-text="Close" readonly>
