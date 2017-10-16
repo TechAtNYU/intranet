@@ -35,6 +35,11 @@ angular.module('app.services')
 			'edit':'partials/actions/venues/venues-edit.html',
 			'list': 'partials/actions/venues/venues-list.html'
 		},
+		'expenses': {
+			'add':'partials/actions/expenses/expenses-add.html',
+			'edit':'partials/actions/expenses/expenses-edit.html',
+			'list': 'partials/actions/expenses/expenses-list.html'
+		},
 		'incomes': {
 			'add':'partials/actions/incomes/incomes-add.html',
 			'edit':'partials/actions/incomes/incomes-edit.html',
