@@ -1,0 +1,60 @@
+<div class="container" ng-controller="ExpensesListCtrl">
+	<h3>
+		List {{rdesc.attributes.name.singular}}
+	</h3>
+	<h5>{{rdesc.attributes.description}}</h5>
+
+	<div class="form-group">
+		<select chosen
+			ng-model="model"
+			ng-options="(m.attributes.shortName) group by displayDate(m.attributes.date) for m in data"
+			ng-change="updateSelection(model.id)"
+			style="width: 500px;">
+			<option value=""></option>
+		</select>
+		<button ui-sref="add({resourceName: rdesc.id})" class="btn btn-sm btn-success">Add</button>
+		<button ui-sref="edit({resourceName: rdesc.id, id: model.id})" ng-disabled="!model" class="btn btn-sm btn-primary">Edit</button>
+		<button ng-click="deleteResource(model.id)" ng-disabled="!model" class="btn btn-sm btn-danger">Delete</button>
+	</div>
+
+	<div class="form-group">
+		<table class="table table-hover table-bordered table-condensed">
+		<tr>
+			<th>ID</th>
+			<td>{{model.id}}</td>
+		</tr>
+
+		<tr ng-repeat="field in rdesc.attributes.fields"
+      		ng-if="field.name !== 'id' && field.name !== 'created'
+      		&& field.name !== 'modified' && field.name !== 'date'
+      		&& field.name !== 'reimbursementFor'">
+			<th>{{field['friendly-name']}}</th>
+			<td>{{model.attributes[field.name]}}</td>
+		</tr>
+
+		<tr>
+        	<th>Reimbursement For</th>
+        	<td ng-bind-html="reimbursing[model.id]"></td>
+	    </tr>
+
+	    <tr>
+	    	<th>Date of Expense</th>
+	        <td>{{model.attributes['date'] | date : 'medium'}}</td>
+	    </tr>
+
+	    <tr>
+	        <th>Created At</th>
+	        <td>{{model.attributes['created'] | date : 'medium'}}</td>
+	    </tr>
+
+	    <tr>
+	        <th>Modified At</th>
+	        <td>{{model.attributes['modified'] | date : 'medium'}}</td>
+	    </tr>
+		</table>
+	</div>
+
+	<div class="form-group">
+
+	</div>
+</div>

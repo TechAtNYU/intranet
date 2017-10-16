@@ -1,13 +1,14 @@
-<div class="container" ng-controller="MembershipListCtrl">
+<div class="container" ng-controller="IncomesListCtrl">
 	<h3>
 		List {{rdesc.attributes.name.singular}}
 	</h3>
 	<h5>{{rdesc.attributes.description}}</h5>
+
 	<div class="form-group">
 		<select chosen
-				ng-model="select_id"
-				ng-options="info.id as info.display group by displayActivity(info.isActive) for info in memberDetails | orderBy: ['-isActive', 'team', '-isLead']"
-				ng-change="updateSelection(select_id)"
+				ng-model="model"
+				ng-options="(m.attributes.shortName) group by displayDate(m.attributes.recievedOn) for m in data | orderBy: 'attributes.startDateTime': true"
+				ng-change="updateSelection(model.id)"
 				style="width: 500px;">
 			<option value=""></option>
 		</select>
@@ -23,31 +24,16 @@
 				<td>{{model.id}}</td>
 			</tr>
 
-			<tr>
-				<th>Name</th>
-				<td>{{model.name}}</td>
+			<tr ng-repeat="field in rdesc.attributes.fields"
+					ng-if="field.name !== 'id' && field.name !== 'authorizer'">
+				<th>{{field['friendly-name']}}</th>
+				<td>{{model.attributes[field.name]}}</td>
 			</tr>
 
 			<tr>
-				<th>Position</th>
-				<td>{{model.position}}</td>
+				<th>Authorizer</th>
+				<td>{{authorizer[model.id]}}</td>
 			</tr>
-
-			<tr>
-				<th>Start Date</th>
-				<td>{{model.startDate | date: 'medium'}}</td>
-			</tr>
-
-			<tr>
-				<th>End Date</th>
-				<td>{{model.endDate | date: 'medium'}}</td>
-			</tr>
-
-			<tr>
-				<th>Is Active</th>
-				<td>{{model.isActive}}</td>
-			</tr>
-
 		</table>
 	</div>
 

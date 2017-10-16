@@ -1,0 +1,16 @@
+<div class="container" ng-controller="ExpensesAddCtrl">
+	<h3>
+		Add {{rdesc.attributes.name.singular}}
+	</h3>
+	<h5>{{rdesc.attributes.description}}</h5>
+
+	<div class="form-group"
+		ng-repeat="field in rdesc.attributes.fields"
+		ng-if="fep.hiddenFields.indexOf(field.name) == -1"
+		ng-include="'/partials/fields/default-field.html'">
+	</div>
+
+	<div class="form-group">
+		<button class="btn btn-primary" ng-click="createResource(model, rdesc)">Create</button>
+	</div>
+</div>
