@@ -1,17 +1,13 @@
 <div class="container">
-	<h3>Home</h3>
-
-	<div class="col-md-3" ng-repeat="rdesc in apidesc">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<div class="panel-title">{{rdesc.attributes.name.plural}}</div>
-			</div>
-			<div class="panel-body">
-				<p>
-					<a ui-sref="list({resourceName: rdesc.id})" class="btn btn-default">List</a>
-					<a ui-sref="add({resourceName: rdesc.id})" class="btn btn-success">Add</a>
-				</p>
-			</div>
-		</div>
-	</div>
+  <div class="card-deck justify-content-md-center">
+    <div ng-repeat="rdesc in apidesc">
+      <div class="card" style="width: 300px; height: 150px; margin: 20px">
+        <div class="card-body">
+          <h4 class="card-title">{{rdesc.attributes.name.plural}}</h4>
+          <a ui-sref="list({resourceName: rdesc.id})" class="btn btn-outline-primary">List</a>
+          <a ui-sref="add({resourceName: rdesc.id})" class="btn btn-success">Add</a>
+        </div>
+      </div>
+    </div>
+<  /div>
 </div>
