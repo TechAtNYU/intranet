@@ -3,7 +3,7 @@
 angular
 .module('app.controllers')
 .controller('MembershipEditCtrl', function($scope, $rootScope, $stateParams, $state,
-		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
+		$interval, formatTeamDisplayFilter, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
 
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
@@ -38,7 +38,7 @@ angular
 			_.each(position, function(element) {
 				const isLead = element.attributes.isLead;
 				const teamName = teamsIdToName[element.relationships.team.data.id];
-				$scope.positionIdToName[element.id] = `${teamName} ${(isLead ? '- Lead' : '')}`;
+				$scope.positionIdToName[element.id] = formatTeamDisplayFilter(teamName, isLead);
 				$scope.refreshData($scope.data, $scope.rdesc.attributes.fields[1].kind['target-type']);
 			});
 		});
