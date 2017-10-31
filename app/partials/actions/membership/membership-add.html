@@ -5,7 +5,7 @@
 	<h5>{{rdesc.attributes.description}}</h5>
 
 	<div class="form-group" ng-form>
-		<label>Position</label>
+		<label><strong>Position</strong></label>
 		<p class="help-block"></p>
 		<select chosen name="value"
 				ng-model="model.attributes[rdesc.attributes.fields[1].name]"
@@ -30,7 +30,7 @@
 	</div>
 
 	<div class="form-group" ng-form>
-		<label>Start Date</label>
+		<label><strong>Start Date</strong></label>
 		<div class="input-group" ng-controller="DateCtrl">
 		<span class="input-group-btn">
 			<button type="button" class="btn btn-outline-primary" ng-click="open($event)">
@@ -42,7 +42,7 @@
 	</div ng-form>
 
 	<div class="form-group" ng-form>
-		<label>End Date</label>
+		<label><strong>End Date</strong></label>
 		<div class="input-group" ng-controller="DateCtrl">
 		<span class="input-group-btn">
 			<button type="button" class="btn btn-outline-primary" ng-click="open($event)">
