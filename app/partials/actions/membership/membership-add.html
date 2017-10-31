@@ -4,11 +4,55 @@
 	</h3>
 	<h5>{{rdesc.attributes.description}}</h5>
 
+	<div class="form-group" ng-form>
+		<label>Position</label>
+		<p class="help-block"></p>
+		<select chosen name="value"
+				ng-model="model.attributes[rdesc.attributes.fields[1].name]"
+				ng-options="m.id as positionIdToName[m.id] for m in data[rdesc.attributes.fields[1].kind['target-type']]"
+				ng-disabled="rdesc.attributes.fields[1].validation['read-only']"
+				style="min-width: 300px;">
+		<option value=""></option>
+		</select>
+
+		<a ui-sref="add({resourceName: rdesc.attributes.fields[1].kind['target-type']})" target="_blank" class="btn btn-sm btn-success" role="button">Add</a>
+		<a ui-sref="edit({resourceName: rdesc.attributes.fields[1].kind['target-type'], id: model[position]})" target="_blank" class="btn btn-sm btn-primary" role="button" ng-disabled="!model[position]">Edit</a>
+		<button class="btn btn-sm btn-default" ng-click="refreshData(data, rdesc.attributes.fields[1].kind['target-type'])"><i class="glyphicon glyphicon-refresh"></i></button>
+	</div ng-form>
+
 	<div class="form-group"
 		ng-repeat="field in rdesc.attributes.fields"
-		ng-if="fep.hiddenFields.indexOf(field.name) == -1 && field.name !== 'isActive'"
+		ng-if="fep.hiddenFields.indexOf(field.name) == -1
+				&& field.name !== 'isActive' && field.name !== 'position'
+				&& field.name !== 'startDate' && field.name !== 'endDate'"
 		ng-include="'/partials/fields/default-field.html'">
+		<div ng-form name="subForm"></div>
 	</div>
+
+	<div class="form-group" ng-form>
+		<label>Start Date</label>
+		<div class="input-group" ng-controller="DateCtrl">
+		<span class="input-group-btn">
+			<button type="button" class="btn btn-default" ng-click="open($event)">
+				<i class="glyphicon glyphicon-calendar"></i>
+			</button>
+		</span>
+		<input name="value" type="text" class="form-control" datepicker-popup="short" ng-model="model.attributes['startDate']" is-open="opened" datepicker-options="dateOptions" date-disabled="field.validation['read-only']" close-text="Close" readonly>
+		</div>
+	</div ng-form>
+
+	<div class="form-group" ng-form>
+		<label>End Date</label>
+		<div class="input-group" ng-controller="DateCtrl">
+		<span class="input-group-btn">
+			<button type="button" class="btn btn-default" ng-click="open($event)">
+				<i class="glyphicon glyphicon-calendar"></i>
+			</button>
+		</span>
+		<input name="value" type="text" class="form-control" datepicker-popup="short" ng-model="model.attributes['endDate']" is-open="opened" datepicker-options="dateOptions" date-disabled="field.validation['read-only']" close-text="Close" readonly>
+		</div>
+	</div ng-form>
+
 
 	<div class="form-group">
 		<button class="btn btn-primary" ng-click="createResource(model, rdesc)">Create</button>
