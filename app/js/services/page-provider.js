@@ -20,6 +20,11 @@ angular.module('app.services')
 			'list': 'partials/actions/organization/organization-list.html',
 			'add': 'partials/actions/event/event-add.html'
 		},
+		'positions': {
+			'list': 'partials/actions/position/position-list.html',
+			'edit':'partials/actions/position/position-edit.html',
+			'list': 'partials/actions/position/position-list.html'
+		},
 		'people': {
 			'add':'partials/actions/person/person-add.html',
 			'edit':'partials/actions/person/person-edit.html',
