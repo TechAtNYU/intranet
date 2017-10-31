@@ -5,7 +5,6 @@ angular
 .controller('PositionListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
-	console.log("this is position");
 	$scope.resourceName = resourceName;
 	apiDescriptor.then(function(apiDescription) {
 		$scope.rdesc = apiDescription.resource(resourceName);
@@ -30,7 +29,7 @@ angular
 				}	
 				$scope.data = data;
 				_.each($scope.data, function(element) {
-					element.attributes.name = teamsIdToName[element.relationships.team.data.id] + (element.attributes.isLead ? " Lead" : "");
+					element.attributes.name = teamsIdToName[element.relationships.team.data.id] + (element.attributes.isLead ? " Lead" : " Member");
 					element.attributes.team = teamsIdToName[element.relationships.team.data.id];
 					element.attributes.applicationForm = (element.relationships.applicationForm.data==null ? "None" : element.relationships.applicationForm);
 				});
