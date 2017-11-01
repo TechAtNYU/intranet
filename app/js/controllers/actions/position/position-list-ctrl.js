@@ -3,7 +3,7 @@
 angular
 .module('app.controllers')
 .controller('PositionListCtrl', function($scope, $rootScope, $stateParams,
-		$state, formatTeamDisplayFilter, Restangular, apiDescriptor, dataTransformer) {
+		$state, formatTeamDisplayFilter, Restangular, apiDescriptor, dataTransformer, preProcess) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;
@@ -11,7 +11,7 @@ angular
 		$scope.rdesc = apiDescription.resource(resourceName);
 	});
 	// PositionID -> Team ID -> Team Name
-	var teamsIdToName = {};
+	var teamsIdToName = preProcess.position();
 	//map id to teams (positions)
 	Restangular.all('teams')
 		.getList()
