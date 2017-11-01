@@ -2,7 +2,8 @@
 
 angular
 .module('app.controllers')
-.controller('PositionListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer) {
+.controller('PositionListCtrl', function($scope, $rootScope, $stateParams,
+		$state, formatTeamDisplayFilter, Restangular, apiDescriptor, dataTransformer) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;
@@ -11,7 +12,6 @@ angular
 	});
 	// PositionID -> Team ID -> Team Name
 	var teamsIdToName = {};
-
 	//map id to teams (positions)
 	Restangular.all('teams')
 		.getList()
@@ -28,7 +28,7 @@ angular
 				}	
 				$scope.data = data;
 				_.each($scope.data, function(element) {
-					element.attributes.name = teamsIdToName[element.relationships.team.data.id] + (element.attributes.isLead ? " Lead" : " Member");
+					element.attributes.name = formatTeamDisplayFilter(teamsIdToName[element.relationships.team.data.id], element.attributes.isLead);
 					element.attributes.team = teamsIdToName[element.relationships.team.data.id];
 					element.attributes.applicationForm = (element.relationships.applicationForm.data==null ? "None" : element.relationships.applicationForm);
 				});
