@@ -12,7 +12,6 @@ angular
 	// PositionID -> Team ID -> Team Name
 	var teamsIdToName = {};
 
-
 	//map id to teams (positions)
 	Restangular.all('teams')
 		.getList()
