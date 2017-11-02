@@ -11,29 +11,26 @@ angular
 		$scope.rdesc = apiDescription.resource(resourceName);
 	});
 	// PositionID -> Team ID -> Team Name
-	var teamsIdToName = preProcess.position();
+	var teamsIdToName = preProcess.teamIdtoNames();
 	//map id to teams (positions)
-	Restangular.all('teams')
-		.getList()
-		.then(function(teams) {
-			_.each(teams, function(element) {
-				teamsIdToName[element.id] = element.attributes.name;
-			});
-			Restangular.all(resourceName)
-			.getList()
-			.then(function(data) {	
-				if (resourceId) {
-					var index = _.findIndex($scope.data, {id: resourceId});
-					$scope.model = $scope.data[index];
-				}	
-				$scope.data = data;
-				_.each($scope.data, function(element) {
-					element.attributes.name = formatTeamDisplayFilter(teamsIdToName[element.relationships.team.data.id], element.attributes.isLead);
-					element.attributes.team = teamsIdToName[element.relationships.team.data.id];
-					element.attributes.applicationForm = (element.relationships.applicationForm.data==null ? "None" : element.relationships.applicationForm);
-				});
-			});
+	Restangular.all(resourceName)
+	.getList()
+	.then(function(data) {	
+		if (resourceId) {
+			var index = _.findIndex($scope.data, {id: resourceId});
+			$scope.model = $scope.data[index];
+		}	
+		$scope.data = data;
+		_.each($scope.data, function(element) {
+			const name = preProcess.positionToString(teamsIdToName, element);
+			element.attributes.name = formatTeamDisplayFilter(name, element.attributes.isLead);
+			element.attributes.team = name;
+			element.attributes.applicationForm = (element.relationships.applicationForm.data==null ? "None" : element.relationships.applicationForm);
 		});
+	});
 	
 
 }); //modular
+
+//			element.attributes.name = formatTeamDisplayFilter(preProcess.positionToString(preProcess, element), element.attributes.isLead);
+//teamsIdToName[element.relationships.team.data.id]

@@ -3,7 +3,7 @@ angular
 .factory('preProcess', function(Restangular, apiDescriptor) {
 	'use strict';
     return{
-        position: function() {
+        teamIdtoNames: function() {
             var teamsIdToName = {};
             Restangular.all('teams')
                 .getList()
@@ -13,9 +13,14 @@ angular
                     });
                 });
             return teamsIdToName;
+        },
+        positionToString: function(teamMap, element){
+            return teamMap[element.relationships.team.data.id];
         }
     };
     
 });
+
+//positionToString(teamIdsToNames, position): string
 
  
