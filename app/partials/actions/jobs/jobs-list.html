@@ -7,7 +7,7 @@
 	<div class="form-group">
 		<select chosen
 				ng-model="select_id"
-				ng-options="id as info.display group by displayDate(info.expireDate) for (id, info) in jobIDtoAttr"
+				ng-options="id as info.display group by expiredOrNot(info.expireDate) for (id, info) in jobIDtoAttr"
 				ng-change="updateSelection(select_id)"
 				style="width: 500px;">
 			<option value=""></option>

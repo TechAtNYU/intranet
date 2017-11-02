@@ -18,6 +18,19 @@ angular
 		return monthNames[month - 1] + " " + year;
 	}
 
+	$scope.expiredOrNot = function(date){
+		const today = new Date().toISOString;
+		console.log(today);
+		const d1 = new Date(today)
+    const d2 = new Date(date);
+		if(d1 <= d2){
+			console.log(d1 < d2);
+			return "Active";
+		}
+		console.log(d1 < d2);
+		return "Expired";
+	}
+
 	$scope.prettifyDate = function(date) {
 		if (date === undefined) { return; };
 		var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
