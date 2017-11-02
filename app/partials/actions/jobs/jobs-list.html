@@ -7,7 +7,7 @@
 	<div class="form-group">
 		<select chosen
 				ng-model="select_id"
-				ng-options="id as info.display for (id, info) in jobIDtoAttr"
+				ng-options="id as info.display group by displayDate(info.expireDate) for (id, info) in jobIDtoAttr"
 				ng-change="updateSelection(select_id)"
 				style="width: 500px;">
 			<option value=""></option>
@@ -27,6 +27,11 @@
 			<tr>
 				<th>Employer</th>
 				<td>{{jobIDtoAttr[model.id].employer}}</td>
+			</tr>
+
+			<tr>
+				<th>Expires</th>
+				<td ng-bind-html="prettifyDate(jobIDtoAttr[model.id].expireDate)"></td>
 			</tr>
 
 			<tr>

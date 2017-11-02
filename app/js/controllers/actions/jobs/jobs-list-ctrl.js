@@ -10,6 +10,23 @@ angular
 		$scope.rdesc = apiDescription.resource(resourceName);
 	});
 
+	$scope.displayDate = function(date) {
+		if (date === undefined) { return; };
+		var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		var year = parseInt(date.substring(0,4));
+		var month = parseInt(date.substring(5, 7));
+		return monthNames[month - 1] + " " + year;
+	}
+
+	$scope.prettifyDate = function(date) {
+		if (date === undefined) { return; };
+		var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		var year = parseInt(date.substring(0, 4));
+		var month = parseInt(date.substring(5, 7));
+		var day = parseInt(date.substring(8, 10));
+		return monthNames[month - 1] + " " + day + ", "+ year;
+	}
+
 	var selectionMode = $stateParams.selectionMode;
 	if (!selectionMode || (selectionMode !== 'single ' && selectionMode !== 'multiple')) {
 		selectionMode = 'multiple';
@@ -30,7 +47,6 @@ angular
 		_.each($scope.data, job => {
 			//store all attributes for each job
 			const attributes = {};
-
 			//storing employer
 			Restangular.one("organizations/" + job.relationships.employer.data.id)
 			.get()
@@ -45,7 +61,9 @@ angular
 				} else {
 					attributes['url'] = '';
 				}
-
+				//add expire date
+				const expireDate = job.attributes.exiresAt;
+				attributes['expireDate'] = expireDate;
 				//storing categories
 				const categories = job.attributes.categories;
 				attributes['categories'] = categories.join(', ');

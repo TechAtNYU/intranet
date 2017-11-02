@@ -53,3 +53,5 @@ angular.xcodeproj
 libpeerconnection.log
 /tmp/
 /scripts/bower/bower-*
+
+package-lock.json
