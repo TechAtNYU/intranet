@@ -22,8 +22,6 @@ angular.module('app.services')
 		},
 		'positions': {
 			'list': 'partials/actions/position/position-list.html',
-			'edit':'partials/actions/position/position-edit.html',
-			'list': 'partials/actions/position/position-list.html'
 		},
 		'people': {
 			'add':'partials/actions/person/person-add.html',
