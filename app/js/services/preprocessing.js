@@ -21,7 +21,6 @@ angular
             else{
                 return formatTeamDisplayFilter(teamMap[element.relationships.team.data.id], false);
             }
-
         }
     };
 });

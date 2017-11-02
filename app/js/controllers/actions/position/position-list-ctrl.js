@@ -1,5 +1,3 @@
-'use strict';
-
 angular
 .module('app.controllers')
 .controller('PositionListCtrl', function($scope, $rootScope, $stateParams,
@@ -27,5 +25,4 @@ angular
 			element.attributes.applicationForm = (element.relationships.applicationForm.data==null ? "None" : element.relationships.applicationForm);
 		});
 	});
-
-}); //modular
+});
