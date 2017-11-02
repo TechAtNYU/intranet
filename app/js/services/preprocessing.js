@@ -18,6 +18,4 @@ angular
             return teamMap[element.relationships.team.data.id];
         }
     };
-    
 });
- 
