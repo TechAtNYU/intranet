@@ -20,7 +20,4 @@ angular
     };
     
 });
-
-//positionToString(teamIdsToNames, position): string
-
  

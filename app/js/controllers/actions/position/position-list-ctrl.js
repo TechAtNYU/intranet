@@ -28,9 +28,5 @@ angular
 			element.attributes.applicationForm = (element.relationships.applicationForm.data==null ? "None" : element.relationships.applicationForm);
 		});
 	});
-	
 
 }); //modular
-
-//			element.attributes.name = formatTeamDisplayFilter(preProcess.positionToString(preProcess, element), element.attributes.isLead);
-//teamsIdToName[element.relationships.team.data.id]
