@@ -22,9 +22,8 @@ angular
 		}	
 		$scope.data = data;
 		_.each($scope.data, function(element) {
-			const name = preProcess.positionToString(teamsIdToName, element);
-			element.attributes.name = formatTeamDisplayFilter(name, element.attributes.isLead);
-			element.attributes.team = name;
+			element.attributes.name = preProcess.positionToString(teamsIdToName, element, true);
+			element.attributes.team = preProcess.positionToString(teamsIdToName, element, false);
 			element.attributes.applicationForm = (element.relationships.applicationForm.data==null ? "None" : element.relationships.applicationForm);
 		});
 	});

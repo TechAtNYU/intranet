@@ -1,6 +1,6 @@
 angular
 .module('app.services')
-.factory('preProcess', function(Restangular, apiDescriptor) {
+.factory('preProcess', function(Restangular, formatTeamDisplayFilter) {
 	'use strict';
     return{
         teamIdtoNames: function() {
@@ -14,8 +14,14 @@ angular
                 });
             return teamsIdToName;
         },
-        positionToString: function(teamMap, element){
-            return teamMap[element.relationships.team.data.id];
+        positionToString: function(teamMap, element, includeLead){
+            if(includeLead){
+                return formatTeamDisplayFilter(teamMap[element.relationships.team.data.id], element.attributes.isLead);
+            }
+            else{
+                return formatTeamDisplayFilter(teamMap[element.relationships.team.data.id], false);
+            }
+
         }
     };
 });
