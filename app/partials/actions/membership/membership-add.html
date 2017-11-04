@@ -5,7 +5,7 @@
 	<h5>{{rdesc.attributes.description}}</h5>
 
 	<div class="form-group" ng-form>
-		<label>Position</label>
+		<label><strong>Position</strong></label>
 		<p class="help-block"></p>
 		<select chosen name="value"
 				ng-model="model.attributes[rdesc.attributes.fields[1].name]"
@@ -17,7 +17,7 @@
 
 		<a ui-sref="add({resourceName: rdesc.attributes.fields[1].kind['target-type']})" target="_blank" class="btn btn-sm btn-success" role="button">Add</a>
 		<a ui-sref="edit({resourceName: rdesc.attributes.fields[1].kind['target-type'], id: model[position]})" target="_blank" class="btn btn-sm btn-primary" role="button" ng-disabled="!model[position]">Edit</a>
-		<button class="btn btn-sm btn-default" ng-click="refreshData(data, rdesc.attributes.fields[1].kind['target-type'])"><i class="glyphicon glyphicon-refresh"></i></button>
+		<button class="btn btn-sm btn-outline-primary" ng-click="refreshData(data, rdesc.attributes.fields[1].kind['target-type'])"><i class="fa fa-refresh" aria-hidden="true"></i></button>
 	</div ng-form>
 
 	<div class="form-group"
@@ -30,11 +30,11 @@
 	</div>
 
 	<div class="form-group" ng-form>
-		<label>Start Date</label>
+		<label><strong>Start Date</strong></label>
 		<div class="input-group" ng-controller="DateCtrl">
 		<span class="input-group-btn">
-			<button type="button" class="btn btn-default" ng-click="open($event)">
-				<i class="glyphicon glyphicon-calendar"></i>
+			<button type="button" class="btn btn-outline-primary" ng-click="open($event)">
+				<i class="fa fa-calendar" aria-hidden="true"></i>
 			</button>
 		</span>
 		<input name="value" type="text" class="form-control" datepicker-popup="short" ng-model="model.attributes['startDate']" is-open="opened" datepicker-options="dateOptions" date-disabled="field.validation['read-only']" close-text="Close" readonly>
@@ -42,11 +42,11 @@
 	</div ng-form>
 
 	<div class="form-group" ng-form>
-		<label>End Date</label>
+		<label><strong>End Date</strong></label>
 		<div class="input-group" ng-controller="DateCtrl">
 		<span class="input-group-btn">
-			<button type="button" class="btn btn-default" ng-click="open($event)">
-				<i class="glyphicon glyphicon-calendar"></i>
+			<button type="button" class="btn btn-outline-primary" ng-click="open($event)">
+				<i class="fa fa-calendar" aria-hidden="true"></i>
 			</button>
 		</span>
 		<input name="value" type="text" class="form-control" datepicker-popup="short" ng-model="model.attributes['endDate']" is-open="opened" datepicker-options="dateOptions" date-disabled="field.validation['read-only']" close-text="Close" readonly>
