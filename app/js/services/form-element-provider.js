@@ -17,7 +17,7 @@ angular.module('app.services')
 				return 'partials/inputs/tinymce-input.html';
 			} else if (field && field.validation['one-of']) {
 				return 'partials/inputs/enum-input.html';
-			} else if (field && useTextarea(field)) {
+			} else if (field && useTextarea(field) && field['friendly-name'] !== "Address") {
 				return 'partials/inputs/textarea-input.html';
 			} else {
 				return 'partials/inputs/default-input.html';
