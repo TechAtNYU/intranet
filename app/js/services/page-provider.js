@@ -25,6 +25,9 @@ angular.module('app.services')
 			'edit':'partials/actions/person/person-edit.html',
 			'list': 'partials/actions/person/person-list.html'
 		},
+		'positions': {
+			'list': 'partials/actions/position/position-list.html',
+		},
 		'jobs': {
 			'add':'partials/actions/jobs/jobs-add.html',
 			'edit':'partials/actions/jobs/jobs-edit.html',
