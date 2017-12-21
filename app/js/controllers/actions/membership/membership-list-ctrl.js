@@ -18,13 +18,7 @@ angular
 	}
 
 	//mapping teamID to teamName
-	Restangular.all('teams')
-		.getList()
-		.then(function(teams) {
-			_.each(teams, function(element) {
-				teamsIdToName[element.id] = element.attributes.name;
-			});
-		});
+	var teamsIdToName = preProcess.teamIdtoNames();
 
 
 	Restangular.all(resourceName)
