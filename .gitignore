@@ -53,3 +53,4 @@ angular.xcodeproj
 libpeerconnection.log
 /tmp/
 /scripts/bower/bower-*
+.vscode/settings.json
