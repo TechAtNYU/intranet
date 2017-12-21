@@ -9,7 +9,7 @@ angular
 		$scope.rdesc = apiDescription.resource(resourceName);
 	});
 	// PositionID -> Team ID -> Team Name
-	var teamsIdToName = preProcess.teamIdtoNames();
+	var teamsIdToName = preProcess.objectIdtoName('teams');
 	//map id to teams (positions)
 	Restangular.all(resourceName)
 	.getList()

@@ -3,27 +3,16 @@ angular
 .factory('preProcess', function(Restangular, formatTeamDisplayFilter) {
 	'use strict';
     return{
-        teamIdtoNames: function() {
-            var teamsIdToName = {};
-            Restangular.all('teams')
+        objectIdtoName: function(name){
+            var objectIdToName = {};
+            Restangular.all(name)
                 .getList()
-                .then(function(teams) {
-                    _.each(teams, function(element) {
-                        teamsIdToName[element.id] = element.attributes.name;
+                .then(function(objectName) {
+                    _.each(objectName, function(element) {
+                        objectIdToName[element.id] = element.attributes.name;
                     });
                 });
-            return teamsIdToName;
-        },
-        venueIdtoNames: function() {
-            var venuesIdToName = {};
-            Restangular.all('venues')
-                .getList()
-                .then(function(teams) {
-                    _.each(teams, function(element) {
-                        venuesIdToName[element.id] = element.attributes.name;
-                    });
-                });
-            return venuesIdToName;
+            return objectIdToName;
         },
         positionToString: function(teamMap, element, includeLead){
             if(includeLead){

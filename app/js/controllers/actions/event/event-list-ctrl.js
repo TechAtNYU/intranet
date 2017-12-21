@@ -19,9 +19,9 @@ angular
 		return monthNames[month - 1] + " " + year;
 	}
 
-	var teamsIdToName = preProcess.teamIdtoNames();
-	var venuesIdToName = {};
-	var organizationIdToName = {};
+	var teamsIdToName = preProcess.objectIdtoName('teams');
+	var venuesIdToName = preProcess.objectIdtoName('venues');
+	var organizationIdToName = preProcess.objectIdtoName('organization');
 	var personIdToName = {};
 
 	$scope.eventDetails = {
@@ -42,24 +42,6 @@ angular
 		aims: {},
 		categories: {}
 	};
-
-	//mapping venueID to venueName
-	Restangular.all('venues')
-		.getList()
-		.then(function(teams) {
-			_.each(teams, function(element) {
-				venuesIdToName[element.id] = element.attributes.name;
-			});
-		});
-
-	//mapping organization to organizationName
-	Restangular.all('organizations')
-		.getList()
-		.then(function(organization) {
-			_.each(organization, function(element) {
-				organizationIdToName[element.id] = element.attributes.name;
-			});
-		});
 
 	//mapping personID to personName
 	Restangular.all('people')
