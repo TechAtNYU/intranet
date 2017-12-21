@@ -14,7 +14,7 @@ angular
                 });
             return teamsIdToName;
         },
-        venueIdToNames: function() {
+        venueIdtoNames: function() {
             var venuesIdToName = {};
             Restangular.all('venues')
                 .getList()
