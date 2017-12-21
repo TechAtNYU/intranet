@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('MembershipListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer) {
+.controller('MembershipListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer, preProcess) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;
@@ -40,10 +40,10 @@ angular
 				.then(function(position) {
 					$scope.memberDetails.push({
 						'id': element.id,
-						'display': person.attributes.name + " | " + teamsIdToName[position.relationships.team.data.id] + (position.attributes.isLead ? " (Lead)" : ""),
+						'display': person.attributes.name + " | " + preProcess.positionToString(teamsIdToName, position, true),
 						'name': person.attributes.name,
-            'team': teamsIdToName[position.relationships.team.data.id],
-						'position': teamsIdToName[position.relationships.team.data.id] + (position.attributes.isLead ? " (Lead)" : ""),
+            'team': preProcess.positionToString(teamsIdToName, position, false),
+						'position': preProcess.positionToString(teamsIdToName, position, true),
 						'isActive': element.attributes.isActive,
             'isLead': position.attributes.isLead,
 						'startDate': element.attributes.startDate,
