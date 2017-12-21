@@ -10,7 +10,6 @@ angular
 	});
 	// PositionID -> Team ID -> Team Name
 	var teamsIdToName = preProcess.objectIdtoName('teams');
-	//map id to teams (positions)
 	Restangular.all(resourceName)
 	.getList()
 	.then(function(data) {	
