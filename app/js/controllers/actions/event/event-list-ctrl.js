@@ -22,7 +22,7 @@ angular
 	var teamsIdToName = preProcess.objectIdtoName('teams');
 	var venuesIdToName = preProcess.objectIdtoName('venues');
 	var organizationIdToName = preProcess.objectIdtoName('organization');
-	var personIdToName = {};
+	var personIdToName = preProcess.objectIdtoName('people');
 
 	$scope.eventDetails = {
 		venue : {},
@@ -46,11 +46,6 @@ angular
 	//mapping personID to personName
 	Restangular.all('people')
 		.getList()
-		.then(function(person) {
-			_.each(person, function(element) {
-				personIdToName[element.id] = element.attributes.name;
-			});
-		})
 		.then(function(){
 			Restangular.all(resourceName)
 			.getList()
