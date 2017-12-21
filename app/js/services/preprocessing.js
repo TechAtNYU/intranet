@@ -1,6 +1,6 @@
 angular
 .module('app.services')
-.factory('preProcess', function(Restangular, formatTeamDisplayFilter) {
+.factory('preProcess', function($filter, Restangular, formatTeamDisplayFilter) {
 	'use strict';
     return{
         objectIdtoName: function(name){
@@ -21,6 +21,11 @@ angular
             else{
                 return formatTeamDisplayFilter(teamMap[element.relationships.team.data.id], false);
             }
+        },
+        displayDate: function(filter) {
+                return function(date){
+                    return filter('date')(date, 'MMMM yyyy');
+                }
         }
     };
 });
