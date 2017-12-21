@@ -25,4 +25,13 @@ angular
 			element.attributes.applicationForm = (element.relationships.applicationForm.data==null ? "None" : element.relationships.applicationForm);
 		});
 	});
+
+	$scope.updateSelection = function(resourceId) {
+		var index =	_.findIndex($scope.data, {'id': resourceId});
+		$scope.model = $scope.data[index];
+		$state.transitionTo('list',
+			{id: resourceId, resourceName: resourceName},
+			{notify: false}
+		);
+	};
 });
