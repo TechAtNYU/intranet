@@ -33,4 +33,19 @@ angular
 			{notify: false}
 		);
 	};
+
+	$scope.deleteResource = function(id) {
+		dataTransformer.deleteResource($scope.resourceName, id).then(function() {
+			alert('Successfully deleted this entry');			
+			$scope.model = {};
+			$state.transitionTo('list',
+				{resourceName: $scope.resourceName},
+				{
+					inherit: false,
+					notify: false,
+					reload: true
+				}
+			);
+		});
+	};
 });
