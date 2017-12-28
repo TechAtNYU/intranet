@@ -19,10 +19,10 @@ angular
 		}	
 		$scope.data = data;
 		_.each($scope.data, function(element) {
-			element.attributes.responsibilities = element.attributes.responsibilities.length ==0 ? "None" : element.attributes.responsibilities.join(' ')
+			element.attributes.responsibilities = element.attributes.responsibilities.length == 0 ? "None" : element.attributes.responsibilities.join(' ')
 			element.attributes.name = preProcess.positionToString(teamsIdToName, element, true);
 			element.attributes.team = preProcess.positionToString(teamsIdToName, element, false);
-			element.attributes.applicationForm = (element.relationships.applicationForm.data==null ? "None" : element.relationships.applicationForm);
+			element.attributes.applicationForm = (element.relationships.applicationForm.data == null ? "None" : element.relationships.applicationForm);
 		});
 	});
 
