@@ -18,7 +18,7 @@ angular
 	}
 
 	//mapping teamID to teamName
-	var teamsIdToName = preProcess.teamIdtoNames();
+	var teamsIdToName = preProcess.objectIdtoName('teams');
 
 
 	Restangular.all(resourceName)

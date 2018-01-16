@@ -60,7 +60,7 @@ angular
 					//mapping eventID to venue names with links
 					if (element.relationships.venue.data !== null) {
 						// !! change venueURL to the venue page once the venue override page is ready
-						var venueURL = "https://api.tnyu.org/v3/venues/" + element.relationships.venue.data.id;
+						var venueURL = "/#/r/venues/list/" + element.relationships.venue.data.id;
 						$scope.eventDetails.venue[element.id] = "<a href=" + venueURL + ">" + venuesIdToName[element.relationships.venue.data.id] + "</a>";
 					}
 
