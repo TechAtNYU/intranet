@@ -55,3 +55,4 @@ libpeerconnection.log
 /scripts/bower/bower-*
 
 package-lock.json
+.vscode/settings.json
