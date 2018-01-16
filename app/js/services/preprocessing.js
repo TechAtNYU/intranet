@@ -1,18 +1,23 @@
 angular
 .module('app.services')
-.factory('preProcess', function(Restangular, formatTeamDisplayFilter) {
+.factory('preProcess', function($filter, Restangular, formatTeamDisplayFilter) {
 	'use strict';
     return{
-        teamIdtoNames: function() {
-            var teamsIdToName = {};
-            Restangular.all('teams')
+        displayDate: function(filter) {
+                return function(date){
+                    return filter('date')(date, 'MMMM yyyy');
+                }
+        },
+        objectIdtoName: function(name){
+            var objectIdToName = {};
+            Restangular.all(name)
                 .getList()
-                .then(function(teams) {
-                    _.each(teams, function(element) {
-                        teamsIdToName[element.id] = element.attributes.name;
+                .then(function(objectName) {
+                    _.each(objectName, function(element) {
+                        objectIdToName[element.id] = element.attributes.name;
                     });
                 });
-            return teamsIdToName;
+            return objectIdToName;
         },
         positionToString: function(teamMap, element, includeLead){
             if(includeLead){
