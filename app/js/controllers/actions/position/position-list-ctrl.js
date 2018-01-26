@@ -13,11 +13,14 @@ angular
 	Restangular.all(resourceName)
 	.getList()
 	.then(function(data) {	
+
+		$scope.data = data;
+
 		if (resourceId) {
 			var index = _.findIndex($scope.data, {id: resourceId});
 			$scope.model = $scope.data[index];
 		}	
-		$scope.data = data;
+		
 		_.each($scope.data, function(element) {
 			element.attributes.responsibilities = element.attributes.responsibilities.length == 0 ? "None" : element.attributes.responsibilities.join(' ')
 			element.attributes.name = preProcess.positionToString(teamsIdToName, element, true);
