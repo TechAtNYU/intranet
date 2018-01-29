@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="card-deck justify-content-md-center">
+  <div class="card-deck">
     <div ng-repeat="rdesc in apidesc">
-      <div class="card" style="width: 300px; height: 150px; margin: 20px">
+      <div class="card" style="width: 230px; height: 150px; margin: 20px">
         <div class="card-body">
-          <h4 class="card-title">{{rdesc.attributes.name.plural}}</h4>
+          <h4 class="card-title"><b>{{rdesc.attributes.name.plural}}</b></h4>
           <a ui-sref="list({resourceName: rdesc.id})" class="btn btn-outline-primary">List</a>
           <a ui-sref="add({resourceName: rdesc.id})" class="btn btn-success">Add</a>
         </div>
