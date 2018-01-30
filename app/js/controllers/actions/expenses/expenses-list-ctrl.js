@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('ReimbursementsListCtrl', function($scope, $filter, $rootScope, $stateParams, 
+.controller('ExpensesListCtrl', function($scope, $filter, $rootScope, $stateParams, 
 	$state, Restangular, apiDescriptor, dataTransformer, preProcess) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
@@ -11,28 +11,30 @@ angular
 		$scope.rdesc = apiDescription.resource(resourceName);
 	});
 
+	$scope.reimbursing = {};
+
 	$scope.displayDate = preProcess.displayDate($filter);
 
-	$scope.personToReimburse = {};
-
-	Restangular.all(resourceName).getList().then(function(data) {
+	Restangular.all(resourceName)
+	.getList()
+	.then(function(data) {
 		$scope.data = data;
+
 		if (resourceId) {
 			$scope.model = _.find($scope.data, {id: resourceId});
 		}
 
-		_.each($scope.data, element => {
-			Restangular.one("people/" + element.relationships.personToReimburse.data.id)
-			.get()
-			.then(data => {
-				$scope.personToReimburse[element.id] = data.attributes.name;
-			});
+		_.each($scope.data, function(element) {
+		//mapping expenseID to reimbursementID
+			if (element.relationships.reimbursementFor.data !== null) {
+				const url = "https://api.tnyu.org/v3/reimbursement-requests/" + element.relationships.reimbursementFor.data.id;
+				$scope.reimbursing[element.id] = "<a href=" + url + ">" + url + "</a>";
+			}
 		});
 	});
 
-
 	$scope.updateSelection = function(newModelId) {
-		var index = _.findIndex($scope.data, {'id': newModelId});
+		var index =	_.findIndex($scope.data, {'id': newModelId});
 		$scope.model = $scope.data[index];
 		$state.transitionTo('list',
 			{id: newModelId, resourceName: resourceName},

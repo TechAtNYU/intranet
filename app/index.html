@@ -5,7 +5,7 @@
   <meta charset="utf-8">
 
   <!--CSS Libraries-->
-  <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="/js/lib/chosen_v1.4.2/chosen.css">
 
   <!--User Defined CSS-->
@@ -15,6 +15,7 @@
   <script src="//cdn.rawgit.com/jpillora/xdomain/0.7.4/dist/xdomain.min.js" slave="https://api.tnyu.org/v3-test/proxy.html"></script>
 
   <!--JavaScript Libraries-->
+  <script src="https://use.fontawesome.com/0c61ca009b.js"></script>
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.3.1/lodash.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.js"></script>
@@ -51,12 +52,16 @@
   <script src="/js/controllers/actions/person/person-add-ctrl.js"></script>
   <script src="/js/controllers/actions/person/person-list-ctrl.js"></script>
   <script src="/js/controllers/actions/person/person-edit-ctrl.js"></script>
+  <script src="/js/controllers/actions/position/position-list-ctrl.js"></script>
   <script src="/js/controllers/actions/jobs/jobs-add-ctrl.js"></script>
   <script src="/js/controllers/actions/jobs/jobs-list-ctrl.js"></script>
   <script src="/js/controllers/actions/jobs/jobs-edit-ctrl.js"></script>
   <script src="/js/controllers/actions/venues/venues-add-ctrl.js"></script>
   <script src="/js/controllers/actions/venues/venues-list-ctrl.js"></script>
   <script src="/js/controllers/actions/venues/venues-edit-ctrl.js"></script>
+  <script src="/js/controllers/actions/expenses/expenses-add-ctrl.js"></script>
+  <script src="/js/controllers/actions/expenses/expenses-list-ctrl.js"></script>
+  <script src="/js/controllers/actions/expenses/expenses-edit-ctrl.js"></script>
   <script src="/js/controllers/actions/incomes/incomes-add-ctrl.js"></script>
   <script src="/js/controllers/actions/incomes/incomes-list-ctrl.js"></script>
   <script src="/js/controllers/actions/incomes/incomes-edit-ctrl.js"></script>
@@ -69,26 +74,25 @@
   <script src="/js/services/data-transformer.js"></script>
   <script src="/js/services/form-element-provider.js"></script>
   <script src="/js/services/page-provider.js"></script>
+  <script src="/js/services/preprocessing.js"></script>
 </head>
 <body ng-app="app" ng-controller="AuthCtrl">
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" ui-sref="index">
-          <i class="glyphicon glyphicon-home" aria-hidden="false"></i>
-          Tech@NYU Intranet
-        </a>
-      </div>
-      <span class="navbar-right" ng-if="user">
-        <span class="navbar-text">Hi, {{user.attributes.name}}! </span>
-        <a type="button" class="btn btn-sm btn-default navbar-btn" ui-sref="edit({resourceName: 'people', id: 'me'})">
-          Profile&nbsp;
-          <i class="glyphicon glyphicon-user" aria-hidden="false"></i>
-        </a>
-        <button type="button" class="btn btn-sm btn-default navbar-btn" ng-click="signOut()">
-          Sign out&nbsp;
-          <i class="glyphicon glyphicon-off" aria-hidden="false"></i>
-        </button>
+  <nav class="navbar fixed-top navbar-dark bg-dark">
+    <div class="container">
+    <a class="navbar-brand mb-0" ui-sref="index">
+      <i class="glyphicon glyphicon-home" aria-hidden="false"></i>
+      <strong>Tech@NYU Intranet</strong>
+    </a>
+    <span class="navbar-toggler-right" ng-if="user">
+      <span class="navbar-text">Hi, {{user.attributes.name}}! </span>
+      <button type="button" class="btn btn-outline-primary btn-sm" ui-sref="edit({resourceName: 'people', id: 'me'})">
+        Profile&nbsp;
+        <i class="glyphicon glyphicon-user" aria-hidden="false"></i>
+      </button>
+      <button type="button" class="btn btn-outline-danger btn-sm" ng-click="signOut()">
+        Sign out&nbsp;
+        <i class="glyphicon glyphicon-off" aria-hidden="false"></i>
+      </button>
       </span>
     </div>
   </nav>

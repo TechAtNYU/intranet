@@ -2,9 +2,8 @@
 
 angular
 .module('app.controllers')
-.controller('VenuesAddCtrl', function($scope, $rootScope, $stateParams, $state,
+.controller('ExpensesAddCtrl', function($scope, $rootScope, $stateParams, $state,
 		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
-
 
 	var resourceName = $stateParams.resourceName;
 
@@ -21,7 +20,7 @@ angular
 	});
 
 	$scope.createResource = function (model, rdesc) {
-		dataTransformer.createResource(model, rdesc, resource).then((data, err) => {
+		dataTransformer.createResource(model, rdesc, resource).then(function(data) {
 			$state.go('list', {resourceName: resourceName, selectionMode: 'single', id: data.id});
 		});
 	}

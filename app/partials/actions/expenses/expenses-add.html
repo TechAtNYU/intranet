@@ -1,4 +1,4 @@
-<div class="container" ng-controller="VenuesAddCtrl">
+<div class="container" ng-controller="ExpensesAddCtrl">
 	<h3>
 		Add {{rdesc.attributes.name.singular}}
 	</h3>
@@ -6,7 +6,7 @@
 
 	<div class="form-group"
 		ng-repeat="field in rdesc.attributes.fields"
-		ng-if="fep.hiddenFields.indexOf(field.name) == -1 && field.name !== 'isActive'"
+		ng-if="fep.hiddenFields.indexOf(field.name) == -1"
 		ng-include="'/partials/fields/default-field.html'">
 	</div>
 

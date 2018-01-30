@@ -2,8 +2,8 @@
 
 angular
 .module('app.controllers')
-.controller('MembershipEditCtrl', function($scope, $rootScope, $stateParams, $state,
-		$interval, formatTeamDisplayFilter, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
+.controller('ExpensestEditCtrl', function($scope, $rootScope, $stateParams, $state,
+		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
 
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
@@ -19,29 +19,6 @@ angular
 			$scope.data = dataTransformer.loadLinkedData($scope.rdesc, $scope.refreshData);
 		});
 		$scope.model = dataTransformer.delink(data);
-	});
-
-	let teamsIdToName = {};
-	$scope.positionIdToName = {};
-	//mapping teamID to teamName
-	Restangular.one('teams')
-	.getList()
-	.then(function(teams) {
-		_.each(teams, function(element) {
-			teamsIdToName[element.id] = element.attributes.name;
-		});
-
-		//mapping positionID to names
-		Restangular.one('positions')
-		.getList()
-		.then( position => {
-			_.each(position, function(element) {
-				const isLead = element.attributes.isLead;
-				const teamName = teamsIdToName[element.relationships.team.data.id];
-				$scope.positionIdToName[element.id] = formatTeamDisplayFilter(teamName, isLead);
-				$scope.refreshData($scope.data, $scope.rdesc.attributes.fields[1].kind['target-type']);
-			});
-		});
 	});
 
 	$scope.updateResource = function (model, rdesc) {
