@@ -1,29 +1,32 @@
-'use strict';
+"use strict";
 
 angular
-.module('app.controllers')
-.controller('AuthCtrl', function($scope, $location, Restangular) {
-	Restangular.one('people/me')
+.module( "app.controllers" )
+.controller( "AuthCtrl", ( $scope, $location, Restangular ) => {
+    Restangular.one( "people/me" )
 		.get()
-		.then(function(data) {
-			$scope.user = data;
-		})
-		.catch(function(res) {
-			var status = res.data.errors[0].status;
-			if (status === '401') {
-				$scope.signIn();
-			}
-		});
+		.then( ( data ) => {
+    $scope.user = data;
+} )
+		.catch( ( res ) => {
+    const status = res.data.errors[ 0 ].status;
 
-	$scope.signIn = function() {
-		var url = 'https://api.tnyu.org/v2/auth/facebook?success=' +
-			window.encodeURIComponent($location.absUrl());
-		window.location = url;
-	};
+    if ( status === "401" ) {
+        $scope.signIn();
+    }
+} );
 
-	$scope.signOut = function() {
-		var url = 'https://api.tnyu.org/v2/auth/facebook/logout?doExternalServiceLogout=true&success=' +
-			window.encodeURIComponent('http://google.com/');
-		window.location = url;
-	};
-});
+    $scope.signIn = function() {
+        const url = `https://api.tnyu.org/v2/auth/facebook?success=${
+			window.encodeURIComponent( $location.absUrl() )}`;
+
+        window.location = url;
+    };
+
+    $scope.signOut = function() {
+        const url = `https://api.tnyu.org/v2/auth/facebook/logout?doExternalServiceLogout=true&success=${
+			window.encodeURIComponent( "http://google.com/" )}`;
+
+        window.location = url;
+    };
+} );
