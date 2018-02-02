@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "http-server ./app -p 3000 -c-1",
-    "test": "karma start ./test/karma.conf.js"
+    "test": "karma start ./test/karma.conf.js",
+    "format": "prettier-eslint --write app/**/**.js"
   },
   "dependencies": {},
   "devDependencies": {
