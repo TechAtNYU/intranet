@@ -1,65 +1,84 @@
-'use strict';
+"use strict";
 
 angular
-.module('app.controllers')
-.controller('VenuesListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer) {
-	var resourceName = $stateParams.resourceName;
-	var resourceId = $stateParams.id;
-	$scope.resourceName = resourceName;
-	apiDescriptor.then(function(apiDescription) {
-		$scope.rdesc = apiDescription.resource(resourceName);
-	});
+  .module("app.controllers")
+  .controller(
+    "VenuesListCtrl",
+    (
+      $scope,
+      $rootScope,
+      $stateParams,
+      $state,
+      Restangular,
+      apiDescriptor,
+      dataTransformer
+    ) => {
+      const resourceName = $stateParams.resourceName;
+      const resourceId = $stateParams.id;
 
-	var selectionMode = $stateParams.selectionMode;
-	if (!selectionMode || (selectionMode !== 'single ' && selectionMode !== 'multiple')) {
-		selectionMode = 'multiple';
-	}
+      $scope.resourceName = resourceName;
+      apiDescriptor.then(apiDescription => {
+        $scope.rdesc = apiDescription.resource(resourceName);
+      });
 
-	$scope.selectionMode = selectionMode;
-	Restangular.all(resourceName)
-		.getList()
-		.then(function(data) {
-		$scope.data = data;
+      let selectionMode = $stateParams.selectionMode;
 
-		if (resourceId) {
-			$scope.model = _.find($scope.data, {id: resourceId});
-		}
+      if (
+        !selectionMode ||
+        (selectionMode !== "single " && selectionMode !== "multiple")
+      ) {
+        selectionMode = "multiple";
+      }
 
-		$scope.organizations = {};
-		//mapping venueID to organizations
-		_.each($scope.data, function(element) {
-			if (element.relationships.organization.data !== null) {
-				Restangular.one("organizations/" + element.relationships.organization.data.id)
-				.get()
-				.then(org => {
-					$scope.organizations[element.id] = org.attributes.name;
-				});
-			}
-		})
-	});
+      $scope.selectionMode = selectionMode;
+      Restangular.all(resourceName).getList().then(data => {
+        $scope.data = data;
 
-	$scope.updateSelection = function(newModelId) {
-	 		var index =	_.findIndex($scope.data, {'id': newModelId});
-	 		$scope.model = $scope.data[index];
-	 		$state.transitionTo('list',
-	 			{id: newModelId, resourceName: resourceName},
-	 			{notify: false}
-	 		);
-	 };
+        if (resourceId) {
+          $scope.model = _.find($scope.data, { id: resourceId });
+        }
 
-	$scope.deleteResource = function(id) {
-		dataTransformer.deleteResource($scope.resourceName, id).then(function() {
-			alert('Successfully deleted this entry');
-			$scope.data = Restangular.all($scope.resourceName).getList().$object;
-			$scope.model = {};
-			$state.transitionTo('list',
-				{resourceName: $scope.resourceName},
-				{
-					inherit: false,
-					notify: false,
-					reload: true
-				}
-			);
-		});
-	};
-});
+        $scope.organizations = {};
+        // mapping venueID to organizations
+        _.each($scope.data, element => {
+          if (element.relationships.organization.data !== null) {
+            Restangular.one(
+              `organizations/${element.relationships.organization.data.id}`
+            )
+              .get()
+              .then(org => {
+                $scope.organizations[element.id] = org.attributes.name;
+              });
+          }
+        });
+      });
+
+      $scope.updateSelection = function(newModelId) {
+        const index = _.findIndex($scope.data, { id: newModelId });
+
+        $scope.model = $scope.data[index];
+        $state.transitionTo(
+          "list",
+          { id: newModelId, resourceName: resourceName },
+          { notify: false }
+        );
+      };
+
+      $scope.deleteResource = function(id) {
+        dataTransformer.deleteResource($scope.resourceName, id).then(() => {
+          alert("Successfully deleted this entry");
+          $scope.data = Restangular.all($scope.resourceName).getList().$object;
+          $scope.model = {};
+          $state.transitionTo(
+            "list",
+            { resourceName: $scope.resourceName },
+            {
+              inherit: false,
+              notify: false,
+              reload: true
+            }
+          );
+        });
+      };
+    }
+  );

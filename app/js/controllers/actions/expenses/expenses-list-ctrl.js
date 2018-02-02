@@ -1,60 +1,75 @@
-'use strict';
+"use strict";
 
 angular
-.module('app.controllers')
-.controller('ExpensesListCtrl', function($scope, $filter, $rootScope, $stateParams, 
-	$state, Restangular, apiDescriptor, dataTransformer, preProcess) {
-	var resourceName = $stateParams.resourceName;
-	var resourceId = $stateParams.id;
-	$scope.resourceName = resourceName;
-	apiDescriptor.then(function(apiDescription) {
-		$scope.rdesc = apiDescription.resource(resourceName);
-	});
+  .module("app.controllers")
+  .controller(
+    "ExpensesListCtrl",
+    (
+      $scope,
+      $filter,
+      $rootScope,
+      $stateParams,
+      $state,
+      Restangular,
+      apiDescriptor,
+      dataTransformer,
+      preProcess
+    ) => {
+      const resourceName = $stateParams.resourceName;
+      const resourceId = $stateParams.id;
 
-	$scope.reimbursing = {};
+      $scope.resourceName = resourceName;
+      apiDescriptor.then(apiDescription => {
+        $scope.rdesc = apiDescription.resource(resourceName);
+      });
 
-	$scope.displayDate = preProcess.displayDate($filter);
+      $scope.reimbursing = {};
 
-	Restangular.all(resourceName)
-	.getList()
-	.then(function(data) {
-		$scope.data = data;
+      $scope.displayDate = preProcess.displayDate($filter);
 
-		if (resourceId) {
-			$scope.model = _.find($scope.data, {id: resourceId});
-		}
+      Restangular.all(resourceName).getList().then(data => {
+        $scope.data = data;
 
-		_.each($scope.data, function(element) {
-		//mapping expenseID to reimbursementID
-			if (element.relationships.reimbursementFor.data !== null) {
-				const url = "https://api.tnyu.org/v3/reimbursement-requests/" + element.relationships.reimbursementFor.data.id;
-				$scope.reimbursing[element.id] = "<a href=" + url + ">" + url + "</a>";
-			}
-		});
-	});
+        if (resourceId) {
+          $scope.model = _.find($scope.data, { id: resourceId });
+        }
 
-	$scope.updateSelection = function(newModelId) {
-		var index =	_.findIndex($scope.data, {'id': newModelId});
-		$scope.model = $scope.data[index];
-		$state.transitionTo('list',
-			{id: newModelId, resourceName: resourceName},
-			{notify: false}
-		);
-	};
+        _.each($scope.data, element => {
+          // mapping expenseID to reimbursementID
+          if (element.relationships.reimbursementFor.data !== null) {
+            const url = `https://api.tnyu.org/v3/reimbursement-requests/${element.relationships.reimbursementFor.data.id}`;
 
-	$scope.deleteResource = function(id) {
-		dataTransformer.deleteResource($scope.resourceName, id).then(function() {
-			alert('Successfully deleted this entry');
-			$scope.data = Restangular.all($scope.resourceName).getList().$object;
-			$scope.model = {};
-			$state.transitionTo('list',
-				{resourceName: $scope.resourceName},
-				{
-					inherit: false,
-					notify: false,
-					reload: true
-				}
-			);
-		});
-	};
-});
+            $scope.reimbursing[element.id] = `<a href=${url}>${url}</a>`;
+          }
+        });
+      });
+
+      $scope.updateSelection = function(newModelId) {
+        const index = _.findIndex($scope.data, { id: newModelId });
+
+        $scope.model = $scope.data[index];
+        $state.transitionTo(
+          "list",
+          { id: newModelId, resourceName: resourceName },
+          { notify: false }
+        );
+      };
+
+      $scope.deleteResource = function(id) {
+        dataTransformer.deleteResource($scope.resourceName, id).then(() => {
+          alert("Successfully deleted this entry");
+          $scope.data = Restangular.all($scope.resourceName).getList().$object;
+          $scope.model = {};
+          $state.transitionTo(
+            "list",
+            { resourceName: $scope.resourceName },
+            {
+              inherit: false,
+              notify: false,
+              reload: true
+            }
+          );
+        });
+      };
+    }
+  );

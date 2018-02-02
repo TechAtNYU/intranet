@@ -1,0 +1,4 @@
+/app/js/lib/**
+/node_modules/**
+/test/**
+!.eslintrc.js

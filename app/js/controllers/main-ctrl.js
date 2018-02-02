@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 angular
-.module('app.controllers')
-.controller('MainCtrl', function($scope, apiDescriptor) {
-	apiDescriptor.then(function(apiDescription) {
-		$scope.apidesc = apiDescription.data;
-	});
-});
+  .module("app.controllers")
+  .controller("MainCtrl", ($scope, apiDescriptor) => {
+    apiDescriptor.then(apiDescription => {
+      $scope.apidesc = apiDescription.data;
+    });
+  });
