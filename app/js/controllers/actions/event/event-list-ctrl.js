@@ -16,7 +16,7 @@ angular
         if ( date === undefined ) {
             return;
         }
-        const monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         const year = parseInt( date.substring( 0, 4 ) );
         const month = parseInt( date.substring( 5, 7 ) );
 

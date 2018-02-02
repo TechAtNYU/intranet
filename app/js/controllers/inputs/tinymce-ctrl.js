@@ -60,7 +60,7 @@ angular
         toolbarItems.push( "spacer" );
 
 		// Add inline formatting buttons
-        [ "strong", "em" ].forEach( ( tag ) => {
+        ["strong", "em"].forEach( ( tag ) => {
             if ( allowedTags.indexOf( tag ) !== -1 ) {
                 toolbarItems.push( tagsToButtonNames[ tag ] );
                 allowsInlineFormatting = true;
@@ -79,7 +79,7 @@ angular
         }
 
 		// Add block formatting buttons.
-        [ "ul", "ol", "blockquote" ].forEach( ( tag ) => {
+        ["ul", "ol", "blockquote"].forEach( ( tag ) => {
             if ( allowedTags.indexOf( tag ) !== -1 ) {
                 toolbarItems.push( tagsToButtonNames[ tag ] );
                 allowsBlockFormatting = true;

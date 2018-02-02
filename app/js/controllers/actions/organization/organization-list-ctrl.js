@@ -39,7 +39,7 @@ angular
     };
 
     if ( orgIdToLiaisons[ element.id ] == null ) {
-        orgIdToLiaisons[ element.id ] = [ details ];
+        orgIdToLiaisons[ element.id ] = [details];
     } else {
         orgIdToLiaisons[ element.id ].push( details );
     }
