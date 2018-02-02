@@ -24,7 +24,7 @@ angular
     $scope.data = data;
 
     if ( resourceId ) {
-        $scope.model = _.find( $scope.data, { "id": resourceId } );
+        $scope.model = _.find( $scope.data, {"id": resourceId} );
     }
 
     $scope.organizations = {};
@@ -41,12 +41,12 @@ angular
 } );
 
     $scope.updateSelection = function( newModelId ) {
-	 		const index =	_.findIndex( $scope.data, { "id": newModelId } );
+	 		const index =	_.findIndex( $scope.data, {"id": newModelId} );
 
 	 		$scope.model = $scope.data[ index ];
 	 		$state.transitionTo( "list",
-	 			{ "id": newModelId, "resourceName": resourceName },
-	 			{ "notify": false }
+	 			{"id": newModelId, "resourceName": resourceName},
+	 			{"notify": false}
 	 		);
 	 };
 
@@ -56,7 +56,7 @@ angular
             $scope.data = Restangular.all( $scope.resourceName ).getList().$object;
             $scope.model = {};
             $state.transitionTo( "list",
-				{ "resourceName": $scope.resourceName },
+				{"resourceName": $scope.resourceName},
                 {
                     "inherit": false,
                     "notify": false,

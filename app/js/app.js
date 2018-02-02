@@ -35,7 +35,7 @@ angular.module( "app", [
         if ( operation === "remove" ) {
             return null;
         }
-        return { "data": data };
+        return {"data": data};
     } );
 
 	// called after we get a response from the server

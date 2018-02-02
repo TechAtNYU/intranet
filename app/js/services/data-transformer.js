@@ -34,7 +34,7 @@ angular
                         linkage = null;
                     }
 
-                    links[ field.name ] = { "data": linkage };
+                    links[ field.name ] = {"data": linkage};
                     delete model.attributes[ field.name ];
                 }
             } );

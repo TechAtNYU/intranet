@@ -18,7 +18,7 @@ angular
     $scope.data = data;
 
     if ( resourceId ) {
-        const index = _.findIndex( $scope.data, { "id": resourceId } );
+        const index = _.findIndex( $scope.data, {"id": resourceId} );
 
         $scope.model = $scope.data[ index ];
     }
@@ -32,12 +32,12 @@ angular
 } );
 
     $scope.updateSelection = function( resourceId ) {
-        const index =	_.findIndex( $scope.data, { "id": resourceId } );
+        const index =	_.findIndex( $scope.data, {"id": resourceId} );
 
         $scope.model = $scope.data[ index ];
         $state.transitionTo( "list",
-			{ "id": resourceId, "resourceName": resourceName },
-			{ "notify": false }
+			{"id": resourceId, "resourceName": resourceName},
+			{"notify": false}
 		);
     };
 
@@ -46,7 +46,7 @@ angular
             alert( "Successfully deleted this entry" );
             $scope.model = {};
             $state.transitionTo( "list",
-				{ "resourceName": $scope.resourceName },
+				{"resourceName": $scope.resourceName},
                 {
                     "inherit": false,
                     "notify": false,

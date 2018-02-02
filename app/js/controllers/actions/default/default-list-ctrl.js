@@ -21,15 +21,15 @@ angular
     Restangular.all( resourceName ).getList().then( ( data ) => {
         $scope.data = data;
         if ( resourceId ) {
-            $scope.model = _.find( $scope.data, { "id": resourceId } );
+            $scope.model = _.find( $scope.data, {"id": resourceId} );
         }
     } );
 
     $scope.updateSelection = function( newModelId ) {
 		// $state.go("list", {id: newModelId});
         $state.transitionTo( "list",
-			{ "id": newModelId },
-			{ "notify": false }
+			{"id": newModelId},
+			{"notify": false}
 		);
     };
 
@@ -39,7 +39,7 @@ angular
             $scope.data = Restangular.all( $scope.resourceName ).getList().$object;
             $scope.model = {};
             $state.transitionTo( "list",
-				{ "resourceName": $scope.resourceName },
+				{"resourceName": $scope.resourceName},
                 {
                     "inherit": false,
                     "notify": false,

@@ -11,7 +11,7 @@ angular
     $scope.fep = formElementProvider;
 
     $scope.data = {};
-    $scope.model = { "attributes": {} };
+    $scope.model = {"attributes": {}};
 
     apiDescriptor.then( ( apiDescription ) => {
         $scope.rdesc = apiDescription.resource( resourceName );
@@ -20,7 +20,7 @@ angular
 
     $scope.createResource = function( model, rdesc ) {
         dataTransformer.createResource( model, rdesc, resource ).then( ( data ) => {
-            $state.go( "list", { "resourceName": resourceName, "selectionMode": "single", "id": data.id } );
+            $state.go( "list", {"resourceName": resourceName, "selectionMode": "single", "id": data.id} );
         } );
     };
 

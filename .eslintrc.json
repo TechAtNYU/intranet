@@ -1,6 +1,5 @@
 {
   "env": {
-    "node": true,
     "es6": true
   },
   "ecmaFeatures": {
@@ -26,7 +25,6 @@
     "globalReturn": true
   },
   "rules": {
-    "comma-dangle": [ 2, "never" ],
     "no-console": 1,
     "no-constant-condition": 2,
     "no-control-regex": 2,
@@ -122,6 +120,7 @@
     "prefer-arrow-callback": 1,
     "prefer-spread": 1,
     "prefer-template": 1,
-    "require-yield": 2
+    "require-yield": 2,
+    "object-curly-spacing": ["error", "never"]
   }
 }

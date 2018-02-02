@@ -22,7 +22,7 @@ angular
 
     $scope.updateResource = function( model, rdesc ) {
         dataTransformer.updateResource( model, rdesc, resource ).then( ( data ) => {
-            $state.go( "list", { "resourceName": resourceName, "selectionMode": "single", "id": data.id } );
+            $state.go( "list", {"resourceName": resourceName, "selectionMode": "single", "id": data.id} );
         } );
     };
 

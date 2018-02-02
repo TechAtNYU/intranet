@@ -33,12 +33,12 @@ angular
 		// the object literal below, so it's reassuring to know that object member
 		// enumeration is in fact deterministic in ES6.
         const tagsToFormats = {
-            "h1": { "title": "Heading", "format": "h1" },
-            "h2": { "title": "Subheading", "format": "h2" },
-            "p": { "title": "Standard Paragraph", "format": "p" },
-            "code": { "title": "Code", "icon": "code", "format": "code" },
-            "sup": { "title": "Superscript", "icon": "superscript", "format": "superscript" },
-            "sub": { "title": "Subscript", "icon": "subscript", "format": "subscript" }
+            "h1": {"title": "Heading", "format": "h1"},
+            "h2": {"title": "Subheading", "format": "h2"},
+            "p": {"title": "Standard Paragraph", "format": "p"},
+            "code": {"title": "Code", "icon": "code", "format": "code"},
+            "sup": {"title": "Superscript", "icon": "superscript", "format": "superscript"},
+            "sub": {"title": "Subscript", "icon": "subscript", "format": "subscript"}
         };
 
         const tagsToButtonNames = {
