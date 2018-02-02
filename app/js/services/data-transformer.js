@@ -53,7 +53,7 @@ angular
 				// This is primarily to omit the 'self' property
 
                 if ( !linkage ) {
-                    return;
+
                 } else if ( _.isArray( linkage ) ) {
                     model.attributes[ name ] = _.pluck( linkage, "id" );
                 } else {
@@ -89,7 +89,7 @@ angular
             } );
             return resource.patch( finalModel )
 			.catch( ( err ) => {
-    alert( `Could not submit to resource. API returned the following error: ${ err.data.errors[ 0 ].title}` );
+    alert( `Could not submit to resource. API returned the following error: ${err.data.errors[ 0 ].title}` );
 } );
         },
 
@@ -100,7 +100,7 @@ angular
 
             return resource.post( finalModel )
 			.catch( ( err ) => {
-    alert( `Could not submit to resource. API returned the following error: ${ err.data.errors[ 0 ].title}` );
+    alert( `Could not submit to resource. API returned the following error: ${err.data.errors[ 0 ].title}` );
 } );
         },
 

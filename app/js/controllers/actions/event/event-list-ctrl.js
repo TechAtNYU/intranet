@@ -20,7 +20,7 @@ angular
         const year = parseInt( date.substring( 0, 4 ) );
         const month = parseInt( date.substring( 5, 7 ) );
 
-        return `${monthNames[ month - 1 ] } ${ year}`;
+        return `${monthNames[ month - 1 ]} ${year}`;
     };
 
     const teamsIdToName = preProcess.objectIdtoName( "teams" );
@@ -65,9 +65,9 @@ angular
 					// mapping eventID to venue names with links
         if ( element.relationships.venue.data !== null ) {
 						// !! change venueURL to the venue page once the venue override page is ready
-            const venueURL = `/#/r/venues/list/${ element.relationships.venue.data.id}`;
+            const venueURL = `/#/r/venues/list/${element.relationships.venue.data.id}`;
 
-            $scope.eventDetails.venue[ element.id ] = `<a href=${ venueURL }>${ venuesIdToName[ element.relationships.venue.data.id ] }</a>`;
+            $scope.eventDetails.venue[ element.id ] = `<a href=${venueURL}>${venuesIdToName[ element.relationships.venue.data.id ]}</a>`;
         }
 
 					// mapping eventID to categories
@@ -78,7 +78,7 @@ angular
                 } else {
                     let string = $scope.eventDetails.categories[ element.id ];
 
-                    string = `${string }, ${ category}`;
+                    string = `${string}, ${category}`;
                     $scope.eventDetails.categories[ element.id ] = string;
                 }
             } );
@@ -98,7 +98,7 @@ angular
 
 					// mapping eventID to survey URI
         if ( element.relationships.survey.data !== null ) {
-            Restangular.one( `surveys/${ element.relationships.survey.data.id}` )
+            Restangular.one( `surveys/${element.relationships.survey.data.id}` )
 						.get()
 						.then( ( survey ) => {
     $scope.eventDetails.survey[ element.id ] = survey.attributes.URI;
@@ -125,7 +125,7 @@ angular
             const responses = [];
 
             element.relationships.feedback.data.forEach( ( response ) => {
-                Restangular.one( `survey-responses/${ response.id}` )
+                Restangular.one( `survey-responses/${response.id}` )
 							.get()
 							.then( ( data ) => {
     responses.push( data.id );
@@ -144,10 +144,9 @@ angular
 
 					// mapping eventID to alt RSVP urls
         if ( element.attributes.alternateRsvpUrls.length > 0 ) {
-            const urls = element.attributes.alternateRsvpUrls.map( ( url ) => `<a href=${ url }</a>${ url}` );
+            const urls = element.attributes.alternateRsvpUrls.map( ( url ) => `<a href=${url}</a>${url}` );
 
             $scope.eventDetails.altRsvps[ element.id ] = urls.join( ", " );
-
         }
 
 					// mapping eventID to teaches
@@ -155,7 +154,7 @@ angular
             const teaches = [];
 
             element.relationships.teaches.data.forEach( ( response ) => {
-                Restangular.one( `skills/${ response.id}` )
+                Restangular.one( `skills/${response.id}` )
 							.get()
 							.then( ( data ) => {
     teaches.push( data.attributes.name );
@@ -176,7 +175,7 @@ angular
             const presenterList = [];
 
             element.relationships.presenters.data.forEach( ( presenter ) => {
-                Restangular.one( `presenters/${ presenter.id}` )
+                Restangular.one( `presenters/${presenter.id}` )
 							.get()
 							.then( ( data ) => {
     presenterList.push( data.attributes.name );

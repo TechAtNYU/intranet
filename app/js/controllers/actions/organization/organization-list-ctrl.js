@@ -31,7 +31,7 @@ angular
     _.each( $scope.data, ( element ) => {
 					// loop through every liaison in the organization
         _.each( element.relationships.liaisons.data, ( liaison ) => {
-            Restangular.one( `people/${ liaison.id}` )
+            Restangular.one( `people/${liaison.id}` )
 					.get()
 					.then( ( person ) => {
     const details = {
@@ -51,7 +51,7 @@ angular
         if ( i == 0 ) {
             displayText = orgIdToLiaisons[ element.id ][ i ].name;
         } else {
-            displayText = `${displayText }, ${ orgIdToLiaisons[ element.id ][ i ].name}`;
+            displayText = `${displayText}, ${orgIdToLiaisons[ element.id ][ i ].name}`;
             $scope.liaisonsDisplay[ element.id ] = displayText;
         }
     }

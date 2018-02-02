@@ -32,7 +32,6 @@ angular
 
 		// mapping personID to name, position and display information
     _.each( $scope.data, ( person ) => {
-
         const personData = {};
 			// getting roles
 
@@ -42,7 +41,7 @@ angular
 
 			// getting currentEmployer
         if ( person.relationships.currentEmployer.data != null ) {
-            Restangular.one( `organizations/${ person.relationships.currentEmployer.data.id}` )
+            Restangular.one( `organizations/${person.relationships.currentEmployer.data.id}` )
 				.get()
 				.then( ( org ) => {
     personData.currentEmployer = org.attributes.name;
@@ -54,7 +53,7 @@ angular
 
         if ( person.relationships.schools.data != null && person.relationships.schools.data.length > 0 ) {
             person.relationships.schools.data.forEach( ( school ) => {
-                Restangular.one( `school-attendances/${ school.id}` )
+                Restangular.one( `school-attendances/${school.id}` )
 					.get()
 					.then( ( data ) => {
     schools.push( data.attributes.schoolName );
@@ -68,7 +67,7 @@ angular
 
         if ( person.relationships.skills.data != null && person.relationships.skills.data.length > 0 ) {
             person.relationships.skills.data.forEach( ( skill ) => {
-                Restangular.one( `skills/${ skill.id}` )
+                Restangular.one( `skills/${skill.id}` )
 					.get()
 					.then( ( data ) => {
     skills.push( data.attributes.name );
@@ -82,7 +81,7 @@ angular
 
         if ( person.relationships.wantsToLearn.data != null && person.relationships.wantsToLearn.data.length > 0 ) {
             person.relationships.wantsToLearn.data.forEach( ( name ) => {
-                Restangular.one( `skills/${ name.id}` )
+                Restangular.one( `skills/${name.id}` )
 					.get()
 					.then( ( data ) => {
     learn.push( data.attributes.name );
@@ -96,7 +95,7 @@ angular
 
         if ( person.relationships.wantsToHire.data != null && person.relationships.wantsToHire.data.length > 0 ) {
             person.relationships.wantsToHire.data.forEach( ( name ) => {
-                Restangular.one( `skills/${ name.id}` )
+                Restangular.one( `skills/${name.id}` )
 					.get()
 					.then( ( data ) => {
     hire.push( data.attributes.name );
@@ -111,14 +110,13 @@ angular
         if ( person.attributes.imgUrl != null || person.attributes.imgUrl != undefined ) {
             const url = person.attributes.imgUrl;
 
-            imgURL = `<a href="${ url }">${ url }</a>`;
+            imgURL = `<a href="${url}">${url}</a>`;
             personData.imgURL = imgURL;
         }
 
         $scope.personIDtoAttr[ person.id ] = personData;
     } );// end for each loop
 } );
-
 
     $scope.updateSelection = function( newModelId ) {
         const index =	_.findIndex( $scope.data, { "id": newModelId } );

@@ -15,7 +15,6 @@ angular
     Restangular.all( resourceName )
 	.getList()
 	.then( ( data ) => {
-
     $scope.data = data;
 
     if ( resourceId ) {
@@ -23,7 +22,7 @@ angular
 
         $scope.model = $scope.data[ index ];
     }
-		
+
     _.each( $scope.data, ( element ) => {
         element.attributes.responsibilities = element.attributes.responsibilities.length == 0 ? "None" : element.attributes.responsibilities.join( " " );
         element.attributes.name = preProcess.positionToString( teamsIdToName, element, true );

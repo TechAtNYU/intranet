@@ -23,14 +23,13 @@ angular
         }
 
         _.each( $scope.data, ( element ) => {
-            Restangular.one( `people/${ element.relationships.authorizer.data.id}` )
+            Restangular.one( `people/${element.relationships.authorizer.data.id}` )
 			.get()
 			.then( ( data ) => {
     $scope.authorizer[ element.id ] = data.attributes.name;
 } );
         } );
     } );
-
 
     $scope.updateSelection = function( newModelId ) {
         const index = _.findIndex( $scope.data, { "id": newModelId } );

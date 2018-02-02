@@ -4,7 +4,6 @@ angular
 .module( "app.controllers" )
 .controller( "MembershipEditCtrl", ( $scope, $rootScope, $stateParams, $state,
 		$interval, formatTeamDisplayFilter, Restangular, apiDescriptor, formElementProvider, dataTransformer ) => {
-
     const resourceName = $stateParams.resourceName;
     const resourceId = $stateParams.id;
 

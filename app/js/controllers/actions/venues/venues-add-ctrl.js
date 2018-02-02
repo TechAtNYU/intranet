@@ -4,8 +4,6 @@ angular
 .module( "app.controllers" )
 .controller( "VenuesAddCtrl", ( $scope, $rootScope, $stateParams, $state,
 		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer ) => {
-
-
     const resourceName = $stateParams.resourceName;
 
     const resource = Restangular.all( resourceName );

@@ -35,17 +35,17 @@ angular
         const attributes = {};
 
 			// storing employer
-        Restangular.one( `organizations/${ job.relationships.employer.data.id}` )
+        Restangular.one( `organizations/${job.relationships.employer.data.id}` )
 			.get()
 			.then( ( employer ) => {
     attributes.employer = employer.attributes.name;
-    attributes.display = `${job.attributes.positionTitle } @ ${ employer.attributes.name}`;
+    attributes.display = `${job.attributes.positionTitle} @ ${employer.attributes.name}`;
 } ).then( () => {
 				// storing url
     if ( job.attributes.applicationUrl !== undefined ) {
         const url = job.attributes.applicationUrl;
 
-        attributes.url = `<a href=${ url }>${ url }</a>`;
+        attributes.url = `<a href=${url}>${url}</a>`;
     } else {
         attributes.url = "";
     }
@@ -59,7 +59,7 @@ angular
         const skills = [];
 
         job.relationships.desiredSkills.data.forEach( ( data ) => {
-            Restangular.one( `skills/${ data.id}` )
+            Restangular.one( `skills/${data.id}` )
 						.get()
 						.then( ( skill ) => {
     skills.push( skill.attributes.name );
@@ -72,7 +72,6 @@ angular
 			);
     } );
 } );
-
 
     $scope.updateSelection = function( newModelId ) {
         const index =	_.findIndex( $scope.data, { "id": newModelId } );

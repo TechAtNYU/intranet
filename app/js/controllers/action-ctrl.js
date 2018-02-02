@@ -3,7 +3,6 @@
 angular
 .module( "app.controllers" )
 .controller( "ActionCtrl", ( $scope, $stateParams, $state, apiDescriptor, pageProvider ) => {
-
     const resourceName = $stateParams.resourceName;
 
     $scope.action = $state.current.data.action;
@@ -14,5 +13,4 @@ angular
     apiDescriptor.then( ( apiDescription ) => {
         $scope.rdesc = apiDescription.resource( resourceName );
     } );
-
 } );

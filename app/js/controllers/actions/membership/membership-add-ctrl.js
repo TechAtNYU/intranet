@@ -4,8 +4,6 @@ angular
 .module( "app.controllers" )
 .controller( "MembershipAddCtrl", ( $scope, $rootScope, $stateParams, $state,
 		$interval, formatTeamDisplayFilter, Restangular, apiDescriptor, formElementProvider, dataTransformer ) => {
-
-
     const resourceName = $stateParams.resourceName;
 
     const resource = Restangular.all( resourceName );
@@ -40,7 +38,6 @@ angular
     } );
 } );
 } );
-
 
     apiDescriptor.then( ( apiDescription ) => {
         $scope.rdesc = apiDescription.resource( resourceName );

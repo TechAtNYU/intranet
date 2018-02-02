@@ -11,7 +11,6 @@ angular
         $scope.rdesc = apiDescription.resource( resourceName );
     } );
 
-
     var teamsIdToName = {};
 
     $scope.displayActivity = function( isActive ) {
@@ -20,7 +19,6 @@ angular
 
 	// mapping teamID to teamName
     var teamsIdToName = preProcess.objectIdtoName( "teams" );
-
 
     Restangular.all( resourceName )
 	.getList()
@@ -34,15 +32,15 @@ angular
     $scope.memberDetails = [];
 		// mapping memberID to name, position and display information
     _.each( $scope.data, ( element ) => {
-        Restangular.one( `people/${ element.relationships.member.data.id}` )
+        Restangular.one( `people/${element.relationships.member.data.id}` )
 			.get()
 			.then( ( person ) => {
-    Restangular.one( `positions/${ element.relationships.position.data.id}` )
+    Restangular.one( `positions/${element.relationships.position.data.id}` )
 				.get()
 				.then( ( position ) => {
     $scope.memberDetails.push( {
         "id": element.id,
-        "display": `${person.attributes.name } | ${ preProcess.positionToString( teamsIdToName, position, true )}`,
+        "display": `${person.attributes.name} | ${preProcess.positionToString( teamsIdToName, position, true )}`,
         "name": person.attributes.name,
         "team": preProcess.positionToString( teamsIdToName, position, false ),
         "position": preProcess.positionToString( teamsIdToName, position, true ),
@@ -55,7 +53,6 @@ angular
 } );
     } );
 } );
-
 
     $scope.updateSelection = function( newModelId ) {
         const index =	_.findIndex( $scope.memberDetails, { "id": newModelId } );
@@ -82,5 +79,4 @@ angular
 			);
         } );
     };
-
 } );

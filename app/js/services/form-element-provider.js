@@ -21,14 +21,12 @@ angular.module( "app.services" )
                 return "partials/inputs/textarea-input.html";
             }
             return "partials/inputs/default-input.html";
-			
         },
         "Relationship": function( field ) {
             if ( field.kind[ "is-array" ] ) {
                 return "partials/inputs/link-multiple-input.html";
             }
             return "partials/inputs/link-input.html";
-			
         },
         "Date": "partials/inputs/date-input.html",
         "Boolean": "partials/inputs/boolean-input.html",
@@ -45,7 +43,6 @@ angular.module( "app.services" )
                         return t( field );
                     }
                     return t || templates.String();
-					
                 },
                 "hiddenFields": [
                     "id",

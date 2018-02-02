@@ -44,7 +44,7 @@ angular.module( "app", [
             var flatten = function( object, parentKey ) {
                 if ( _.isObject( object ) && !_.isArray( object ) ) {
                     Object.keys( object ).forEach( ( key ) => {
-                        flatten( object[ key ], `${parentKey }.${ key}` );
+                        flatten( object[ key ], `${parentKey}.${key}` );
                     } );
                 } else {
                     resource[ parentKey ] = object;
@@ -96,7 +96,6 @@ angular.module( "app", [
         } );
         return data;
     } );
-
 } ).config( ( datepickerConfig ) => {
     datepickerConfig.showWeeks = false;
 } );

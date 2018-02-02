@@ -1,6 +1,5 @@
 angular.module( "app.services" )
 .provider( "pageProvider", () => {
-
     const templates = {
         "__defaults__": {
             "edit": "partials/actions/default/default-edit.html",
@@ -66,10 +65,8 @@ angular.module( "app.services" )
                         return t( action );
                     }
                     return t;
-					
                 }
             };
         }
     };
-
 } );

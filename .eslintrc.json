@@ -118,7 +118,7 @@
     "eol-last": 2,
     "func-style": [ 2, "expression" ],
     "indent": [ 2, 4, { "SwitchCase": 1 } ],
-    "key-spacing": [ 2, { "beforeColon": false, "afterColon": true } ],
+    "key-spacing": [ 1, { "beforeColon": false, "afterColon": true } ],
     "new-cap": 2,
     "new-parens": 2,
     "newline-after-var": [ 2, "always" ],

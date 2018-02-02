@@ -28,9 +28,9 @@ angular
     _.each( $scope.data, ( element ) => {
 		// mapping expenseID to reimbursementID
         if ( element.relationships.reimbursementFor.data !== null ) {
-            const url = `https://api.tnyu.org/v3/reimbursement-requests/${ element.relationships.reimbursementFor.data.id}`;
+            const url = `https://api.tnyu.org/v3/reimbursement-requests/${element.relationships.reimbursementFor.data.id}`;
 
-            $scope.reimbursing[ element.id ] = `<a href=${ url }>${ url }</a>`;
+            $scope.reimbursing[ element.id ] = `<a href=${url}>${url}</a>`;
         }
     } );
 } );

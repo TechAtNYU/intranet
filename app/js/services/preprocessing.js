@@ -2,7 +2,7 @@ angular
 .module( "app.services" )
 .factory( "preProcess", ( $filter, Restangular, formatTeamDisplayFilter ) => {
     "use strict";
-    return{
+    return {
         "displayDate": function( filter ) {
             return function( date ) {
                 return filter( "date" )( date, "MMMM yyyy" );
@@ -21,12 +21,11 @@ angular
             return objectIdToName;
         },
         "positionToString": function( teamMap, element, includeLead ) {
-            if( includeLead ) {
+            if ( includeLead ) {
                 return formatTeamDisplayFilter( teamMap[ element.relationships.team.data.id ], element.attributes.isLead );
             }
-            
+
             return formatTeamDisplayFilter( teamMap[ element.relationships.team.data.id ], false );
-            
         }
     };
 } );

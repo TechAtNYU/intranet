@@ -4,7 +4,6 @@ angular
 .module( "app.controllers" )
 .controller( "ExpensestEditCtrl", ( $scope, $rootScope, $stateParams, $state,
 		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer ) => {
-
     const resourceName = $stateParams.resourceName;
     const resourceId = $stateParams.id;
 
