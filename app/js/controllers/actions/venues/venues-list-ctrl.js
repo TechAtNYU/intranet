@@ -1,68 +1,84 @@
 "use strict";
 
 angular
-.module( "app.controllers" )
-.controller( "VenuesListCtrl", ( $scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer ) => {
-    const resourceName = $stateParams.resourceName;
-    const resourceId = $stateParams.id;
+  .module("app.controllers")
+  .controller(
+    "VenuesListCtrl",
+    (
+      $scope,
+      $rootScope,
+      $stateParams,
+      $state,
+      Restangular,
+      apiDescriptor,
+      dataTransformer
+    ) => {
+      const resourceName = $stateParams.resourceName;
+      const resourceId = $stateParams.id;
 
-    $scope.resourceName = resourceName;
-    apiDescriptor.then( ( apiDescription ) => {
-        $scope.rdesc = apiDescription.resource( resourceName );
-    } );
+      $scope.resourceName = resourceName;
+      apiDescriptor.then(apiDescription => {
+        $scope.rdesc = apiDescription.resource(resourceName);
+      });
 
-    let selectionMode = $stateParams.selectionMode;
+      let selectionMode = $stateParams.selectionMode;
 
-    if ( !selectionMode || ( selectionMode !== "single " && selectionMode !== "multiple" ) ) {
+      if (
+        !selectionMode ||
+        (selectionMode !== "single " && selectionMode !== "multiple")
+      ) {
         selectionMode = "multiple";
-    }
+      }
 
-    $scope.selectionMode = selectionMode;
-    Restangular.all( resourceName )
-		.getList()
-		.then( ( data ) => {
-    $scope.data = data;
+      $scope.selectionMode = selectionMode;
+      Restangular.all(resourceName).getList().then(data => {
+        $scope.data = data;
 
-    if ( resourceId ) {
-        $scope.model = _.find( $scope.data, {"id": resourceId} );
-    }
-
-    $scope.organizations = {};
-		// mapping venueID to organizations
-    _.each( $scope.data, ( element ) => {
-        if ( element.relationships.organization.data !== null ) {
-            Restangular.one( `organizations/${element.relationships.organization.data.id}` )
-				.get()
-				.then( ( org ) => {
-    $scope.organizations[ element.id ] = org.attributes.name;
-} );
+        if (resourceId) {
+          $scope.model = _.find($scope.data, { id: resourceId });
         }
-    } );
-} );
 
-    $scope.updateSelection = function( newModelId ) {
-	 		const index =	_.findIndex( $scope.data, {"id": newModelId} );
+        $scope.organizations = {};
+        // mapping venueID to organizations
+        _.each($scope.data, element => {
+          if (element.relationships.organization.data !== null) {
+            Restangular.one(
+              `organizations/${element.relationships.organization.data.id}`
+            )
+              .get()
+              .then(org => {
+                $scope.organizations[element.id] = org.attributes.name;
+              });
+          }
+        });
+      });
 
-	 		$scope.model = $scope.data[ index ];
-	 		$state.transitionTo( "list",
-	 			{"id": newModelId, "resourceName": resourceName},
-	 			{"notify": false}
-	 		);
-	 };
+      $scope.updateSelection = function(newModelId) {
+        const index = _.findIndex($scope.data, { id: newModelId });
 
-    $scope.deleteResource = function( id ) {
-        dataTransformer.deleteResource( $scope.resourceName, id ).then( () => {
-            alert( "Successfully deleted this entry" );
-            $scope.data = Restangular.all( $scope.resourceName ).getList().$object;
-            $scope.model = {};
-            $state.transitionTo( "list",
-				{"resourceName": $scope.resourceName},
-                {
-                    "inherit": false,
-                    "notify": false,
-                    "reload": true
-                }
-			);
-        } );
-    };
-} );
+        $scope.model = $scope.data[index];
+        $state.transitionTo(
+          "list",
+          { id: newModelId, resourceName: resourceName },
+          { notify: false }
+        );
+      };
+
+      $scope.deleteResource = function(id) {
+        dataTransformer.deleteResource($scope.resourceName, id).then(() => {
+          alert("Successfully deleted this entry");
+          $scope.data = Restangular.all($scope.resourceName).getList().$object;
+          $scope.model = {};
+          $state.transitionTo(
+            "list",
+            { resourceName: $scope.resourceName },
+            {
+              inherit: false,
+              notify: false,
+              reload: true
+            }
+          );
+        });
+      };
+    }
+  );
