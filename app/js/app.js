@@ -21,7 +21,7 @@ angular
 
     // Configuring Restangular to work with JSONAPI spec
     RestangularProvider.setDefaultHeaders({
-      Accept: "application/vnd.api+json, application/*, */*",
+      "Accept": "application/vnd.api+json, application/*, */*",
       "Content-Type": "application/vnd.api+json"
     });
 
