@@ -4,27 +4,15 @@
       <div class="card" style="width: 230px; height: 80%; margin: 20px">
         <div class="card-body">
           <h4 class="card-title">
-            <a ui-sref="add({resourceName: rdesc.id})" class="btn btn-success btn-sm">
-              <i class="fas fa-plus"></i>
-            </a>
             <a ui-sref="list({resourceName: rdesc.id})">
               <b>{{rdesc.attributes.name.plural}}</b>
             </a>
           </h4>
+          <a ui-sref="add({resourceName: rdesc.id})" class="btn btn-success btn-sm">
+            Add
+          </a>
         </div>
       </div>
     </div>
-  </div>
-  <div class="card"">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <b>Links</b>
-      </li>
-      <li class="list-group-item" ng-repeat="(name, url) in links">
-        <a ng-href="{{url}}">
-          {{name}}
-        </a>
-      </li>
-    </ul>
   </div>
 </div>
