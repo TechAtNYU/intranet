@@ -26,9 +26,9 @@ localhost:3000
 
 If you try to use `127.0.0.1:3000`, it will tell you that you are unauthorized.
 
-### [Staging]( intranet-staging.tnyu.org/#/)
+### [Staging](http://intranet-staging.tnyu.org/#/)
 
-*  Staging site builds from the `dev` branch
+*  Staging site builds from the `develop` branch
 * Remember to change the API url from `https://api.tnyu.org/v3` to `https://api.tnyu.org/v3-test` in `app/js/app.js` – `RestangularProvider.setBaseUrl`
 
 ### Testing
