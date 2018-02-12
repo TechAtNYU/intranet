@@ -227,4 +227,14 @@ angular
 			);
 		});
 	};
+
+	$scope.getVenueLink = function(newModelId) {
+		console.log(newModelId);
+		var index =	_.findIndex($scope.data, {'id': newModelId});
+		$scope.model = $scope.data[index];
+		$state.transitionTo('list',
+			{id: newModelId, resourceName: 'venue'},
+			{notify: false}
+		);
+	}
 });
