@@ -2,7 +2,8 @@
 
 angular
 .module('app.controllers')
-.controller('EventListCtrl', function($scope, $sce, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer) {
+.controller('EventListCtrl', function($scope, $sce, $rootScope, $stateParams,
+		$state, Restangular, apiDescriptor, dataTransformer, preProcess) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;
@@ -18,10 +19,10 @@ angular
 		return monthNames[month - 1] + " " + year;
 	}
 
-	var teamsIdToName = {};
-	var venuesIdToName = {};
-	var organizationIdToName = {};
-	var personIdToName = {};
+	var teamsIdToName = preProcess.objectIdtoName('teams');
+	var venuesIdToName = preProcess.objectIdtoName('venues');
+	var organizationIdToName = preProcess.objectIdtoName('organization');
+	var personIdToName = preProcess.objectIdtoName('people');
 
 	$scope.eventDetails = {
 		venue : {},
@@ -42,41 +43,9 @@ angular
 		categories: {}
 	};
 
-	//mapping teamID to teamName
-	Restangular.all('teams')
-		.getList()
-		.then(function(teams) {
-			_.each(teams, function(element) {
-				teamsIdToName[element.id] = element.attributes.name;
-			});
-		});
-
-	//mapping venueID to venueName
-	Restangular.all('venues')
-		.getList()
-		.then(function(teams) {
-			_.each(teams, function(element) {
-				venuesIdToName[element.id] = element.attributes.name;
-			});
-		});
-
-	//mapping organization to organizationName
-	Restangular.all('organizations')
-		.getList()
-		.then(function(organization) {
-			_.each(organization, function(element) {
-				organizationIdToName[element.id] = element.attributes.name;
-			});
-		});
-
 	//mapping personID to personName
 	Restangular.all('people')
 		.getList()
-		.then(function(person) {
-			_.each(person, function(element) {
-				personIdToName[element.id] = element.attributes.name;
-			});
-		})
 		.then(function(){
 			Restangular.all(resourceName)
 			.getList()
@@ -91,7 +60,7 @@ angular
 					//mapping eventID to venue names with links
 					if (element.relationships.venue.data !== null) {
 						// !! change venueURL to the venue page once the venue override page is ready
-						var venueURL = "https://api.tnyu.org/v3/venues/" + element.relationships.venue.data.id;
+						var venueURL = "/#/r/venues/list/" + element.relationships.venue.data.id;
 						$scope.eventDetails.venue[element.id] = "<a href=" + venueURL + ">" + venuesIdToName[element.relationships.venue.data.id] + "</a>";
 					}
 

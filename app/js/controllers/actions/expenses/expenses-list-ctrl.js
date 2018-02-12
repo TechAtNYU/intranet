@@ -2,7 +2,8 @@
 
 angular
 .module('app.controllers')
-.controller('ExpensesListCtrl', function($scope, $filter, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer) {
+.controller('ExpensesListCtrl', function($scope, $filter, $rootScope, $stateParams, 
+	$state, Restangular, apiDescriptor, dataTransformer, preProcess) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;
@@ -12,9 +13,7 @@ angular
 
 	$scope.reimbursing = {};
 
-	$scope.displayDate = function(date) {
-		return $filter('date')(date, 'MMMM yyyy');
-	}
+	$scope.displayDate = preProcess.displayDate($filter);
 
 	Restangular.all(resourceName)
 	.getList()
