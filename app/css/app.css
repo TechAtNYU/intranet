@@ -39,3 +39,20 @@ label {
 .content {
   padding-top: 20px;
 }
+
+.midCard{
+  height: 13rem;
+}
+
+.cardButton:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-footer{
+  background-color: #28a745;
+  color: white;
+}
+
+.card-footer:hover{
+  background-color: #1e7c33;
+}
