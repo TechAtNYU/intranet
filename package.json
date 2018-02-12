@@ -7,10 +7,10 @@
     "test": "karma start ./test/karma.conf.js"
   },
   "dependencies": {
-    "jasmine": "^2.8.0"
   },
   "devDependencies": {
     "http-server": "^0.8.5",
+    "jasmine": "^2.8.0",
     "jasmine-core": "^2.2.0",
     "karma": "^0.12.37",
     "karma-chrome-launcher": "^0.1.7",
