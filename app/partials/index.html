@@ -1,6 +1,5 @@
 <div class="container">
     <div class="card-deck">
-        <!-- Sites Card -->
         <div class="card topCard">
             <h4 class="card-header">
                 Sites
@@ -17,7 +16,6 @@
                 </ul>
             </div>
         </div>
-        <!-- Sites Card -->
         <div class="card topCard">
             <h4 class="card-header">
                 Current e-Board
@@ -50,16 +48,18 @@
     <div ng-repeat="cardRow in subCards">
         <div class="card-deck">
             <div ng-repeat="card in cardRow" class="card midCard cardButton">
+                    
                 <div class="card-body">
                     <a ng-href="/#/r{{card.listLink}}">
                         <h3 class="card-title">{{card.name}}</h3>
                     </a>
-                </div>
-                <a ng-href="/#/r{{card.addLink}}">
-                <div class="card-footer">
-                        <center><h3>+</h3></center>
+                    <a ng-href="/#/r{{card.listLink}}"><span></span></a>
                 </div>
                 </a>
+                <div class="card-footer">
+                        <center><h3>+</h3></center>
+                        <a ng-href="/#/r{{card.addLink}}"><span></span></a>
+                </div>
             </div>  
         </div>
         <br>
