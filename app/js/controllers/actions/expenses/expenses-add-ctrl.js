@@ -1,52 +1,33 @@
-"use strict";
+'use strict';
 
 angular
-  .module("app.controllers")
-  .controller("ExpensesAddCtrl", function(
-    $scope,
-    $rootScope,
-    $stateParams,
-    $state,
-    $interval,
-    Restangular,
-    apiDescriptor,
-    formElementProvider,
-    dataTransformer
-  ) {
-    const resourceName = $stateParams.resourceName;
+.module('app.controllers')
+.controller('ExpensesAddCtrl', function($scope, $rootScope, $stateParams, $state,
+		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
 
-    const resource = Restangular.all(resourceName);
+	var resourceName = $stateParams.resourceName;
 
-    $scope.fep = formElementProvider;
+	var resource = Restangular.all(resourceName);
 
-    $scope.data = {};
-    $scope.model = { attributes: {} };
+	$scope.fep = formElementProvider;
 
-    apiDescriptor.then(function(apiDescription) {
-      $scope.rdesc = apiDescription.resource(resourceName);
-      $scope.data = dataTransformer.loadLinkedData(
-        $scope.rdesc,
-        $scope.refreshData
-      );
-    });
+	$scope.data = {};
+	$scope.model = {attributes: {}};
 
-    $scope.createResource = function(model, rdesc) {
-      dataTransformer
-        .createResource(model, rdesc, resource)
-        .then(function(data) {
-          $state.go("list", {
-            resourceName: resourceName,
-            selectionMode: "single",
-            id: data.id
-          });
-        });
-    };
+	apiDescriptor.then(function(apiDescription) {
+		$scope.rdesc = apiDescription.resource(resourceName);
+		$scope.data = dataTransformer.loadLinkedData($scope.rdesc, $scope.refreshData);
+	});
 
-    //data: array of array type data
-    //fieldResourceType: which field to grab
-    $scope.refreshData = function(data, fieldResourceType) {
-      data[fieldResourceType] = Restangular.all(
-        fieldResourceType
-      ).getList().$object;
-    };
-  });
+	$scope.createResource = function (model, rdesc) {
+		dataTransformer.createResource(model, rdesc, resource).then(function(data) {
+			$state.go('list', {resourceName: resourceName, selectionMode: 'single', id: data.id});
+		});
+	}
+
+	//data: array of array type data
+	//fieldResourceType: which field to grab
+	$scope.refreshData = function(data, fieldResourceType) {
+		data[fieldResourceType] = Restangular.all(fieldResourceType).getList().$object;
+	};
+});
