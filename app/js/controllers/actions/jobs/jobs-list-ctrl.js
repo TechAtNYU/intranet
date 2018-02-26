@@ -2,21 +2,13 @@
 
 angular
 .module('app.controllers')
-.controller('JobsListCtrl', function($scope, $sce, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer) {
+.controller('JobsListCtrl', function($scope, $sce, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer, preProcess) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;
 	apiDescriptor.then(function(apiDescription) {
 		$scope.rdesc = apiDescription.resource(resourceName);
 	});
-
-	$scope.displayDate = function(date) {
-		if (date == undefined) { return; };
-		var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-		var year = parseInt(date.substring(0,4));
-		var month = parseInt(date.substring(5, 7));
-		return monthNames[month - 1] + " " + year;
-	}
 
 	$scope.expiredOrNot = function(date){
 		const d1 = new Date();
@@ -25,15 +17,6 @@ angular
 			return "Active";
 		}
 		return "Expired";
-	}
-
-	$scope.prettifyDate = function(date) {
-		if (date == undefined) { return; };
-		var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-		var year = parseInt(date.substring(0, 4));
-		var month = parseInt(date.substring(5, 7));
-		var day = parseInt(date.substring(8, 10));
-		return monthNames[month - 1] + " " + day + ", "+ year;
 	}
 
 	var selectionMode = $stateParams.selectionMode;
@@ -73,6 +56,9 @@ angular
 				//add expire date
 				const expireDate = job.attributes.exiresAt;
 				attributes['expireDate'] = expireDate;
+				//formate date
+				const expireDisplay = preProcess.prettifyDate(expireDate);
+				attributes['expireDisplay'] = expireDisplay;
 				//storing categories
 				const categories = job.attributes.categories;
 				attributes['categories'] = categories.join(', ');
