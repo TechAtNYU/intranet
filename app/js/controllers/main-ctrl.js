@@ -5,7 +5,7 @@ angular
 .controller('MainCtrl', function($scope, apiDescriptor, Restangular) {
 	apiDescriptor.then(function(apiDescription) {
 		$scope.apidesc = apiDescription.data;
-		console.log(Restangular.all('memberships').getList())
+		//console.log(preProcess.loadCurrentEBoard());
 		$scope.relatedSites = [
 			{	"name": "Tech@NYU",
 				"mainLink": "https://techatnyu.org/",
@@ -52,13 +52,13 @@ angular
 							"listLink": "/events/list/",
 							"addLink": "/events/add"}];
 		$scope.subCards = [
-			[{	"name": "Membership 👥",
-				"listLink": "/memberships/list/",
-				"addLink": "/memberships/add"
+			[{	"name": "Teams ⛹🏾",
+			"listLink": "/teams/list/",
+			"addLink": "/teams/add"
 			},
-			{	"name": "Expenses 🍕",
-				"listLink": "/expenses/list/",
-				"addLink": "/expenses/add"
+			{	"name": "Membership 👥",
+				"listLink": "/membership/list/",
+				"addLink": "/membership/add"
 			},
 			{	"name": "Position 👮🏽",
 				"listLink": "/positions/list/",
@@ -68,9 +68,9 @@ angular
 				"listLink": "/venues/list/",
 				"addLink": "/venues/add"
 			},
-			{	"name": "Jobs 👕",
-				"listLink": "/jobs/list/",
-				"addLink": "/jobs/add"
+			{	"name": "People 💃🏽",
+				"listLink": "/people/list/",
+				"addLink": "/people/add"
 			},
 			{	"name": "Organizations 🏙",
 				"listLink": "/organizations/list/",
