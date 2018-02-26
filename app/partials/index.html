@@ -8,7 +8,7 @@
                 <ul class="list-group list-group-flush">
                     <div ng-repeat="site in relatedSites">
                         <li class="list-group-item">
-                            <a ng-href="{{site.mainLink}}">{{site.name}}</a>
+                            {{site.name}}
                             <a ng-href="{{site.prodLink}}">(prod)</a>
                             <a ng-href="{{site.stagingLink}}">(staging)</a>
                         </li>
