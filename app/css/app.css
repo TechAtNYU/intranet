@@ -97,3 +97,8 @@ footer {
   bottom: 0px;
   width: 100%;
 }
+
+.otherResourceCard{
+  height: 10em;
+  overflow-y: auto;
+}
