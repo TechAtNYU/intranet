@@ -11,6 +11,18 @@ label {
   margin-bottom: 25px;
 }
 
+footer {
+  padding-top: 4em;
+  padding-bottom:1em;
+  color: rgb(150, 150, 150);
+  font-size: 14px;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
 .chosen-container-single .chosen-single, .chosen-container-multi .chosen-choices {
   min-height: 30px !important;
   height: auto;
