@@ -13,10 +13,7 @@ angular
 	$scope.expiredOrNot = function(date){
 		const d1 = new Date();
     const d2 = new Date(date);
-		if(d1 <= d2){
-			return "Active";
-		}
-		return "Expired";
+		return (d1 <= d2) ? "Active" : "Expired";
 	}
 
 	var selectionMode = $stateParams.selectionMode;
