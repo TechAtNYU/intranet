@@ -86,13 +86,13 @@
             </h4>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        Reimbursement Requests
-                    </li>
-                    <li class="list-group-item">
-                        Surveys
-                    </li>
-                    
+                    <div ng-repeat="resource in otherResources | orderBy:'name'">
+                        <li class="list-group-item">
+                            <a ng-href="/#/r{{resource.listLink}}">
+                            {{resource.name}}
+                            </a>
+                        </li>
+                    </div>
                 </ul>
             </div>
         </div>    

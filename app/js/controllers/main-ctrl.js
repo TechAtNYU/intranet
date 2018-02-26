@@ -76,6 +76,65 @@ angular
 				"listLink": "/organizations/list/",
 				"addLink": "/organizations/add"
 			}]
-		]
+		];
+		$scope.otherResources = [
+			{ 	"name": "Jobs",
+				"listLink": "/jobs/list/"
+			},
+			{ 	"name": "Venues",
+				"listLink": "/venues/list/"
+			},
+			{ 	"name": "Policy Proposals",
+				"listLink": "/policy-proposals/list/"
+			},
+			{ 	"name": "Projects",
+				"listLink": "/projects/list/"
+			},
+			{ 	"name": "Income",
+				"listLink": "/incomes/list/"
+			},
+			{ 	"name": "Expense",
+				"listLink": "/expenses/list"
+			},
+			{ 	"name": "Reimbursement Requests",
+				"listLink": "/reimbursement-requests/list/"
+			},
+			{ 	"name": "Sponsorship Packages",
+				"listLink": "/sponsorship-packages/list/"
+			},
+			{ 	"name": "Surveys",
+				"listLink": "/surveys/list/"
+			},
+			{ 	"name": "Applications",
+				"listLink": "/applications/list/"
+			},
+			{ 	"name": "Skills",
+				"listLink": "/skills/list/"
+			},
+			{ 	"name": "API Keys",
+				"listLink": "/api-keys/list/"
+			},
+			{ 	"name": "Answers",
+				"listLink": "/answers/list/"
+			},
+			{ 	"name": "Questions",
+				"listLink": "/questions/list/"
+			},
+			{ 	"name": "Survey Responses",
+				"listLink": "/survey-responses/list/"
+			},
+			{ 	"name": "School Attendances",
+				"listLink": "/school-attendances/list/"
+			},
+			{ 	"name": "Presenters",
+				"listLink": "/presenters/list/"
+			},
+			{ 	"name": "Related Clubs",
+				"listLink": "/related-clubs/list/"
+			},
+			{ 	"name": "Sponsorship Purchases",
+				"listLink": "/sponsorship-purchases/list/"
+			}
+		];
 	});
 });
