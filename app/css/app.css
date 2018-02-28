@@ -52,25 +52,25 @@ footer {
   padding-top: 20px;
 }
 
-.topCard .card-body{
+.top-card .card-body{
   position: relative;
 }
 
-.topCard .card-body a h2 { 
+.top-card .card-body a h2 { 
   width: 100%;
   height: 12em;
 }
 
-.topCard .card-body a { 
+.top-card .card-body a { 
   text-decoration: none;
 }
 
-.topCard .card-footer{
+.top-card .card-footer{
   position: absolute;
   bottom: 0px;
   width: 100%;
 }
-.cardButton:hover{
+.card-button:hover{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -83,22 +83,22 @@ footer {
   background-color: #1e7c33;
 }
 
-.midCard .card-body a h3 { 
+.mid-card .card-body a h3 { 
   width: 100%;
   height: 5em;
 }
 
-.midCard .card-body a { 
+.mid-card .card-body a { 
   text-decoration: none;
 }
 
-.midCard .card-footer{
+.mid-card .card-footer{
   position: absolute;
   bottom: 0px;
   width: 100%;
 }
 
-.otherResourceCard{
+.other-resource-card{
   height: 10em;
   overflow-y: auto;
 }

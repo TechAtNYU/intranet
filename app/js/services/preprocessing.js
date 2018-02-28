@@ -54,7 +54,6 @@ angular
                         });
                     });
                 });
-                console.log(memberDetails);
             });
         }
     };
