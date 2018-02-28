@@ -5,7 +5,7 @@ angular
 .controller('MainCtrl', function($scope, apiDescriptor, Restangular) {
 	apiDescriptor.then(function(apiDescription) {
 		$scope.apidesc = apiDescription.data;
-		//console.log(preProcess.loadCurrentEBoard());
+
 		$scope.relatedSites = [
 			{	"name": "Tech@NYU",
 				"mainLink": "https://techatnyu.org/",
@@ -37,103 +37,94 @@ angular
 				"prodLink": 'https://www.prodink.com',
 				"stagingLink": "https://www.staginglink.com"
 			},
-			{	"name": "Mosaico",
-				"mainLink": "https://techatnyu.org/",
-				"prodLink": 'https://www.prodink.com',
-				"stagingLink": "https://www.staginglink.com"
-			},
 			{	"name": "Discuss",
 				"mainLink": "https://techatnyu.org/",
 				"prodLink": 'https://www.prodink.com',
 				"stagingLink": "https://www.staginglink.com"
 			}
 			];
+
 		$scope.mainCard = [{	"name": "Events 🚀",
-							"listLink": "/events/list/",
-							"addLink": "/events/add"}];
+								"id": "events"
+							}];
+
 		$scope.subCards = [
 			[{	"name": "Teams ⛹🏾",
-			"listLink": "/teams/list/",
-			"addLink": "/teams/add"
+				"id": "teams"
 			},
 			{	"name": "Membership 👥",
-				"listLink": "/membership/list/",
-				"addLink": "/membership/add"
+				"id": "membership"
 			},
 			{	"name": "Position 👮🏽",
-				"listLink": "/positions/list/",
-				"addLink": "/positions/add"
+				"id": "positions"
 			}],
 			[{	"name": "Venue 🏛",
-				"listLink": "/venues/list/",
-				"addLink": "/venues/add"
+				"id": "venues"
 			},
 			{	"name": "People 💃🏽",
-				"listLink": "/people/list/",
-				"addLink": "/people/add"
+				"id": "people"
 			},
 			{	"name": "Organizations 🏙",
-				"listLink": "/organizations/list/",
-				"addLink": "/organizations/add"
+				"id": "organizations"
 			}]
 		];
 		$scope.otherResources = [
 			{ 	"name": "Jobs",
-				"listLink": "/jobs/list/"
+				"id": "jobs"
 			},
 			{ 	"name": "Venues",
-				"listLink": "/venues/list/"
+				"id": "venues"
 			},
 			{ 	"name": "Policy Proposals",
-				"listLink": "/policy-proposals/list/"
+				"id": "policy-proposals"
 			},
 			{ 	"name": "Projects",
-				"listLink": "/projects/list/"
+				"id": "projects"
 			},
 			{ 	"name": "Income",
-				"listLink": "/incomes/list/"
+				"id": "incomes"
 			},
 			{ 	"name": "Expense",
-				"listLink": "/expenses/list"
+				"id": "expenses"
 			},
 			{ 	"name": "Reimbursement Requests",
-				"listLink": "/reimbursement-requests/list/"
+				"id": "reimbursement-requests"
 			},
 			{ 	"name": "Sponsorship Packages",
-				"listLink": "/sponsorship-packages/list/"
+				"id": "sponsorship-packages"
 			},
 			{ 	"name": "Surveys",
-				"listLink": "/surveys/list/"
+				"id": "surveys"
 			},
 			{ 	"name": "Applications",
-				"listLink": "/applications/list/"
+				"id": "applications"
 			},
 			{ 	"name": "Skills",
-				"listLink": "/skills/list/"
+				"id": "skills"
 			},
 			{ 	"name": "API Keys",
-				"listLink": "/api-keys/list/"
+				"id": "api-keys"
 			},
 			{ 	"name": "Answers",
-				"listLink": "/answers/list/"
+				"id": "answers"
 			},
 			{ 	"name": "Questions",
-				"listLink": "/questions/list/"
+				"id": "questions"
 			},
 			{ 	"name": "Survey Responses",
-				"listLink": "/survey-responses/list/"
+				"id": "survey-responses"
 			},
 			{ 	"name": "School Attendances",
-				"listLink": "/school-attendances/list/"
+				"id": "school-attendances"
 			},
 			{ 	"name": "Presenters",
-				"listLink": "/presenters/list/"
+				"id": "presenters"
 			},
 			{ 	"name": "Related Clubs",
-				"listLink": "/related-clubs/list/"
+				"id": "related-clubs"
 			},
 			{ 	"name": "Sponsorship Purchases",
-				"listLink": "/sponsorship-purchases/list/"
+				"id": "sponsorship-purchases"
 			}
 		];
 	});
