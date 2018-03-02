@@ -74,11 +74,14 @@
             </h4>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        Ship.tnyu.org
-                        <a href="#">(prod)</a>
-                        <a href="#">(staging)</a>
-                    </li>
+                    <div ng-repeat="site in otherSites">
+                        <li class="list-group-item">
+                            {{site.name}}
+                            <span ng-repeat="(type, link) in site.links">
+                                <a ng-href="{{link}}" target="_blank">({{type}})</a>
+                            </span> 
+                        </li>
+                    </div>
                 </ul>
             </div>
         </div>

@@ -44,6 +44,19 @@ angular
 				}
 			},
 			];
+		
+		$scope.otherSites = [
+			{	"name": "Ship",
+				"links": {
+					"Main": "http://ship.techatnyu.org/",
+				}
+			},
+			{	"name": "Demo Days",
+				"links": {
+					"Main": "http://demodays.co/",
+				}
+			},
+		];
 
 		$scope.mainCard = [{	"name": "Events 🚀",
 								"id": "events"
