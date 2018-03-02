@@ -8,7 +8,7 @@ angular
 		$scope.apidesc = apiDescription.data;
 		$scope.eboard = preProcess.loadCurrentEBoard($scope, preProcess.objectIdtoName('teams'));
 
-		$scope.relatedSites = [
+		$scope.related_sites = [
 			{	"name": "Tech@NYU",
 				"links": {
 					"Main": "https://techatnyu.org/",
@@ -45,7 +45,7 @@ angular
 			},
 			];
 		
-		$scope.otherSites = [
+		$scope.other_sites = [
 			{	"name": "Ship",
 				"links": {
 					"Main": "http://ship.techatnyu.org/",
@@ -58,11 +58,13 @@ angular
 			},
 		];
 
-		$scope.mainCard = [{	"name": "Events 🚀",
-								"id": "events"
-							}];
+		$scope.main_card = [
+			{"name": "Events 🚀",
+			"id": "events"
+			}
+		];
 
-		$scope.subCards = [
+		$scope.sub_cards = [
 			[{	"name": "Teams ⛹🏾",
 				"id": "teams"
 			},
@@ -82,7 +84,7 @@ angular
 				"id": "organizations"
 			}]
 		];
-		$scope.otherResources = [
+		$scope.other_resources = [
 			{ 	"name": "Jobs",
 				"id": "jobs"
 			},
