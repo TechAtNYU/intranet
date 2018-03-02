@@ -2,9 +2,11 @@
 
 angular
 .module('app.controllers')
-.controller('MainCtrl', function($scope, apiDescriptor, Restangular) {
+.controller('MainCtrl', function($q, $scope, apiDescriptor, Restangular, preProcess) {
 	apiDescriptor.then(function(apiDescription) {
+		
 		$scope.apidesc = apiDescription.data;
+		$scope.eboard = preProcess.loadCurrentEBoard($scope, preProcess.objectIdtoName('teams'));
 
 		$scope.relatedSites = [
 			{	"name": "Tech@NYU",

@@ -20,11 +20,13 @@
             <h4 class="card-header">
                 Current e-Board
             </h4>
-            <div class="card-body">
+            <div class="card-body eboard">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        Name - Position
-                    </li>
+                    <div ng-repeat="person in eboard">
+                        <li class="list-group-item">
+                            {{person}}
+                        </li>
+                    </div>
                 </ul>
             </div>
         </div>
