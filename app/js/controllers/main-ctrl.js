@@ -4,51 +4,67 @@ angular
 .module('app.controllers')
 .controller('MainCtrl', function($scope, apiDescriptor, Restangular) {
 	apiDescriptor.then(function(apiDescription) {
+		
 		$scope.apidesc = apiDescription.data;
+		$scope.eboard = preProcess.loadCurrentEBoard($scope, preProcess.objectIdtoName('teams'));
 
-		$scope.relatedSites = [
+		$scope.related_sites = [
 			{	"name": "Tech@NYU",
-				"mainLink": "https://techatnyu.org/",
-				"prodLink": 'https://www.prodink.com',
-				"stagingLink": "https://www.staginglink.com"
+				"links": {
+					"Main": "https://techatnyu.org/",
+				}
+				
 			},
 			{	"name": "Intranet",
-				"mainLink": "https://intranet.sexy/",
-				"prodLink": 'https://www.prodink.com',
-				"stagingLink": "https://www.staginglink.com"
+				"links": {
+					"Main": "http://intranet.sexy/#/",
+					"Staging": "http://intranet-staging.tnyu.org/#/",
+				}
 			},
 			{	"name": "Calendar",
-				"mainLink": "https://techatnyu.org/",
-				"prodLink": 'https://www.prodink.com',
-				"stagingLink": "https://www.staginglink.com"
+				"links": {
+					"Main": "http://cal.techatnyu.org/",
+				}
 			},
 			{	"name": "RSVP",
-				"mainLink": "https://techatnyu.org/",
-				"prodLink": 'https://www.prodink.com',
-				"stagingLink": "https://www.staginglink.com"
+				"links": {
+					"Main": "http://rsvp.techatnyu.org/",
+					"Staging": "http://rsvp-staging.techatnyu.org/",
+				}
 			},
 			{	"name": "Check-In",
-				"mainLink": "https://techatnyu.org/",
-				"prodLink": 'https://www.prodink.com',
-				"stagingLink": "https://www.staginglink.com"
-			},
-			{	"name": "Mailtrain",
-				"mainLink": "https://techatnyu.org/",
-				"prodLink": 'https://www.prodink.com',
-				"stagingLink": "https://www.staginglink.com"
+				"links": {
+					"Main": "http://checkin.techatnyu.org/#/",
+					"Staging": "http://checkin-staging.techatnyu.org/#/",
+				}
 			},
 			{	"name": "Discuss",
-				"mainLink": "https://techatnyu.org/",
-				"prodLink": 'https://www.prodink.com',
-				"stagingLink": "https://www.staginglink.com"
-			}
+				"links": {
+					"Main": "https://discuss.techatnyu.org/",
+				}
+			},
 			];
+		
+		$scope.other_sites = [
+			{	"name": "Ship",
+				"links": {
+					"Main": "http://ship.techatnyu.org/",
+				}
+			},
+			{	"name": "Demo Days",
+				"links": {
+					"Main": "http://demodays.co/",
+				}
+			},
+		];
 
-		$scope.mainCard = [{	"name": "Events 🚀",
-								"id": "events"
-							}];
+		$scope.main_card = [
+			{"name": "Events 🚀",
+			"id": "events"
+			}
+		];
 
-		$scope.subCards = [
+		$scope.sub_cards = [
 			[{	"name": "Teams ⛹🏾",
 				"id": "teams"
 			},
@@ -68,7 +84,8 @@ angular
 				"id": "organizations"
 			}]
 		];
-		$scope.otherResources = [
+
+    $scope.other_resources = [
 			{ 	"name": "Jobs",
 				"id": "jobs"
 			},

@@ -6,11 +6,12 @@
             </h4>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <div ng-repeat="site in relatedSites">
+                    <div ng-repeat="site in related_sites">
                         <li class="list-group-item">
                             {{site.name}}
-                            <a ng-href="{{site.prodLink}}">(prod)</a>
-                            <a ng-href="{{site.stagingLink}}">(staging)</a>
+                            <span ng-repeat="(type, link) in site.links">
+                                <a ng-href="{{link}}" target="_blank">({{type}})</a>
+                            </span> 
                         </li>
                     </div>
                 </ul>
@@ -20,16 +21,18 @@
             <h4 class="card-header">
                 Current e-Board
             </h4>
-            <div class="card-body">
+            <div class="card-body eboard">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        Name - Position
-                    </li>
+                    <div ng-repeat="person in eboard">
+                        <li class="list-group-item">
+                            {{person}}
+                        </li>
+                    </div>
                 </ul>
             </div>
         </div>
 
-        <div ng-repeat="card in mainCard" class="card top-card card-button">
+        <div ng-repeat="card in main_card" class="card top-card card-button">
                 <div class="card-body">
                         <a ng-href="/#/r/{{card.listLink}}/list/">
                     <h2 class="card-title">{{card.name}}</h2>
@@ -45,7 +48,7 @@
     </div>
     <br>
 <div class="card-deck-wrapper">
-    <div ng-repeat="cardRow in subCards">
+    <div ng-repeat="cardRow in sub_cards">
         <div class="card-deck">
             <div ng-repeat="card in cardRow" class="card mid-card card-button">
                 <div class="card-body">
@@ -71,11 +74,14 @@
             </h4>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        Ship.tnyu.org
-                        <a href="#">(prod)</a>
-                        <a href="#">(staging)</a>
-                    </li>
+                    <div ng-repeat="site in other_sites">
+                        <li class="list-group-item">
+                            {{site.name}}
+                            <span ng-repeat="(type, link) in site.links">
+                                <a ng-href="{{link}}" target="_blank">({{type}})</a>
+                            </span> 
+                        </li>
+                    </div>
                 </ul>
             </div>
         </div>
@@ -86,7 +92,7 @@
             </h4>
             <div class="card-body other-resource-card">
                 <ul class="list-group list-group-flush">
-                    <div ng-repeat="resource in otherResources | orderBy:'name'">
+                    <div ng-repeat="resource in other_resources | orderBy:'name'">
                         <li class="list-group-item">
                             <a ng-href="/#/r/{{resource.id}}/list/">
                             {{resource.name}}
