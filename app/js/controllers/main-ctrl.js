@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('MainCtrl', function($q, $scope, apiDescriptor, Restangular, preProcess) {
+.controller('MainCtrl', function($scope, apiDescriptor, Restangular) {
 	apiDescriptor.then(function(apiDescription) {
 		
 		$scope.apidesc = apiDescription.data;
@@ -84,7 +84,8 @@ angular
 				"id": "organizations"
 			}]
 		];
-		$scope.other_resources = [
+
+    $scope.other_resources = [
 			{ 	"name": "Jobs",
 				"id": "jobs"
 			},
