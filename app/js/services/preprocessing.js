@@ -8,22 +8,22 @@ angular
                     return filter('date')(date, 'MMMM yyyy');
                 }
         },
-        objectIdtoName: function(name){
+        objectIdtoName: function(name){;
             var deferred = $q.defer();
-		    var promise = deferred.promise;
-            const objectIdToName1 = {};
-            let listt = undefined;
+            var promise = deferred.promise;
+            const objectIdToNameHash = {};
             promise.then(function(){
                 return Restangular.all(name).getList()
                         .then(function(){
-                        _.each(listt, function(element) {
-                            objectIdToName1[element.id] = element.attributes.name;
+                        _.each(undefined, function(element) {
+                            objectIdToNameHash[element.id] = element.attributes.name;
                         })
-                        return  objectIdToName1;                    
+                        return  objectIdToNameHash;                    
                         });
                     });
             deferred.resolve();
-            return objectIdToName1;
+            return objectIdToNameHash;
+                               
         },
         positionToString: function(teamMap, element, includeLead){
             if(includeLead){
