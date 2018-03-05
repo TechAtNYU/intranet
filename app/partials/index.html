@@ -6,14 +6,12 @@
             </h4>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <div ng-repeat="site in related_sites">
-                        <li class="list-group-item">
-                            {{site.name}}
-                            <span ng-repeat="(type, link) in site.links">
-                                <a ng-href="{{link}}" target="_blank">({{type}})</a>
-                            </span> 
-                        </li>
-                    </div>
+                    <li ng-repeat="site in related_sites" class="list-group-item">
+                        {{site.name}}
+                        <span ng-repeat="(type, link) in site.links">
+                            <a ng-href="{{link}}" target="_blank">({{type}})</a>
+                        </span> 
+                    </li>
                 </ul>
             </div>
         </div>
@@ -23,11 +21,9 @@
             </h4>
             <div class="card-body eboard">
                 <ul class="list-group list-group-flush">
-                    <div ng-repeat="person in eboard">
-                        <li class="list-group-item">
-                            {{person}}
-                        </li>
-                    </div>
+                    <li ng-repeat="person in eboard" class="list-group-item">
+                        {{person}}
+                    </li>
                 </ul>
             </div>
         </div>
@@ -74,14 +70,12 @@
             </h4>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <div ng-repeat="site in other_sites">
-                        <li class="list-group-item">
-                            {{site.name}}
-                            <span ng-repeat="(type, link) in site.links">
-                                <a ng-href="{{link}}" target="_blank">({{type}})</a>
-                            </span> 
-                        </li>
-                    </div>
+                    <li ng-repeat="site in other_sites" class="list-group-item">
+                        {{site.name}}
+                        <span ng-repeat="(type, link) in site.links">
+                            <a ng-href="{{link}}" target="_blank">({{type}})</a>
+                        </span> 
+                    </li>
                 </ul>
             </div>
         </div>
@@ -92,13 +86,11 @@
             </h4>
             <div class="card-body other-resource-card">
                 <ul class="list-group list-group-flush">
-                    <div ng-repeat="resource in other_resources | orderBy:'name'">
-                        <li class="list-group-item">
-                            <a ng-href="/#/r/{{resource.id}}/list/">
-                            {{resource.name}}
-                            </a>
-                        </li>
-                    </div>
+                    <li ng-repeat="resource in other_resources | orderBy:'name'" class="list-group-item">
+                        <a ng-href="/#/r/{{resource.id}}/list/">
+                        {{resource.name}}
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>    
