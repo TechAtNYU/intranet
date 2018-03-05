@@ -68,13 +68,13 @@ angular
 			[{	"name": "Teams ⛹🏾",
 				"id": "teams"
 			},
-			{	"name": "Membership 👥",
+			{	"name": "Memberships 👥",
 				"id": "membership"
 			},
-			{	"name": "Position 👮🏽",
+			{	"name": "Positions 👮🏽",
 				"id": "positions"
 			}],
-			[{	"name": "Venue 🏛",
+			[{	"name": "Venues 🏛",
 				"id": "venues"
 			},
 			{	"name": "People 💃🏽",
