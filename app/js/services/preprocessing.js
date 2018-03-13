@@ -2,7 +2,7 @@ angular
 .module('app.services')
 .factory('preProcess', function($q, $filter, Restangular, formatTeamDisplayFilter) {
 	'use strict';
-    const funcs = {
+    var funcs = {
         displayDate: function(filter) {
                 return function(date){
                     return filter('date')(date, 'MMMM yyyy');
@@ -11,7 +11,7 @@ angular
         objectIdtoName: function(name){;
             var deferred = $q.defer();
             var promise = deferred.promise;
-            const objectIdToNameHash = {};
+            var objectIdToNameHash = {};
             promise.then(function(){
                 return Restangular.all(name).getList()
                         .then(function(){
@@ -34,7 +34,7 @@ angular
             }
         },
         loadCurrentEBoard: function(scope, teamIds){
-            const eBoard = [];
+            var eBoard = [];
             Restangular.all('memberships')
             .getList()
             .then(function(data) {
