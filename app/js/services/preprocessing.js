@@ -33,6 +33,14 @@ angular
                 return formatTeamDisplayFilter(teamMap[element.relationships.team.data.id], false);
             }
         },
+				prettifyDate: function(date) {
+					if (date == undefined) { return; };
+					var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+					var year = parseInt(date.substring(0, 4));
+					var month = parseInt(date.substring(5, 7));
+					var day = parseInt(date.substring(8, 10));
+					return monthNames[month - 1] + " " + day + ", "+ year;
+				},
         loadCurrentEBoard: function(scope, teamIds){
             var eBoard = [];
             Restangular.all('memberships')

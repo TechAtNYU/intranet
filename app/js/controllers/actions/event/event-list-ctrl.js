@@ -12,7 +12,7 @@ angular
 	});
 
 	$scope.displayDate = function(date) {
-		if (date === undefined) { return; };
+		if (date == undefined) { return; };
 		var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 		var year = parseInt(date.substring(0,4));
 		var month = parseInt(date.substring(5, 7));
@@ -196,4 +196,14 @@ angular
 			);
 		});
 	};
+
+	$scope.getVenueLink = function(newModelId) {
+		console.log(newModelId);
+		var index =	_.findIndex($scope.data, {'id': newModelId});
+		$scope.model = $scope.data[index];
+		$state.transitionTo('list',
+			{id: newModelId, resourceName: 'venue'},
+			{notify: false}
+		);
+	}
 });
