@@ -1,13 +1,98 @@
 <div class="container">
-  <div class="card-deck">
-    <div ng-repeat="rdesc in apidesc">
-      <div class="card" style="width: 230px; height: 150px; margin: 20px">
-        <div class="card-body">
-          <h4 class="card-title"><b>{{rdesc.attributes.name.plural}}</b></h4>
-          <a ui-sref="list({resourceName: rdesc.id})" class="btn btn-outline-primary">List</a>
-          <a ui-sref="add({resourceName: rdesc.id})" class="btn btn-success">Add</a>
+    <div class="card-deck">
+        <div class="card top-card">
+            <h4 class="card-header">
+                Sites
+            </h4>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li ng-repeat="site in related_sites" class="list-group-item">
+                        {{site.name}}
+                        <span ng-repeat="(type, link) in site.links">
+                            <a ng-href="{{link}}" target="_blank">({{type}})</a>
+                        </span> 
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
+        <div class="card top-card">
+            <h4 class="card-header">
+                Current e-Board
+            </h4>
+            <div class="card-body eboard">
+                <ul class="list-group list-group-flush">
+                    <li ng-repeat="person in eboard" class="list-group-item">
+                        {{person}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div ng-repeat="card in main_card" class="card top-card card-button">
+                <div class="card-body">
+                        <a ng-href="/#/r/{{card.id}}/list/">
+                    <h2 class="card-title">{{card.name}}</h2>
+                </a>
+                </div>
+            
+            <a ng-href="/#/r/{{card.id}}/add">
+                <div class="card-footer">
+                    <center><h3>+</h3></center>
+                </div>
+            </a>
+        </div>     
     </div>
-  </div>
+    <br>
+<div class="card-deck-wrapper">
+    <div ng-repeat="cardRow in sub_cards">
+        <div class="card-deck">
+            <div ng-repeat="card in cardRow" class="card mid-card card-button">
+                <div class="card-body">
+                        <a ng-href="/#/r/{{card.id}}/list/"><h3 class="card-title">{{card.name}}</h3></a>
+                </div>        
+                <a ng-href="/#/r/{{card.id}}/add">
+                    <div class="card-footer">
+                        <center><h3>+</h3></center>
+                    </div>
+                </a>
+            </div>  
+        </div>
+        <br>
+    </div>
+</div>
+<br>
+<h2>Other Resources</h2>
+<div class="card-deck">
+        <!-- Sites Card -->
+        <div class="card top-card">
+            <h4 class="card-header">
+                Sites
+            </h4>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li ng-repeat="site in other_sites" class="list-group-item">
+                        {{site.name}}
+                        <span ng-repeat="(type, link) in site.links">
+                            <a ng-href="{{link}}" target="_blank">({{type}})</a>
+                        </span> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Sites Card -->
+        <div class="card top-card">
+            <h4 class="card-header">
+                Resources
+            </h4>
+            <div class="card-body other-resource-card">
+                <ul class="list-group list-group-flush">
+                    <li ng-repeat="resource in other_resources | orderBy:'name'" class="list-group-item">
+                        <a ng-href="/#/r/{{resource.id}}/list/">
+                        {{resource.name}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>    
+    </div>
 </div>
