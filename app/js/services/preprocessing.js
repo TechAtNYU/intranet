@@ -1,23 +1,29 @@
 angular
 .module('app.services')
-.factory('preProcess', function($filter, Restangular, formatTeamDisplayFilter) {
+.factory('preProcess', function($q, $filter, Restangular, formatTeamDisplayFilter) {
 	'use strict';
-    return{
+    var funcs = {
         displayDate: function(filter) {
                 return function(date){
                     return filter('date')(date, 'MMMM yyyy');
                 }
         },
-        objectIdtoName: function(name){
-            var objectIdToName = {};
-            Restangular.all(name)
-                .getList()
-                .then(function(objectName) {
-                    _.each(objectName, function(element) {
-                        objectIdToName[element.id] = element.attributes.name;
+        objectIdtoName: function(name){;
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            var objectIdToNameHash = {};
+            promise.then(function(){
+                return Restangular.all(name).getList()
+                        .then(function(){
+                        _.each(undefined, function(element) {
+                            objectIdToNameHash[element.id] = element.attributes.name;
+                        })
+                        return  objectIdToNameHash;                    
+                        });
                     });
-                });
-            return objectIdToName;
+            deferred.resolve();
+            return objectIdToNameHash;
+                               
         },
         positionToString: function(teamMap, element, includeLead){
             if(includeLead){
@@ -34,6 +40,29 @@ angular
 					var month = parseInt(date.substring(5, 7));
 					var day = parseInt(date.substring(8, 10));
 					return monthNames[month - 1] + " " + day + ", "+ year;
-				}
+				},
+        loadCurrentEBoard: function(scope, teamIds){
+            var eBoard = [];
+            Restangular.all('memberships')
+            .getList()
+            .then(function(data) {
+                _.each(data, function(member){
+                    if(member.attributes.isActive){
+                        Restangular.one("people/" + member.relationships.member.data.id)
+                        .get()
+                        .then(function (person){
+                            
+                            Restangular.one("positions/" + member.relationships.position.data.id)
+                            .get()
+                            .then(function(position) {
+                                eBoard.push(person.attributes.name);
+                            });
+                        });
+                    }
+                });
+            });
+            return eBoard;
+        }
     };
+    return funcs;
 });
