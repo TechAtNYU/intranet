@@ -1,0 +1,46 @@
+version: 2
+jobs:
+  deploy-staging:
+    docker:
+      # specify the version you desire here
+      - image: circleci/python:2.7.14-stretch-browsers
+
+    steps:
+      - checkout
+      - run: 
+          name: Deploying Intranet (Staging)
+          command: |
+            git clone git://github.com/cloudnull/turbolift.git
+            cd turbolift
+            sudo python setup.py install
+            if [ -d "$HOME/project/app/server.py" ]; then rm $HOME/project/app/server.py; fi
+            turbolift -u $RAXUSER -a $RAXAPIKEY --os-rax-auth $RAXREGION upload -s $HOME/project/app -c $STAGECONTAINER;
+
+  deploy-production:
+    docker:
+      # specify the version you desire here
+      - image: circleci/python:2.7.14-stretch-browsers
+
+    steps:
+      - checkout
+      - run: 
+          name: Deploying Intranet (Production)
+          command: |
+            git clone git://github.com/cloudnull/turbolift.git
+            cd turbolift
+            sudo python setup.py install
+            if [ -d "$HOME/project/app/server.py" ]; then rm $HOME/project/app/server.py; fi
+            turbolift -u $RAXUSER -a $RAXAPIKEY --os-rax-auth $RAXREGION upload -s $HOME/project/app -c $CONTAINER;
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - deploy-staging:
+          filters:
+            branches:
+              only: dev
+      - deploy-production:
+          filters:
+            branches:
+              only: master
