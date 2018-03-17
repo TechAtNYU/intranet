@@ -7,7 +7,7 @@
 	<div class="form-group"
 		ng-repeat="field in rdesc.attributes.fields"
 		ng-if="fep.hiddenFields.indexOf(field.name) == -1 && field.name !== 'isActive'
-				&& field.name !== 'exiresAt'"
+				&& field.name !== 'expiresAt'"
 		ng-include="'/partials/fields/default-field.html'">
 	</div>
 
@@ -19,7 +19,7 @@
  				<i class="fa fa-calendar" aria-hidden="true"></i>
  			</button>
  		</span>
- 		<input name="value" type="text" class="form-control" datepicker-popup="short" ng-model="model.attributes[exiresAt]" is-open="opened" datepicker-options="dateOptions" date-disabled="field.validation['read-only']" close-text="Close" readonly>
+ 		<input name="value" type="text" class="form-control" datepicker-popup="short" ng-model="model.attributes[expiresAt]" is-open="opened" datepicker-options="dateOptions" date-disabled="field.validation['read-only']" close-text="Close" readonly>
  		</div>
  	</div ng-form>
 

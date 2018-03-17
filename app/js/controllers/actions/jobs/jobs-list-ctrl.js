@@ -11,7 +11,7 @@ angular
 	});
 
 	$scope.expiredOrNot = function(date){
-		const d1 = new Date();
+    const d1 = new Date();
     const d2 = new Date(date);
 		return (d1 <= d2) ? "Active" : "Expired";
 	}
@@ -51,7 +51,7 @@ angular
 					attributes['url'] = '';
 				}
 				//add expire date
-				const expireDate = job.attributes.exiresAt;
+				const expireDate = job.attributes.expiresAt;
 				attributes['expireDate'] = expireDate;
 				//formate date
 				const expireDisplay = preProcess.prettifyDate(expireDate);
