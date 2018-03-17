@@ -13,7 +13,7 @@ angular
 	$scope.expiredOrNot = function(date){
     const d1 = new Date();
     const d2 = new Date(date);
-		return (d1 <= d2) ? "Active" : "Expired";
+    return (d1 <= d2) ? "Active" : "Expired";
 	}
 
 	var selectionMode = $stateParams.selectionMode;
@@ -51,9 +51,9 @@ angular
 					attributes['url'] = '';
 				}
 				//add expire date
-				const expireDate = job.attributes.expiresAt;
+				const expireDate = job.attributes.exiresAt;
 				attributes['expireDate'] = expireDate;
-				//formate date
+				//format date
 				const expireDisplay = preProcess.prettifyDate(expireDate);
 				attributes['expireDisplay'] = expireDisplay;
 				//storing categories
