@@ -34,7 +34,9 @@ angular
             }
         },
         convertTimeToEST: function(time){
-            
+            if(time == undefined){
+                return undefined;
+            }
             var hour = parseInt(time.substring(11,13));
             var minute = time.substring(14,16);
             var night = 'AM';
