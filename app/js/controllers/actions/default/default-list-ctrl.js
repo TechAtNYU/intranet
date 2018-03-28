@@ -27,7 +27,7 @@ angular
 	});
 
 	$scope.updateSelection = function(newModelId) {
-		//e$state.go("list", {id: newModelId});
+		//$state.go("list", {id: newModelId});
 		$state.transitionTo('list',
 			{id: newModelId},
 			{notify: false}
