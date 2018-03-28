@@ -22,6 +22,7 @@ angular
 		}
 
 		_.each($scope.data, element => {
+			element = preProcess.changeDate(element);
 			Restangular.one("people/" + element.relationships.personToReimburse.data.id)
 			.get()
 			.then(data => {
