@@ -33,6 +33,15 @@ angular
                 return formatTeamDisplayFilter(teamMap[element.relationships.team.data.id], false);
             }
         },
+        changeDate: function(element){
+            if(element.attributes != undefined){
+				element.attributes.created = this.convertTimeToEST(element.attributes.created);
+			}
+			if(element.attributes != undefined){
+				element.attributes.modified = this.convertTimeToEST(element.attributes.modified);
+            }
+            return element;
+        },
         convertTimeToEST: function(time){
             if(time == undefined){
                 return undefined;

@@ -22,17 +22,12 @@ angular
 			$scope.model = _.find($scope.data, {id: resourceId});
 		}
 		_.each($scope.data, function(element) {
-			if(element.attributes != undefined){
-				element.attributes.created = preProcess.convertTimeToEST(element.attributes.created);
-			}
-			if(element.attributes != undefined){
-				element.attributes.modified = preProcess.convertTimeToEST(element.attributes.modified);
-			}
+			element = preProcess.changeDate(element);	
 		});
 	});
 
 	$scope.updateSelection = function(newModelId) {
-		// $state.go("list", {id: newModelId});
+		//e$state.go("list", {id: newModelId});
 		$state.transitionTo('list',
 			{id: newModelId},
 			{notify: false}
