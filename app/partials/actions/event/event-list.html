@@ -33,14 +33,21 @@
 					&& field.name !== 'level' && field.name !== 'rsvpUrl'
 					&& field.name !== 'body' && field.name !== 'aims'
 					&& field.name !== 'rsvps' && field.name !== 'alternateRsvpUrls'
-					&& field.name !== 'categories' && field.name !== 'details'">
+					&& field.name !== 'categories' && field.name !== 'details'
+					&& field.name !== 'shortTitle' && field.name !== 'bodyPlain'
+					&& field.name !== 'startDateTime' && field.name !== 'endDateTime'">
 				<th>{{field['friendly-name']}}</th>
 				<td>{{model.attributes[field.name]}}</td>
 			</tr>
 
 			<tr>
-				<th>Body</th>
-				<td ng-bind-html="model.attributes['body']"></td>
+				<th>Start Date Time</th>
+				<td>{{eventDetails.time[model.id].start}}</td>
+			</tr>
+
+			<tr>
+				<th>Start End Time</th>
+				<td>{{eventDetails.time[model.id].end}}</td>
 			</tr>
 
 			<tr>
@@ -60,8 +67,7 @@
 
 			<tr>
 				<th>Venue</th>
-				<td ng-change="getVenueLink(model.relationships.venue.data.id)">{{eventDetails.venue[model.id]}}</td>
-				<td ng-bind-html="eventDetails.venue[model.id]"></td>
+				<td><a href="{{eventDetails.venue[model.id].url}}">{{eventDetails.venue[model.id].venue_name}}</a></td>
 			</tr>
 
 			<tr>

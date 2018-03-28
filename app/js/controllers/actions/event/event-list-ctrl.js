@@ -40,7 +40,8 @@ angular
 		rsvpCount: {},
 		altRsvps: {},
 		aims: {},
-		categories: {}
+		categories: {},
+		time : {}
 	};
 
 	//mapping personID to personName
@@ -57,11 +58,23 @@ angular
 				}
 
 				_.each($scope.data, function(element) {
+					element.attributes.created = preProcess.convertTimeToEST(element.attributes.created);
+					element.attributes.modified = preProcess.convertTimeToEST(element.attributes.modified);
+					$scope.eventDetails.time[element.id] = {};
+					$scope.eventDetails.time[element.id].start = preProcess.convertTimeToEST(element.attributes.startDateTime);
+					$scope.eventDetails.time[element.id].end = preProcess.convertTimeToEST(element.attributes.endDateTime);
 					//mapping eventID to venue names with links
 					if (element.relationships.venue.data !== null) {
 						// !! change venueURL to the venue page once the venue override page is ready
 						var venueURL = "/#/r/venues/list/" + element.relationships.venue.data.id;
-						$scope.eventDetails.venue[element.id] = "<a href=" + venueURL + ">" + venuesIdToName[element.relationships.venue.data.id] + "</a>";
+						var venueName = "unknown";
+						if(venuesIdToName[element.relationships.venue.data.id] != undefined){
+							venueName = venuesIdToName[element.relationships.venue.data.id];
+						}
+						$scope.eventDetails.venue[element.id] = {
+							'url': venueURL,
+							'venue_name': venueName
+						};
 					}
 
 					//mapping eventID to categories
