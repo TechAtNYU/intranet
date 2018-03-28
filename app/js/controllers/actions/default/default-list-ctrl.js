@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('DefaultListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer) {
+.controller('DefaultListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer, preProcess) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;
@@ -21,6 +21,11 @@ angular
 		if (resourceId) {
 			$scope.model = _.find($scope.data, {id: resourceId});
 		}
+		_.each($scope.data, function(element) {
+			console.log(element);
+			element.attributes.created = preProcess.convertTimeToEST(element.attributes.created);
+			element.attribtues.modified = preProcess.convertTimeToEST(element.attribtues.modified);
+		});
 	});
 
 	$scope.updateSelection = function(newModelId) {
