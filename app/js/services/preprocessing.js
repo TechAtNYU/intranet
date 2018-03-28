@@ -33,6 +33,19 @@ angular
                 return formatTeamDisplayFilter(teamMap[element.relationships.team.data.id], false);
             }
         },
+        convertTimeToEST: function(time){
+            
+            var hour = parseInt(time.substring(11,13));
+            var minute = time.substring(14,16);
+            var night = 'AM';
+            if(hour > 12){
+                hour -= 12;
+                night = 'PM';
+            }
+            //return this.prettifyDate(time) + " " + hour + ":" + minute + night;
+            return moment(time).tz('America/New_York').format('LLLL');;
+
+        },
         prettifyDate: function(date) {
             if (date == undefined) { return; };
             var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
