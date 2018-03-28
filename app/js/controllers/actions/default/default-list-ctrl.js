@@ -23,8 +23,12 @@ angular
 		}
 		_.each($scope.data, function(element) {
 			console.log(element);
-			element.attributes.created = preProcess.convertTimeToEST(element.attributes.created);
-			element.attribtues.modified = preProcess.convertTimeToEST(element.attribtues.modified);
+			if(element.attributes != undefined){
+				element.attributes.created = preProcess.convertTimeToEST(element.attributes.created);
+			}
+			if(element.attributes != undefined){
+				element.attributes.modified = preProcess.convertTimeToEST(element.attributes.modified);
+			}
 		});
 	});
 
