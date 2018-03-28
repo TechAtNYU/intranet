@@ -22,7 +22,6 @@ angular
 			$scope.model = _.find($scope.data, {id: resourceId});
 		}
 		_.each($scope.data, function(element) {
-			console.log(element);
 			if(element.attributes != undefined){
 				element.attributes.created = preProcess.convertTimeToEST(element.attributes.created);
 			}
