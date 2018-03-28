@@ -58,8 +58,7 @@ angular
 				}
 
 				_.each($scope.data, function(element) {
-					element.attributes.created = preProcess.convertTimeToEST(element.attributes.created);
-					element.attributes.modified = preProcess.convertTimeToEST(element.attributes.modified);
+					element = preProcess.changeDate(element);
 					$scope.eventDetails.time[element.id] = {};
 					$scope.eventDetails.time[element.id].start = preProcess.convertTimeToEST(element.attributes.startDateTime);
 					$scope.eventDetails.time[element.id].end = preProcess.convertTimeToEST(element.attributes.endDateTime);
