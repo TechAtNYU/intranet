@@ -22,6 +22,8 @@ angular
 		}
 
 		_.each($scope.data, element => {
+			element = preProcess.changeDate(element);
+			element.attributes.recievedOn = preProcess.convertTimeToEST(element.attributes.recievedOn);
 			Restangular.one("people/" + element.relationships.authorizer.data.id)
 			.get()
 			.then(data => {
