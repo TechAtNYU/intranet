@@ -15,9 +15,9 @@ angular
             promise.then(function() {
                 Restangular.all(name)
                     .getList()
-                    .then(function(list){
-                        list.forEach(function(element) {
-                            objectIdToNameHash[element.id] = element.attributes.name;
+                    .then(function(element){
+                        element.forEach(function(el) {
+                        objectIdToNameHash[el.id] = el.attributes.name;
                         })
                     });
                 }, function (error) {
@@ -35,12 +35,17 @@ angular
                 return formatTeamDisplayFilter(teamMap[element.relationships.team.data.id], false);
             }
         },
-        changeDate: function(element){
+        changeDate: function(element, ...attributeArray){
             if(element.attributes != undefined){
-				element.attributes.created = this.convertTimeToEST(element.attributes.created);
-			}
-			if(element.attributes != undefined){
-				element.attributes.modified = this.convertTimeToEST(element.attributes.modified);
+                if(attributeArray != undefined){
+                    attributeArray.forEach(function(attr){
+                        if(element.attributes.hasOwnProperty(attr)){
+                            element.attributes[attr] = this.convertTimeToEST(element.attributes[attr]);
+                        }
+                    },this);
+                }
+                element.attributes.created = this.convertTimeToEST(element.attributes.created);
+                element.attributes.modified = this.convertTimeToEST(element.attributes.modified);
             }
             return element;
         },
