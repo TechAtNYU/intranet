@@ -69,7 +69,7 @@ angular
 				"id": "teams"
 			},
 			{	"name": "Memberships 👥",
-				"id": "membership"
+				"id": "memberships"
 			},
 			{	"name": "Positions 👮🏽",
 				"id": "positions"
