@@ -84,64 +84,16 @@ angular
 				"id": "organizations"
 			}]
 		];
-		$scope.other_resources = [
-			{ 	"name": "Jobs",
-				"id": "jobs"
-			},
-			{ 	"name": "Venues",
-				"id": "venues"
-			},
-			{ 	"name": "Policy Proposals",
-				"id": "policy-proposals"
-			},
-			{ 	"name": "Projects",
-				"id": "projects"
-			},
-			{ 	"name": "Income",
-				"id": "incomes"
-			},
-			{ 	"name": "Expense",
-				"id": "expenses"
-			},
-			{ 	"name": "Reimbursement Requests",
-				"id": "reimbursement-requests"
-			},
-			{ 	"name": "Sponsorship Packages",
-				"id": "sponsorship-packages"
-			},
-			{ 	"name": "Surveys",
-				"id": "surveys"
-			},
-			{ 	"name": "Applications",
-				"id": "applications"
-			},
-			{ 	"name": "Skills",
-				"id": "skills"
-			},
-			{ 	"name": "API Keys",
-				"id": "api-keys"
-			},
-			{ 	"name": "Answers",
-				"id": "answers"
-			},
-			{ 	"name": "Questions",
-				"id": "questions"
-			},
-			{ 	"name": "Survey Responses",
-				"id": "survey-responses"
-			},
-			{ 	"name": "School Attendances",
-				"id": "school-attendances"
-			},
-			{ 	"name": "Presenters",
-				"id": "presenters"
-			},
-			{ 	"name": "Related Clubs",
-				"id": "related-clubs"
-			},
-			{ 	"name": "Sponsorship Purchases",
-				"id": "sponsorship-purchases"
+
+		// collect the ids of all our resources
+		var all_ids = $scope.apidesc.map(data => data.id)
+		// get the ids of cards that are on the main and sub cards
+		var ids_already_exist = $scope.main_card.concat($scope.sub_cards[0]).concat($scope.sub_cards[1]).map(data => data.id)
+		// get the difference of those ids to display in the 'other resources' section without hardcoding them
+		$scope.other_resource_ids = all_ids.filter(id => !ids_already_exist.includes(id));
+		
+		$scope.resource_name = function(resource_id) {
+				return apiDescription.resource(resource_id).attributes.name.plural;
 			}
-		];
+		});	
 	});
-});

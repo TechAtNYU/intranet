@@ -21,7 +21,7 @@
             </h4>
             <div class="card-body eboard">
                 <ul class="list-group list-group-flush">
-                    <li ng-repeat="person in eboard" class="list-group-item">
+                    <li ng-repeat="person in eboard track by $index" class="list-group-item">
                         {{person}}
                     </li>
                 </ul>
@@ -86,9 +86,9 @@
             </h4>
             <div class="card-body other-resource-card">
                 <ul class="list-group list-group-flush">
-                    <li ng-repeat="resource in other_resources | orderBy:'name'" class="list-group-item">
-                        <a ng-href="/#/r/{{resource.id}}/list/">
-                        {{resource.name}}
+                    <li ng-repeat="id in other_resource_ids" class="list-group-item">
+                        <a ng-href="/#/r/{{id}}/list/">
+                            {{resource_name(id)}}
                         </a>
                     </li>
                 </ul>
