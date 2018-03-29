@@ -64,10 +64,10 @@ angular
 					$scope.eventDetails.time[element.id].end = preProcess.convertTimeToEST(element.attributes.endDateTime);
 					//mapping eventID to venue names with links
 					if (element.relationships.venue.data !== null) {
-						// !! change venueURL to the venue page once the venue override page is ready
 						var venueURL = "/#/r/venues/list/" + element.relationships.venue.data.id;
 						var venueName = "unknown";
-						if(venuesIdToName[element.relationships.venue.data.id] != undefined){
+
+						if(venuesIdToName[element.relationships.venue.data.id] != undefined) {
 							venueName = venuesIdToName[element.relationships.venue.data.id];
 						}
 						$scope.eventDetails.venue[element.id] = {
