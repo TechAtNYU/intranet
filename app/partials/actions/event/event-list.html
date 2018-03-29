@@ -60,8 +60,9 @@
 
 			<tr>
 				<th>Venue</th>
-				<td ng-change="getVenueLink(model.relationships.venue.data.id)">{{eventDetails.venue[model.id]}}</td>
-				<td ng-bind-html="eventDetails.venue[model.id]"></td>
+				<td>
+					<a href="{{eventDetails.venue[model.id].url}}">{{eventDetails.venue[model.id].venue_name}}</a>
+				</td>
 			</tr>
 
 			<tr>
