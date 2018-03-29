@@ -12,15 +12,17 @@ angular
             var deferred = $q.defer();
             var promise = deferred.promise;
             var objectIdToNameHash = {};
-            promise.then(function(){
-                return Restangular.all(name).getList()
-                        .then(function(){
-                        _.each(undefined, function(element) {
-                            objectIdToNameHash[element.id] = element.attributes.name;
+            promise.then(function() {
+                Restangular.all(name)
+                    .getList()
+                    .then(function(element){
+                        element.forEach(function(el) {
+                        objectIdToNameHash[el.id] = el.attributes.name;
                         })
-                        return  objectIdToNameHash;                    
-                        });
                     });
+                }, function (error) {
+                    console.error(error);
+                });
             deferred.resolve();
             return objectIdToNameHash;
                                
