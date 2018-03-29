@@ -55,7 +55,6 @@ angular
                 hour -= 12;
                 night = 'PM';
             }
-            //return this.prettifyDate(time) + " " + hour + ":" + minute + night;
             return moment(time).tz('America/New_York').format('LLL [(]dddd[)]');;
 
         },
