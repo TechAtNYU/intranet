@@ -71,8 +71,6 @@ angular
 						};
 					}
 
-					console.log($scope.eventDetails.venue)
-
 					//mapping eventID to categories
 					if (element.attributes.categories.length > 0) {
 						element.attributes.categories.forEach(category => {
