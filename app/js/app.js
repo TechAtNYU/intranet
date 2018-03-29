@@ -23,6 +23,8 @@ angular.module('app', [
 		'Content-Type': 'application/vnd.api+json'
 	});
 
+	RestangularProvider.setDefaultHttpFields({cache: true});
+
 	RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
 		if (operation === 'remove') {
 			return null;
