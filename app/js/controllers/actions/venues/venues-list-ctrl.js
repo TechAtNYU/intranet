@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('VenuesListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer, preProcess) {
+.controller('VenuesListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;
@@ -28,7 +28,6 @@ angular
 		$scope.organizations = {};
 		//mapping venueID to organizations
 		_.each($scope.data, function(element) {
-			element = preProcess.changeDate(element);
 			if (element.relationships.organization.data !== null) {
 				Restangular.one("organizations/" + element.relationships.organization.data.id)
 				.get()
