@@ -65,11 +65,7 @@ angular
         },
         prettifyDate: function(date) {
             if (date == undefined) { return; };
-            var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            var year = parseInt(date.substring(0, 4));
-            var month = parseInt(date.substring(5, 7));
-            var day = parseInt(date.substring(8, 10));
-            return monthNames[month - 1] + " " + day + ", "+ year;
+            return moment(date).tz('America/New_York').format('LL');;
         },
         loadCurrentEBoard: function(scope, teamIds){
             var eBoard = [];
