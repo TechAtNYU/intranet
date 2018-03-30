@@ -22,7 +22,7 @@ angular
 		}
 
 		_.each($scope.data, element => {
-			element = preProcess.convertTimeAtrtributes(element);
+			element = preProcess.convertTimeAttributes(element);
 			Restangular.one("people/" + element.relationships.personToReimburse.data.id)
 			.get()
 			.then(data => {

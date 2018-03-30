@@ -22,7 +22,7 @@ angular
 		}	
 		
 		_.each($scope.data, function(element) {
-			element = preProcess.convertTimeAtrtributes(element);
+			element = preProcess.convertTimeAttributes(element);
 			element.attributes.responsibilities = element.attributes.responsibilities.length == 0 ? "None" : element.attributes.responsibilities.join(' ')
 			element.attributes.name = preProcess.positionToString(teamsIdToName, element, true);
 			element.attributes.team = preProcess.positionToString(teamsIdToName, element, false);

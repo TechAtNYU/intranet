@@ -33,7 +33,7 @@ angular
 			$scope.model = $scope.data[index];
 		}
 		_.each($scope.data, job => {
-			job = preProcess.convertTimeAtrtributes(job);
+			job = preProcess.convertTimeAttributes(job);
 			//store all attributes for each job
 			const attributes = {};
 			//storing employer

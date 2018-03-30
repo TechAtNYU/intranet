@@ -27,7 +27,7 @@ angular
 
 		//mapping organizationID to every liaison in it
 		_.each($scope.data, function(element) {
-			element = preProcess.convertTimeAtrtributes(element);
+			element = preProcess.convertTimeAttributes(element);
 					//loop through every liaison in the organization
 				_.each(element.relationships.liaisons.data, function(liaison) {
 					Restangular.one("people/" + liaison.id)
