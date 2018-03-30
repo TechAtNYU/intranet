@@ -60,7 +60,7 @@ angular
                 hour -= 12;
                 night = 'PM';
             }
-            return moment(time).tz('America/New_York').format('LLL [(]dddd[)]');;
+            return moment(time).tz('America/New_York').format('LLL [(]dddd[)]');
 
         },
         prettifyDate: function(date) {
