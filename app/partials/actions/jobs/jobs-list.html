@@ -57,7 +57,8 @@
 			<tr ng-repeat="field in rdesc.attributes.fields"
 					ng-if="field.name !== 'id' && field.name !== 'description'
 							&& field.name !== 'employer' && field.name !== 'desiredSkills'
-							&& field.name !== 'categories' && field.name !== 'applicationUrl'">
+							&& field.name !== 'categories' && field.name !== 'applicationUrl'
+							&& field.name !== 'exiresAt'">
 				<th>{{field['friendly-name']}}</th>
 				<td>{{model.attributes[field.name]}}</td>
 			</tr>
