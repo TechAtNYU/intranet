@@ -25,7 +25,7 @@ angular
 		}
 
 		_.each($scope.data, function(element) {
-			element = preProcess.changeDate(element);	
+			element = preProcess.convertTimeAtrtributes(element);	
 		//mapping expenseID to reimbursementID
 			if (element.relationships.reimbursementFor.data !== null) {
 				const url = "https://api.tnyu.org/v3/reimbursement-requests/" + element.relationships.reimbursementFor.data.id;

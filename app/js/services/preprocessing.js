@@ -35,7 +35,7 @@ angular
                 return formatTeamDisplayFilter(teamMap[element.relationships.team.data.id], false);
             }
         },
-        changeDate: function(element, ...attributeArray){
+        convertTimeAtrtributes: function(element, ...attributeArray){
             if(element.attributes != undefined){
                 if(attributeArray != undefined){
                     attributeArray.forEach(function(attr){

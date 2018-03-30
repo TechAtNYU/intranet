@@ -22,7 +22,7 @@ angular
 			$scope.model = _.find($scope.data, {id: resourceId});
 		}
 		_.each($scope.data, function(element) {
-			element = preProcess.changeDate(element);	
+			element = preProcess.convertTimeAtrtributes(element);	
 		});
 	});
 

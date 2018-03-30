@@ -29,7 +29,7 @@ angular
 
 		//mapping personID to name, position and display information
 		_.each($scope.data, function(person) {
-			person = preProcess.changeDate(person);
+			person = preProcess.convertTimeAtrtributes(person);
 			var personData= {};
 			//getting roles
 			if (person.attributes.roles != null && person.attributes.roles.length > 0) {
