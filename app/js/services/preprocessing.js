@@ -15,9 +15,9 @@ angular
             promise.then(function() {
                 Restangular.all(name)
                     .getList()
-                    .then(function(element){
-                        element.forEach(function(el) {
-                        objectIdToNameHash[el.id] = el.attributes.name;
+                    .then(function(list){
+                        list.forEach(function(element) {
+                            objectIdToNameHash[element.id] = element.attributes.name;
                         })
                     });
                 }, function (error) {
