@@ -32,6 +32,7 @@ angular
 		$scope.memberDetails = [];
 		//mapping memberID to name, position and display information
 		_.each($scope.data, function(element) {
+			element = preProcess.convertTimeAttributes(element);
 			Restangular.one("people/" + element.relationships.member.data.id)
 			.get()
 			.then(function(person) {

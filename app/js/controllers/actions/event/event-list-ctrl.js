@@ -40,7 +40,8 @@ angular
 		rsvpCount: {},
 		altRsvps: {},
 		aims: {},
-		categories: {}
+		categories: {},
+		time : {}
 	};
 
 	//mapping personID to personName
@@ -57,6 +58,10 @@ angular
 				}
 
 				_.each($scope.data, function(element) {
+					element = preProcess.convertTimeAttributes(element);
+					$scope.eventDetails.time[element.id] = {};
+					$scope.eventDetails.time[element.id].start = preProcess.convertTimeToEST(element.attributes.startDateTime);
+					$scope.eventDetails.time[element.id].end = preProcess.convertTimeToEST(element.attributes.endDateTime);
 					//mapping eventID to venue names with links
 					if (element.relationships.venue.data !== null) {
 						var venueURL = "/#/r/venues/list/" + element.relationships.venue.data.id;

@@ -2,7 +2,8 @@
 
 angular
 .module('app.controllers')
-.controller('OrganizationListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer) {
+.controller('OrganizationListCtrl', function($scope, $rootScope, $stateParams, $state,
+	Restangular, apiDescriptor, dataTransformer, preProcess) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;
@@ -26,6 +27,7 @@ angular
 
 		//mapping organizationID to every liaison in it
 		_.each($scope.data, function(element) {
+			element = preProcess.convertTimeAttributes(element);
 					//loop through every liaison in the organization
 				_.each(element.relationships.liaisons.data, function(liaison) {
 					Restangular.one("people/" + liaison.id)

@@ -32,8 +32,8 @@ angular
 			var index = _.findIndex($scope.data, {id: resourceId});
 			$scope.model = $scope.data[index];
 		}
-
 		_.each($scope.data, job => {
+			job = preProcess.convertTimeAttributes(job);
 			//store all attributes for each job
 			const attributes = {};
 			//storing employer

@@ -35,14 +35,38 @@ angular
                 return formatTeamDisplayFilter(teamMap[element.relationships.team.data.id], false);
             }
         },
-				prettifyDate: function(date) {
-					if (date == undefined) { return; };
-					var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-					var year = parseInt(date.substring(0, 4));
-					var month = parseInt(date.substring(5, 7));
-					var day = parseInt(date.substring(8, 10));
-					return monthNames[month - 1] + " " + day + ", "+ year;
-				},
+        convertTimeAttributes: function(element, ...attributeArray){
+            if(element.attributes != undefined){
+                if(attributeArray != undefined){
+                    attributeArray.forEach(function(attr){
+                        if(element.attributes.hasOwnProperty(attr)){
+                            element.attributes[attr] = this.convertTimeToEST(element.attributes[attr]);
+                        }
+                    },this);
+                }
+                element.attributes.created = this.convertTimeToEST(element.attributes.created);
+                element.attributes.modified = this.convertTimeToEST(element.attributes.modified);
+            }
+            return element;
+        },
+        convertTimeToEST: function(time){
+            if(time == undefined){
+                return undefined;
+            }
+            var hour = parseInt(time.substring(11,13));
+            var minute = time.substring(14,16);
+            var night = 'AM';
+            if(hour > 12){
+                hour -= 12;
+                night = 'PM';
+            }
+            return moment(time).tz('America/New_York').format('LLL [(]dddd[)]');
+
+        },
+        prettifyDate: function(date) {
+            if (date == undefined) { return; };
+            return moment(date).tz('America/New_York').format('LL');;
+        },
         loadCurrentEBoard: function(scope, teamIds){
             var eBoard = [];
             Restangular.all('memberships')
