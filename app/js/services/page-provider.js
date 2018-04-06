@@ -8,6 +8,7 @@ angular.module('app.services')
 			'list': 'partials/actions/default/default-list.html'
 		},
 		'events': {
+			'edit': 'partials/actions/event/event-edit.html',
 			'add': 'partials/actions/event/event-add.html',
 			'list': 'partials/actions/event/event-list.html'
 		},
