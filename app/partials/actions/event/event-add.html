@@ -18,7 +18,11 @@
 		ng-include="'/partials/fields/default-field.html'">
 	</div>
 
-	<div class="form-group">
-		<button class="btn btn-primary" ng-click="createResource(model, rdesc)">Create</button>
+	<div class="form-group" ng-if="statusFound">
+		<button class="btn btn-primary" ng-click="createResource(model, rdesc, 1)">Announce Event</button>
+		<button class="btn btn-info" ng-click="createResource(model, rdesc, 0)">Draft</button>
 	</div>
+	<div class="form-group" ng-if="!statusFound">
+			<button class="btn btn-primary" ng-click="createResource(model, rdesc, 0)">Submit</button>
+		</div>
 </div>
