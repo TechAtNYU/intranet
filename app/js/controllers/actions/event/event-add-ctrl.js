@@ -25,12 +25,6 @@ angular
 		$scope.data = dataTransformer.loadLinkedData($scope.rdesc, $scope.refreshData);
 	});
 
-	$scope.createResourceTest = function(model, rdesc, statusField){
-		dataTransformer.createResource(model, rdesc, resource).then(function(data) {
-			$state.go('list', {resourceName: resourceName, selectionMode: 'single', id: data.id});
-		})
-	}
-
 	$scope.createResource = function (model, rdesc, statusOption) {
 		if(statusFound){
 			model.attributes.status = statusOption;
