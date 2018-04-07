@@ -21,16 +21,7 @@ angular
 			$scope.data = dataTransformer.loadLinkedData($scope.rdesc, $scope.refreshData);
 			
 			if($scope.rdesc.attributes.fields[18].name == "status"){
-				$scope.statusField = $scope.rdesc.attributes.fields[18];
 				$scope.statusFound = true;
-			}
-			$scope.rdescWithoutStatus = $scope.rdesc;
-			$scope.rdescWithoutStatus.attributes.fields = $scope.rdesc.attributes.fields.filter((element) => {return element.name != "status";})
-			if($scope.statusFound){
-				$scope.data = dataTransformer.loadLinkedData($scope.rdescWithoutStatus, $scope.refreshData);
-			}
-			else{
-				$scope.data = dataTransformer.loadLinkedData($scope.rdesc, $scope.refreshData);
 			}
 		});
 		$scope.model = dataTransformer.delink(data);
@@ -38,7 +29,7 @@ angular
 	});
 
 	$scope.updateResource = function (model, rdesc, statusData) {
-		if(statusData != 0){
+		if(statusFound !=0){
 			model.attributes.status = statusData;
 		}
 		dataTransformer.updateResource(model, rdesc, resource).then(function (data) {

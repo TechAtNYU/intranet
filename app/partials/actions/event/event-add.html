@@ -19,10 +19,10 @@
 	</div>
 
 	<div class="form-group" ng-if="statusFound">
-		<button class="btn btn-primary" ng-click="createResource(model, rdesc, 1)">Announce Event</button>
-		<button class="btn btn-info" ng-click="createResource(model, rdesc, 0)">Draft</button>
+		<button class="btn btn-primary" ng-click="createResource(model, rdesc, 'announced')">Announce Event</button>
+		<button class="btn btn-info" ng-click="createResource(model, rdesc, 'draft')">Draft</button>
 	</div>
 	<div class="form-group" ng-if="!statusFound">
-			<button class="btn btn-primary" ng-click="createResource(model, rdesc, 0)">Submit</button>
+			<button class="btn btn-primary" ng-click="createResource(model, rdesc, 'draft')">Submit</button>
 		</div>
 </div>

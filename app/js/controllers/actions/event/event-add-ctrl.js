@@ -19,19 +19,10 @@ angular
 		$scope.rdesc = apiDescription.resource(resourceName);
 		//In case status field is not found
 		if($scope.rdesc.attributes.fields[18].name == "status"){
-			$scope.statusField = $scope.rdesc.attributes.fields[18];
 			$scope.statusFound = true;
 		}
-		//Need to make two rdsec so status data is properly created.
-		$scope.rdescWithoutStatus = $scope.rdesc;
-		$scope.rdescWithoutStatus.attributes.fields = $scope.rdesc.attributes.fields.filter((element) => {return element.name != "status";})
-	//If not found, the page will load with the default field and submit button
-		if($scope.statusFound){
-			$scope.data = dataTransformer.loadLinkedData($scope.rdescWithoutStatus, $scope.refreshData);
-		}
-		else{
-			$scope.data = dataTransformer.loadLinkedData($scope.rdesc, $scope.refreshData);
-		}
+
+		$scope.data = dataTransformer.loadLinkedData($scope.rdesc, $scope.refreshData);
 	});
 
 	$scope.createResourceTest = function(model, rdesc, statusField){
@@ -40,14 +31,12 @@ angular
 		})
 	}
 
-	$scope.createResource = function (model, rdesc, status) {
+	$scope.createResource = function (model, rdesc, statusOption) {
 		if(statusFound){
-			if(status == 0){
-				model.attributes.status = "draft";
-			}
-			else if(status == 1){
-				model.attributes.status = "announced";
-			}
+			model.attributes.status = statusOption;
+		}
+		else{
+			model.attributes.status = "draft";
 		}
 		dataTransformer.createResource(model, rdesc, resource).then(function(data) {
 			$state.go('list', {resourceName: resourceName, selectionMode: 'single', id: data.id});
