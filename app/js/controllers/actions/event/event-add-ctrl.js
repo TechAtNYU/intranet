@@ -26,7 +26,7 @@ angular
 	});
 
 	$scope.createResource = function (model, rdesc, statusOption) {
-		if(statusFound){
+		if($scope.statusFound){
 			model.attributes.status = statusOption;
 		}
 		else{
