@@ -13,7 +13,7 @@
 	</form
 	>
 	<div class="form-group" ng-if="statusFound">
-		<button class="btn btn-primary" ng-click="updateResource(model, rdesc,0)">Save Changes</button>
+		<button class="btn btn-primary" ng-click="updateResource(model, rdesc,undefined)">Save Changes</button>
 	</div>
 	<div class="form-group" ng-if="statusData=='draft'">
 			<button class="btn btn-primary" ng-click="updateResource(model, rdesc, 'draft')">Announce this Event</button>
