@@ -16,7 +16,7 @@
 		<button class="btn btn-primary" ng-click="updateResource(model, rdesc,undefined)">Save Changes as {{statusData}} event</button>
 	</div>
 	<div class="form-group" ng-if="statusData=='draft'">
-			<button class="btn btn-primary" ng-click="updateResource(model, rdesc, 'announced')">Save and Announce this Event</button>
+			<button class="btn btn-success" ng-click="updateResource(model, rdesc, 'announced')">Save and Announce this Event</button>
 			<button class="btn btn-danger" ng-click="updateResource(model, rdesc, 'draft')">Delete Event</button>
 	</div>
 	<div class="form-group" ng-if="statusData=='announced'">
