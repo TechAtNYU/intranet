@@ -13,17 +13,17 @@
 	</form
 	>
 	<div class="form-group" ng-if="statusFound">
-		<button class="btn btn-primary" ng-click="updateResource(model, rdesc,undefined)">Save Changes</button>
+		<button class="btn btn-primary" ng-click="updateResource(model, rdesc,undefined)">Save Changes as {{statusData}} event</button>
 	</div>
 	<div class="form-group" ng-if="statusData=='draft'">
-			<button class="btn btn-primary" ng-click="updateResource(model, rdesc, 'announced')">Announce this Event</button>
+			<button class="btn btn-primary" ng-click="updateResource(model, rdesc, 'announced')">Save and Announce this Event</button>
 			<button class="btn btn-danger" ng-click="updateResource(model, rdesc, 'draft')">Delete Event</button>
 	</div>
 	<div class="form-group" ng-if="statusData=='announced'">
-			<button class="btn btn-danger" ng-click="updateResource(model, rdesc, 'canceled')">Cancel this Event</button>
+			<button class="btn btn-danger" ng-click="updateResource(model, rdesc, 'canceled')">Save and Cancel this Event</button>
 	</div>
 	<div class="form-group" ng-if="statusData=='canceled'">
-			<button class="btn btn-danger" ng-click="updateResource(model, rdesc, 'announced')">Un-Cancel this Event</button>
+			<button class="btn btn-danger" ng-click="updateResource(model, rdesc, 'announced')">Save and Un-Cancel this Event</button>
 	</div>
 	<div class="form-group" ng-if="!statusFound">
 		<button class="btn btn-primary" ng-click="updateResource(model, rdesc, 'draft')">Submit</button>
