@@ -10,7 +10,7 @@ angular
 	//Gmap origin setup
 	$scope.map = { center: { latitude: 40.72, longitude: -73.98 }, zoom: 13 };
 	$scope.options = { scrollwheel: false };
-	$scope.Amarkers = [];
+	$scope.allMarkers = [];
 	var geocoder = new google.maps.Geocoder();
 
 	apiDescriptor.then(function(apiDescription) {
@@ -22,6 +22,7 @@ angular
 		selectionMode = 'multiple';
 	}
 
+	var markers = [];
 	$scope.selectionMode = selectionMode;
 	Restangular.all(resourceName)
 		.getList()
@@ -56,7 +57,7 @@ angular
 				});
 			}
 		})
-		$scope.Amarkers = markers;
+		$scope.allMarkers = markers;
 	});
 
 	$scope.updateSelection = function(newModelId) {
