@@ -8,7 +8,7 @@ angular
                     return filter('date')(date, 'MMMM yyyy');
                 }
         },
-        objectIdtoName: function(name){;
+        objectIdtoName: function(name){
             var deferred = $q.defer();
             var promise = deferred.promise;
             var objectIdToNameHash = {};
