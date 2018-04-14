@@ -11,6 +11,7 @@ angular
 	$scope.map = { center: { latitude: 40.72, longitude: -73.98 }, zoom: 13 };
 	$scope.options = { scrollwheel: false };
 	$scope.allMarkers = [];
+	$scope.selectedMarker = undefined;
 	var geocoder = new google.maps.Geocoder();
 
 	apiDescriptor.then(function(apiDescription) {
@@ -62,7 +63,20 @@ angular
 
 	$scope.updateSelection = function(newModelId) {
 	 		var index =	_.findIndex($scope.data, {'id': newModelId});
-	 		$scope.model = $scope.data[index];
+			 $scope.model = $scope.data[index];
+			 console.log($scope.model);
+			 geocoder.geocode( { 'address': $scope.model.attributes.address}, function(results, status) {
+				if(status === 'OK'){
+					$scope.selectedMarker = {
+						'id':
+						{
+							'latitude': results[0].geometry.location.lat(),
+							'longitude': results[0].geometry.location.lng(),
+							'title': $scope.model.attributes.name
+						}
+					};
+				}
+			});
 	 		$state.transitionTo('list',
 	 			{id: newModelId, resourceName: resourceName},
 	 			{notify: false}
