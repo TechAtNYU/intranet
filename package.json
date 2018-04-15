@@ -3,13 +3,12 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "http-server ./app -p 3000 -c-1",
+    "start": "http-server ./app -p 3000 -a localhost -c-1",
     "test": "karma start ./test/karma.conf.js"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "http-server": "^0.8.5",
+    "http-server": "^0.11.1",
     "jasmine": "^2.8.0",
     "jasmine-core": "^2.2.0",
     "karma": "^0.12.37",
