@@ -6,21 +6,32 @@ angular
 		$interval, Restangular, apiDescriptor, formElementProvider, dataTransformer) {
 
 	var resourceName = $stateParams.resourceName;
-
 	var resource = Restangular.all(resourceName);
 
 	$scope.fep = formElementProvider;
 
 	$scope.data = {};
 	$scope.model = {attributes: {}};
+	//boolean used for html
+	$scope.statusFound = false;
 
 	apiDescriptor.then(function(apiDescription) {
 		$scope.rdesc = apiDescription.resource(resourceName);
-		$scope.fieldOne = $scope.rdesc.attributes.fields[0];
+		//In case status field is not found
+		if($scope.rdesc.attributes.fields[18].name == "status"){
+			$scope.statusFound = true;
+		}
+
 		$scope.data = dataTransformer.loadLinkedData($scope.rdesc, $scope.refreshData);
 	});
 
-	$scope.createResource = function (model, rdesc) {
+	$scope.createResource = function (model, rdesc, statusOption) {
+		if($scope.statusFound){
+			model.attributes.status = statusOption;
+		}
+		else{
+			model.attributes.status = "draft";
+		}
 		dataTransformer.createResource(model, rdesc, resource).then(function(data) {
 			$state.go('list', {resourceName: resourceName, selectionMode: 'single', id: data.id});
 		})
