@@ -17,7 +17,7 @@ angular.module('app', [
 	'nemLogging',
 	'uiGmapgoogle-maps'
 ]).config(function(RestangularProvider) {
-	RestangularProvider.setBaseUrl('https://api.tnyu.org/v3');
+	RestangularProvider.setBaseUrl('https://api.tnyu.org/v3-test');
 
 	// Configuring Restangular to work with JSONAPI spec
 	RestangularProvider.setDefaultHeaders({
