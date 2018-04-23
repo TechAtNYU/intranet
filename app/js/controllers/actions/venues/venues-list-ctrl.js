@@ -64,7 +64,6 @@ angular
 	$scope.updateSelection = function(newModelId) {
 	 		var index =	_.findIndex($scope.data, {'id': newModelId});
 			 $scope.model = $scope.data[index];
-			 console.log($scope.model);
 			 geocoder.geocode( { 'address': $scope.model.attributes.address}, function(results, status) {
 				if(status === 'OK'){
 					$scope.selectedMarker = {
