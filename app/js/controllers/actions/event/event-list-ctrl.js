@@ -12,7 +12,7 @@ angular
 	});
 
 	$scope.displayDate = function(date) {
-		if (date === undefined) { return; };
+		if (date == undefined) { return; };
 		var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 		var year = parseInt(date.substring(0,4));
 		var month = parseInt(date.substring(5, 7));
@@ -40,7 +40,8 @@ angular
 		rsvpCount: {},
 		altRsvps: {},
 		aims: {},
-		categories: {}
+		categories: {},
+		time : {}
 	};
 
 	//mapping personID to personName
@@ -57,11 +58,22 @@ angular
 				}
 
 				_.each($scope.data, function(element) {
+					element = preProcess.convertTimeAttributes(element);
+					$scope.eventDetails.time[element.id] = {};
+					$scope.eventDetails.time[element.id].start = preProcess.convertTimeToEST(element.attributes.startDateTime);
+					$scope.eventDetails.time[element.id].end = preProcess.convertTimeToEST(element.attributes.endDateTime);
 					//mapping eventID to venue names with links
 					if (element.relationships.venue.data !== null) {
-						// !! change venueURL to the venue page once the venue override page is ready
 						var venueURL = "/#/r/venues/list/" + element.relationships.venue.data.id;
-						$scope.eventDetails.venue[element.id] = "<a href=" + venueURL + ">" + venuesIdToName[element.relationships.venue.data.id] + "</a>";
+						var venueName = "unknown";
+
+						if(venuesIdToName[element.relationships.venue.data.id] != undefined) {
+							venueName = venuesIdToName[element.relationships.venue.data.id];
+						}
+						$scope.eventDetails.venue[element.id] = {
+							'url': venueURL,
+							'venue_name': venueName
+						};
 					}
 
 					//mapping eventID to categories
@@ -196,4 +208,14 @@ angular
 			);
 		});
 	};
+
+	$scope.getVenueLink = function(newModelId) {
+		console.log(newModelId);
+		var index =	_.findIndex($scope.data, {'id': newModelId});
+		$scope.model = $scope.data[index];
+		$state.transitionTo('list',
+			{id: newModelId, resourceName: 'venue'},
+			{notify: false}
+		);
+	}
 });

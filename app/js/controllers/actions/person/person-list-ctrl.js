@@ -2,7 +2,7 @@
 
 angular
 .module('app.controllers')
-.controller('PersonListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer) {
+.controller('PersonListCtrl', function($scope, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer, preProcess) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;
@@ -29,7 +29,7 @@ angular
 
 		//mapping personID to name, position and display information
 		_.each($scope.data, function(person) {
-
+			person = preProcess.convertTimeAttributes(person);
 			var personData= {};
 			//getting roles
 			if (person.attributes.roles != null && person.attributes.roles.length > 0) {

@@ -7,7 +7,7 @@
 	<div class="form-group">
 		<select chosen
 				ng-model="select_id"
-				ng-options="id as info.display for (id, info) in jobIDtoAttr"
+				ng-options="id as info.display group by expiredOrNot(info.expireDate) for (id, info) in jobIDtoAttr"
 				ng-change="updateSelection(select_id)"
 				style="width: 500px;">
 			<option value=""></option>
@@ -27,6 +27,11 @@
 			<tr>
 				<th>Employer</th>
 				<td>{{jobIDtoAttr[model.id].employer}}</td>
+			</tr>
+
+			<tr>
+				<th>Expires</th>
+				<td ng-bind-html="jobIDtoAttr[model.id].expireDisplay"></td>
 			</tr>
 
 			<tr>
@@ -52,7 +57,8 @@
 			<tr ng-repeat="field in rdesc.attributes.fields"
 					ng-if="field.name !== 'id' && field.name !== 'description'
 							&& field.name !== 'employer' && field.name !== 'desiredSkills'
-							&& field.name !== 'categories' && field.name !== 'applicationUrl'">
+							&& field.name !== 'categories' && field.name !== 'applicationUrl'
+							&& field.name !== 'exiresAt'">
 				<th>{{field['friendly-name']}}</th>
 				<td>{{model.attributes[field.name]}}</td>
 			</tr>

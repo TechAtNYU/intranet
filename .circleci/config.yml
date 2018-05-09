@@ -39,7 +39,7 @@ workflows:
       - deploy-staging:
           filters:
             branches:
-              only: dev
+              only: develop
       - deploy-production:
           filters:
             branches:

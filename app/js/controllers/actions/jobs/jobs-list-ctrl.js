@@ -2,13 +2,19 @@
 
 angular
 .module('app.controllers')
-.controller('JobsListCtrl', function($scope, $sce, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer) {
+.controller('JobsListCtrl', function($scope, $sce, $rootScope, $stateParams, $state, Restangular, apiDescriptor, dataTransformer, preProcess) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;
 	apiDescriptor.then(function(apiDescription) {
 		$scope.rdesc = apiDescription.resource(resourceName);
 	});
+
+	$scope.expiredOrNot = function(date){
+    const d1 = new Date();
+    const d2 = new Date(date);
+    return (d1 <= d2) ? "Active" : "Expired";
+	}
 
 	var selectionMode = $stateParams.selectionMode;
 	if (!selectionMode || (selectionMode !== 'single ' && selectionMode !== 'multiple')) {
@@ -26,11 +32,10 @@ angular
 			var index = _.findIndex($scope.data, {id: resourceId});
 			$scope.model = $scope.data[index];
 		}
-
 		_.each($scope.data, job => {
+			job = preProcess.convertTimeAttributes(job);
 			//store all attributes for each job
 			const attributes = {};
-
 			//storing employer
 			Restangular.one("organizations/" + job.relationships.employer.data.id)
 			.get()
@@ -45,7 +50,12 @@ angular
 				} else {
 					attributes['url'] = '';
 				}
-
+				//add expire date
+				const expireDate = job.attributes.exiresAt;
+				attributes['expireDate'] = expireDate;
+				//format date
+				const expireDisplay = preProcess.prettifyDate(expireDate);
+				attributes['expireDisplay'] = expireDisplay;
 				//storing categories
 				const categories = job.attributes.categories;
 				attributes['categories'] = categories.join(', ');

@@ -15,13 +15,15 @@ angular.module('app', [
 	'app.directives',
 	'app.controllers',
 ]).config(function(RestangularProvider) {
-	RestangularProvider.setBaseUrl('https://api.tnyu.org/v3');
+	RestangularProvider.setBaseUrl('https://api.tnyu.org/v3-test');
 
 	// Configuring Restangular to work with JSONAPI spec
 	RestangularProvider.setDefaultHeaders({
 		'Accept': 'application/vnd.api+json, application/*, */*',
 		'Content-Type': 'application/vnd.api+json'
 	});
+
+	RestangularProvider.setDefaultHttpFields({cache: true});
 
 	RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
 		if (operation === 'remove') {

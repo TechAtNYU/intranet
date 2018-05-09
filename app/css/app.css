@@ -11,6 +11,18 @@ label {
   margin-bottom: 25px;
 }
 
+footer {
+  padding-top: 4em;
+  padding-bottom:1em;
+  color: rgb(150, 150, 150);
+  font-size: 14px;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
 .chosen-container-single .chosen-single, .chosen-container-multi .chosen-choices {
   min-height: 30px !important;
   height: auto;
@@ -38,4 +50,60 @@ label {
 
 .content {
   padding-top: 20px;
+}
+
+.top-card .card-body{
+  position: relative;
+}
+
+.top-card .card-body a h2 { 
+  width: 100%;
+  height: 12em;
+}
+
+.top-card .card-body a { 
+  text-decoration: none;
+}
+
+.top-card .card-footer{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+.card-button:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-footer{
+  background-color: #28a745;
+  color: white;
+}
+
+.card-footer:hover{
+  background-color: #1e7c33;
+}
+
+.mid-card .card-body a h3 { 
+  width: 100%;
+  height: 5em;
+}
+
+.mid-card .card-body a { 
+  text-decoration: none;
+}
+
+.mid-card .card-footer{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
+.other-resource-card{
+  height: 10em;
+  overflow-y: auto;
+}
+
+.eboard{
+  height: 10em;
+  overflow-y: auto;
 }
