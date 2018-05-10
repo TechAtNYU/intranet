@@ -38,6 +38,9 @@
 	</div>
 
 	<div class="form-group">
-
 	</div>
+	<ui-gmap-google-map center='map.center' zoom='map.zoom'>
+		<ui-gmap-marker ng-if="selectedMarker == undefined" ng-repeat="m in allMarkers" coords="m.id" icon="m.icon" idkey="m.id"></ui-gmap-marker>
+		<ui-gmap-marker ng-if="selectedMarker != undefined" coords="selectedMarker.id" idkey="selectedMarker.id"></ui-gmap-marker>
+	</ui-gmap-google-map>
 </div>

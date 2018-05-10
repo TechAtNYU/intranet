@@ -3,10 +3,17 @@
 angular
 .module('app.controllers')
 .controller('VenuesListCtrl', function($scope, $rootScope, $stateParams, $state,
-	Restangular, apiDescriptor, dataTransformer, preProcess) {
+	Restangular, apiDescriptor, dataTransformer, preProcess, uiGmapGoogleMapApi) {
 	var resourceName = $stateParams.resourceName;
 	var resourceId = $stateParams.id;
 	$scope.resourceName = resourceName;
+	//Gmap origin setup
+	$scope.map = { center: { latitude: 40.72, longitude: -73.98 }, zoom: 13 };
+	$scope.options = { scrollwheel: false };
+	$scope.allMarkers = [];
+	$scope.selectedMarker = undefined;
+	var geocoder = new google.maps.Geocoder();
+
 	apiDescriptor.then(function(apiDescription) {
 		$scope.rdesc = apiDescription.resource(resourceName);
 	});
@@ -16,6 +23,7 @@ angular
 		selectionMode = 'multiple';
 	}
 
+	var markers = [];
 	$scope.selectionMode = selectionMode;
 	Restangular.all(resourceName)
 		.getList()
@@ -30,6 +38,18 @@ angular
 		//mapping venueID to organizations
 		_.each($scope.data, function(element) {
 			element = preProcess.convertTimeAttributes(element);
+			geocoder.geocode( { 'address': element.attributes.address}, function(results, status) {
+				if(status === 'OK'){
+					markers.push({
+						'id':
+						{
+							'latitude': results[0].geometry.location.lat(),
+							'longitude': results[0].geometry.location.lng(),
+							'title': element.attributes.name
+						}
+					});
+				}
+			});
 			if (element.relationships.organization.data !== null) {
 				Restangular.one("organizations/" + element.relationships.organization.data.id)
 				.get()
@@ -38,11 +58,24 @@ angular
 				});
 			}
 		})
+		$scope.allMarkers = markers;
 	});
 
 	$scope.updateSelection = function(newModelId) {
 	 		var index =	_.findIndex($scope.data, {'id': newModelId});
-	 		$scope.model = $scope.data[index];
+			 $scope.model = $scope.data[index];
+			 geocoder.geocode( { 'address': $scope.model.attributes.address}, function(results, status) {
+				if(status === 'OK'){
+					$scope.selectedMarker = {
+						'id':
+						{
+							'latitude': results[0].geometry.location.lat(),
+							'longitude': results[0].geometry.location.lng(),
+							'title': $scope.model.attributes.name
+						}
+					};
+				}
+			});
 	 		$state.transitionTo('list',
 	 			{id: newModelId, resourceName: resourceName},
 	 			{notify: false}

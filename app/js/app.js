@@ -14,6 +14,8 @@ angular.module('app', [
 	'app.services',
 	'app.directives',
 	'app.controllers',
+	'nemLogging',
+	'uiGmapgoogle-maps'
 ]).config(function(RestangularProvider) {
 	RestangularProvider.setBaseUrl('https://api.tnyu.org/v3-test');
 
@@ -98,4 +100,11 @@ angular.module('app', [
 
 }).config(function(datepickerConfig) {
 	datepickerConfig.showWeeks = false;
+})
+.config(function(uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+      key: 'AIzaSyBZ2vS-x4GYyhTnMGEW20qJLaSNo9i48N4',
+	  v: '3.17',
+	  libraries: 'weather,geometry,visualization'
+	});
 });
